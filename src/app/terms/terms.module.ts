@@ -9,7 +9,7 @@ import { TermsComponent } from './terms.component';
   declarations: [TermsComponent],
   imports: [
     CommonModule,
-    TermsRoutingModule
-  ]
+    TermsRoutingModule,
+  ],
 })
 export class TermsModule { }

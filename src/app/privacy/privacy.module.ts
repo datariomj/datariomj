@@ -9,7 +9,7 @@ import { PrivacyComponent } from './privacy.component';
   declarations: [PrivacyComponent],
   imports: [
     CommonModule,
-    PrivacyRoutingModule
-  ]
+    PrivacyRoutingModule,
+  ],
 })
 export class PrivacyModule { }

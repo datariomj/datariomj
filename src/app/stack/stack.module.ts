@@ -9,7 +9,7 @@ import { StackComponent } from './stack.component';
   declarations: [StackComponent],
   imports: [
     CommonModule,
-    StackRoutingModule
-  ]
+    StackRoutingModule,
+  ],
 })
 export class StackModule { }

@@ -9,7 +9,7 @@ import { ErrorComponent } from './error.component';
   declarations: [ErrorComponent],
   imports: [
     CommonModule,
-    ErrorRoutingModule
-  ]
+    ErrorRoutingModule,
+  ],
 })
 export class ErrorModule { }

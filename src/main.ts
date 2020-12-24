@@ -10,7 +10,7 @@ if (environment.production) {
 
 document.addEventListener('DOMContentLoaded', () => {
   platformBrowserDynamic().bootstrapModule(AppModule, {
-  defaultEncapsulation: ViewEncapsulation.None
+  defaultEncapsulation: ViewEncapsulation.None,
 })
   .catch(err => console.error(err));
 });

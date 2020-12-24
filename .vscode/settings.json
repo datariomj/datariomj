@@ -1,5 +1,19 @@
 {
   "cSpell.words": [
-    "datario"
-  ]
+    "datario",
+    "multiline",
+    "sidenav"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "typescript"
+  ],
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#000000",
+    "titleBar.activeBackground": "#13cf13",
+    "titleBar.activeForeground": "#000000"
+  }
 }

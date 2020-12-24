@@ -9,7 +9,7 @@ import { CvComponent } from './cv.component';
   declarations: [CvComponent],
   imports: [
     CommonModule,
-    CvRoutingModule
-  ]
+    CvRoutingModule,
+  ],
 })
 export class CvModule { }
