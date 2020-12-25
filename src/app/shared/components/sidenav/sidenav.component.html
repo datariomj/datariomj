@@ -1,0 +1,15 @@
+<mat-sidenav-container class="sidenav">
+  <mat-sidenav #drawer class="sidenav__main" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let navLink of navLinks" class="sidenav__link" routerLinkActive="sidenav__link--active"
+         [routerLink]="navLink.route" [routerLinkActiveOptions]="{exact: navLink.route !== ''}">
+        <mat-icon svgIcon="{{navLink.icon}}" class="sidenav__icon"></mat-icon>
+      </a>
+    </mat-nav-list>
+    <app-footer></app-footer>
+  </mat-sidenav>
+  <mat-sidenav-content>  
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

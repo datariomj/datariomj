@@ -1,0 +1,31 @@
+.sidenav {
+  height: 100%;
+  &__main {
+    width: 120px;
+  }
+  &__link {
+    &.mat-list-item {
+      height: 100px !important;
+    }
+    .mat-list-item-content {
+      justify-content: center;
+    }
+    .mat-icon {
+      color: #757b82;
+    }
+    &--active {
+      .mat-icon {
+        color: white;
+      }
+    }
+  }
+  &__icon {
+    &.mat-icon {
+      height: 50px;
+      width: 50px;
+    }
+  }
+  .mat-drawer-side {
+    border-right: solid 1px #757b82;
+  }
+}

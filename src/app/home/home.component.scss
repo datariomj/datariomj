@@ -1,0 +1,38 @@
+.home {
+  &__container {
+    display: flex;
+    flex-flow: row;
+    height: calc(100vh - 50px);
+    padding: 0 100px;
+  }
+  &__main {
+    width: 50%;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  &__photo-wrapper {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__photo {
+    height: 800px;
+    width: 800px;
+  }
+  &__greeting {
+    margin: 0;
+    font-size: 40px;
+  }
+  &__details {
+    margin: 0;
+    font-size: 60px;
+  }
+  &__cta {
+    &.mat-stroked-button {
+      margin-top: 150px;
+    }
+  }
+}

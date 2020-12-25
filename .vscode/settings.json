@@ -11,6 +11,10 @@
     "javascript",
     "typescript"
   ],
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
   "workbench.colorCustomizations": {
     "activityBar.background": "#000000",
     "titleBar.activeBackground": "#13cf13",

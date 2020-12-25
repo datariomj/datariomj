@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { CvRoutingModule } from './cv-routing.module';
 import { CvComponent } from './cv.component';
+import { CvRoutingModule } from './cv-routing.module';
 
 
 @NgModule({

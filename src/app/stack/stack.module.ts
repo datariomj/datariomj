@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { StackRoutingModule } from './stack-routing.module';
 import { StackComponent } from './stack.component';
+import { StackRoutingModule } from './stack-routing.module';
 
 
 @NgModule({
