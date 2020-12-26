@@ -1,38 +1,82 @@
+@import 'variables';
+@import 'mixins';
+
 .home {
   &__container {
     display: flex;
-    flex-flow: row;
-    height: calc(100vh - 50px);
-    padding: 0 100px;
+    flex-flow: column-reverse;
+    height: auto;
+    align-items: center;
+    padding: 20px 20px 55px 20px;
+    @include breakpoint(lg) {
+      padding: 0 100px;
+      flex-flow: row;
+      height: calc(100vh - 50px);
+    }
   }
   &__main {
-    width: 50%;
     display: flex;
     flex-flow: column;
     align-items: flex-start;
     justify-content: center;
+    width: auto;
+    @include breakpoint(lg) {
+      width: 50%;
+    }
   }
   &__photo-wrapper {
-    width: 50%;
+    width: 150px;
+    height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    border: 1px solid $disabled-color;
+    @include breakpoint(lg) {
+      width: 50%;
+      height: auto;
+      border-radius: 0;
+      border: none;
+    }
   }
   &__photo {
-    height: 800px;
-    width: 800px;
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    @include breakpoint(lg) {
+      height: auto;
+      width: 100%;
+      border-radius: 0;
+    }
   }
   &__greeting {
-    margin: 0;
-    font-size: 40px;
+    margin: 20px 0 0 0;
+    font-size: 24px;
+    @include breakpoint(lg) {
+      margin: 0;
+      font-size: 40px;
+    }
   }
-  &__details {
+  &__name {
     margin: 0;
-    font-size: 60px;
+    font-size: 42px;
+    @include breakpoint(lg) {
+      font-size: 60px;
+    }
+  }
+  &__profession {
+    margin: 0;
+    font-size: 28px;
+    @include breakpoint(lg) {
+      font-size: 60px;
+    }
   }
   &__cta {
     &.mat-stroked-button {
-      margin-top: 150px;
+      margin: 70px auto 0 auto;
+      @include breakpoint(lg) {
+        margin: 150px 0 0 0;
+      }
     }
   }
 }

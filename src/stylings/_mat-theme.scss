@@ -1,111 +1,111 @@
-@import 'variables';
+@import "variables";
+@import "mixins";
 @import "~@angular/material/theming";
 
-
 $poppins-typography: mat-typography-config(
-  $font-family: 'Poppins, monospace',
+  $font-family: "Poppins, monospace",
 );
 
 // Include non-theme styles for core.
 @include mat-core($poppins-typography);
 
 $custom-primary: (
-    50: #e5e8ea,
-    100: #bdc5ca,
-    200: #919ea6,
-    300: #657782,
-    400: #445a68,
-    500: #233d4d,
-    600: #1f3746,
-    700: #1a2f3d,
-    800: #152734,
-    900: #0c1a25,
-    A100: #63b5ff,
-    A200: #309dff,
-    A400: #0085fc,
-    A700: #0077e3,
-    contrast: (
-        50: #000000,
-        100: #000000,
-        200: #000000,
-        300: #ffffff,
-        400: #ffffff,
-        500: #ffffff,
-        600: #ffffff,
-        700: #ffffff,
-        800: #ffffff,
-        900: #ffffff,
-        A100: #000000,
-        A200: #000000,
-        A400: #ffffff,
-        A700: #ffffff,
-    ),
+  50: #e5e8ea,
+  100: #bdc5ca,
+  200: #919ea6,
+  300: #657782,
+  400: #445a68,
+  500: #233d4d,
+  600: #1f3746,
+  700: #1a2f3d,
+  800: #152734,
+  900: #0c1a25,
+  A100: #63b5ff,
+  A200: #309dff,
+  A400: #0085fc,
+  A700: #0077e3,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
 );
 
 $custom-accent: (
-    50: #e3f9e3,
-    100: #b8f1b8,
-    200: #89e789,
-    300: #5add5a,
-    400: #36d636,
-    500: #13cf13,
-    600: #11ca11,
-    700: #0ec30e,
-    800: #0bbd0b,
-    900: #06b206,
-    A100: #dcffdc,
-    A200: #a9ffa9,
-    A400: #76ff76,
-    A700: #5dff5d,
-    contrast: (
-        50: #000000,
-        100: #000000,
-        200: #000000,
-        300: #000000,
-        400: #000000,
-        500: #000000,
-        600: #ffffff,
-        700: #ffffff,
-        800: #ffffff,
-        900: #ffffff,
-        A100: #000000,
-        A200: #000000,
-        A400: #000000,
-        A700: #000000,
-    ),
+  50: #e3f9e3,
+  100: #b8f1b8,
+  200: #89e789,
+  300: #5add5a,
+  400: #36d636,
+  500: #13cf13,
+  600: #11ca11,
+  700: #0ec30e,
+  800: #0bbd0b,
+  900: #06b206,
+  A100: #dcffdc,
+  A200: #a9ffa9,
+  A400: #76ff76,
+  A700: #5dff5d,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
 );
 
 $custom-warn: (
-    50: #f4e0e3,
-    100: #e3b3b9,
-    200: #d1808a,
-    300: #bf4d5b,
-    400: #b12638,
-    500: #a30015,
-    600: #9b0012,
-    700: #91000f,
-    800: #88000c,
-    900: #770006,
-    A100: #ffa5a6,
-    A200: #ff7273,
-    A400: #ff3f41,
-    A700: #ff2528,
-    contrast: (
-        50: #000000,
-        100: #000000,
-        200: #000000,
-        300: #ffffff,
-        400: #ffffff,
-        500: #ffffff,
-        600: #ffffff,
-        700: #ffffff,
-        800: #ffffff,
-        900: #ffffff,
-        A100: #000000,
-        A200: #000000,
-        A400: #ffffff,
-        A700: #ffffff,
-    ),
+  50: #f4e0e3,
+  100: #e3b3b9,
+  200: #d1808a,
+  300: #bf4d5b,
+  400: #b12638,
+  500: #a30015,
+  600: #9b0012,
+  700: #91000f,
+  800: #88000c,
+  900: #770006,
+  A100: #ffa5a6,
+  A200: #ff7273,
+  A400: #ff3f41,
+  A700: #ff2528,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
 );
 
 // Define your application's custom theme.
@@ -114,62 +114,67 @@ $accent: mat-palette($custom-accent);
 $warn: mat-palette($custom-warn);
 $background-color: black;
 $mat-black-theme-background: (
-    status-bar: $main-background,
-    app-bar: $main-background,
-    background: $main-background,
-    hover: rgba(white, 0.04),
-    // TODO(kara): check style with Material Design UX
-    card: $main-background,
-    dialog: $main-background,
-    disabled-button: rgba(white, 0.12),
-    raised-button: $main-background,
-    focused-button: $light-focused,
-    selected-button: $main-background,
-    selected-disabled-button: $main-background,
-    disabled-button-toggle: $main-background,
-    unselected-chip: $main-background,
-    disabled-list-option: $main-background,
-    tooltip: $main-background,
+  status-bar: $main-background,
+  app-bar: $main-background,
+  background: $main-background,
+  hover: rgba(white, 0.04),
+  // TODO(kara): check style with Material Design UX
+  card: $main-background,
+  dialog: $main-background,
+  disabled-button: rgba(white, 0.12),
+  raised-button: $main-background,
+  focused-button: $light-focused,
+  selected-button: $main-background,
+  selected-disabled-button: $main-background,
+  disabled-button-toggle: $main-background,
+  unselected-chip: $main-background,
+  disabled-list-option: $main-background,
+  tooltip: $main-background,
 );
 $mat-black-theme-foreground: (
-    base: white,
-    divider: $light-dividers,
-    dividers: $light-dividers,
-    disabled: $light-disabled-text,
-    disabled-button: rgba(white, 0.3),
-    disabled-text: $light-disabled-text,
-    elevation: $main-background,
-    hint-text: $light-disabled-text,
-    secondary-text: $light-secondary-text,
-    icon: white,
-    icons: white,
-    text: white,
-    slider-min: white,
-    slider-off: rgba(white, 0.3),
-    slider-off-active: rgba(white, 0.3),
+  base: white,
+  divider: $light-dividers,
+  dividers: $light-dividers,
+  disabled: $light-disabled-text,
+  disabled-button: rgba(white, 0.3),
+  disabled-text: $light-disabled-text,
+  elevation: $main-background,
+  hint-text: $light-disabled-text,
+  secondary-text: $light-secondary-text,
+  icon: white,
+  icons: white,
+  text: white,
+  slider-min: white,
+  slider-off: rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
 );
 
 $theme: mat-dark-theme($primary, $accent, $warn);
 $theme: map_merge(
-    $theme,
-    (
-        foreground: $mat-black-theme-foreground,
-        background: $mat-black-theme-background,
-    )
+  $theme,
+  (
+    foreground: $mat-black-theme-foreground,
+    background: $mat-black-theme-background,
+  )
 );
 
 // Include theme styles for Angular Material components.
 @include angular-material-theme($theme);
 
 .black-theme {
-    .mat-stroked-button {
-        border: 4px solid $disabled-color;
-        padding: 0 50px;
-        font-size: 28px;
-        font-weight: 400;
-        height: 80px;
-        &:hover {
-            border: 4px solid white;
-        }
+  .mat-stroked-button {
+    padding: 0 25px;
+    font-size: 14px;
+    height: 40px;
+    font-weight: 400;
+    border: 4px solid $disabled-color;
+    &:hover {
+      border: 4px solid white;
     }
+    @include breakpoint(lg) {
+      padding: 0 50px;
+      font-size: 28px;
+      height: 80px;
+    }
+  }
 }
