@@ -19,7 +19,42 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@env/*": [
+        "src/environments/*"
+      ],
+      "@blog/*": [
+        "src/app/blog/*"
+      ],
+      "@contact/*": [
+        "src/app/contact/*"
+      ],
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@cv/*": [
+        "src/app/cv/*"
+      ],
+      "@error/*": [
+        "src/app/error/*"
+      ],
+      "@home/*": [
+        "src/app/home/*"
+      ],
+      "@privacy/*": [
+        "src/app/privacy/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@stack/*": [
+        "src/app/stack/*"
+      ],
+      "@terms/*": [
+        "src/app/terms/*"
+      ]
+    },
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,

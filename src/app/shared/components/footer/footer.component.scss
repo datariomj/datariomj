@@ -65,7 +65,7 @@
     align-items: center;
     justify-content: center;
     @include breakpoint(lg) {
-      margin-right: 20px;
+      margin-right: 36px;
       flex-flow: row;
     }
     &--flex-sb {
@@ -111,6 +111,8 @@
   }
   &__link {
     text-decoration: none;
+    display: flex;
+    align-items: center;
     &:hover {
       text-decoration: underline;
     }
@@ -123,14 +125,6 @@
   }
   &__link-divider {
     margin: 0 8px;
-  }
-  &__branch-button {
-    &.mat-button {
-      padding: 0;
-      @include breakpoint(lg) {
-        padding: 0 16px;
-      }
-    }
   }
   &__copyright-icon {
     &.mat-icon {

@@ -1,11 +1,11 @@
-<mat-sidenav-container class="sidenav">
-  <mat-sidenav #drawer class="sidenav__main d__none d__block--lg" fixedInViewport role="navigation" mode="side" opened="true">
+<mat-drawer-container class="sidenav" autosize>
+  <mat-drawer #drawer class="d__none d__block--lg" fixedInViewport role="navigation" mode="side" opened="true">
     <mat-nav-list>
       <ng-container *ngTemplateOutlet="mainNavigation"></ng-container>
     </mat-nav-list>
     <app-footer class="d__none d__block--lg"></app-footer>
-  </mat-sidenav>
-  <mat-sidenav-content>
+  </mat-drawer>
+  <!-- <mat-sidenav-content> -->
     <ng-content></ng-content>
     <mat-toolbar class="sidenav__mobile-nav d__flex d__none--lg">
       <mat-nav-list class="sidenav__mobile-nav-list">
@@ -13,12 +13,15 @@
       </mat-nav-list>
     </mat-toolbar>
     <app-footer class="d__none--lg"></app-footer>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  <!-- </mat-sidenav-content> -->
+</mat-drawer-container>
 
 <ng-template #mainNavigation>
   <a mat-list-item *ngFor="let navLink of navLinks" class="sidenav__link" routerLinkActive="sidenav__link--active"
       [routerLink]="navLink.route" [routerLinkActiveOptions]="{exact: navLink.route === ''}">
-    <mat-icon svgIcon="{{navLink.icon}}" class="sidenav__icon"></mat-icon>
+    <div class="sidenav__link-wrapper">
+      <mat-icon svgIcon="{{navLink.icon}}" class="sidenav__icon"></mat-icon>
+      <p *ngIf="sidenavExpanded$ | async" class="sidenav__description d__none d__block--lg">{{navLink.description}}</p>
+    </div>
   </a>
 </ng-template>

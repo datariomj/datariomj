@@ -1,6 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Select } from '@ngxs/store';
+import { AppState } from '@shared/state/app.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,6 +12,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   encapsulation: ViewEncapsulation.None,
 })
 export class SidenavComponent {
+  @Select(AppState.sidenavExpanded) sidenavExpanded$!: Observable<boolean>;
+
   icons = [
     'home',
     'cv',
@@ -17,11 +22,11 @@ export class SidenavComponent {
     'contact',
   ];
   navLinks = [
-    { icon: 'home', route: '' },
-    { icon: 'cv', route: '/cv' },
-    { icon: 'stack', route: '/stack' },
-    { icon: 'blog', route: '/blog' },
-    { icon: 'contact', route: '/contact' },
+    { icon: 'home', route: '', description: 'Home' },
+    { icon: 'cv', route: '/cv', description: 'CV' },
+    { icon: 'stack', route: '/stack', description: 'Stack' },
+    { icon: 'blog', route: '/blog', description: 'Blog' },
+    { icon: 'contact', route: '/contact', description: 'Contact' },
   ];
 
   constructor(

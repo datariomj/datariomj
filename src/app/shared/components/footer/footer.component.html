@@ -2,15 +2,12 @@
   <mat-toolbar>
     <div class="footer__left">
       <div class="footer__section">
-        <div class="footer__expand d__none d__flex--lg">
+        <div class="footer__expand d__none d__flex--lg" (click)="toggleSidenav()">
           <mat-icon svgIcon="chevron-right"></mat-icon>
         </div>
       </div>
       <div class="footer__section d__none d__flex--lg">
         <ng-container *ngTemplateOutlet="branch"></ng-container>
-      </div>
-      <div class="footer__section d__none d__flex--lg">
-        <ng-container *ngTemplateOutlet="copyright"></ng-container>
       </div>
       <div class="footer__section footer__section--flex-sb d__flex d__none--lg">
         <ng-container *ngTemplateOutlet="branch"></ng-container>
@@ -31,23 +28,16 @@
         <span class="footer__text footer__text--smaller">datariomj.dev</span>
       </div>
       <div class="footer__section">
-        <span class="footer__text d__none d__block--lg">{{currentVersion}}</span>
-        <div class="d__flex d__none--lg">
-          <ng-container *ngTemplateOutlet="copyright"></ng-container>
-        </div>
+        <mat-icon svgIcon="copyright" class="footer__copyright-icon"></mat-icon>
+        <span class="footer__text footer__text--smaller">{{currentYear}}</span>
       </div>
     </div>
   </mat-toolbar>
 </div>
 
-<ng-template #copyright>
-  <mat-icon svgIcon="copyright" class="footer__copyright-icon"></mat-icon>
-  <span class="footer__text footer__text--smaller">{{currentYear}}</span>
-</ng-template>
-
 <ng-template #branch>
-  <a class="footer__branch-button" mat-button href="https://github.com/datariomj/datariomj/tree/main" rel="noreferrer" target="_blank">
+  <a class="footer__link" href="https://github.com/datariomj/datariomj/tree/main" rel="noreferrer" target="_blank">
     <mat-icon svgIcon="git"></mat-icon>
-    <span class="footer__link">main</span>
+    <span>main</span>
   </a>
 </ng-template>

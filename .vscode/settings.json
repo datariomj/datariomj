@@ -4,6 +4,7 @@
     "datariomj",
     "mixins",
     "multiline",
+    "ngxs",
     "sidenav"
   ],
   "editor.codeActionsOnSave": {

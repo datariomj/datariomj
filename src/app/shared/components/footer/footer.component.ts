@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
+import { Store } from '@ngxs/store';
+import { ToggleSidenav } from '@shared/state/app.action';
 
 @Component({
   selector: 'app-footer',
@@ -9,7 +10,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./footer.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   icons = [
     'chevron-right',
     'git',
@@ -19,7 +20,6 @@ export class FooterComponent implements OnInit {
     'instagram',
   ];
   currentYear = new Date().getFullYear();
-  currentVersion = environment.version;
   socialIcons = [
     {
       icon: 'github',
@@ -38,6 +38,7 @@ export class FooterComponent implements OnInit {
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
+    private store: Store,
   ) {
     this.icons.forEach((icon) => {
       this.matIconRegistry.addSvgIcon(
@@ -47,7 +48,8 @@ export class FooterComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  toggleSidenav() {
+    this.store.dispatch(new ToggleSidenav());
+    // todo animate chevron
   }
-
 }
