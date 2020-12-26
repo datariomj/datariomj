@@ -1,4 +1,5 @@
-@import './scss/mat-theme';
+@import 'utilities';
+@import 'mat-theme';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Poppins, "Helvetica Neue", sans-serif; }

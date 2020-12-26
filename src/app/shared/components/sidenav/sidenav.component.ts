@@ -1,9 +1,6 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sidenav',
@@ -19,19 +16,15 @@ export class SidenavComponent {
     'blog',
     'contact',
   ];
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(result => result.matches),
-    shareReplay(),
-  );
   navLinks = [
     { icon: 'home', route: '' },
     { icon: 'cv', route: '/cv' },
     { icon: 'stack', route: '/stack' },
     { icon: 'blog', route: '/blog' },
+    { icon: 'contact', route: '/contact' },
   ];
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
   ) {

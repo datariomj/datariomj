@@ -1,5 +1,6 @@
-// Import library functions for theme creation.
+@import 'variables';
 @import "~@angular/material/theming";
+
 
 $poppins-typography: mat-typography-config(
   $font-family: 'Poppins, monospace',
@@ -113,22 +114,22 @@ $accent: mat-palette($custom-accent);
 $warn: mat-palette($custom-warn);
 $background-color: black;
 $mat-black-theme-background: (
-    status-bar: black,
-    app-bar: black,
-    background: black,
+    status-bar: $main-background,
+    app-bar: $main-background,
+    background: $main-background,
     hover: rgba(white, 0.04),
     // TODO(kara): check style with Material Design UX
-    card: black,
-    dialog: black,
+    card: $main-background,
+    dialog: $main-background,
     disabled-button: rgba(white, 0.12),
-    raised-button: black,
+    raised-button: $main-background,
     focused-button: $light-focused,
-    selected-button: black,
-    selected-disabled-button: black,
-    disabled-button-toggle: black,
-    unselected-chip: black,
-    disabled-list-option: black,
-    tooltip: black,
+    selected-button: $main-background,
+    selected-disabled-button: $main-background,
+    disabled-button-toggle: $main-background,
+    unselected-chip: $main-background,
+    disabled-list-option: $main-background,
+    tooltip: $main-background,
 );
 $mat-black-theme-foreground: (
     base: white,
@@ -137,7 +138,7 @@ $mat-black-theme-foreground: (
     disabled: $light-disabled-text,
     disabled-button: rgba(white, 0.3),
     disabled-text: $light-disabled-text,
-    elevation: black,
+    elevation: $main-background,
     hint-text: $light-disabled-text,
     secondary-text: $light-secondary-text,
     icon: white,
@@ -152,13 +153,8 @@ $theme: mat-dark-theme($primary, $accent, $warn);
 $theme: map_merge(
     $theme,
     (
-        background: $mat-black-theme-background,
-    )
-);
-$theme: map_merge(
-    $theme,
-    (
         foreground: $mat-black-theme-foreground,
+        background: $mat-black-theme-background,
     )
 );
 
@@ -167,7 +163,7 @@ $theme: map_merge(
 
 .black-theme {
     .mat-stroked-button {
-        border: 4px solid #757b82;
+        border: 4px solid $disabled-color;
         padding: 0 50px;
         font-size: 28px;
         font-weight: 400;

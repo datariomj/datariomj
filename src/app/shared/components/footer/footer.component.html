@@ -2,38 +2,52 @@
   <mat-toolbar>
     <div class="footer__left">
       <div class="footer__section">
-        <div class="footer__expand">
+        <div class="footer__expand d__none d__flex--lg">
           <mat-icon svgIcon="chevron-right"></mat-icon>
         </div>
       </div>
-      <div class="footer__section">
-        <a mat-button href="https://github.com/datariomj/datariomj/tree/main" rel="noreferrer" target="_blank">
-          <mat-icon svgIcon="git"></mat-icon>
-          <span class="footer__link">main</span>
-        </a>
+      <div class="footer__section d__none d__flex--lg">
+        <ng-container *ngTemplateOutlet="branch"></ng-container>
       </div>
-      <div class="footer__section">
-        <mat-icon svgIcon="copyright"></mat-icon>
-        <span class="footer__text">{{currentYear}}</span>
+      <div class="footer__section d__none d__flex--lg">
+        <ng-container *ngTemplateOutlet="copyright"></ng-container>
       </div>
-      <div class="footer__section">
-        <a mat-icon-button *ngFor="let socialIcon of socialIcons" class="footer__social-icon" href="{{socialIcon.link}}" rel="noreferrer" target="_blank">
-          <mat-icon svgIcon="{{socialIcon.icon}}"></mat-icon>
-        </a>
+      <div class="footer__section footer__section--flex-sb d__flex d__none--lg">
+        <ng-container *ngTemplateOutlet="branch"></ng-container>
+        <div>
+          <a mat-icon-button *ngFor="let socialIcon of socialIcons" class="footer__social-icon" href="{{socialIcon.link}}" rel="noreferrer" target="_blank">
+            <mat-icon svgIcon="{{socialIcon.icon}}"></mat-icon>
+          </a>
+        </div>
       </div>
-      <div class="footer__section">
+      <div class="footer__section footer__section--links">
         <a class="footer__link" routerLinkActive="footer__link--active" routerLink="/privacy">Privacy Policy</a>
-        <span class="footer__text">|</span>
+        <span class="footer__link-divider">|</span>
         <a class="footer__link" routerLinkActive="footer__link--active" routerLink="/terms">Terms & Conditions</a>
       </div>
     </div>
     <div class="footer__right">
       <div class="footer__section">
-        <span class="footer__text">datariomj.dev</span>
+        <span class="footer__text footer__text--smaller">datariomj.dev</span>
       </div>
       <div class="footer__section">
-        <span class="footer__text">{{currentVersion}}</span>
+        <span class="footer__text d__none d__block--lg">{{currentVersion}}</span>
+        <div class="d__flex d__none--lg">
+          <ng-container *ngTemplateOutlet="copyright"></ng-container>
+        </div>
       </div>
     </div>
   </mat-toolbar>
 </div>
+
+<ng-template #copyright>
+  <mat-icon svgIcon="copyright" class="footer__copyright-icon"></mat-icon>
+  <span class="footer__text footer__text--smaller">{{currentYear}}</span>
+</ng-template>
+
+<ng-template #branch>
+  <a class="footer__branch-button" mat-button href="https://github.com/datariomj/datariomj/tree/main" rel="noreferrer" target="_blank">
+    <mat-icon svgIcon="git"></mat-icon>
+    <span class="footer__link">main</span>
+  </a>
+</ng-template>

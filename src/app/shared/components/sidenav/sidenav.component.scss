@@ -1,3 +1,6 @@
+@import "variables";
+@import "mixins";
+
 .sidenav {
   height: 100%;
   &__main {
@@ -5,13 +8,15 @@
   }
   &__link {
     &.mat-list-item {
-      height: 100px !important;
+      @include breakpoint(lg) {
+        height: 100px !important;
+      }
     }
     .mat-list-item-content {
       justify-content: center;
     }
     .mat-icon {
-      color: #757b82;
+      color: $disabled-color;
     }
     &--active {
       .mat-icon {
@@ -21,11 +26,26 @@
   }
   &__icon {
     &.mat-icon {
-      height: 50px;
-      width: 50px;
+      height: 24px;
+      width: auto;
+      @include breakpoint(lg) {
+        height: 50px;
+      }
     }
   }
   .mat-drawer-side {
-    border-right: solid 1px #757b82;
+    border-right: solid 1px $disabled-color;
+  }
+  &__mobile-nav {
+    position: fixed;
+    bottom: 0;
+    border-top: solid 1px $disabled-color;
+    z-index: 2;
+  }
+  &__mobile-nav-list {
+    &.mat-nav-list {
+      display: flex;
+      padding-top: 0;
+    }
   }
 }

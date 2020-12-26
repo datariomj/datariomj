@@ -1,23 +1,56 @@
+@import "variables";
+@import "mixins";
+
 .footer {
-  position: fixed;
-  bottom: 0;
-  height: 50px;
+  position: relative;
+  border-top: solid 1px $disabled-color;
   width: 100%;
-  border-top: solid 1px #757b82;
-  .mat-toolbar {
+  padding-bottom: 80px;
+  @include breakpoint(lg) {
+    position: fixed;
+    bottom: 0;
     height: 50px;
+    padding-bottom: 0;
+  }
+  .mat-toolbar {
     display: flex;
-    justify-content: space-between;
+    height: auto;
+    flex-flow: column;
+    // justify-content: space-between;
     padding: 0;
+    @include breakpoint(lg) {
+      height: 50px;
+      flex-flow: row;
+      justify-content: space-between;
+    }
   }
-  &__left {
-    display: flex;
-  }
+  &__left,
   &__right {
     display: flex;
+    flex-flow: column;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    @include breakpoint(lg) {
+      width: auto;
+      flex-flow: row;
+      max-width: none;
+    }
+  }
+  &__left {
+    padding-top: 12px;
+    @include breakpoint(lg) {
+      padding-top: 0;
+    }
+  }
+  &__right {
+    margin-top: 16px;
+    @include breakpoint(lg) {
+      margin-top: 0;
+    }
   }
   &__expand {
-    background-color: #757b82;
+    background-color: $disabled-color;
     width: 80px;
     height: 50px;
     display: flex;
@@ -27,30 +60,56 @@
     cursor: pointer;
   }
   &__section {
-    margin-right: 20px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    @include breakpoint(lg) {
+      margin-right: 20px;
+      flex-flow: row;
+    }
+    &--flex-sb {
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+    &--links {
+      margin-top: 20px;
+      @include breakpoint(lg) {
+        margin-top: 0;
+      }
+    }
   }
   &__social-icon {
-    color: #757b82;
-    &:hover {
-      color: white;
+    &.mat-icon-button {
+      color: $disabled-color;
+      &:not(:last-child) {
+        margin-right: 8px;
+      }
+      &:hover {
+        color: white;
+      }
+      @include breakpoint(lg) {
+        margin-right: 0;
+      }
     }
   }
-  &__text {
-    color: #757b82;
-    font-size: 24px;
+  &__text,
+  &__link,
+  &__link-divider {
+    color: $disabled-color;
+    font-size: 16px;
     font-weight: 300;
-    margin-left: 8px;
+    @include breakpoint(lg) {
+      font-size: 24px;
+    }
+    &--smaller {
+      font-size: 14px;
+      @include breakpoint(lg) {
+        font-size: 24px;
+      }
+    }
   }
   &__link {
-    color: #757b82;
-    font-size: 24px;
-    font-weight: 300;
     text-decoration: none;
-    &:not(:first-child) {
-      margin-left: 8px;
-    }
     &:hover {
       text-decoration: underline;
     }
@@ -58,6 +117,28 @@
       color: white;
       &:hover {
         text-decoration: none;
+      }
+    }
+  }
+  &__link-divider {
+    margin: 0 8px;
+  }
+  &__branch-button {
+    &.mat-button {
+      padding: 0;
+      @include breakpoint(lg) {
+        padding: 0 16px;
+      }
+    }
+  }
+  &__copyright-icon {
+    &.mat-icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+      @include breakpoint(lg) {
+        width: 24px;
+        height: 24px;
       }
     }
   }

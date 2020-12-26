@@ -1,0 +1,57 @@
+@import "mixins";
+
+$breakpoints: ("xs-only", "sm", "md", "lg", "xl");
+$displays: (
+  "none": $breakpoints,
+  "block": $breakpoints,
+  "flex": $breakpoints,
+  // add displays more if needed
+);
+
+.d {
+  @each $display, $breakpoints in $displays {
+    &__#{$display} {
+      display: #{$display} !important;
+    }
+  }
+  @each $display, $breakpoints in $displays {
+    @each $breakpoint in $breakpoints {
+      &__#{$display} {
+        &--#{$breakpoint} {
+          @include breakpoint(#{$breakpoint}) {
+            display: #{$display} !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// todo
+// $spacer: 1;
+// $spaces: (
+//   '0': 0,
+//   '1': 0.25,
+//   '2': 0.5,
+//   '3': 1,
+//   '4': 1.5,
+//   '5': 2
+// );
+// $sides: (top, right, bottom, left);
+
+// @each $space, $multiplier in $spaces {
+//   .m-#{$space} {
+//     margin: #{$spacer * $multiplier}rem !important;
+//   }
+//   .m-x-#{$space} {
+//     margin: 0 #{$spacer * $multiplier}rem !important;
+//   }
+//   .m-y-#{$space} {
+//     margin: #{$spacer * $multiplier}rem 0 !important;
+//   }
+//   @each $side in $sides {
+//     .m#{str-slice($side, 0, 1)}-#{$space} {
+//       margin-#{$side}: #{$spacer * $multiplier}rem !important;
+//     }
+//   }
+// }
