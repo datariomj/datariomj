@@ -1,0 +1,14 @@
+<mat-card class="stack-card">
+  <mat-card-header>
+    <mat-card-title>{{stackData.name}}</mat-card-title>
+    <mat-card-subtitle>Since {{stackData.yearStarted}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="stack-card__icon-wrapper">
+      <app-stack-icon mat-card-avatar class="stack-card__icon" icon="{{stackData.icon}}"></app-stack-icon>
+    </div>
+    <mat-chip-list>
+      <mat-chip *ngFor="let tag of stackData.tags" color="primary" selected>{{tag}}</mat-chip>
+    </mat-chip-list>
+  </mat-card-content>
+</mat-card>

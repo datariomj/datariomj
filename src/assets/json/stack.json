@@ -1,0 +1,557 @@
+{
+  "entityType": "stack",
+  "yearCreated": 2021,
+  "owner": "Marc Joseph M. Datario",
+  "types": [
+    "language",
+    "frontend",
+    "backend",
+    "ops",
+    "cloud",
+    "qa",
+    "design",
+    "others"
+  ],
+  "data": [
+    {
+      "name": "Typescript",
+      "symbol": "Ts",
+      "yearStarted": 2017,
+      "icon": "typescript",
+      "tags": [
+        "language",
+        "active"
+      ]
+    },
+    {
+      "name": "Javascript",
+      "symbol": "Js",
+      "yearStarted": 2014,
+      "icon": "javascript",
+      "tags": [
+        "language",
+        "active"
+      ]
+    },
+    {
+      "name": "PHP",
+      "symbol": "Ph",
+      "yearStarted": 2016,
+      "icon": "php",
+      "tags": [
+        "language",
+        "inactive"
+      ]
+    },
+    {
+      "name": "Angular",
+      "symbol": "Ng",
+      "yearStarted": 2017,
+      "icon": "angular",
+      "tags": [
+        "frontend",
+        "active"
+      ]
+    },
+    {
+      "name": "Angular Material",
+      "symbol": "Nm",
+      "yearStarted": 2017,
+      "icon": "angular-material",
+      "tags": [
+        "frontend",
+        "active"
+      ]
+    },
+    {
+      "name": "Angular Universal",
+      "symbol": "Nu",
+      "yearStarted": 2017,
+      "icon": "angular-universal",
+      "tags": [
+        "frontend",
+        "active"
+      ]
+    },
+    {
+      "name": "RxJS",
+      "symbol": "Rx",
+      "yearStarted": 2017,
+      "icon": "rxjs",
+      "tags": [
+        "frontend",
+        "active"
+      ]
+    },
+    {
+      "name": "Redux",
+      "symbol": "Rd",
+      "yearStarted": 2017,
+      "icon": "redux",
+      "tags": [
+        "frontend",
+        "active"
+      ]
+    },
+    {
+      "name": "Lodash",
+      "symbol": "Lo",
+      "yearStarted": 2017,
+      "icon": "lodash",
+      "tags": [
+        "frontend",
+        "active"
+      ]
+    },
+    {
+      "name": "HTML",
+      "symbol": "Ht",
+      "yearStarted": 2014,
+      "icon": "html",
+      "tags": [
+        "frontend",
+        "active"
+      ]
+    },
+    {
+      "name": "CSS",
+      "symbol": "Cs",
+      "yearStarted": 2014,
+      "icon": "css",
+      "tags": [
+        "frontend",
+        "active"
+      ]
+    },
+    {
+      "name": "Sass",
+      "symbol": "Sa",
+      "yearStarted": 2016,
+      "icon": "sass",
+      "tags": [
+        "frontend",
+        "active"
+      ]
+    },
+    {
+      "name": "Bootstrap",
+      "symbol": "Bs",
+      "yearStarted": 2014,
+      "icon": "bootstrap",
+      "tags": [
+        "frontend",
+        "inactive"
+      ]
+    },
+    {
+      "name": "jQuery",
+      "symbol": "Jq",
+      "yearStarted": 2014,
+      "icon": "jquery",
+      "tags": [
+        "frontend",
+        "inactive"
+      ]
+    },
+    {
+      "name": "Zend Framework",
+      "symbol": "Zf",
+      "yearStarted": 2016,
+      "icon": "zend-framework",
+      "tags": [
+        "backend",
+        "inactive"
+      ]
+    },
+    {
+      "name": "NodeJS",
+      "symbol": "Ns",
+      "yearStarted": 2017,
+      "icon": "nodejs",
+      "tags": [
+        "backend",
+        "active"
+      ]
+    },
+    {
+      "name": "Express",
+      "symbol": "Ex",
+      "yearStarted": 2017,
+      "icon": "express",
+      "tags": [
+        "backend",
+        "active"
+      ]
+    },
+    {
+      "name": "Serverless",
+      "symbol": "Sl",
+      "yearStarted": 2018,
+      "icon": "serverless",
+      "tags": [
+        "backend",
+        "active"
+      ]
+    },
+    {
+      "name": "Strapi",
+      "symbol": "Sp",
+      "yearStarted": 2020,
+      "icon": "strapi",
+      "tags": [
+        "frontend",
+        "active"
+      ]
+    },
+    {
+      "name": "MySQL",
+      "symbol": "Sq",
+      "yearStarted": 2016,
+      "icon": "mysql",
+      "tags": [
+        "database",
+        "active"
+      ]
+    },
+    {
+      "name": "Babel",
+      "symbol": "B",
+      "yearStarted": 2017,
+      "icon": "babel",
+      "tags": [
+        "ops",
+        "inactive"
+      ]
+    },
+    {
+      "name": "Webpack",
+      "symbol": "Wp",
+      "yearStarted": 2017,
+      "icon": "webpack",
+      "tags": [
+        "ops",
+        "inactive"
+      ]
+    },
+    {
+      "name": "Jenkins",
+      "symbol": "Jk",
+      "yearStarted": 2019,
+      "icon": "jenkins",
+      "tags": [
+        "ops",
+        "inactive"
+      ]
+    },
+    {
+      "name": "SaltStack",
+      "symbol": "Ss",
+      "yearStarted": 2019,
+      "icon": "saltstack",
+      "tags": [
+        "ops",
+        "inactive"
+      ]
+    },
+    {
+      "name": "Nginx",
+      "symbol": "Nx",
+      "yearStarted": 2019,
+      "icon": "nginx",
+      "tags": [
+        "ops",
+        "active"
+      ]
+    },
+    {
+      "name": "Docker",
+      "symbol": "Dk",
+      "yearStarted": 2019,
+      "icon": "docker",
+      "tags": [
+        "ops",
+        "active"
+      ]
+    },
+    {
+      "name": "Git",
+      "symbol": "G",
+      "yearStarted": 2016,
+      "icon": "git",
+      "tags": [
+        "others",
+        "inactive"
+      ]
+    },
+    {
+      "name": "Linux",
+      "symbol": "Lx",
+      "yearStarted": 2017,
+      "icon": "linux",
+      "tags": [
+        "others",
+        "true"
+      ]
+    },
+    {
+      "name": "Jasmine",
+      "symbol": "Jm",
+      "yearStarted": 2017,
+      "icon": "jasmine",
+      "tags": [
+        "qa",
+        "inactive"
+      ]
+    },
+    {
+      "name": "Cypress",
+      "symbol": "Cy",
+      "yearStarted": 2018,
+      "icon": "cypress",
+      "tags": [
+        "qa",
+        "active"
+      ]
+    },
+    {
+      "name": "Cucumber",
+      "symbol": "Cu",
+      "yearStarted": 2020,
+      "icon": "cucumber",
+      "tags": [
+        "qa",
+        "active"
+      ]
+    },
+    {
+      "name": "Adobe XD",
+      "symbol": "Xd",
+      "yearStarted": 2018,
+      "icon": "adobe-xd",
+      "tags": [
+        "qa",
+        "design"
+      ]
+    },
+    {
+      "name": "Figma",
+      "symbol": "Fg",
+      "yearStarted": 2018,
+      "icon": "figma",
+      "tags": [
+        "qa",
+        "design"
+      ]
+    },
+    {
+      "name": "Firebase",
+      "symbol": "Fb",
+      "yearStarted": 2018,
+      "icon": "firebase",
+      "tags": [
+        "cloud",
+        "inactive"
+      ]
+    },
+    {
+      "name": "Amazon Web Services",
+      "symbol": "Aw",
+      "yearStarted": 2019,
+      "icon": "aws",
+      "tags": [
+        "cloud",
+        "inactive"
+      ]
+    },
+    {
+      "name": "Amazon EC2",
+      "symbol": "Ec",
+      "yearStarted": 2019,
+      "icon": "amazon-ec2",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "AWS Lambda",
+      "symbol": "L",
+      "yearStarted": 2019,
+      "icon": "aws-lambda",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "Amazon S3",
+      "symbol": "S",
+      "yearStarted": 2019,
+      "icon": "amazon-s3",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "Amazon EBS",
+      "symbol": "Eb",
+      "yearStarted": 2019,
+      "icon": "amazon-ebs",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "Amazon RDS",
+      "symbol": "Rd",
+      "yearStarted": 2019,
+      "icon": "amazon-rds",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "Amazon DynamoDB",
+      "symbol": "Dy",
+      "yearStarted": 2020,
+      "icon": "amazon-dynamodb",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "Amazon VPC",
+      "symbol": "Vp",
+      "yearStarted": 2019,
+      "icon": "amazon-vpc",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "Amazon Cloudfront",
+      "symbol": "Cn",
+      "yearStarted": 2019,
+      "icon": "amazon-cloudfront",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "Amazon Route 53",
+      "symbol": "R",
+      "yearStarted": 2019,
+      "icon": "amazon-route53",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "Amazon API Gateway",
+      "symbol": "Ag",
+      "yearStarted": 2019,
+      "icon": "amazon-api-gateway",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "AWS CodeCommit",
+      "symbol": "Cc",
+      "yearStarted": 2019,
+      "icon": "aws-codecommit",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "AWS CodeBuild",
+      "symbol": "Cb",
+      "yearStarted": 2019,
+      "icon": "aws-codebuild",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "AWS CodePipeline",
+      "symbol": "Cp",
+      "yearStarted": 2019,
+      "icon": "aws-codepipeline",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "Amazon CloudWatch",
+      "symbol": "Cw",
+      "yearStarted": 2019,
+      "icon": "amazon-cloudwatch",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "AWS CloudFormation",
+      "symbol": "Cf",
+      "yearStarted": 2019,
+      "icon": "aws-cloudformation",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "AWS IAM",
+      "symbol": "Ia",
+      "yearStarted": 2019,
+      "icon": "aws-iam",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "AWS Certificate Manager",
+      "symbol": "Cm",
+      "yearStarted": 2019,
+      "icon": "aws-cm",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "AWS KMS",
+      "symbol": "Km",
+      "yearStarted": 2019,
+      "icon": "aws-kms",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    },
+    {
+      "name": "AWS CDK",
+      "symbol": "Ck",
+      "yearStarted": 2019,
+      "icon": "aws-cdk",
+      "tags": [
+        "cloud",
+        "active"
+      ]
+    }
+  ]
+}

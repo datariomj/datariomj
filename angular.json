@@ -55,7 +55,9 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "library/devbrand/variables.scss",
+              "library/devbrand/style.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [

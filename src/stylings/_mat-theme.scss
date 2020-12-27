@@ -118,8 +118,8 @@ $mat-black-theme-background: (
   app-bar: $main-background,
   background: $main-background,
   hover: rgba(white, 0.04),
-  // TODO(kara): check style with Material Design UX
-  card: $main-background,
+  card: $disabled-color,
+  // card: white,
   dialog: $main-background,
   disabled-button: rgba(white, 0.12),
   raised-button: $main-background,

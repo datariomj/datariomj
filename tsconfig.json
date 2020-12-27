@@ -20,6 +20,8 @@
       "es2018",
       "dom"
     ],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "paths": {
       "@env/*": [
         "src/environments/*"
