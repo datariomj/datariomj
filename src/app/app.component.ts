@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   private initRoutingEvents(): void {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
-        const sidenavContent = this.doc.querySelector('.mat-sidenav-content');
+        const sidenavContent = this.doc.querySelector('.mat-drawer-content');
 
         if (sidenavContent) {
           sidenavContent.scrollTop = 0;

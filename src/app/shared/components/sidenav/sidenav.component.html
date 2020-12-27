@@ -5,15 +5,13 @@
     </mat-nav-list>
     <app-footer class="d__none d__block--lg"></app-footer>
   </mat-drawer>
-  <!-- <mat-sidenav-content> -->
-    <ng-content></ng-content>
-    <mat-toolbar class="sidenav__mobile-nav d__flex d__none--lg">
-      <mat-nav-list class="sidenav__mobile-nav-list">
-        <ng-container *ngTemplateOutlet="mainNavigation"></ng-container>
-      </mat-nav-list>
-    </mat-toolbar>
-    <app-footer class="d__none--lg"></app-footer>
-  <!-- </mat-sidenav-content> -->
+  <ng-content></ng-content>
+  <mat-toolbar class="sidenav__mobile-nav d__flex d__none--lg">
+    <mat-nav-list class="sidenav__mobile-nav-list">
+      <ng-container *ngTemplateOutlet="mainNavigation"></ng-container>
+    </mat-nav-list>
+  </mat-toolbar>
+  <app-footer class="d__none--lg"></app-footer>
 </mat-drawer-container>
 
 <ng-template #mainNavigation>
