@@ -9,7 +9,7 @@
   @include breakpoint(lg) {
     position: fixed;
     bottom: 0;
-    height: 50px;
+    height: $footer-height;
     padding-bottom: 0;
   }
   .mat-toolbar {
@@ -19,7 +19,7 @@
     // justify-content: space-between;
     padding: 0;
     @include breakpoint(lg) {
-      height: 50px;
+      height: $footer-height;
       flex-flow: row;
       justify-content: space-between;
     }
@@ -52,7 +52,7 @@
   }
   &__expand {
     background-color: $disabled-color;
-    width: 80px;
+    width: 101px;
     height: 50px;
     display: flex;
     align-items: center;

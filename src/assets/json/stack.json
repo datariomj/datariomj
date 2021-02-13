@@ -254,6 +254,16 @@
       ]
     },
     {
+      "name": "Ansible",
+      "symbol": "An",
+      "yearStarted": 2021,
+      "icon": "ansible",
+      "tags": [
+        "ops",
+        "active"
+      ]
+    },
+    {
       "name": "Nginx",
       "symbol": "Nx",
       "yearStarted": 2019,

@@ -3,9 +3,9 @@
 @font-face {
   font-family: '#{$icomoon-font-family}';
   src:
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?m54iq6') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?m54iq6') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?m54iq6##{$icomoon-font-family}') format('svg');
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?qd5pn2') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?qd5pn2') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?qd5pn2##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -26,335 +26,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.devbrand-jquery {
-  &:before {
-    content: $devbrand-jquery;     
-    color: #0868ac;
-  }
-}
-.devbrand-linux .path1 {
-  &:before {
-    content: $devbrand-linux-path1;  
-    color: rgb(236, 239, 241);
-  }
-}
-.devbrand-linux .path2 {
-  &:before {
-    content: $devbrand-linux-path2;  
-    margin-left: -1em;  
-    color: rgb(38, 50, 56);
-  }
-}
-.devbrand-linux .path3 {
-  &:before {
-    content: $devbrand-linux-path3;  
-    margin-left: -1em;  
-    color: rgb(236, 239, 241);
-  }
-}
-.devbrand-linux .path4 {
-  &:before {
-    content: $devbrand-linux-path4;  
-    margin-left: -1em;  
-    color: rgb(236, 239, 241);
-  }
-}
-.devbrand-linux .path5 {
-  &:before {
-    content: $devbrand-linux-path5;  
-    margin-left: -1em;  
-    color: rgb(33, 33, 33);
-  }
-}
-.devbrand-linux .path6 {
-  &:before {
-    content: $devbrand-linux-path6;  
-    margin-left: -1em;  
-    color: rgb(33, 33, 33);
-  }
-}
-.devbrand-linux .path7 {
-  &:before {
-    content: $devbrand-linux-path7;  
-    margin-left: -1em;  
-    color: rgb(255, 193, 7);
-  }
-}
-.devbrand-linux .path8 {
-  &:before {
-    content: $devbrand-linux-path8;  
-    margin-left: -1em;  
-    color: rgb(255, 193, 7);
-  }
-}
-.devbrand-linux .path9 {
-  &:before {
-    content: $devbrand-linux-path9;  
-    margin-left: -1em;  
-    color: rgb(255, 193, 7);
-  }
-}
-.devbrand-linux .path10 {
-  &:before {
-    content: $devbrand-linux-path10;  
-    margin-left: -1em;  
-    color: rgb(99, 71, 3);
-  }
-}
-.devbrand-linux .path11 {
-  &:before {
-    content: $devbrand-linux-path11;  
-    margin-left: -1em;  
-    color: rgb(99, 71, 3);
-  }
-}
-.devbrand-linux .path12 {
-  &:before {
-    content: $devbrand-linux-path12;  
-    margin-left: -1em;  
-    color: rgb(99, 71, 3);
-  }
-}
-.devbrand-linux .path13 {
-  &:before {
-    content: $devbrand-linux-path13;  
-    margin-left: -1em;  
-    color: rgb(69, 90, 100);
-  }
-}
-.devbrand-lodash .path1 {
-  &:before {
-    content: $devbrand-lodash-path1;  
-    color: rgb(0, 0, 0);
-  }
-}
-.devbrand-lodash .path2 {
-  &:before {
-    content: $devbrand-lodash-path2;  
-    margin-left: -1.0986328125em;  
-    color: rgb(0, 0, 0);
-  }
-}
-.devbrand-lodash .path3 {
-  &:before {
-    content: $devbrand-lodash-path3;  
-    margin-left: -1.0986328125em;  
-    color: rgb(52, 146, 255);
-  }
-}
-.devbrand-mysql {
-  &:before {
-    content: $devbrand-mysql;     
-    color: #00546b;
-  }
-}
-.devbrand-nginx .path1 {
-  &:before {
-    content: $devbrand-nginx-path1;  
-    color: rgb(0, 148, 56);
-  }
-}
-.devbrand-nginx .path2 {
-  &:before {
-    content: $devbrand-nginx-path2;  
-    margin-left: -1em;  
-    color: rgb(254, 254, 254);
-  }
-}
-.devbrand-nodejs {
-  &:before {
-    content: $devbrand-nodejs;     
-    color: #539e43;
-  }
-}
-.devbrand-php .path1 {
-  &:before {
-    content: $devbrand-php-path1;  
-    color: rgb(0, 0, 0);
-  }
-}
-.devbrand-php .path2 {
-  &:before {
-    content: $devbrand-php-path2;  
-    margin-left: -1.8544921875em;  
-    color: rgb(119, 123, 179);
-  }
-}
-.devbrand-php .path3 {
-  &:before {
-    content: $devbrand-php-path3;  
-    margin-left: -1.8544921875em;  
-    color: rgb(0, 0, 0);
-  }
-}
-.devbrand-php .path4 {
-  &:before {
-    content: $devbrand-php-path4;  
-    margin-left: -1.8544921875em;  
-    color: rgb(255, 255, 255);
-  }
-}
-.devbrand-php .path5 {
-  &:before {
-    content: $devbrand-php-path5;  
-    margin-left: -1.8544921875em;  
-    color: rgb(0, 0, 0);
-  }
-}
-.devbrand-php .path6 {
-  &:before {
-    content: $devbrand-php-path6;  
-    margin-left: -1.8544921875em;  
-    color: rgb(255, 255, 255);
-  }
-}
-.devbrand-php .path7 {
-  &:before {
-    content: $devbrand-php-path7;  
-    margin-left: -1.8544921875em;  
-    color: rgb(0, 0, 0);
-  }
-}
-.devbrand-php .path8 {
-  &:before {
-    content: $devbrand-php-path8;  
-    margin-left: -1.8544921875em;  
-    color: rgb(255, 255, 255);
-  }
-}
-.devbrand-redux {
-  &:before {
-    content: $devbrand-redux;     
-    color: #764abc;
-  }
-}
-.devbrand-rxjs {
-  &:before {
-    content: $devbrand-rxjs;     
-    color: #f7008c;
-  }
-}
-.devbrand-saltstack .path1 {
-  &:before {
-    content: $devbrand-saltstack-path1;  
-    color: rgb(67, 150, 185);
-  }
-}
-.devbrand-saltstack .path2 {
-  &:before {
-    content: $devbrand-saltstack-path2;  
-    margin-left: -1.0986328125em;  
-    color: rgb(184, 221, 232);
-  }
-}
-.devbrand-saltstack .path3 {
-  &:before {
-    content: $devbrand-saltstack-path3;  
-    margin-left: -1.0986328125em;  
-    color: rgb(117, 190, 213);
-  }
-}
-.devbrand-saltstack .path4 {
-  &:before {
-    content: $devbrand-saltstack-path4;  
-    margin-left: -1.0986328125em;  
-    color: rgb(67, 150, 185);
-  }
-}
-.devbrand-saltstack .path5 {
-  &:before {
-    content: $devbrand-saltstack-path5;  
-    margin-left: -1.0986328125em;  
-    color: rgb(117, 190, 213);
-  }
-}
-.devbrand-saltstack .path6 {
-  &:before {
-    content: $devbrand-saltstack-path6;  
-    margin-left: -1.0986328125em;  
-    color: rgb(117, 190, 213);
-  }
-}
-.devbrand-saltstack .path7 {
-  &:before {
-    content: $devbrand-saltstack-path7;  
-    margin-left: -1.0986328125em;  
-    color: rgb(184, 221, 232);
-  }
-}
-.devbrand-sass {
-  &:before {
-    content: $devbrand-sass;     
-    color: #cd6799;
-  }
-}
-.devbrand-serverless {
-  &:before {
-    content: $devbrand-serverless;     
-    color: #f26d61;
-  }
-}
-.devbrand-strapi .path1 {
-  &:before {
-    content: $devbrand-strapi-path1;  
-    color: rgb(142, 117, 255);
-  }
-}
-.devbrand-strapi .path2 {
-  &:before {
-    content: $devbrand-strapi-path2;  
-    margin-left: -1em;  
-    color: rgb(142, 117, 255);  
-    opacity: 0.41;
-  }
-}
-.devbrand-strapi .path3 {
-  &:before {
-    content: $devbrand-strapi-path3;  
-    margin-left: -1em;  
-    color: rgb(142, 117, 255);  
-    opacity: 0.41;
-  }
-}
-.devbrand-typescript .path1 {
-  &:before {
-    content: $devbrand-typescript-path1;  
-    color: rgb(49, 120, 198);
-  }
-}
-.devbrand-typescript .path2 {
-  &:before {
-    content: $devbrand-typescript-path2;  
-    margin-left: -1em;  
-    color: rgb(255, 255, 255);
-  }
-}
-.devbrand-webpack .path1 {
-  &:before {
-    content: $devbrand-webpack-path1;  
-    color: rgb(255, 255, 255);
-  }
-}
-.devbrand-webpack .path2 {
-  &:before {
-    content: $devbrand-webpack-path2;  
-    margin-left: -0.8837890625em;  
-    color: rgb(142, 214, 251);
-  }
-}
-.devbrand-webpack .path3 {
-  &:before {
-    content: $devbrand-webpack-path3;  
-    margin-left: -0.8837890625em;  
-    color: rgb(28, 120, 192);
-  }
-}
-.devbrand-zend-framework {
-  &:before {
-    content: $devbrand-zend-framework;     
-    color: #57a900;
-  }
-}
 .devbrand-adobe-xd .path1 {
   &:before {
     content: $devbrand-adobe-xd-path1;  
@@ -892,6 +563,19 @@
     content: $devbrand-angular-universal-path6;  
     margin-left: -0.9296875em;  
     color: rgb(128, 214, 224);
+  }
+}
+.devbrand-ansible .path1 {
+  &:before {
+    content: $devbrand-ansible-path1;  
+    color: rgb(26, 25, 24);
+  }
+}
+.devbrand-ansible .path2 {
+  &:before {
+    content: $devbrand-ansible-path2;  
+    margin-left: -1em;  
+    color: rgb(255, 255, 255);
   }
 }
 .devbrand-aws .path1 {
@@ -1622,6 +1306,335 @@
   &:before {
     content: $devbrand-jenkins;     
     color: #d33833;
+  }
+}
+.devbrand-jquery {
+  &:before {
+    content: $devbrand-jquery;     
+    color: #0868ac;
+  }
+}
+.devbrand-linux .path1 {
+  &:before {
+    content: $devbrand-linux-path1;  
+    color: rgb(236, 239, 241);
+  }
+}
+.devbrand-linux .path2 {
+  &:before {
+    content: $devbrand-linux-path2;  
+    margin-left: -1em;  
+    color: rgb(38, 50, 56);
+  }
+}
+.devbrand-linux .path3 {
+  &:before {
+    content: $devbrand-linux-path3;  
+    margin-left: -1em;  
+    color: rgb(236, 239, 241);
+  }
+}
+.devbrand-linux .path4 {
+  &:before {
+    content: $devbrand-linux-path4;  
+    margin-left: -1em;  
+    color: rgb(236, 239, 241);
+  }
+}
+.devbrand-linux .path5 {
+  &:before {
+    content: $devbrand-linux-path5;  
+    margin-left: -1em;  
+    color: rgb(33, 33, 33);
+  }
+}
+.devbrand-linux .path6 {
+  &:before {
+    content: $devbrand-linux-path6;  
+    margin-left: -1em;  
+    color: rgb(33, 33, 33);
+  }
+}
+.devbrand-linux .path7 {
+  &:before {
+    content: $devbrand-linux-path7;  
+    margin-left: -1em;  
+    color: rgb(255, 193, 7);
+  }
+}
+.devbrand-linux .path8 {
+  &:before {
+    content: $devbrand-linux-path8;  
+    margin-left: -1em;  
+    color: rgb(255, 193, 7);
+  }
+}
+.devbrand-linux .path9 {
+  &:before {
+    content: $devbrand-linux-path9;  
+    margin-left: -1em;  
+    color: rgb(255, 193, 7);
+  }
+}
+.devbrand-linux .path10 {
+  &:before {
+    content: $devbrand-linux-path10;  
+    margin-left: -1em;  
+    color: rgb(99, 71, 3);
+  }
+}
+.devbrand-linux .path11 {
+  &:before {
+    content: $devbrand-linux-path11;  
+    margin-left: -1em;  
+    color: rgb(99, 71, 3);
+  }
+}
+.devbrand-linux .path12 {
+  &:before {
+    content: $devbrand-linux-path12;  
+    margin-left: -1em;  
+    color: rgb(99, 71, 3);
+  }
+}
+.devbrand-linux .path13 {
+  &:before {
+    content: $devbrand-linux-path13;  
+    margin-left: -1em;  
+    color: rgb(69, 90, 100);
+  }
+}
+.devbrand-lodash .path1 {
+  &:before {
+    content: $devbrand-lodash-path1;  
+    color: rgb(0, 0, 0);
+  }
+}
+.devbrand-lodash .path2 {
+  &:before {
+    content: $devbrand-lodash-path2;  
+    margin-left: -1.0986328125em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.devbrand-lodash .path3 {
+  &:before {
+    content: $devbrand-lodash-path3;  
+    margin-left: -1.0986328125em;  
+    color: rgb(52, 146, 255);
+  }
+}
+.devbrand-mysql {
+  &:before {
+    content: $devbrand-mysql;     
+    color: #00546b;
+  }
+}
+.devbrand-nginx .path1 {
+  &:before {
+    content: $devbrand-nginx-path1;  
+    color: rgb(0, 148, 56);
+  }
+}
+.devbrand-nginx .path2 {
+  &:before {
+    content: $devbrand-nginx-path2;  
+    margin-left: -1em;  
+    color: rgb(254, 254, 254);
+  }
+}
+.devbrand-nodejs {
+  &:before {
+    content: $devbrand-nodejs;     
+    color: #539e43;
+  }
+}
+.devbrand-php .path1 {
+  &:before {
+    content: $devbrand-php-path1;  
+    color: rgb(0, 0, 0);
+  }
+}
+.devbrand-php .path2 {
+  &:before {
+    content: $devbrand-php-path2;  
+    margin-left: -1.8544921875em;  
+    color: rgb(119, 123, 179);
+  }
+}
+.devbrand-php .path3 {
+  &:before {
+    content: $devbrand-php-path3;  
+    margin-left: -1.8544921875em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.devbrand-php .path4 {
+  &:before {
+    content: $devbrand-php-path4;  
+    margin-left: -1.8544921875em;  
+    color: rgb(255, 255, 255);
+  }
+}
+.devbrand-php .path5 {
+  &:before {
+    content: $devbrand-php-path5;  
+    margin-left: -1.8544921875em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.devbrand-php .path6 {
+  &:before {
+    content: $devbrand-php-path6;  
+    margin-left: -1.8544921875em;  
+    color: rgb(255, 255, 255);
+  }
+}
+.devbrand-php .path7 {
+  &:before {
+    content: $devbrand-php-path7;  
+    margin-left: -1.8544921875em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.devbrand-php .path8 {
+  &:before {
+    content: $devbrand-php-path8;  
+    margin-left: -1.8544921875em;  
+    color: rgb(255, 255, 255);
+  }
+}
+.devbrand-redux {
+  &:before {
+    content: $devbrand-redux;     
+    color: #764abc;
+  }
+}
+.devbrand-rxjs {
+  &:before {
+    content: $devbrand-rxjs;     
+    color: #f7008c;
+  }
+}
+.devbrand-saltstack .path1 {
+  &:before {
+    content: $devbrand-saltstack-path1;  
+    color: rgb(67, 150, 185);
+  }
+}
+.devbrand-saltstack .path2 {
+  &:before {
+    content: $devbrand-saltstack-path2;  
+    margin-left: -1.0986328125em;  
+    color: rgb(184, 221, 232);
+  }
+}
+.devbrand-saltstack .path3 {
+  &:before {
+    content: $devbrand-saltstack-path3;  
+    margin-left: -1.0986328125em;  
+    color: rgb(117, 190, 213);
+  }
+}
+.devbrand-saltstack .path4 {
+  &:before {
+    content: $devbrand-saltstack-path4;  
+    margin-left: -1.0986328125em;  
+    color: rgb(67, 150, 185);
+  }
+}
+.devbrand-saltstack .path5 {
+  &:before {
+    content: $devbrand-saltstack-path5;  
+    margin-left: -1.0986328125em;  
+    color: rgb(117, 190, 213);
+  }
+}
+.devbrand-saltstack .path6 {
+  &:before {
+    content: $devbrand-saltstack-path6;  
+    margin-left: -1.0986328125em;  
+    color: rgb(117, 190, 213);
+  }
+}
+.devbrand-saltstack .path7 {
+  &:before {
+    content: $devbrand-saltstack-path7;  
+    margin-left: -1.0986328125em;  
+    color: rgb(184, 221, 232);
+  }
+}
+.devbrand-sass {
+  &:before {
+    content: $devbrand-sass;     
+    color: #cd6799;
+  }
+}
+.devbrand-serverless {
+  &:before {
+    content: $devbrand-serverless;     
+    color: #f26d61;
+  }
+}
+.devbrand-strapi .path1 {
+  &:before {
+    content: $devbrand-strapi-path1;  
+    color: rgb(142, 117, 255);
+  }
+}
+.devbrand-strapi .path2 {
+  &:before {
+    content: $devbrand-strapi-path2;  
+    margin-left: -1em;  
+    color: rgb(142, 117, 255);  
+    opacity: 0.41;
+  }
+}
+.devbrand-strapi .path3 {
+  &:before {
+    content: $devbrand-strapi-path3;  
+    margin-left: -1em;  
+    color: rgb(142, 117, 255);  
+    opacity: 0.41;
+  }
+}
+.devbrand-typescript .path1 {
+  &:before {
+    content: $devbrand-typescript-path1;  
+    color: rgb(49, 120, 198);
+  }
+}
+.devbrand-typescript .path2 {
+  &:before {
+    content: $devbrand-typescript-path2;  
+    margin-left: -1em;  
+    color: rgb(255, 255, 255);
+  }
+}
+.devbrand-webpack .path1 {
+  &:before {
+    content: $devbrand-webpack-path1;  
+    color: rgb(255, 255, 255);
+  }
+}
+.devbrand-webpack .path2 {
+  &:before {
+    content: $devbrand-webpack-path2;  
+    margin-left: -0.8837890625em;  
+    color: rgb(142, 214, 251);
+  }
+}
+.devbrand-webpack .path3 {
+  &:before {
+    content: $devbrand-webpack-path3;  
+    margin-left: -0.8837890625em;  
+    color: rgb(28, 120, 192);
+  }
+}
+.devbrand-zend-framework {
+  &:before {
+    content: $devbrand-zend-framework;     
+    color: #57a900;
   }
 }
 

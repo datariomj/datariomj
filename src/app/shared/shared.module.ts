@@ -28,6 +28,8 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
   exports: [
     SidenavComponent,
     FooterComponent,
+    MatButtonModule,
+    MatIconModule,
   ],
 })
 export class SharedModule { }

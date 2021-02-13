@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
+import { IconService } from '@core/services/icon.service';
+import { IconServerService } from '@core/services/icon-server.service';
 
 import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
@@ -12,6 +14,12 @@ import { SharedModule } from './shared/shared.module';
     ServerModule,
     SharedModule,
     CoreModule,
+  ],
+  providers: [
+    {
+      provide: IconService,
+      useClass: IconServerService,
+    },
   ],
   bootstrap: [AppComponent],
 })

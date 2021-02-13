@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
+import { IconService } from '@core/services/icon.service';
 import { Select } from '@ngxs/store';
 import { AppState } from '@shared/state/app.state';
 import { Observable } from 'rxjs';
@@ -30,14 +29,10 @@ export class SidenavComponent {
   ];
 
   constructor(
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
+    private iconService: IconService,
   ) {
     this.icons.forEach((icon) => {
-      this.matIconRegistry.addSvgIcon(
-        icon,
-        this.domSanitizer.bypassSecurityTrustResourceUrl(`./assets/svg/${ icon }.svg`),
-      );
+      this.iconService.addSvgIcon(icon);
     });
   }
 }

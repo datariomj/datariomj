@@ -61,7 +61,7 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/stylings"
+                "./src/stylings"
               ]
             },
             "scripts": []
@@ -128,8 +128,15 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "library/devbrand/variables.scss",
+              "library/devbrand/style.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src/stylings"
+              ]
+            },
             "scripts": []
           }
         },
@@ -159,7 +166,12 @@
           "options": {
             "outputPath": "dist/datariomj/server",
             "main": "server.ts",
-            "tsConfig": "tsconfig.server.json"
+            "tsConfig": "tsconfig.server.json",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src/stylings"
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -193,9 +205,7 @@
           "options": {
             "browserTarget": "datariomj:build:production",
             "serverTarget": "datariomj:server:production",
-            "routes": [
-              "/"
-            ]
+            "routes": []
           },
           "configurations": {
             "production": {}

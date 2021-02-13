@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
+import { IconService } from '@core/services/icon.service';
 import { Store } from '@ngxs/store';
 import { ToggleSidenav } from '@shared/state/app.action';
 
@@ -36,15 +35,11 @@ export class FooterComponent {
   ];
 
   constructor(
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
     private store: Store,
+    private iconService: IconService,
   ) {
     this.icons.forEach((icon) => {
-      this.matIconRegistry.addSvgIcon(
-        icon,
-        this.domSanitizer.bypassSecurityTrustResourceUrl(`./assets/svg/${ icon }.svg`),
-      );
+      this.iconService.addSvgIcon(icon);
     });
   }
 

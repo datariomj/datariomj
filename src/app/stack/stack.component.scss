@@ -1,7 +1,14 @@
 .stack {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 50px;
+  &__container {
+    padding-bottom: 50px;
+  }
+  &__intro-wrapper {
+
+  }
+  &__card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
 }

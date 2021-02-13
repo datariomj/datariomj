@@ -1,3 +1,10 @@
 <div class="stack">
-  <app-stack-card *ngFor="let stackDatum of stackData" [stackData]="stackDatum"></app-stack-card>
+  <div class="stack__container">
+    <div class="stack__intro-wrapper">
+      <span>Stack</span>
+    </div>
+    <div class="stack__card-wrapper">
+      <app-stack-card *ngFor="let stackDatum of stackData" [stackData]="stackDatum"></app-stack-card>
+    </div>
+  </div>
 </div>

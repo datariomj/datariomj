@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { IconService } from '@core/services/icon.service';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
@@ -33,7 +34,9 @@ import { SharedModule } from './shared/shared.module';
       NgxsLoggerPluginModule.forRoot(),
     ] : [],
   ],
-  providers: [],
+  providers: [
+    IconService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

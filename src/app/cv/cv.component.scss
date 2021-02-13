@@ -1,0 +1,12 @@
+@import 'variables';
+@import 'mixins';
+
+.cv {
+  &__container {
+  }
+  &__list-wrapper {
+    background-color: $card-color;
+    height: calc(100vh - #{$footer-height});
+    width: 30%;
+  }
+}

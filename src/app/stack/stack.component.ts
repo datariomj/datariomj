@@ -9,7 +9,7 @@ import * as stackJson from '../../assets/json/stack.json';
   encapsulation: ViewEncapsulation.None,
 })
 export class StackComponent implements OnInit {
-  stackData = stackJson.data;
+  stackData = [];
 
   constructor() { }
 
