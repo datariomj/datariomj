@@ -19,7 +19,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                sh 'aws s3 cp ./dist/datariomj/browser/* s3://staging.datariomj.dev --recursive'
+                sh 'aws s3 cp ./dist/datariomj/browser s3://staging.datariomj.dev --recursive'
             }
         }
     }
