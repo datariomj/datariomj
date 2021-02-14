@@ -4,7 +4,7 @@
       <span>Stack</span>
     </div>
     <div class="stack__card-wrapper">
-      <app-stack-card *ngFor="let stackDatum of stackData" [stackData]="stackDatum"></app-stack-card>
+      <app-stack-card *ngFor="let stackDatum of (stack$ | async)?.data" [stackData]="stackDatum"></app-stack-card>
     </div>
   </div>
 </div>

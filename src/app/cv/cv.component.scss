@@ -3,10 +3,49 @@
 
 .cv {
   &__container {
+    position: absolute;
+    display: flex;
+    overflow: hidden;
+    height: calc(100vh - #{$footer-height});
+    width: 100%;
   }
   &__list-wrapper {
     background-color: $card-color;
-    height: calc(100vh - #{$footer-height});
     width: 30%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  &__router-wrapper {
+    width: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  &__detail-route {
+    text-decoration: none;
+    color: $text-color;
+    &:hover {
+      color: $accent-color;
+    }
+  }
+  &__detail-expand {
+    cursor: pointer;
+  }
+  &__icon-expand {
+    color: $disabled-color;
+  }
+  .mat-tree-node {
+    &:hover {
+      .cv__icon-expand {
+        color: white;
+      }
+    }
   }
 }

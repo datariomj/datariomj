@@ -1,0 +1,29 @@
+pipeline {
+    agent {
+        docker {
+            image 'node:12-alpine'
+            args '-p 3000:3000'
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+                sh 'npm install --only=prod'
+                sh 'npm run prerender'
+                sh 'npm run build'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                sh 'aws s3 cp ./dist/datariomj/browser/* s3://staging.datariomj.dev --recursive'
+            }
+        }
+    }
+}

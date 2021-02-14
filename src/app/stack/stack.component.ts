@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
-import * as stackJson from '../../assets/json/stack.json';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-stack',
@@ -9,11 +9,13 @@ import * as stackJson from '../../assets/json/stack.json';
   encapsulation: ViewEncapsulation.None,
 })
 export class StackComponent implements OnInit {
-  stackData = [];
+  // todo get from api and create interfaces
+  stack$ = this.http.get('/assets/json/stack.json') as Observable<any>;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   ngOnInit(): void {
   }
-
 }

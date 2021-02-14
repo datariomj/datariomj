@@ -10,7 +10,8 @@
     "prerender",
     "saltstack",
     "sidenav",
-    "strapi"
+    "strapi",
+    "unsubsriber"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true

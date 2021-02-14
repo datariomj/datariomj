@@ -52,6 +52,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/robots.txt",
+              "src/sitemap.xml",
               "src/manifest.webmanifest"
             ],
             "styles": [

@@ -1,0 +1,76 @@
+{
+  "data": [
+    {
+      "name": "Work Experience",
+      "children": [
+        {
+          "name": "Solutions Developer",
+          "route": "solutions-developer"
+        },
+        {
+          "name": "DevOps Engineer",
+          "route": "devops-engineer"
+        },
+        {
+          "name": "Software Engineer",
+          "route": "software-engineer"
+        },
+        {
+          "name": "Associate Software Engineer",
+          "route": "associate-software-engineer"
+        },
+        {
+          "name": "Junior Software Engineer",
+          "route": "junior-software-engineer"
+        },
+        {
+          "name": "Software Engineer Intern",
+          "route": "software-engineer-intern"
+        }
+      ]
+    },
+    {
+      "name": "Certification",
+      "children": [
+        {
+          "name": "AWS Certified Solutions Architect - Associate",
+          "route": "assoc-solutions-architect"
+        }
+      ]
+    },
+    {
+      "name": "Education",
+      "children": [
+        {
+          "name": "BS in Computer Engineering",
+          "route": "bs-comp-eng"
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "children": [
+        {
+          "name": "datariomj.dev",
+          "route": "datariomj"
+        },
+        {
+          "name": "datariomj-dev.web.app",
+          "route": "datariomj-free"
+        },
+        {
+          "name": "christinemanrique.com",
+          "route": "christinemanrique"
+        },
+        {
+          "name": "Client Facing Applications",
+          "route": "cfa"
+        },
+        {
+          "name": "Customer Relationship Management",
+          "route": "crm"
+        }
+      ]
+    }
+  ]
+}
