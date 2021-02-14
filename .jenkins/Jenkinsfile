@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'npm install --only=prod'
+                sh 'npm install'
                 sh 'npm run prerender'
                 sh 'npm run build'
             }
