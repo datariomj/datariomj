@@ -1,10 +1,8 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:12-alpine'
-            args '-p 3000:3000'
-        }
-    }
+    agent any
+
+    tools {nodejs "nodejs-12"}
+
     stages {
         stage('Build') {
             steps {
@@ -22,7 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                sh 'aws s3 cp ./dist/datariomj/browser/* s3://staging.datariomj.dev --recursive'
+                // sh 'aws s3 cp ./dist/datariomj/browser/* s3://staging.datariomj.dev --recursive'
             }
         }
     }
