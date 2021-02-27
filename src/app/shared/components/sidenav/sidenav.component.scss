@@ -40,8 +40,11 @@
     line-height: 1;
   }
   &__route-wrapper {
-    position: relative;
-    height: calc(100vh - 50px);
+    min-height: calc(100vh - 200px);
+    // padding-bottom: 56px;
+    @include breakpoint(sm) {
+      // padding-bottom: 64px;
+    }
   }
   .mat-drawer-side {
     border-right: none;

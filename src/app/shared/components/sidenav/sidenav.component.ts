@@ -24,8 +24,8 @@ export class SidenavComponent {
     { icon: 'home', route: '', description: 'Home' },
     { icon: 'cv', route: '/cv', description: 'CV' },
     { icon: 'stack', route: '/stack', description: 'Stack' },
-    // { icon: 'blog', route: '/blog', description: 'Blog' },
-    // { icon: 'contact', route: '/contact', description: 'Contact' },
+    { icon: 'blog', route: '/blog', description: 'Blog' },
+    { icon: 'contact', route: '/contact', description: 'Contact' },
   ];
 
   constructor(

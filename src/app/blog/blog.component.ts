@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { SeoService } from '@core/services/seo.service';
 
 @Component({
   selector: 'app-blog',
@@ -7,10 +8,16 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    private seo: SeoService,
+  ) { }
 
   ngOnInit(): void {
+    this.seo.generateTags({
+      title: 'MJ Datario | Blog',
+      description: 'Blog',
+      image: '/assets/images/placeholder.jpg',
+      slug: 'blog',
+    });
   }
-
 }

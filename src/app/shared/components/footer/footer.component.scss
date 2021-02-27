@@ -4,20 +4,16 @@
 .footer {
   position: relative;
   width: 100%;
-  padding-bottom: 65px;
   @include breakpoint(lg) {
     position: fixed;
     bottom: 0;
     height: $footer-height;
-    padding-bottom: 0;
   }
   .mat-toolbar {
     display: flex;
     height: auto;
     flex-flow: column;
-    // border-top: solid 1px $disabled-color;
     border-top: none;
-    // justify-content: space-between;
     padding: 0;
     @include breakpoint(lg) {
       height: $footer-height;
@@ -37,18 +33,6 @@
       flex-flow: row;
       max-width: none;
       margin: 0;
-    }
-  }
-  &__left {
-    padding-top: 12px;
-    @include breakpoint(lg) {
-      padding-top: 0;
-    }
-  }
-  &__right {
-    margin-top: 16px;
-    @include breakpoint(lg) {
-      margin-top: 0;
     }
   }
   &__expand {
@@ -72,12 +56,6 @@
     &--flex-sb {
       justify-content: space-between;
       padding: 0 20px;
-    }
-    &--links {
-      margin-top: 20px;
-      @include breakpoint(lg) {
-        margin-top: 0;
-      }
     }
   }
   &__social-icon {

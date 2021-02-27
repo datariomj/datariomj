@@ -1,6 +1,7 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { SeoService } from '@core/services/seo.service';
 import { GetData } from '@cv/store/cv.actions';
 import { CvState } from '@cv/store/cv.state';
 import { Store } from '@ngxs/store';
@@ -30,12 +31,20 @@ export class CvComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
+    private seo: SeoService,
   ) {
   }
 
   hasChild = (_: number, node: CvFlatNode) => node.expandable;
 
   ngOnInit() {
+    this.seo.generateTags({
+      title: 'MJ Datario | CV',
+      description: 'Curriculum Vitae',
+      image: '/assets/images/placeholder.jpg',
+      slug: 'cv',
+    });
+
     this.store.select(CvState.getData).pipe(
       takeUntil(this.$unsubsriber),
     ).subscribe((cv) => {

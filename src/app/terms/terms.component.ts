@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { SeoService } from '@core/services/seo.service';
 
 @Component({
   selector: 'app-terms',
@@ -7,10 +8,16 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class TermsComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    private seo: SeoService,
+  ) { }
 
   ngOnInit(): void {
+    this.seo.generateTags({
+      title: 'MJ Datario | Terms & Conditions',
+      description: 'Terms and Conditions',
+      image: '/assets/images/placeholder.jpg',
+      slug: 'terms',
+    });
   }
-
 }

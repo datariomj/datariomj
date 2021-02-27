@@ -8,12 +8,12 @@
   <div class="sidenav__route-wrapper">
     <ng-content></ng-content>
   </div>
+  <app-footer class="d__none--lg"></app-footer>
   <mat-toolbar class="sidenav__mobile-nav d__flex d__none--lg">
     <mat-nav-list class="sidenav__mobile-nav-list">
       <ng-container *ngTemplateOutlet="mainNavigation"></ng-container>
     </mat-nav-list>
   </mat-toolbar>
-  <app-footer class="d__none--lg"></app-footer>
 </mat-drawer-container>
 
 <ng-template #mainNavigation>

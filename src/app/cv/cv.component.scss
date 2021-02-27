@@ -3,11 +3,13 @@
 
 .cv {
   &__container {
-    position: absolute;
     display: flex;
-    overflow: hidden;
     height: calc(100vh - #{$footer-height});
     width: 100%;
+    @include breakpoint(lg) {
+      position: absolute;
+      overflow: hidden;
+    }
   }
   &__list-wrapper {
     background-color: $card-color;

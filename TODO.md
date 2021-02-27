@@ -1,12 +1,22 @@
 # Todo List
 
 ## General
-- implement seo service
-- handle overflows on containers
-- implement route loader
 - add static texts like email, contact number to config
 ## CV
+- mobile ui
 - add collapse or expand all buttons
+
+## Stack
+- mobile ui
+
+## Contact
+- contact form
+- contact api
+
+## Blog
+- ui
+# Error
+- ui
 
 ## Jenkins
 - update robots.txt by branch
