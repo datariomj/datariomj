@@ -5,7 +5,9 @@
     </mat-nav-list>
     <app-footer class="d__none d__block--lg"></app-footer>
   </mat-drawer>
-  <ng-content></ng-content>
+  <div class="sidenav__route-wrapper">
+    <ng-content></ng-content>
+  </div>
   <mat-toolbar class="sidenav__mobile-nav d__flex d__none--lg">
     <mat-nav-list class="sidenav__mobile-nav-list">
       <ng-container *ngTemplateOutlet="mainNavigation"></ng-container>

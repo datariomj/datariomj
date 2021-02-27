@@ -114,11 +114,11 @@ $accent: mat-palette($custom-accent);
 $warn: mat-palette($custom-warn);
 $mat-black-theme-background: (
   status-bar: $main-background,
-  app-bar: $main-background,
+  app-bar: #0f0f0f,
   background: $main-background,
   hover: rgba(white, 0.04),
   card: $card-color,
-  dialog: $main-background,
+  dialog: #0f0f0f,
   disabled-button: rgba(white, 0.12),
   raised-button: $main-background,
   focused-button: $light-focused,

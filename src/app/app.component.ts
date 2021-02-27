@@ -1,6 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { UIState } from 'src/store/ui/ui.state';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +12,7 @@ import { Event, NavigationEnd, Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
+  @Select(UIState.showPreloader) showPreloader$!: Observable<boolean>;
   title = 'datariomj';
 
   constructor(

@@ -1,7 +1,9 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { GetData } from '@cv/store/cv.actions';
+import { CvState } from '@cv/store/cv.state';
+import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -27,20 +29,22 @@ export class CvComponent implements OnInit, OnDestroy {
   private $unsubsriber = new Subject<any>();
 
   constructor(
-    private http: HttpClient,
+    private store: Store,
   ) {
   }
 
   hasChild = (_: number, node: CvFlatNode) => node.expandable;
 
   ngOnInit() {
-    // todo get from api and create interfaces
-    this.http.get('/assets/json/cv.json').pipe(
+    this.store.select(CvState.getData).pipe(
       takeUntil(this.$unsubsriber),
-    ).subscribe((cv: any) => {
-      this.dataSource.data = cv.data;
-      this.treeControl.expandAll();
+    ).subscribe((cv) => {
+      if (cv) {
+        this.dataSource.data = cv.data;
+        this.treeControl.expandAll();
+      }
     });
+    this.store.dispatch(new GetData());
   }
 
   ngOnDestroy() {

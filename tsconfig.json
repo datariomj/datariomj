@@ -25,6 +25,9 @@
       "@env/*": [
         "src/environments/*"
       ],
+      "@store/*": [
+        "src/store/*"
+      ],
       "@blog/*": [
         "src/app/blog/*"
       ],

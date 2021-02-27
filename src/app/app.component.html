@@ -1,3 +1,4 @@
 <app-sidenav>
+    <app-preloader *ngIf="showPreloader$ | async"></app-preloader>
     <router-outlet></router-outlet>
 </app-sidenav>

@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { IconService } from '@core/services/icon.service';
 import { Store } from '@ngxs/store';
-import { ToggleSidenav } from '@shared/state/app.action';
+import { ToggleSidenav } from '@store/ui/ui.action';
 
 @Component({
   selector: 'app-footer',

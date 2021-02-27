@@ -3,9 +3,8 @@
 
 .footer {
   position: relative;
-  border-top: solid 1px $disabled-color;
   width: 100%;
-  padding-bottom: 80px;
+  padding-bottom: 65px;
   @include breakpoint(lg) {
     position: fixed;
     bottom: 0;
@@ -16,6 +15,8 @@
     display: flex;
     height: auto;
     flex-flow: column;
+    // border-top: solid 1px $disabled-color;
+    border-top: none;
     // justify-content: space-between;
     padding: 0;
     @include breakpoint(lg) {
@@ -52,7 +53,7 @@
   }
   &__expand {
     background-color: $disabled-color;
-    width: 101px;
+    width: 100px;
     height: 50px;
     display: flex;
     align-items: center;
@@ -131,6 +132,7 @@
       width: 16px;
       height: 16px;
       margin-right: 4px;
+      display: flex;
       @include breakpoint(lg) {
         width: 24px;
         height: 24px;

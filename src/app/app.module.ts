@@ -7,7 +7,7 @@ import { IconService } from '@core/services/icon.service';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { AppState } from '@shared/state/app.state';
+import { UIState } from 'src/store/ui/ui.state';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -26,7 +26,7 @@ import { SharedModule } from './shared/shared.module';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     SharedModule,
     CoreModule,
-    NgxsModule.forRoot([AppState], {
+    NgxsModule.forRoot([UIState], {
       developmentMode: !environment.production,
     }),
     !environment.production ? [

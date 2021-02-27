@@ -19,8 +19,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                sh 'aws s3 cp ./dist/datariomj/browser s3://staging.datariomj.dev --recursive'
-                sh 'aws cloudfront create-invalidation --distribution-id E3KAH5F445FJPG --paths "/*"'
+                withAWS(region:'ap-southeast-1', credentials:'jenkins-aws') {
+                    sh 'aws s3 cp ./dist/datariomj/browser s3://staging.datariomj.dev --recursive'
+                    sh 'aws cloudfront create-invalidation --distribution-id E3KAH5F445FJPG --paths "/*"'
+                }
             }
         }
     }

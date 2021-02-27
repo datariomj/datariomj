@@ -9,9 +9,9 @@
     align-items: center;
     padding: 20px 20px 55px 20px;
     @include breakpoint(lg) {
-      padding: 0 100px;
+      padding: 50px 100px 50px 100px;
       flex-flow: row;
-      height: calc(100vh - 50px);
+      min-height: calc(100vh - 150px);
     }
   }
   &__main {
@@ -31,7 +31,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    border: 1px solid $disabled-color;
     @include breakpoint(lg) {
       width: 50%;
       height: auto;
@@ -45,7 +44,8 @@
     border-radius: 50%;
     @include breakpoint(lg) {
       height: auto;
-      width: 100%;
+      width: auto;
+      max-height: 550px;
       border-radius: 0;
     }
   }

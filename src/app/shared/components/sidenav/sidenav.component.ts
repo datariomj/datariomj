@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { IconService } from '@core/services/icon.service';
 import { Select } from '@ngxs/store';
-import { AppState } from '@shared/state/app.state';
 import { Observable } from 'rxjs';
+import { UIState } from 'src/store/ui/ui.state';
 
 @Component({
   selector: 'app-sidenav',
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class SidenavComponent {
-  @Select(AppState.sidenavExpanded) sidenavExpanded$!: Observable<boolean>;
+  @Select(UIState.sidenavExpanded) sidenavExpanded$!: Observable<boolean>;
 
   icons = [
     'home',
@@ -24,8 +24,8 @@ export class SidenavComponent {
     { icon: 'home', route: '', description: 'Home' },
     { icon: 'cv', route: '/cv', description: 'CV' },
     { icon: 'stack', route: '/stack', description: 'Stack' },
-    { icon: 'blog', route: '/blog', description: 'Blog' },
-    { icon: 'contact', route: '/contact', description: 'Contact' },
+    // { icon: 'blog', route: '/blog', description: 'Blog' },
+    // { icon: 'contact', route: '/contact', description: 'Contact' },
   ];
 
   constructor(

@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { NgxsModule } from '@ngxs/store';
 
 import { StackCardComponent } from './components/stack-card/stack-card.component';
 import { StackIconComponent } from './components/stack-icon/stack-icon.component';
 import { StackComponent } from './stack.component';
 import { StackRoutingModule } from './stack-routing.module';
+import { StackState } from './store/stack.state';
 
 @NgModule({
   declarations: [StackComponent, StackCardComponent, StackIconComponent],
@@ -17,6 +19,9 @@ import { StackRoutingModule } from './stack-routing.module';
     MatCardModule,
     MatButtonModule,
     MatChipsModule,
+    NgxsModule.forFeature([
+      StackState,
+    ]),
   ],
 })
 export class StackModule { }
