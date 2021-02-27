@@ -26,7 +26,7 @@ export class SeoService {
     };
 
     if (environment.production) {
-      config.image = `https://datariomj.dev${ config.image }`;
+      config.image = `${ environment.hostUrl }${ config.image }`;
     }
 
     this.title.setTitle(config.title);
@@ -48,7 +48,7 @@ export class SeoService {
     this.meta.updateTag({ property: 'og:title', content: config.title });
     this.meta.updateTag({ property: 'og:description', content: config.description });
     this.meta.updateTag({ property: 'og:image', content: config.image });
-    this.meta.updateTag({ property: 'og:url', content: `https://datariomj.dev/${ config.slug }` });
+    this.meta.updateTag({ property: 'og:url', content: `${ environment.hostUrl }/${ config.slug }` });
   }
 
   // createLinkForCanonicalURL() {

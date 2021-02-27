@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { IconService } from '@core/services/icon.service';
+import { STATIC_CONSTANT } from '@core/static.constants';
 import { Store } from '@ngxs/store';
 import { ToggleSidenav } from '@store/ui/ui.action';
 
@@ -10,6 +11,7 @@ import { ToggleSidenav } from '@store/ui/ui.action';
   encapsulation: ViewEncapsulation.None,
 })
 export class FooterComponent {
+  email: string = STATIC_CONSTANT.email;
   icons = [
     'chevron-right',
     'git',

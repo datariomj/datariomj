@@ -2,6 +2,9 @@
 
 ## General
 - add static texts like email, contact number to config
+
+## Sidenav
+- add ellipsis when height is insufficient
 ## CV
 - mobile ui
 - add collapse or expand all buttons
@@ -10,11 +13,13 @@
 - mobile ui
 
 ## Contact
+- ui
 - contact form
 - contact api
 
 ## Blog
 - ui
+- cms
 # Error
 - ui
 
