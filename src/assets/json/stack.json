@@ -299,7 +299,7 @@
       "icon": "linux",
       "tags": [
         "others",
-        "true"
+        "active"
       ]
     },
     {
@@ -338,8 +338,8 @@
       "yearStarted": 2018,
       "icon": "adobe-xd",
       "tags": [
-        "qa",
-        "design"
+        "design",
+        "active"
       ]
     },
     {
@@ -348,8 +348,8 @@
       "yearStarted": 2018,
       "icon": "figma",
       "tags": [
-        "qa",
-        "design"
+        "design",
+        "active"
       ]
     },
     {
@@ -369,7 +369,7 @@
       "icon": "aws",
       "tags": [
         "cloud",
-        "inactive"
+        "active"
       ]
     },
     {

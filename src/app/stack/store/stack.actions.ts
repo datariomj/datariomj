@@ -1,5 +1,5 @@
-export class GetData {
-    public static readonly type = '[Stack] Get Data';
+export class GetItems {
+    public static readonly type = '[Stack] Get Items';
 
     constructor() { }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SeoService } from '@core/services/seo.service';
 import { STATIC_CONSTANT } from '@core/static.constants';
 import { environment } from '@env/environment';
@@ -8,6 +8,7 @@ import { environment } from '@env/environment';
   templateUrl: './privacy.component.html',
   styleUrls: ['./privacy.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrivacyComponent implements OnInit {
   email: string = STATIC_CONSTANT.email;

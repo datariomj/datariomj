@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailComponent implements OnInit {
   name = '';

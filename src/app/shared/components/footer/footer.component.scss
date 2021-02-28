@@ -3,9 +3,14 @@
 
 .footer {
   position: relative;
+  padding-bottom: 55px;
   width: 100%;
+  @include breakpoint(sm) {
+    padding-bottom: 63px;
+  }
   @include breakpoint(lg) {
     position: fixed;
+    padding-bottom: 0;
     bottom: 0;
     height: $footer-height;
   }

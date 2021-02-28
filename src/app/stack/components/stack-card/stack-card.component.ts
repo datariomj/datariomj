@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { StackItem } from '@stack/interfaces/stack-item';
 
 @Component({
@@ -6,8 +6,8 @@ import { StackItem } from '@stack/interfaces/stack-item';
   templateUrl: './stack-card.component.html',
   styleUrls: ['./stack-card.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StackCardComponent {
-  @Input()
-  stackData!: StackItem;
+  @Input() stackData!: StackItem;
 }

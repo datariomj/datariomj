@@ -41,10 +41,6 @@
   }
   &__route-wrapper {
     min-height: calc(100vh - 200px);
-    // padding-bottom: 56px;
-    @include breakpoint(sm) {
-      // padding-bottom: 64px;
-    }
   }
   &__mobile-nav {
     position: fixed;
@@ -75,7 +71,9 @@
   }
   .mat-list-base {
     padding-top: 0;
-    padding-bottom: 50px;
+    @include breakpoint(lg) {
+      padding-bottom: 50px;
+    }
     .mat-list-item {
       .mat-list-item-content {
         // justify-content: center;

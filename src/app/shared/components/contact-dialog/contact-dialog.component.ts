@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -7,6 +7,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   templateUrl: './contact-dialog.component.html',
   styleUrls: ['./contact-dialog.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactDialogComponent {
   contactForm = new FormGroup({

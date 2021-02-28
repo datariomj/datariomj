@@ -14,7 +14,7 @@ export class StackService {
   ) {
   }
 
-  getStackV2(): Observable<Stack> {
+  getStack(): Observable<Stack> {
     return this.cms.getAllEntriesByContentType('technology').pipe(
       map(entries => {
         const fields = entries.items.map((nested: any) => nested.fields);

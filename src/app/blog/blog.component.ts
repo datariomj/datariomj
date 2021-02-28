@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SeoService } from '@core/services/seo.service';
 
 @Component({
@@ -6,6 +6,7 @@ import { SeoService } from '@core/services/seo.service';
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogComponent implements OnInit {
   constructor(

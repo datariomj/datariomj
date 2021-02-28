@@ -11,7 +11,7 @@
       <img [appContentfulAsset]="stackData.iconImage.sys.id" [assetWidth]="100" [assetHeight]="100" alt="{{stackData.name}}">
     </div> -->
     <mat-chip-list>
-      <mat-chip color="primary" selected>{{stackData.type}}</mat-chip>
+      <mat-chip *ngIf="stackData.type" color="primary" selected>{{stackData.type}}</mat-chip>
       <mat-chip *ngFor="let tag of stackData.tags" color="primary" selected>{{tag}}</mat-chip>
     </mat-chip-list>
   </mat-card-content>

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ContentfulService } from '@core/services/contentful.service';
 import { SeoService } from '@core/services/seo.service';
 import { Select, Store } from '@ngxs/store';
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 
 import { Stack } from './interfaces/stack';
 import { StackItem } from './interfaces/stack-item';
-import { GetData } from './store/stack.actions';
+import { GetItems } from './store/stack.actions';
 import { StackState } from './store/stack.state';
 
 @Component({
@@ -15,6 +15,7 @@ import { StackState } from './store/stack.state';
   templateUrl: './stack.component.html',
   styleUrls: ['./stack.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StackComponent implements OnInit {
   @Select(StackState.getItems) stack$!: Observable<StackItem[]>;
@@ -33,7 +34,7 @@ export class StackComponent implements OnInit {
       image: '/assets/images/placeholder.jpg',
       slug: 'stack',
     });
-    this.store.dispatch(new GetData());
+    this.store.dispatch(new GetItems());
 
     // this.cms.getAllEntriesByContentType('technology').subscribe(console.log);
     // this.cms.getEntryById('10xhkrXOMbiFp3SzrUxcMt').subscribe(console.log);

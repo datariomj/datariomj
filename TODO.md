@@ -6,16 +6,18 @@
 
 ## Sidenav
 - add ellipsis when height is insufficient
+
 ## CV
 - mobile ui
 - add collapse or expand all buttons
 
 ## Stack
 - mobile ui
+- sort stack
 
 ## Contact
 - ui
-- contact form
+- contact form responsive
 - contact api
 
 ## Blog
@@ -23,6 +25,13 @@
 - cms
 # Error
 - ui
+
+# CMS
+- implement graphql request
+
+# Skills forgot to add
+- Contentful
+- Postgresql
 
 ## Jenkins
 - update robots.txt by branch

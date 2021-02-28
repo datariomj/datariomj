@@ -4,6 +4,8 @@ export const environment = {
   hostUrl: 'https://datariomj.dev',
   contentful: {
     host: 'https://cdn.contentful.com',
+    hostGraphQL: 'https://graphql.contentful.com',
+    environment: 'master',
     space: 's5tpeora8n1x',
     accessToken: 'dTTJKMDYBBneMpjykSXggLlZTBYn004i_AUlRFvmScc', // read only
   },

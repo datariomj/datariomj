@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IconService } from '@core/services/icon.service';
 import { Select } from '@ngxs/store';
@@ -14,6 +14,7 @@ import { ContactDialogComponent } from '../contact-dialog/contact-dialog.compone
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidenavComponent {
   @Select(UIState.sidenavExpanded) sidenavExpanded$!: Observable<boolean>;

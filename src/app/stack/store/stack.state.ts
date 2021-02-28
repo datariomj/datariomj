@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { CvService } from '@cv/cv.service';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { Stack } from '@stack/interfaces/stack';
-import { StackItem } from '@stack/interfaces/stack-item';
 import { StackService } from '@stack/stack.service';
 import { PreloaderVisibility } from '@store/ui/ui.action';
 import { finalize, tap } from 'rxjs/operators';
 
-import { GetData as GetItems } from './stack.actions';
+import { GetItems as GetItems } from './stack.actions';
 
 export interface StackStateModel {
     items: Stack | null;
@@ -40,10 +38,9 @@ export class StackState {
             return;
         }
 
-        return this.stackService.getStackV2().pipe(
-            tap(() => {
-                this.store.dispatch(new PreloaderVisibility(true));
-            }),
+        this.store.dispatch(new PreloaderVisibility(true));
+
+        return this.stackService.getStack().pipe(
             tap(stack => {
                 patchState({
                     items: stack,

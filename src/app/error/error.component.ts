@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SeoService } from '@core/services/seo.service';
 
 @Component({
@@ -6,6 +6,7 @@ import { SeoService } from '@core/services/seo.service';
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorComponent implements OnInit {
   constructor(

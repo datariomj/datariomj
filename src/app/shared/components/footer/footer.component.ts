@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { IconService } from '@core/services/icon.service';
 import { STATIC_CONSTANT } from '@core/static.constants';
 import { Store } from '@ngxs/store';
@@ -9,6 +9,7 @@ import { ToggleSidenav } from '@store/ui/ui.action';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
   email: string = STATIC_CONSTANT.email;

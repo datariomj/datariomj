@@ -1,8 +1,8 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { SeoService } from '@core/services/seo.service';
-import { GetData } from '@cv/store/cv.actions';
+import { GetItems } from '@cv/store/cv.actions';
 import { CvState } from '@cv/store/cv.state';
 import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
@@ -16,6 +16,7 @@ import { CvNodeDetail } from './interfaces/cv-node-detail';
   templateUrl: './cv.component.html',
   styleUrls: ['./cv.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CvComponent implements OnInit, OnDestroy {
   treeControl = new FlatTreeControl<CvFlatNode>(node => node.level, node => node.expandable);
@@ -45,15 +46,15 @@ export class CvComponent implements OnInit, OnDestroy {
       slug: 'cv',
     });
 
-    this.store.select(CvState.getData).pipe(
+    this.store.select(CvState.getItems).pipe(
       takeUntil(this.$unsubsriber),
     ).subscribe((cv) => {
       if (cv) {
-        this.dataSource.data = cv.data;
+        this.dataSource.data = cv;
         this.treeControl.expandAll();
       }
     });
-    this.store.dispatch(new GetData());
+    this.store.dispatch(new GetItems());
   }
 
   ngOnDestroy() {
