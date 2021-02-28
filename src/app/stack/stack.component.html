@@ -1,10 +1,10 @@
 <div class="stack">
   <div class="stack__container">
     <div class="stack__intro-wrapper">
-      <span>Stack</span>
+      <h1>Technology Stack</h1>
     </div>
     <div class="stack__card-wrapper">
-      <app-stack-card *ngFor="let stackDatum of (stack$ | async)?.data" [stackData]="stackDatum"></app-stack-card>
+      <app-stack-card *ngFor="let stackDatum of (stack$ | async)" [stackData]="stackDatum"></app-stack-card>
     </div>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { NgxsModule } from '@ngxs/store';
+import { SharedModule } from '@shared/shared.module';
 
 import { StackCardComponent } from './components/stack-card/stack-card.component';
 import { StackIconComponent } from './components/stack-icon/stack-icon.component';
@@ -19,6 +20,7 @@ import { StackState } from './store/stack.state';
     MatCardModule,
     MatButtonModule,
     MatChipsModule,
+    SharedModule,
     NgxsModule.forFeature([
       StackState,
     ]),

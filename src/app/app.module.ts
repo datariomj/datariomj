@@ -4,10 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { IconService } from '@core/services/icon.service';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { NgxsModule } from '@ngxs/store';
-import { UIState } from 'src/store/ui/ui.state';
+import { NgxsStoreModule } from '@store/store.module';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -26,13 +23,7 @@ import { SharedModule } from './shared/shared.module';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     SharedModule,
     CoreModule,
-    NgxsModule.forRoot([UIState], {
-      developmentMode: !environment.production,
-    }),
-    !environment.production ? [
-      NgxsReduxDevtoolsPluginModule.forRoot(),
-      NgxsLoggerPluginModule.forRoot(),
-    ] : [],
+    NgxsStoreModule,
   ],
   providers: [
     IconService,

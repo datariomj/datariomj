@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { StackItem } from '@stack/interfaces/stack-item';
 
 @Component({
   selector: 'app-stack-card',
@@ -6,19 +7,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./stack-card.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class StackCardComponent implements OnInit {
+export class StackCardComponent {
   @Input()
-  stackData!: {
-    name: string;
-    symbol: string;
-    yearStarted: number;
-    icon?: string;
-    tags: string[];
-  };
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  stackData!: StackItem;
 }

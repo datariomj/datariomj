@@ -6,6 +6,11 @@ export const environment = {
   production: false,
   version: '0.1.0',
   hostUrl: 'http://localhost:4200',
+  contentful: {
+    host: 'https://cdn.contentful.com',
+    space: 's5tpeora8n1x',
+    accessToken: 'dTTJKMDYBBneMpjykSXggLlZTBYn004i_AUlRFvmScc', // read only
+  },
   facebook: {
     appId: '',
   },

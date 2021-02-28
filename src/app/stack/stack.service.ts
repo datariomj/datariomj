@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ContentfulService } from '@core/services/contentful.service';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Stack } from './interfaces/stack';
 
@@ -9,12 +10,17 @@ import { Stack } from './interfaces/stack';
 })
 export class StackService {
   constructor(
-    private http: HttpClient,
+    private cms: ContentfulService,
   ) {
   }
 
-  getStack(): Observable<Stack> {
-    // todo get from api and create interfaces
-    return this.http.get('/assets/json/stack.json') as Observable<Stack>;
+  getStackV2(): Observable<Stack> {
+    return this.cms.getAllEntriesByContentType('technology').pipe(
+      map(entries => {
+        const fields = entries.items.map((nested: any) => nested.fields);
+
+        return fields;
+      }),
+    );
   }
 }

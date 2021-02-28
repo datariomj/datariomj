@@ -7,16 +7,16 @@ import { StackService } from '@stack/stack.service';
 import { PreloaderVisibility } from '@store/ui/ui.action';
 import { finalize, tap } from 'rxjs/operators';
 
-import { GetData } from './stack.actions';
+import { GetData as GetItems } from './stack.actions';
 
 export interface StackStateModel {
-    data: Stack | null;
+    items: Stack | null;
 }
 
 @State<StackStateModel>({
     name: 'stack',
     defaults: {
-        data: null,
+        items: null,
     },
 })
 @Injectable()
@@ -28,25 +28,25 @@ export class StackState {
     }
 
     @Selector()
-    public static getData(state: StackStateModel) {
-        return state.data;
+    public static getItems(state: StackStateModel) {
+        return state.items;
     }
 
-    @Action(GetData)
-    getData({ patchState, getState }: StateContext<StackStateModel>, action: GetData) {
+    @Action(GetItems)
+    getItems({ patchState, getState }: StateContext<StackStateModel>, action: GetItems) {
         const state = getState();
 
-        if (state && state.data) {
+        if (state && state.items) {
             return;
         }
 
-        return this.stackService.getStack().pipe(
+        return this.stackService.getStackV2().pipe(
             tap(() => {
                 this.store.dispatch(new PreloaderVisibility(true));
             }),
             tap(stack => {
                 patchState({
-                    data: stack,
+                    items: stack,
                 });
             }),
             finalize(() => {

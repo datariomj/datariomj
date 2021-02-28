@@ -1,6 +1,7 @@
 {
   "angular.experimental-ivy": true,
   "cSpell.words": [
+    "contentful",
     "datario",
     "datariomj",
     "devbrand",
@@ -8,6 +9,7 @@
     "mixins",
     "mjdatario",
     "multiline",
+    "ngsw",
     "ngxs",
     "prerender",
     "saltstack",

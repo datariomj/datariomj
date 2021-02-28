@@ -1,0 +1,34 @@
+<h2 mat-dialog-title><b>Contact Me!</b></h2>
+<form class="contact-dialog" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error>Please enter a valid name</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error>Please enter a valid email</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Message</mat-label>
+      <textarea
+        rows="8"
+        matInput
+        cdkTextareaAutosize="false"
+        formControlName="message"
+      ></textarea>
+      <mat-error *ngIf="contactForm.get('message')?.hasError('required')"
+        >Please enter a message</mat-error
+      >
+      <mat-error *ngIf="contactForm.get('message')?.hasError('maxlength')"
+        >Your message is too long</mat-error
+      >
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-flat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button type="submit" color="primary">Submit</button>
+  </mat-dialog-actions>
+</form>

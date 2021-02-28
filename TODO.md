@@ -2,6 +2,7 @@
 
 ## General
 - add static texts like email, contact number to config
+- style scroll bar instead of display none
 
 ## Sidenav
 - add ellipsis when height is insufficient
