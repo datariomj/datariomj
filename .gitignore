@@ -40,8 +40,9 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-/.nyc_output
-/cypress/results
+/.nyc_output*
+/cypress/videos/*
+/cypress/results/*
 
 # System Files
 .DS_Store
