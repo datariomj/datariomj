@@ -26,12 +26,17 @@
 # Error
 - ui
 
+# Others
+- update compodoc package
+
 # CMS
 - implement graphql request
 
 # Skills forgot to add
 - Contentful
 - Postgresql
+- ngxs
+- CircleCI
 
 ## Jenkins
 - update robots.txt by branch

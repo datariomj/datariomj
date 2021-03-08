@@ -3,7 +3,7 @@ import { CvService } from '@cv/cv.service';
 import { CvFlatNode } from '@cv/interfaces/cv-flat-node';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { PreloaderVisibility } from '@store/ui/ui.action';
-import { finalize, mergeMap, tap } from 'rxjs/operators';
+import { finalize, tap } from 'rxjs/operators';
 
 import { GetItems as GetItems } from './cv.actions';
 

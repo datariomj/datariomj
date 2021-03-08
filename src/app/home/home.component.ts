@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SeoService } from '@core/services/seo.service';
+import { Store } from '@ngxs/store';
+import { ContactFormVisibility } from '@store/ui/ui.action';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +12,7 @@ import { SeoService } from '@core/services/seo.service';
 })
 export class HomeComponent implements OnInit {
   constructor(
+    private store: Store,
     private seo: SeoService,
   ) { }
 
@@ -20,5 +23,9 @@ export class HomeComponent implements OnInit {
       image: '/assets/images/placeholder.jpg',
       slug: 'home',
     });
+  }
+
+  openContactDialog() {
+    this.store.dispatch(new ContactFormVisibility(true));
   }
 }

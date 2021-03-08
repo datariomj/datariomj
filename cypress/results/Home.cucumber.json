@@ -1,0 +1,66 @@
+[
+  {
+    "description": "  Home page",
+    "keyword": "Feature",
+    "name": "Home",
+    "line": 1,
+    "id": "home",
+    "tags": [],
+    "uri": "Home.feature",
+    "elements": [
+      {
+        "id": "home;user-clicks-hire-me",
+        "keyword": "Scenario",
+        "line": 9,
+        "name": "User clicks hire me",
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 8
+          },
+          {
+            "name": "@smoke",
+            "line": 8
+          },
+          {
+            "name": "@home",
+            "line": 8
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "User visits home page",
+            "result": {
+              "status": "passed",
+              "duration": 10710000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 10,
+            "name": "User clicks hire me",
+            "result": {
+              "status": "passed",
+              "duration": 329000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "User will see contact modal",
+            "result": {
+              "status": "passed",
+              "duration": 91000000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

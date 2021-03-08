@@ -9,3 +9,9 @@ export class PreloaderVisibility {
 
   constructor(public showPreloader: boolean) { };
 }
+
+export class ContactFormVisibility {
+  public static readonly type = '[App] Contact Form Visibility';
+
+  constructor(public showContactForm: boolean) { };
+}

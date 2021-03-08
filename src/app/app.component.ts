@@ -1,7 +1,12 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Event, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngxs/store';
+import { ContactDialogComponent } from '@shared/components/contact-dialog/contact-dialog.component';
+import { Contact } from '@shared/interfaces/contact';
+import { ContactFormVisibility } from '@store/ui/ui.action';
+import { take } from 'rxjs/operators';
 import { UIState } from 'src/store/ui/ui.state';
 
 @Component({
@@ -16,6 +21,7 @@ export class AppComponent implements OnInit {
   title = 'datariomj';
 
   constructor(
+    public dialog: MatDialog,
     @Inject(DOCUMENT) private doc: Document,
     private router: Router,
     private store: Store,
@@ -44,6 +50,23 @@ export class AppComponent implements OnInit {
     this.store.select(UIState.showPreloader).subscribe((showPreloader) => {
       this.showPreloader = showPreloader;
       this.cdRef.detectChanges();
+    });
+    this.store.select(UIState.showContactForm).subscribe((showContactForm) => {
+      if (showContactForm) {
+        this.openContactDialog();
+        this.cdRef.detectChanges();
+      }
+    });
+  }
+
+  private openContactDialog() {
+    const dialogRef = this.dialog.open(ContactDialogComponent, { disableClose: true });
+
+    dialogRef.afterClosed().pipe(
+      take(1),
+    ).subscribe((contactFormData: Contact) => {
+      this.store.dispatch(new ContactFormVisibility(false));
+      console.log(contactFormData);
     });
   }
 }

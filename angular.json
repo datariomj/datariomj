@@ -153,14 +153,29 @@
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "datariomj:serve"
+            "devServerTarget": "datariomj:serve-coverage",
+            "watch": true,
+            "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "datariomj:serve:production"
+              "devServerTarget": "datariomj:serve-coverage:production"
+            }
+          }
+        },
+        "e2e-ci": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "browser": "chrome",
+            "devServerTarget": "datariomj:serve-coverage",
+            "headless": true,
+            "watch": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "datariomj:serve-coverage:production"
             }
           }
         },
@@ -212,6 +227,13 @@
           },
           "configurations": {
             "production": {}
+          }
+        },
+        "serve-coverage": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "datariomj:build",
+            "extraWebpackConfig": "./cypress/coverage.webpack.js"
           }
         }
       }

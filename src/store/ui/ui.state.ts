@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { PreloaderVisibility, ToggleSidenav } from './ui.action';
+import { ContactFormVisibility, PreloaderVisibility, ToggleSidenav } from './ui.action';
 
 export interface UIStateModel {
   sidenavExpanded: boolean;
   showPreloader: boolean;
+  showContactForm: boolean;
 }
 
 @State<UIStateModel>({
@@ -13,6 +14,7 @@ export interface UIStateModel {
   defaults: {
     sidenavExpanded: false,
     showPreloader: false,
+    showContactForm: false,
   },
 })
 @Injectable()
@@ -31,6 +33,13 @@ export class UIState {
     });
   }
 
+  @Action(ContactFormVisibility)
+  showContactForm({ patchState }: StateContext<UIStateModel>, action: ContactFormVisibility) {
+    patchState({
+      showContactForm: action.showContactForm,
+    });
+  }
+
   @Selector()
   static sidenavExpanded(state: UIStateModel) {
     return state.sidenavExpanded;
@@ -39,5 +48,10 @@ export class UIState {
   @Selector()
   static showPreloader(state: UIStateModel) {
     return state.showPreloader;
+  }
+
+  @Selector()
+  static showContactForm(state: UIStateModel) {
+    return state.showContactForm;
   }
 }

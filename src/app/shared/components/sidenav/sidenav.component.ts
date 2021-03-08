@@ -1,13 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { IconService } from '@core/services/icon.service';
-import { Select } from '@ngxs/store';
-import { Contact } from '@shared/interfaces/contact';
+import { Select, Store } from '@ngxs/store';
+import { ContactFormVisibility } from '@store/ui/ui.action';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { UIState } from 'src/store/ui/ui.state';
 
-import { ContactDialogComponent } from '../contact-dialog/contact-dialog.component';
 
 @Component({
   selector: 'app-sidenav',
@@ -34,7 +31,7 @@ export class SidenavComponent {
   ];
 
   constructor(
-    public dialog: MatDialog,
+    private store: Store,
     private iconService: IconService,
   ) {
     this.icons.forEach((icon) => {
@@ -43,12 +40,6 @@ export class SidenavComponent {
   }
 
   openContactDialog() {
-    const dialogRef = this.dialog.open(ContactDialogComponent, { disableClose: true });
-
-    dialogRef.afterClosed().pipe(
-      take(1),
-    ).subscribe((contactFormData: Contact) => {
-      console.log(contactFormData);
-    });
+    this.store.dispatch(new ContactFormVisibility(true));
   }
 }

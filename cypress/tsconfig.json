@@ -12,6 +12,7 @@
   },
   "include": [
     "**/*.ts",
-    "plugins/index.js"
+    "plugins/.bak",
+    "./support/reporter.ts"
   ]
 }
