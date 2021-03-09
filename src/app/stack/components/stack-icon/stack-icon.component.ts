@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 @Component({
   selector: 'app-stack-icon',
   templateUrl: './stack-icon.component.html',
-  styleUrls: ['./stack-icon.component.scss'],
+  styles: [],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

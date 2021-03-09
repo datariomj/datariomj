@@ -16,6 +16,7 @@
     "mixins",
     "mjdatario",
     "multiline",
+    "ngcc",
     "ngfactory",
     "ngstyle",
     "ngsw",
@@ -25,6 +26,7 @@
     "saltstack",
     "sidenav",
     "strapi",
+    "stylelint",
     "unsubsriber"
   ],
   "editor.codeActionsOnSave": {

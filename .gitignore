@@ -43,6 +43,7 @@ testem.log
 /.nyc_output*
 /cypress/videos/*
 /cypress/results/*
+documentation
 
 # System Files
 .DS_Store
