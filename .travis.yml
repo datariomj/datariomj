@@ -16,3 +16,7 @@ script:
 - ng lint
 - npm run e2e:ci --record --key $CYPRESS_RECORD_KEY
 - ng build --prod
+addons:
+  chrome: stable
+notifications:
+  slack: $SLACK_ACCOUNT:$SLACK_TOKEN
