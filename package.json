@@ -2,9 +2,11 @@
   "name": "datariomj",
   "version": "0.1.0",
   "scripts": {
+    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "dev:cov": "ng run datariomj:serve-coverage",
