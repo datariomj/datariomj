@@ -5,27 +5,32 @@
   position: relative;
   padding-bottom: 55px;
   width: 100%;
+
   @include breakpoint(sm) {
     padding-bottom: 63px;
   }
+
   @include breakpoint(lg) {
     position: fixed;
     padding-bottom: 0;
     bottom: 0;
     height: $footer-height;
   }
+
   .mat-toolbar {
     display: flex;
     height: auto;
     flex-flow: column;
     border-top: none;
     padding: 0;
+
     @include breakpoint(lg) {
       height: $footer-height;
       flex-flow: row;
       justify-content: space-between;
     }
   }
+
   &__left,
   &__right {
     display: flex;
@@ -33,6 +38,7 @@
     width: 100%;
     max-width: 500px;
     margin: auto;
+
     @include breakpoint(lg) {
       width: auto;
       flex-flow: row;
@@ -40,6 +46,7 @@
       margin: 0;
     }
   }
+
   &__expand {
     background-color: $disabled-color;
     width: 100px;
@@ -50,72 +57,90 @@
     color: black;
     cursor: pointer;
   }
+
   &__section {
     display: flex;
     align-items: center;
     justify-content: center;
+
     @include breakpoint(lg) {
       margin-right: 36px;
       flex-flow: row;
     }
+
     &--flex-sb {
       justify-content: space-between;
       padding: 0 20px;
     }
   }
+
   &__social-icon {
     &.mat-icon-button {
       color: $disabled-color;
+
       &:not(:last-child) {
         margin-right: 8px;
       }
+
       &:hover {
         color: white;
       }
+
       @include breakpoint(lg) {
         margin-right: 0;
       }
     }
   }
+
   &__text,
   &__link,
   &__link-divider {
     color: $disabled-color;
     font-size: 16px;
     font-weight: 300;
+
     @include breakpoint(lg) {
       font-size: 24px;
     }
+
     &--smaller {
       font-size: 14px;
+
       @include breakpoint(lg) {
         font-size: 24px;
       }
     }
   }
+
   &__link {
     text-decoration: none;
     display: flex;
     align-items: center;
+
     &:hover {
       text-decoration: underline;
     }
+
     &--active {
       color: white;
+
       &:hover {
         text-decoration: none;
       }
     }
   }
+
   &__link-divider {
     margin: 0 8px;
   }
+
   &__copyright-icon {
     &.mat-icon {
       width: 16px;
       height: 16px;
       margin-right: 4px;
       display: flex;
+
       @include breakpoint(lg) {
         width: 24px;
         height: 24px;

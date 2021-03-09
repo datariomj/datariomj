@@ -6,11 +6,13 @@
     display: flex;
     height: calc(100vh - #{$footer-height});
     width: 100%;
+
     @include breakpoint(lg) {
       position: absolute;
       overflow: hidden;
     }
   }
+
   &__list-wrapper {
     background-color: $card-color;
     width: 30%;
@@ -21,6 +23,7 @@
       display: none;
     }
   }
+
   &__router-wrapper {
     width: 100%;
     overflow-y: scroll;
@@ -30,19 +33,24 @@
       display: none;
     }
   }
+
   &__detail-route {
     text-decoration: none;
     color: $text-color;
+
     &:hover {
       color: $accent-color;
     }
   }
+
   &__detail-expand {
     cursor: pointer;
   }
+
   &__icon-expand {
     color: $disabled-color;
   }
+
   .mat-tree-node {
     &:hover {
       .cv__icon-expand {

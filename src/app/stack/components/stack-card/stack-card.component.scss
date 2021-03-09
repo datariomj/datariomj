@@ -1,21 +1,26 @@
 .stack-card {
   max-width: 300px;
+
   .mat-card-avatar {
     width: auto;
     height: auto;
     color: black;
   }
+
   &.mat-card {
     margin: 16px;
     width: 200px;
     height: 300px;
+
     .mat-card-title {
       min-height: 60px;
     }
   }
+
   &__icon-wrapper {
     display: flex;
   }
+
   &__icon {
     font-size: 100px;
     margin: 0 auto;

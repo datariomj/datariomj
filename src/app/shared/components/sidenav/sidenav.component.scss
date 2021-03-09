@@ -3,16 +3,19 @@
 
 .sidenav {
   height: 100%;
+
   &__link {
     &.mat-list-item {
       @include breakpoint(lg) {
         height: 100px !important;
       }
     }
+
     .mat-icon,
     &.mat-list-item {
       color: $disabled-color;
     }
+
     &--active {
       .mat-icon,
       &.mat-list-item {
@@ -20,43 +23,52 @@
       }
     }
   }
+
   &__link-wrapper {
     display: flex;
     align-items: center;
   }
+
   &__icon {
     &.mat-icon {
       height: 24px;
       width: auto;
+
       @include breakpoint(lg) {
         height: 50px;
         width: 50px;
       }
     }
   }
+
   &__description {
     margin: 0 0 0 12px;
     font-size: 20px;
     line-height: 1;
   }
+
   &__route-wrapper {
     min-height: calc(100vh - 200px);
   }
+
   &__mobile-nav {
     position: fixed;
     bottom: 0;
     border-top: none;
     z-index: 2;
   }
+
   &__mobile-nav-list {
     &.mat-nav-list {
       display: flex;
       padding-top: 0;
     }
   }
+
   .mat-drawer-side {
     border-right: none;
   }
+
   .mat-drawer-content {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -64,16 +76,20 @@
       display: none;
     }
   }
-  .mat-drawer-inner-container{
+
+  .mat-drawer-inner-container {
     &::-webkit-scrollbar {
       display: none;
     }
   }
+
   .mat-list-base {
     padding-top: 0;
+
     @include breakpoint(lg) {
       padding-bottom: 50px;
     }
+
     .mat-list-item {
       .mat-list-item-content {
         // justify-content: center;
