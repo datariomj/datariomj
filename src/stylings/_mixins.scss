@@ -5,28 +5,29 @@ $lg-min-width: 1280px;
 $xl-min-width: 1920px;
 
 @mixin breakpoint($class) {
-    @if $class == xs-only {
-      @content;
-      @media screen and (max-width: $xs-max-width) { @content; }
-    }
-   
-    @else if $class == sm {
-      @media screen and (min-width: $sm-min-width) { @content; }
-    }
-   
-    @else if $class == md {
-      @media screen and (min-width: $md-min-width) { @content; }
-    }
-   
-    @else if $class == lg {
-      @media screen and (min-width: $lg-min-width) { @content; }
-    }
+  @if $class == xs-only {
+    @content;
 
-    @else if $class == xl {
-      @media screen and (min-width: $xl-min-width) { @content; }
-    }
-   
-    @else {
-      @warn "Breakpoint mixin supports: xs-only, sm, md, lg, xl";
-    }
+    @media screen and (max-width: $xs-max-width) { @content; }
+  }
+
+  @else if $class == sm {
+    @media screen and (min-width: $sm-min-width) { @content; }
+  }
+
+  @else if $class == md {
+    @media screen and (min-width: $md-min-width) { @content; }
+  }
+
+  @else if $class == lg {
+    @media screen and (min-width: $lg-min-width) { @content; }
+  }
+
+  @else if $class == xl {
+    @media screen and (min-width: $xl-min-width) { @content; }
+  }
+
+  @else {
+    @warn "Breakpoint mixin supports: xs-only, sm, md, lg, xl";
+  }
 }

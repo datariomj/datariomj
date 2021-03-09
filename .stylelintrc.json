@@ -6,6 +6,8 @@
         "ignoreAtRules": [
           "function",
           "if",
+          "else",
+          "warn",
           "each",
           "include",
           "mixin"

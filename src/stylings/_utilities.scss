@@ -14,6 +14,7 @@ $displays: (
       display: #{$display} !important;
     }
   }
+
   @each $display, $breakpoints in $displays {
     @each $breakpoint in $breakpoints {
       &__#{$display} {

@@ -1,11 +1,11 @@
 language: node_js
 node_js:
-  - "12"
+  - '12'
 dist: xenial
 sudo: required
 cache:
   directories:
-    - ~/.npm
+    - "~/.npm"
     - node_modules
 branches:
   only:
@@ -18,4 +18,5 @@ script:
 addons:
   chrome: stable
 notifications:
-  slack: $SLACK_ACCOUNT:$SLACK_TOKEN
+  slack:
+    secure: BcEcKuu2Iudh0vt++0zclXIzXjNguvV8BJDRzYqUQ/aX8B/bvL8EH2Zm2KD1f+r6HPTvVFtshdXRf2ZU439Fvq7iV2HXBJpKuYsY3k4zHdm7YAsYXSs9WJXqXkYFFKJ6qI0mWljNeCjrJCTPF9Dxya5I58uwQv31PwM+Zx59Wj1Si6MDi7YrwCE17FqNPbG+db/nJAq83cusAhbm299VEkHHj1675s6Ydsv0vIF2i2iTXhHxrR06kTT8/aRfD253JhQrBtILBZ+vFKh7lBrhBS0FniBXnb28O0uiwMZd5MHNJBkysEDZNXw1JmyuGRI2sV42dHUkf/mKfF2TSVI/QklrWbktwBDSpTMjZA2nLC2WcqyR7+mPJ4nf16PVQ1TahoIDjGvBWLrWllnOnkWnQ0RC8K5pI1Pan2NW3/3Oe+JPWeJJPy11rBiDqR8G0rd+NUngl9heBI5JFxfcgA3ki5Lj1ZstB76V4h6s86Re7pwMQFkCFprdajHat6YatnFVCa1HyKJx2fmcEFYJFf6mFsiI4hidN0pxZr7aag1Kxwi/eYMUejWLUjCHzN2td7Uznp8AB3tT8PFXoxZasVLudf2NuwAwntW3MTBX8Zwvk2ZrTwjMVIEPuwN66TsNdsc2+Bzl62zTGDVgoZzQY+EYotTsbA7pwFcJ1jU19fE+MJQ=

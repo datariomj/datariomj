@@ -23,24 +23,25 @@
 ## Blog
 - ui
 - cms
-# Error
+## Error
 - ui
 
-# Others
-- update compodoc package
+## Others
+- add code coverage link
 
-# CMS
+## CMS
 - implement graphql request
 
-# Skills forgot to add
+## Skills forgot to add
 - Contentful
 - Postgresql
 - ngxs
 - CircleCI
 
-## Jenkins
+## CI/CD
+- Fix travis notification
 - update robots.txt by branch
 - get distribution id and bucket from config or variable
 
-# Dependency issues
+## Dependency issues
 1. https://github.com/angular/components/issues/9728
