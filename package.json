@@ -9,7 +9,7 @@
     "build:prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "lint:styles": "stylelint \"{src/app,src/stylings}/**/*.scss\"",
+    "lint:styles": "stylelint \"{src,src/app,src/stylings}/**/*.scss\"",
     "prep": "npm run lint && npm run lint:styles -- --fix",
     "gen:docs": "compodoc -p tsconfig.app.json src",
     "dev:cov": "ng run datariomj:serve-coverage",

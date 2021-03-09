@@ -1,12 +1,14 @@
 language: node_js
 node_js:
-  - '12'
+- '12'
 dist: xenial
 sudo: required
+install:
+- npm ci
 cache:
   directories:
-    - "~/.npm"
-    - node_modules
+  - "$HOME/.npm"
+  - node_modules
 branches:
   only:
   - main
