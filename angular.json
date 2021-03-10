@@ -171,6 +171,7 @@
             "browser": "chrome",
             "devServerTarget": "datariomj:serve-coverage",
             "headless": true,
+            "record": true,
             "watch": false
           },
           "configurations": {
