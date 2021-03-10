@@ -3,6 +3,7 @@
 ## General
 - add static texts like email, contact number to config
 - style scroll bar instead of display none
+- add browser not supported notification
 
 ## Sidenav
 - add ellipsis when height is insufficient
@@ -46,3 +47,4 @@
 
 ## Dependency issues
 1. https://github.com/angular/components/issues/9728
+2. https://github.com/cypress-io/cypress/issues/9358

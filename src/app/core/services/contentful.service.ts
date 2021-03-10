@@ -18,11 +18,11 @@ export class ContentfulService {
   ) {
   }
 
-  getAllEntries(): Observable<any> {
-    return this.http.get(`${ this.url }/entries`, {
-      headers: this.getAuthorizationHeaders(),
-    });
-  }
+  // getAllEntries(): Observable<any> {
+  //   return this.http.get(`${ this.url }/entries`, {
+  //     headers: this.getAuthorizationHeaders(),
+  //   });
+  // }
 
   getAllEntriesByContentType(contentType: string): Observable<any> {
     return this.http.get(`${ this.url }/entries?content_type=${ contentType }`, {

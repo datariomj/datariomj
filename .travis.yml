@@ -15,6 +15,8 @@ branches:
 script:
 - npm run lint
 - npm run e2e:ci --record --key $CYPRESS_RECORD_KEY
+- npm run e2e:cov
+- npm run codecov
 - npx update-badge
 - npm run build:prod
 addons:

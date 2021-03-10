@@ -24,7 +24,7 @@
       <p *ngIf="sidenavExpanded$ | async" class="sidenav__description d__none d__block--lg">{{navLink.description}}</p>
     </div>
   </a>
-  <a mat-list-item class="sidenav__link" routerLinkActive="sidenav__link--active" (click)="openContactDialog()">
+  <a mat-list-item class="sidenav__link" routerLinkActive="sidenav__link--active" (click)="openContactDialog()" data-cy="nav-contact">
     <div class="sidenav__link-wrapper">
       <mat-icon svgIcon="contact" class="sidenav__icon"></mat-icon>
       <p *ngIf="sidenavExpanded$ | async" class="sidenav__description d__none d__block--lg">Contact</p>

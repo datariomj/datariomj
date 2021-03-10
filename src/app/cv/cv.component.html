@@ -2,12 +2,12 @@
   <div class="cv__container">
     <div class="cv__list-wrapper">
       <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding data-cy="cv-child-node">
           <ng-container [ngTemplateOutlet]="nodeLink" [ngTemplateOutletContext]="{node:node}"></ng-container>
         </mat-tree-node>
-        <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding (click)="toggleNode(node)" class="cv__detail-expand">
+        <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding (click)="toggleNode(node)" class="cv__detail-expand" data-cy="cv-parent-node">
           <button mat-icon-button matTreeNodeToggle
-                  [attr.aria-label]="'Toggle ' + node.name">
+                  [attr.aria-label]="'Toggle ' + node.name" data-cy="cv-icon-expand">
             <mat-icon class="cv__icon-expand">
               {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>

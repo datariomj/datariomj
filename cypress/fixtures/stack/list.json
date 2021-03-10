@@ -1,0 +1,533 @@
+{
+  "sys": {
+    "type": "Array"
+  },
+  "total": 36,
+  "skip": 0,
+  "limit": 100,
+  "items": [
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "s5tpeora8n1x"
+          }
+        },
+        "id": "5PL2XjhA4Q08NWDuOKnbds",
+        "type": "Entry",
+        "createdAt": "2021-02-28T16:50:04.783Z",
+        "updatedAt": "2021-02-28T17:50:03.276Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "revision": 2,
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "technology"
+          }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "Angular",
+        "type": "framework",
+        "yearStarted": 2017,
+        "symbol": "Ng",
+        "iconText": "angular",
+        "iconImage": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Asset",
+            "id": "7xlLyxAQVrxfvqdGWlR5uE"
+          }
+        },
+        "tags": [
+          "active"
+        ]
+      }
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "s5tpeora8n1x"
+          }
+        },
+        "id": "6xB1ijc4zfepYlKXWuzUUw",
+        "type": "Entry",
+        "createdAt": "2021-02-28T17:42:04.063Z",
+        "updatedAt": "2021-02-28T17:42:04.063Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "revision": 1,
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "technology"
+          }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "Amazon Web Services",
+        "type": "cloud",
+        "yearStarted": 2019,
+        "symbol": "Aw",
+        "iconText": "aws",
+        "iconImage": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Asset",
+            "id": "5Rz3waSOO9NgsGQ6mbhVFq"
+          }
+        },
+        "tags": [
+          "active"
+        ]
+      }
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "s5tpeora8n1x"
+          }
+        },
+        "id": "4O4VLdcNI9dnJU4QUXFhYA",
+        "type": "Entry",
+        "createdAt": "2021-02-28T17:32:11.245Z",
+        "updatedAt": "2021-02-28T17:32:11.245Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "revision": 1,
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "technology"
+          }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "Docker",
+        "type": "operations",
+        "yearStarted": 2019,
+        "symbol": "Dk",
+        "iconText": "docker",
+        "iconImage": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Asset",
+            "id": "42i7zrbt1kR43YF3O53oim"
+          }
+        },
+        "tags": [
+          "active"
+        ]
+      }
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "s5tpeora8n1x"
+          }
+        },
+        "id": "7eUQcsQl4CdPKzbm1bGZEM",
+        "type": "Entry",
+        "createdAt": "2021-02-28T17:11:52.929Z",
+        "updatedAt": "2021-02-28T17:11:52.929Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "revision": 1,
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "technology"
+          }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "Serverless",
+        "type": "framework",
+        "yearStarted": 2018,
+        "symbol": "Sl",
+        "iconText": "serverless",
+        "iconImage": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Asset",
+            "id": "4aeS8P7wMA3o3Z9GpLiLqL"
+          }
+        }
+      }
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "s5tpeora8n1x"
+          }
+        },
+        "id": "6I7r9jrxE0uzgLbGgaP5fm",
+        "type": "Entry",
+        "createdAt": "2021-02-28T10:40:45.275Z",
+        "updatedAt": "2021-02-28T10:49:02.145Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "revision": 3,
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "technology"
+          }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "Typescript",
+        "type": "language",
+        "yearStarted": 2017,
+        "symbol": "Ts",
+        "iconText": "typescript",
+        "iconImage": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Asset",
+            "id": "6K9lhmnkbBPZknjzBRTEu4"
+          }
+        },
+        "tags": [
+          "active"
+        ]
+      }
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "s5tpeora8n1x"
+          }
+        },
+        "id": "38t0gkFPzvvRWp2spo2CcF",
+        "type": "Entry",
+        "createdAt": "2021-02-28T10:41:27.164Z",
+        "updatedAt": "2021-02-28T10:48:43.212Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "revision": 2,
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "technology"
+          }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "Javascript",
+        "type": "language",
+        "yearStarted": 2014,
+        "symbol": "Js",
+        "iconText": "javascript",
+        "iconImage": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Asset",
+            "id": "7jyxHs5paFOR6LjrIaPFQL"
+          }
+        },
+        "tags": [
+          "active"
+        ]
+      }
+    }
+  ],
+  "includes": {
+    "Asset": [
+      {
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "s5tpeora8n1x"
+            }
+          },
+          "id": "42i7zrbt1kR43YF3O53oim",
+          "type": "Asset",
+          "createdAt": "2021-02-28T08:06:42.753Z",
+          "updatedAt": "2021-02-28T08:06:42.753Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "docker",
+          "file": {
+            "url": "//images.ctfassets.net/s5tpeora8n1x/42i7zrbt1kR43YF3O53oim/379c60c9af63ce4eb65ea099eb93168a/docker.svg",
+            "details": {
+              "size": 1528,
+              "image": {
+                "width": 363,
+                "height": 267
+              }
+            },
+            "fileName": "docker.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "s5tpeora8n1x"
+            }
+          },
+          "id": "4aeS8P7wMA3o3Z9GpLiLqL",
+          "type": "Asset",
+          "createdAt": "2021-02-28T08:06:40.524Z",
+          "updatedAt": "2021-02-28T08:06:40.524Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "serverless",
+          "file": {
+            "url": "//images.ctfassets.net/s5tpeora8n1x/4aeS8P7wMA3o3Z9GpLiLqL/1a0203d445f242ee5a3f967ca7e8fb24/serverless.svg",
+            "details": {
+              "size": 920,
+              "image": {
+                "width": 256,
+                "height": 204
+              }
+            },
+            "fileName": "serverless.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "s5tpeora8n1x"
+            }
+          },
+          "id": "5Rz3waSOO9NgsGQ6mbhVFq",
+          "type": "Asset",
+          "createdAt": "2021-02-28T16:51:51.505Z",
+          "updatedAt": "2021-02-28T16:51:51.505Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "aws",
+          "file": {
+            "url": "//images.ctfassets.net/s5tpeora8n1x/5Rz3waSOO9NgsGQ6mbhVFq/bafb49a4144da06cff76e49b0d0343f2/aws.svg",
+            "details": {
+              "size": 3474,
+              "image": {
+                "width": 304,
+                "height": 182
+              }
+            },
+            "fileName": "aws.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "s5tpeora8n1x"
+            }
+          },
+          "id": "6K9lhmnkbBPZknjzBRTEu4",
+          "type": "Asset",
+          "createdAt": "2021-02-28T08:06:28.402Z",
+          "updatedAt": "2021-02-28T08:06:28.402Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "typescript",
+          "file": {
+            "url": "//images.ctfassets.net/s5tpeora8n1x/6K9lhmnkbBPZknjzBRTEu4/3e254b52fc48619930807bc0834508dd/typescript.svg",
+            "details": {
+              "size": 1747,
+              "image": {
+                "width": 128,
+                "height": 128
+              }
+            },
+            "fileName": "typescript.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "s5tpeora8n1x"
+            }
+          },
+          "id": "7jyxHs5paFOR6LjrIaPFQL",
+          "type": "Asset",
+          "createdAt": "2021-02-28T08:06:42.702Z",
+          "updatedAt": "2021-02-28T08:06:42.702Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "javascript",
+          "file": {
+            "url": "//images.ctfassets.net/s5tpeora8n1x/7jyxHs5paFOR6LjrIaPFQL/4661c5a4d1fbf0c3727158dafe420162/javascript.svg",
+            "details": {
+              "size": 687,
+              "image": {
+                "width": 630,
+                "height": 630
+              }
+            },
+            "fileName": "javascript.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "s5tpeora8n1x"
+            }
+          },
+          "id": "7xlLyxAQVrxfvqdGWlR5uE",
+          "type": "Asset",
+          "createdAt": "2021-02-28T16:51:49.737Z",
+          "updatedAt": "2021-02-28T16:51:49.737Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "angular",
+          "file": {
+            "url": "//images.ctfassets.net/s5tpeora8n1x/7xlLyxAQVrxfvqdGWlR5uE/d6ee7f752d9a72f7e98267276c28d06f/angular.svg",
+            "details": {
+              "size": 942,
+              "image": {
+                "width": 267,
+                "height": 267
+              }
+            },
+            "fileName": "angular.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      }
+    ]
+  }
+}

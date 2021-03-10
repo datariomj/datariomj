@@ -2,6 +2,7 @@
   "angular.experimental-ivy": true,
   "cSpell.words": [
     "briebug",
+    "codecov",
     "codelyzer",
     "compat",
     "compodoc",

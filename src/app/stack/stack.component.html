@@ -4,7 +4,7 @@
       <h1>Technology Stack</h1>
     </div>
     <div class="stack__card-wrapper">
-      <app-stack-card *ngFor="let stackDatum of (stack$ | async)" [stackData]="stackDatum"></app-stack-card>
+      <app-stack-card *ngFor="let stackDatum of (stack$ | async)" [stackData]="stackDatum" data-cy="stack-card"></app-stack-card>
     </div>
   </div>
 </div>
