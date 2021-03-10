@@ -37,7 +37,7 @@
     "@angular/platform-server": "^11.2.0",
     "@angular/router": "^11.2.0",
     "@angular/service-worker": "^11.2.0",
-    "@nguniversal/express-engine": "^11.1.2",
+    "@nguniversal/express-engine": "^11.2.0",
     "@ngxs/devtools-plugin": "^3.7.1",
     "@ngxs/logger-plugin": "^3.7.1",
     "@ngxs/store": "^3.7.1",
