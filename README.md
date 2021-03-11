@@ -49,4 +49,4 @@
 [website]: https://datariomj.dev
 [linkedin]: https://linkedin.com/in/datariomj
 [instagram]: https://instagram.com/datariomj
-[soundcloud]: https://youtube.com/datariomj
+[soundcloud]: https://soundcloud.com/datariomj
