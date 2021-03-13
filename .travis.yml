@@ -6,7 +6,7 @@ python:
 dist: xenial
 install:
   - npm ci
-  - pip install awscli
+  - pip3 install awscli
 cache:
   directories:
     - "$HOME/.npm"

@@ -157,6 +157,7 @@
           "builder": "@briebug/cypress-schematic:cypress",
           "options": {
             "devServerTarget": "datariomj:serve-coverage",
+            "port": 4300,
             "watch": true,
             "headless": false
           },
@@ -171,6 +172,7 @@
           "options": {
             "browser": "chrome",
             "devServerTarget": "datariomj:serve-coverage",
+            "port": 4300,
             "headless": true,
             "record": true,
             "watch": false
