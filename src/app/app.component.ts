@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Event, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { ContactDialogComponent } from '@shared/components/contact-dialog/contact-dialog.component';
@@ -19,6 +19,7 @@ import { UIState } from 'src/store/ui/ui.state';
 export class AppComponent implements OnInit {
   showPreloader!: boolean;
   title = 'datariomj';
+  private dialogRef!: MatDialogRef<ContactDialogComponent>;
 
   constructor(
     public dialog: MatDialog,
@@ -54,19 +55,26 @@ export class AppComponent implements OnInit {
     this.store.select(UIState.showContactForm).subscribe((showContactForm) => {
       if (showContactForm) {
         this.openContactDialog();
-        this.cdRef.detectChanges();
+      } else {
+        this.closeContactDialog();
       }
+      this.cdRef.detectChanges();
     });
   }
 
   private openContactDialog() {
-    const dialogRef = this.dialog.open(ContactDialogComponent, { disableClose: true });
+    this.dialogRef = this.dialog.open(ContactDialogComponent, { disableClose: true });
 
-    dialogRef.afterClosed().pipe(
+    this.dialogRef.afterClosed().pipe(
       take(1),
     ).subscribe((contactFormData: Contact) => {
-      this.store.dispatch(new ContactFormVisibility(false));
       console.log(contactFormData);
     });
+  }
+
+  private closeContactDialog() {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 }

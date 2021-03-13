@@ -16,6 +16,7 @@ export const environment = {
   facebook: {
     appId: '',
   },
+  readmeUrl: '/assets/development.md',
 };
 
 /*

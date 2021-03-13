@@ -1,7 +1,10 @@
 {
   "angular.experimental-ivy": true,
   "cSpell.words": [
+    "awscli",
+    "awscliv",
     "briebug",
+    "codacy",
     "codecov",
     "codelyzer",
     "compat",
@@ -12,8 +15,10 @@
     "devbrand",
     "devkit",
     "figma",
+    "gtag",
     "instrumenter",
     "lcov",
+    "linkedin",
     "mixins",
     "mjdatario",
     "multiline",
@@ -26,9 +31,12 @@
     "prerender",
     "saltstack",
     "sidenav",
+    "spotify",
     "strapi",
     "stylelint",
-    "unsubsriber"
+    "submodules",
+    "unsubsriber",
+    "zip"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true

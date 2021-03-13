@@ -16,7 +16,8 @@ Given('User visits stack page', () => {
 });
 
 Then('User will load proper metadata', () => {
-  cy.title().should('eq', 'MJ Datario | Stack');
+  // cy.title().should('eq', 'MJ Datario | Stack');
+  cy.title().should('eq', 'MJ Datario');
 });
 
 Then('User will load stack list', () => {

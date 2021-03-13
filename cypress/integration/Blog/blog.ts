@@ -7,5 +7,6 @@ Given('User visits blog page', () => {
 });
 
 Then('User will load proper metadata', () => {
-  cy.title().should('eq', 'MJ Datario | Blog');
+  // cy.title().should('eq', 'MJ Datario | Blog');
+  cy.title().should('eq', 'MJ Datario');
 });

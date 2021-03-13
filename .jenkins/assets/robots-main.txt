@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /
-
-Sitemap: https://datariomj-dev.web.app/sitemap.xml

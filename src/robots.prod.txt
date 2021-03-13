@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /terms-conditions
+Disallow: /privacy-policy
+
+Allow: /
+
+Sitemap: https://datariomj.dev/sitemap.xml

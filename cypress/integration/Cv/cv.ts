@@ -55,7 +55,8 @@ Then('Child cv details will be visible', () => {
 });
 
 Then('User will load proper metadata', () => {
-  cy.title().should('eq', 'MJ Datario | CV');
+  // cy.title().should('eq', 'MJ Datario | CV');
+  cy.title().should('eq', 'MJ Datario');
 });
 
 Then('User will load cv list', () => {

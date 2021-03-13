@@ -9,7 +9,7 @@ Feature: Home
   Scenario: User should load proper metadata
     Then User will load proper metadata
 
-  @regression @smoke @home
-  Scenario: User clicks hire me
-    When User clicks hire me
-    Then User will see contact dialog
+# @regression @smoke @home
+# Scenario: User clicks hire me
+#   When User clicks hire me
+#   Then User will see contact dialog

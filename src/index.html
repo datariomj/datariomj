@@ -6,8 +6,10 @@
   <base href="/">
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&amp;display=swap" rel="preload" as="style" crossorigin>
-  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&amp;display=swap" rel="stylesheet" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:wght@300,400,500&amp;display=swap" rel="preload" as="style" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:wght@300,400,500&amp;display=swap" rel="stylesheet" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:wght@200;300;400&amp;display=swap" rel="preload" as="style" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:wght@200;300;400&amp;display=swap" rel="stylesheet" crossorigin>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" rel="preload" as="style" crossorigin>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" rel="stylesheet" rel="stylesheet" crossorigin>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -17,6 +19,47 @@
   <link rel="mask-icon" href="assets/favicons/safari-pinned-tab.svg" color="#212121">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <meta name="theme-color" content="#ffffff">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WNKVP2H');
+  </script>
+  <!-- End Google Tag Manager -->
+  <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        xfbml            : true,
+        version          : 'v10.0'
+      });
+    };
+
+    (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+  <!-- Your Chat Plugin code -->
+  <div class="fb-customerchat"
+    attribution="setup_tool"
+    page_id="258063951784623"
+    theme_color="#13cf13">
+  </div>
+  <script>
+    var userAgent=(navigator&&navigator.userAgent||"").toLowerCase(),vendor=(navigator&&navigator.vendor||"").toLowerCase(),comparator={"<":function(r,e){return r<e},"<=":function(r,e){return r<=e},">":function(r,e){return r>e},">=":function(r,e){return r>=e}};function compareVersion(r,e){var n=e+"",o=+(n.match(/\d+/)||NaN),t=n.match(/^[<>]=?|/)[0];return comparator[t]?comparator[t](r,o):r==o||o!=o}var isOpera=function(r){var e=userAgent.match(/(?:^opera.+?version|opr)\/(\d+)/);return null!==e&&compareVersion(e[1],r)},isChrome=function(r){var e=/google inc/.test(vendor)?userAgent.match(/(?:chrome|crios)\/(\d+)/):null;return null!==e&&!isOpera()&&compareVersion(e[1],r)},isEdge=function(r){var e=userAgent.match(/edge\/(\d+)/);return null!==e&&compareVersion(e[1],r)},isFirefox=function(r){var e=userAgent.match(/(?:firefox|fxios)\/(\d+)/);return null!==e&&compareVersion(e[1],r)},isIe=function(r){var e=userAgent.match(/(?:msie |trident.+?; rv:)(\d+)/);return null!==e&&compareVersion(e[1],r)},isSafari=function(r){var e=userAgent.match(/version\/(\d+).+?safari/);return null!==e&&compareVersion(e[1],r)},isBrowserSupported=isChrome()||isFirefox()||isEdge()||isIe(">=11")||isSafari(">=9");isBrowserSupported||(window.onload=function(){document.getElementById("browser-notif").className="browser-notif"});
+  </script>
+  <style>
+    .hide{display:none}.placeholder,body{overflow-x:hidden}body{margin:0}.placeholder{background-color:#000;max-width:calc(1280px + 16px);width:100%;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:72px}.placholder__brand{width:40px;height:40px}@media screen and (min-width:960px){.placeholder{height:102px;padding:0 32px}.placholder__brand{width:70px;height:70px}}
+  </style>
+  <style>
+    .browser-notif{position:fixed;z-index:10;background-color:#000;margin:0 auto;width:100%;bottom:0;padding:16px;text-align:center;color:#13cf13}.browser-notif__links{color:#fff}.browser-notif__links:hover{color:#13cf13}
+  </style>
 </head>
 <body class="black-theme">
   <app-root></app-root>

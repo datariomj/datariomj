@@ -1,13 +1,15 @@
 <div class="home">
   <div class="home__container">
     <div class="home__main">
-      <p class="home__greeting">Hi!</p>
-      <p class="home__name">I'm MJ,</p>
-      <p class="home__profession">Full Stack Developer</p>
-      <button class="home__cta" mat-stroked-button color="accent" data-cy="home-cta" (click)="openContactDialog()">Hire Me!</button>
+      <h1 appHtmlTags class="home__greeting">Hello World!</h1>
+      <!-- <button class="home__cta" mat-stroked-button color="accent" data-cy="home-cta" (click)="openContactDialog()">Hire Me!</button> -->
     </div>
-    <div class="home__photo-wrapper">
-      <img class="home__photo" src="assets/images/leaves.jpg" alt="leaves">
+    <div class="home__readme-wrapper">
+      <mat-tab-group color="accent">
+        <mat-tab label="README.md" *ngIf="readme$">
+          <div [innerHtml]="readme$ | async | mdToHtml"></div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>

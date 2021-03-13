@@ -17,7 +17,7 @@ export class FooterComponent {
     'chevron-right',
     'git',
     'copyright',
-    'linked_in',
+    'linkedin',
     'github',
     'instagram',
   ];
@@ -32,7 +32,7 @@ export class FooterComponent {
       link: 'https://www.instagram.com/datariomj',
     },
     {
-      icon: 'linked_in',
+      icon: 'linkedin',
       link: 'https://www.linkedin.com/in/datariomj',
     },
   ];

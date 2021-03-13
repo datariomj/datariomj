@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Store } from '@ngxs/store';
+import { ContactFormVisibility } from '@store/ui/ui.action';
 
 @Component({
   selector: 'app-contact-dialog',
@@ -26,7 +27,7 @@ export class ContactDialogComponent {
   });
 
   constructor(
-    private dialogRef: MatDialogRef<ContactDialogComponent>,
+    private store: Store,
   ) {
   }
 
@@ -35,6 +36,10 @@ export class ContactDialogComponent {
       return;
     }
 
-    this.dialogRef.close(this.contactForm.value);
+    this.closeDialog();
+  }
+
+  closeDialog() {
+    this.store.dispatch(new ContactFormVisibility(false));
   }
 }
