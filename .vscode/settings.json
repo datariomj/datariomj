@@ -30,6 +30,7 @@
     "spotify",
     "strapi",
     "stylelint",
+    "submodules",
     "unsubsriber"
   ],
   "editor.codeActionsOnSave": {
