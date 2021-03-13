@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { ConstructionRoutingModule } from './construction-routing.module';
 import { ConstructionComponent } from './construction.component';
+import { ConstructionRoutingModule } from './construction-routing.module';
 
 
 @NgModule({
   declarations: [ConstructionComponent],
   imports: [
     CommonModule,
-    ConstructionRoutingModule
-  ]
+    ConstructionRoutingModule,
+  ],
 })
 export class ConstructionModule { }

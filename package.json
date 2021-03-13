@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "lint:styles": "stylelint \"{src,src/app,src/stylings}/**/*.scss\"",
-    "prep": "npm run lint && npm run lint:styles -- --fix",
+    "prep": "npm run lint -- --fix && npm run lint:styles -- --fix",
     "codecov": "codecov",
     "gen:docs": "compodoc -p tsconfig.app.json src",
     "dev:cov": "ng run datariomj:serve-coverage",

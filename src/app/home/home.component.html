@@ -6,7 +6,7 @@
     </div>
     <div class="home__readme-wrapper">
       <mat-tab-group color="accent">
-        <mat-tab label="README.md" *ngIf="readme$">
+        <mat-tab label="README.md" *ngIf="readme$" (click)="openGithubReadme()">
           <div [innerHtml]="readme$ | async | mdToHtml"></div>
         </mat-tab>
       </mat-tab-group>

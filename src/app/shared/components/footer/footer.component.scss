@@ -46,8 +46,10 @@
       margin: 0;
     }
   }
+
   &__left {
     margin-top: 9px;
+
     @include breakpoint(lg) {
       margin-top: 0;
     }

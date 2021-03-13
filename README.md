@@ -4,8 +4,7 @@
 - Hi! I'm MJ 😃
 - Full Stack Developer 💼
 - Creating websites from scratch
-- Utilizing Typescript as main language for frontend, backend and infrastructure
-- I like these things 🎸📷💻📱⌨️💸🍲✈️🏖️🌙
+- Utilizing Typescript for frontend, backend and infrastructure development
 <br />
 
 ### Status 📊
