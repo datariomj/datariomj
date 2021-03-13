@@ -6,7 +6,7 @@
     display: flex;
     flex-flow: column;
     height: auto;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px 20px 55px 20px;
 
     @include breakpoint(lg) {

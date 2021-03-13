@@ -49,7 +49,10 @@
   <div class="fb-customerchat"
     attribution="setup_tool"
     page_id="258063951784623"
-    theme_color="#13cf13">
+    theme_color="#13cf13"
+    logged_in_greeting="Websites? Apps? Tell me about it. ☕"
+    logged_out_greeting="Websites? Apps? Tell me about it. ☕"
+    greeting_dialog_display="fade">
   </div>
   <script>
     var userAgent=(navigator&&navigator.userAgent||"").toLowerCase(),vendor=(navigator&&navigator.vendor||"").toLowerCase(),comparator={"<":function(r,e){return r<e},"<=":function(r,e){return r<=e},">":function(r,e){return r>e},">=":function(r,e){return r>=e}};function compareVersion(r,e){var n=e+"",o=+(n.match(/\d+/)||NaN),t=n.match(/^[<>]=?|/)[0];return comparator[t]?comparator[t](r,o):r==o||o!=o}var isOpera=function(r){var e=userAgent.match(/(?:^opera.+?version|opr)\/(\d+)/);return null!==e&&compareVersion(e[1],r)},isChrome=function(r){var e=/google inc/.test(vendor)?userAgent.match(/(?:chrome|crios)\/(\d+)/):null;return null!==e&&!isOpera()&&compareVersion(e[1],r)},isEdge=function(r){var e=userAgent.match(/edge\/(\d+)/);return null!==e&&compareVersion(e[1],r)},isFirefox=function(r){var e=userAgent.match(/(?:firefox|fxios)\/(\d+)/);return null!==e&&compareVersion(e[1],r)},isIe=function(r){var e=userAgent.match(/(?:msie |trident.+?; rv:)(\d+)/);return null!==e&&compareVersion(e[1],r)},isSafari=function(r){var e=userAgent.match(/version\/(\d+).+?safari/);return null!==e&&compareVersion(e[1],r)},isBrowserSupported=isChrome()||isFirefox()||isEdge()||isIe(">=11")||isSafari(">=9");isBrowserSupported||(window.onload=function(){document.getElementById("browser-notif").className="browser-notif"});
