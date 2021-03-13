@@ -4,7 +4,6 @@ node_js:
 python:
   - "3.5"
 dist: xenial
-sudo: required
 install:
   - npm ci
   - pip install awscli
@@ -22,10 +21,10 @@ branches:
 stages:
   - name: lint
     if: branch = main
-  - compile
+  - name: compile
   - name: test
     if: branch = main
-  - deploy
+  - name: deploy
 jobs:
   include:
   - name: Link checks
@@ -52,7 +51,7 @@ jobs:
       secret_access_key: $AWS_SECRET_ACCESS_KEY
       bucket: $S3_BUCKET_NAME
       region: $AWS_DEFAULT_REGION
-      skip_cleanup: true
+      cleanup: false
       local_dir: dist/datariomj/browser
     after_deploy:
       - aws configure set preview.cloudfront true
