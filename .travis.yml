@@ -22,7 +22,6 @@ script:
   - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run e2e:ci -- --key $CYPRESS_RECORD_KEY; fi || travis_terminate 1;
   - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run codecov; fi || travis_terminate 1;
   - npm run build:prod || travis_terminate 1;
-  - ls -la || travis_terminate 1; # for debug only
 addons:
   chrome: stable
 deploy:
@@ -31,8 +30,8 @@ deploy:
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: $S3_BUCKET_NAME
   region: $AWS_DEFAULT_REGION
-  cleanup: true
-  local_dir: ./dist/datariomj/browser
+  cleanup: false
+  local_dir: dist/datariomj/browser
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^(staging|main)$
