@@ -105,7 +105,6 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "datariomj:build",
-            "port": 4300
           },
           "configurations": {
             "production": {
@@ -234,7 +233,6 @@
           "builder": "ngx-build-plus:dev-server",
           "options": {
             "browserTarget": "datariomj:build",
-            "port": 4300,
             "extraWebpackConfig": "./cypress/coverage.webpack.js"
           }
         }

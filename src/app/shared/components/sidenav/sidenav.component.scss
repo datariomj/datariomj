@@ -18,7 +18,8 @@
 
     &--active {
       .mat-icon,
-      &.mat-list-item {
+      &.mat-list-item,
+      .sidenav__description {
         color: white;
       }
     }
@@ -45,6 +46,7 @@
     margin: 0 0 0 12px;
     font-size: 20px;
     line-height: 1;
+    color: $disabled-color;
   }
 
   &__route-wrapper {

@@ -6,7 +6,10 @@
     </div>
     <div class="home__readme-wrapper">
       <mat-tab-group color="accent">
-        <mat-tab label="README.md" *ngIf="readme$" (click)="openGithubReadme()">
+        <mat-tab *ngIf="readme$">
+          <ng-template mat-tab-label>
+            <span (click)="openGithubReadme()">README.md</span>
+          </ng-template>
           <div [innerHtml]="readme$ | async | mdToHtml"></div>
         </mat-tab>
       </mat-tab-group>
