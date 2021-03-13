@@ -22,8 +22,7 @@
     "cy:open": "./node_modules/.bin/cypress open",
     "cy:run": "./node_modules/.bin/cypress run",
     "e2e": "ng run datariomj:e2e",
-    "e2e:ci": "ng run datariomj:e2e-ci",
-    "e2e:cov": "npx nyc report --reporter=lcov --reporter=text-summary"
+    "e2e:ci": "ng run datariomj:e2e-ci"
   },
   "private": true,
   "dependencies": {

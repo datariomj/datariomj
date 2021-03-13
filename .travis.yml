@@ -1,31 +1,62 @@
 language: node_js
 node_js:
-- '12'
+  - '12'
+python:
+  - "3.5"
 dist: xenial
 sudo: required
 install:
-- npm ci
+  - npm ci
+  - pip install awscli
 cache:
   directories:
-  - "$HOME/.npm"
-  - node_modules
+    - "$HOME/.npm"
+    - "$HOME/.pip-cache/"
+    - node_modules
+addons:
+  chrome: stable
 branches:
   only:
   - main
-script:
-- npm run lint
-- npm run e2e:ci -- --key $CYPRESS_RECORD_KEY
-- npm run e2e:cov
-- npm run codecov
-- npx update-badge
-- npm run build:prod
-addons:
-  chrome: stable
+  - staging
+stages:
+  - name: lint
+    if: branch = main
+  - compile
+  - name: test
+    if: branch = main
+  - deploy
+jobs:
+  include:
+  - name: Link checks
+  - stage: lint
+    script:
+      - echo "Running lint checks"
+      - npm run lint
+  - name: Build app
+  - stage: compile
+    script:
+      - echo "Running build app"
+      - npm run build:prod
+  - name: E2E tests
+  - stage: test
+    script:
+      - echo "Running e2e tests"
+      - npm run e2e:ci -- --key $CYPRESS_RECORD_KEY
+      - npm run codecov
+  - name: Deploy app
+  - stage: deploy
+    deploy:
+      provider: s3
+      access_key_id: $AWS_ACCESS_KEY_ID
+      secret_access_key: $AWS_SECRET_ACCESS_KEY
+      bucket: $S3_BUCKET_NAME
+      region: $AWS_DEFAULT_REGION
+      skip_cleanup: true
+      local_dir: dist/datariomj/browser
+    after_deploy:
+      - aws configure set preview.cloudfront true
+      - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
 notifications:
   slack:
     secure: 03rf2r8vBDsOf/u/Hh2Mtyk4uQIEvxVBR+xNNToAiPQnGgzh1zX/1dvXqOPvnWAuJTYCkYMfGydHfN10yq4h/n8Bs1hNqrKPHbAfEAudLEYpQyVP3F2AgqKfrSVdGwTl5x53qFHCXQISBHc8uXGapbGKILjc8TZLUDIPV5DjNHJY4lzrFS2D0BrOcgGptj0gvb5v5vsVep586PVHvm1wwumfdy23ttDt8/RTI+DXQzMmDfzH8v5udkiAKDnPkJwTrqqZyaSBDfmZXPfTxU9SgVaxa5WCm/DNHsoDuLL39u1rWblzI36cPg7F5ik+ULr+vTHjHQACWQgMljHgS6xuMiWxNOU27zUCwJOaGwevhHOmJmBEbE4qEXp0Fa9NqFI6EZHmb0U/+hQbaaBpbG/Jr59klr6zzDEnU873gaxN8Y1PrO35GrXgc76wyBotsB3w5sAqFAZNsdPqArNrp+/O9dYYu/iRug4mObcuLKdroKWb323AhZZvWYjJ6Bqt4cpbLmjisPSN/JFZh5u73fs18Gp2qqYZnZk1IA6VgEwnls9teZqs1v7fMZiqiszWe6N9XmqFcZJpy1hRMq55Ud2naxp7oJdIllEWRHA0gGbsJqNt9cZUuTnHhGdPpiKb5cQlLqDk76dJvdhvAVlHM5/X1l4quQKROUtpjCCqxUua+xM=
-deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  bucket: $DEPLOY_BUCKET
