@@ -4,7 +4,7 @@
 .home {
   &__container {
     display: flex;
-    flex-flow: column-reverse;
+    flex-flow: column;
     height: auto;
     align-items: center;
     padding: 20px 20px 55px 20px;
@@ -29,12 +29,9 @@
   }
 
   &__readme-wrapper {
-    width: 150px;
-    height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
 
     @include breakpoint(lg) {
       width: 50%;
@@ -42,18 +39,10 @@
       border-radius: 0;
       border: none;
     }
-  }
 
-  &__photo {
-    height: 140px;
-    width: 140px;
-    border-radius: 50%;
-
-    @include breakpoint(lg) {
-      height: auto;
-      width: auto;
-      max-height: 550px;
-      border-radius: 0;
+    img[align=left] {
+      padding-right: 20px;
+      padding-bottom: 20px;
     }
   }
 
@@ -64,24 +53,6 @@
     @include breakpoint(lg) {
       margin: 0;
       font-size: 40px;
-    }
-  }
-
-  &__name {
-    margin: 0;
-    font-size: 42px;
-
-    @include breakpoint(lg) {
-      font-size: 84px;
-    }
-  }
-
-  &__profession {
-    margin: 0;
-    font-size: 28px;
-
-    @include breakpoint(lg) {
-      font-size: 60px;
     }
   }
 

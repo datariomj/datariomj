@@ -177,4 +177,16 @@ $theme: map_merge(
       height: 80px;
     }
   }
+  .html-tag {
+    color: $disabled-color;
+    font-size: 14px;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    &__text {
+      display: block;
+    }
+    &__node {
+      color: $accent-color;
+    }
+  }
 }

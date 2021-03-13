@@ -12,4 +12,5 @@ export const environment = {
   facebook: {
     appId: '2167184696673703',
   },
+  readmeUrl: 'https://raw.githubusercontent.com/datariomj/datariomj/main/README.md',
 };

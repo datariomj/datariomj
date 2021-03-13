@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 
@@ -18,6 +19,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PreloaderComponent } from './components/preloader/preloader.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ContentfulAssetDirective } from './directives/contentful-asset.directive';
+import { HtmlTagsDirective } from './directives/html-tags.directive';
 import { MdToHtmlPipe } from './pipes/mdToHtml.pipe';
 
 
@@ -30,6 +32,7 @@ import { MdToHtmlPipe } from './pipes/mdToHtml.pipe';
     ContactDialogComponent,
     ContentfulAssetDirective,
     MdToHtmlPipe,
+    HtmlTagsDirective,
   ],
   imports: [
     CommonModule,
@@ -43,6 +46,7 @@ import { MdToHtmlPipe } from './pipes/mdToHtml.pipe';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatTabsModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
@@ -51,8 +55,10 @@ import { MdToHtmlPipe } from './pipes/mdToHtml.pipe';
     SidenavComponent,
     FooterComponent,
     MatButtonModule,
+    MatTabsModule,
     MatIconModule,
     PreloaderComponent,
+    HtmlTagsDirective,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,

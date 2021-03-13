@@ -17,15 +17,18 @@ const routes: Routes = [
   },
   {
     path: 'cv',
-    loadChildren: () => import('./cv/cv.module').then(m => m.CvModule),
+    // loadChildren: () => import('./cv/cv.module').then(m => m.CvModule),
+    loadChildren: () => import('./construction/construction.module').then(m => m.ConstructionModule),
   },
   {
     path: 'blog',
-    loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule),
+    // loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule),
+    loadChildren: () => import('./construction/construction.module').then(m => m.ConstructionModule),
   },
   {
     path: 'stack',
-    loadChildren: () => import('./stack/stack.module').then(m => m.StackModule),
+    // loadChildren: () => import('./stack/stack.module').then(m => m.StackModule),
+    loadChildren: () => import('./construction/construction.module').then(m => m.ConstructionModule),
   },
   {
     path: '**',

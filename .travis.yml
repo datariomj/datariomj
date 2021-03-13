@@ -21,6 +21,7 @@ script:
   - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run lint; fi || travis_terminate 1;
   - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run e2e:ci -- --key $CYPRESS_RECORD_KEY; fi || travis_terminate 1;
   - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run codecov; fi || travis_terminate 1;
+  - if [ "$TRAVIS_BRANCH" = "main" ]; then rm src/robots.txt && mv src/robots.prod.txt src/robots.txt; fi || travis_terminate 1;
   - npm run build:prod || travis_terminate 1;
 addons:
   chrome: stable

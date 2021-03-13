@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,6 +18,6 @@ export class HomeService {
       'Content-Type': 'text/plain; charset=utf-8',
     });
 
-    return this.http.get('https://raw.githubusercontent.com/datariomj/datariomj/main/README.md', { headers, responseType: 'text' });
+    return this.http.get(environment.readmeUrl, { headers, responseType: 'text' });
   }
 }

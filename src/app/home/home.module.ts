@@ -14,7 +14,6 @@ import { HomeState } from './store/home.state';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    MatButtonModule,
     SharedModule,
     NgxsModule.forFeature([
       HomeState,

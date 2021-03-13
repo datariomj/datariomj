@@ -27,10 +27,10 @@
 <br />
 
 ### Connect 🔗
-[<img align="left" alt="datariomj.dev" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/svg/datariomj-white.svg" />][website]
-[<img align="left" alt="datariomj | LinkedIn" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/svg/linkedin-white.svg" />][linkedin]
-[<img align="left" alt="datariomj | Instagram" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/svg/instagram-white.svg" />][instagram]
-[<img align="left" alt="datariomj | SoundCloud" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/svg/soundcloud-white.svg" />][soundcloud]
+[<img align="left" alt="datariomj.dev" width="22px" src="http://localhost:4300/assets/svg/datariomj-white.svg" />][website]
+[<img align="left" alt="datariomj | LinkedIn" width="22px" src="http://localhost:4300/assets/svg/linkedin-white.svg" />][linkedin]
+[<img align="left" alt="datariomj | Instagram" width="22px" src="http://localhost:4300/assets/svg/instagram-white.svg" />][instagram]
+[<img align="left" alt="datariomj | SoundCloud" width="22px" src="http://localhost:4300/assets/svg/soundcloud-white.svg" />][soundcloud]
 <br />
 
 ### Spotify Now Playing 🎧

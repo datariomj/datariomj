@@ -36,4 +36,8 @@ export class HomeComponent implements OnInit {
   openContactDialog() {
     this.store.dispatch(new ContactFormVisibility(true));
   }
+
+  openGithubReadme() {
+
+  }
 }
