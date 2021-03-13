@@ -1,16 +1,13 @@
 language: node_js
 node_js:
-  - '12'
-python:
-  - "3.9"
+  - 12
 dist: xenial
 install:
   - npm ci
-  - pip3 install awscli
+  - if ! [ -x "$(command -v aws)" ]; then curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" ; unzip awscliv2.zip ; sudo ./aws/install ; fi
 cache:
   directories:
     - "$HOME/.npm"
-    - "$HOME/.pip-cache/"
     - node_modules
 git:
   depth: false
@@ -21,10 +18,10 @@ branches:
     - main
     - staging
 script:
-  - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run lint; fi 
-  - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run e2e:ci -- --key $CYPRESS_RECORD_KEY; fi
-  - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run codecov; fi
-  - npm run build:prod
+  - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run lint; fi || travis_terminate 1;
+  - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run e2e:ci -- --key $CYPRESS_RECORD_KEY; fi || travis_terminate 1;
+  - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run codecov; fi || travis_terminate 1;
+  - npm run build:prod || travis_terminate 1;
 addons:
   chrome: stable
 deploy:
