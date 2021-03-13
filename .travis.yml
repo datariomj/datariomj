@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - '12'
 python:
-  - "3.5"
+  - "3.9"
 dist: xenial
 install:
   - npm ci
@@ -21,9 +21,9 @@ branches:
     - main
     - staging
 script:
-  - npm run lint
-  - npm run e2e:ci -- --key $CYPRESS_RECORD_KEY
-  - npm run codecov
+  - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run lint; fi 
+  - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run e2e:ci -- --key $CYPRESS_RECORD_KEY; fi
+  - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run codecov; fi
   - npm run build:prod
 addons:
   chrome: stable
