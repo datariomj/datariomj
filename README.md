@@ -1,9 +1,12 @@
 # datariomj.dev
 
 ### Greetings 👋
-- Hi! I'm MJ 😃
+-  Hi! I'm MJ 😃
 - Currently working as a Solutions Developer 💼
+- Creating websites from scratch
+- Utilizing Typescript as main language for frontend, backend and infrastructure
 - I like these things 🎸📷💻📱⌨️💸🍲✈️🏖️🌙
+<br />
 
 ### Status 📊
 [![Build](https://www.travis-ci.com/datariomj/datariomj.svg?branch=main)][travis]
@@ -15,31 +18,39 @@
 <br />
 
 ### Stack 📦
-<img align="left" alt="JavaScript" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" />
-<img align="left" alt="Typescript" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png" />
-<img align="left" alt="Angular" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/angular/angular.png" />
-<img align="left" alt="HTML" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png" />
-<img align="left" alt="SASS" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/sass/sass.png" />
-<img align="left" alt="NodeJS" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nodejs/nodejs.png" />
-<img align="left" alt="MongoDB" width="26px" src="https://raw.githubusercontent.com/devicons/devicon/2809b567852a4648062a2d3e7c1c531367458c0b/icons/mongodb/mongodb-plain.svg" />
-
-<img align="left" alt="PostgreSQL" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/postgresql/postgresql.png" />
-<img align="left" alt="AWS" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/aws/aws.png" />
-<img align="left" alt="Firebase" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/firebase/firebase.png" />
-<img align="left" alt="Docker" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/docker/docker.png" />
+[<img align="left" style="margin-right: 15px" alt="JavaScript" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" />][javascript]
+[<img align="left" style="margin-right: 15px" alt="Typescript" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png" />][typescript]
+[<img align="left" style="margin-right: 15px" alt="Angular" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/angular/angular.png" />][angular]
+[<img align="left" style="margin-right: 15px" alt="HTML" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png" />][html]
+[<img align="left" style="margin-right: 15px" alt="SASS" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/sass/sass.png" />][sass]
+[<img align="left" style="margin-right: 15px" alt="NodeJS" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nodejs/nodejs.png" />][nodejs]
+[<img align="left" style="margin-right: 15px" alt="AWS" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/aws/aws.png" />][aws]
+[<img align="left" style="margin-right: 15px" alt="PostgreSQL" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/postgresql/postgresql.png" />][postgres]
+[<img align="left" style="margin-right: 15px" alt="Firebase" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/firebase/firebase.png" />][firebase]
+[<img align="left" style="margin-right: 15px" alt="Docker" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/docker/docker.png" />][docker]
 <br />
 
 ### Connect 🔗
-[<img align="left" alt="datariomj.dev" width="26px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/globe.svg" />][website]
-[<img align="left" alt="datariomj | LinkedIn" width="26px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />][linkedin]
-[<img align="left" alt="datariomj | Instagram" width="26px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/instagram.svg" />][instagram]
-[<img align="left" alt="datariomj | SoundCloud" width="26px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/soundcloud.svg" />][soundcloud]
+[<img align="left" style="margin-right: 15px" style="color: #13cf13" alt="datariomj.dev" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/globe.svg" />][website]
+[<img align="left" style="margin-right: 15px" style="color: #13cf13" alt="datariomj | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />][linkedin]
+[<img align="left" style="margin-right: 15px" style="color: #13cf13" alt="datariomj | Instagram" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/instagram.svg" />][instagram]
+[<img align="left" style="margin-right: 15px" style="color: #13cf13" alt="datariomj | SoundCloud" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/soundcloud.svg" />][soundcloud]
 <br />
 
 ### Spotify Now Playing 🎧
 
 [<img src="https://spotify-np-datariomj.vercel.app/api/spotify-playing" alt="Spotify Now Playing" width="350" />](https://open.spotify.com/user/beg8h6lxlplfx76lekg8cn7m2/playlists)
 
+[javascript]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[typescript]: https://www.typescriptlang.org
+[angular]: https://angular.io
+[html]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[sass]: https://sass-lang.com
+[nodejs]: https://nodejs.org
+[postgres]: https://www.postgresql.org
+[aws]: https://aws.amazon.com
+[firebase]: https://firebase.google.com
+[docker]: https://www.docker.com
 [travis]: https://www.travis-ci.com/github/datariomj/datariomj
 [cypress]: https://dashboard.cypress.io/projects/3zwyy9/runs
 [codecov]: https://app.codecov.io/gh/datariomj/datariomj
@@ -49,4 +60,4 @@
 [website]: https://datariomj.dev
 [linkedin]: https://linkedin.com/in/datariomj
 [instagram]: https://instagram.com/datariomj
-[soundcloud]: https://youtube.com/datariomj
+[soundcloud]: https://soundcloud.com/datariomj

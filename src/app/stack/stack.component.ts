@@ -1,11 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ContentfulService } from '@core/services/contentful.service';
 import { SeoService } from '@core/services/seo.service';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { Stack } from './interfaces/stack';
 import { StackItem } from './interfaces/stack-item';
 import { GetItems } from './store/stack.actions';
 import { StackState } from './store/stack.state';
@@ -23,7 +20,6 @@ export class StackComponent implements OnInit {
   constructor(
     private store: Store,
     private seo: SeoService,
-    private cms: ContentfulService,
   ) {
   }
 

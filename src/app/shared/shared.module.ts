@@ -18,6 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PreloaderComponent } from './components/preloader/preloader.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ContentfulAssetDirective } from './directives/contentful-asset.directive';
+import { MdToHtmlPipe } from './pipes/mdToHtml.pipe';
 
 
 
@@ -28,6 +29,7 @@ import { ContentfulAssetDirective } from './directives/contentful-asset.directiv
     PreloaderComponent,
     ContactDialogComponent,
     ContentfulAssetDirective,
+    MdToHtmlPipe,
   ],
   imports: [
     CommonModule,
@@ -57,6 +59,7 @@ import { ContentfulAssetDirective } from './directives/contentful-asset.directiv
     MatInputModule,
     ContactDialogComponent,
     ContentfulAssetDirective,
+    MdToHtmlPipe,
   ],
 })
 export class SharedModule { }

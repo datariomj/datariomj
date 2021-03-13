@@ -6,8 +6,8 @@
       <p class="home__profession">Full Stack Developer</p>
       <button class="home__cta" mat-stroked-button color="accent" data-cy="home-cta" (click)="openContactDialog()">Hire Me!</button>
     </div>
-    <div class="home__photo-wrapper">
-      <img class="home__photo" src="assets/images/leaves.jpg" alt="leaves">
+    <div class="home__-wrapper">
+      <div *ngIf="readme$" [innerHtml]="readme$ | async | mdToHtml"></div>
     </div>
   </div>
 </div>

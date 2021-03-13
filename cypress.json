@@ -1,6 +1,6 @@
 {
   "projectId": "3zwyy9",
-  "baseUrl": "http://localhost:4200",
+  "baseUrl": "http://localhost:4300",
   "testFiles": "**/*.feature",
   "viewportHeight": 768,
   "viewportWidth": 1366
