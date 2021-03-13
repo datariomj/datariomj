@@ -30,7 +30,7 @@ deploy:
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: $S3_BUCKET_NAME
   region: $AWS_DEFAULT_REGION
-  cleanup: false
+  skip_cleanup: true
   local_dir: dist/datariomj/browser
   on:
     all_branches: true
