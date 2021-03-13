@@ -4,6 +4,7 @@
 - add static texts like email, contact number to config
 - style scroll bar instead of display none
 - add browser not supported notification
+- add gtag
 
 ## Sidenav
 - add ellipsis when height is insufficient

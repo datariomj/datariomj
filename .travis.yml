@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 12
+  - '12'
 dist: xenial
 install:
   - npm ci
@@ -32,6 +32,11 @@ deploy:
   region: $AWS_DEFAULT_REGION
   cleanup: true
   local_dir: dist/datariomj/browser
+  on:
+    branches:
+      only:
+        - main
+        - staging
 after_deploy:
   - aws configure set preview.cloudfront true
   - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"

@@ -2,6 +2,7 @@
   "angular.experimental-ivy": true,
   "cSpell.words": [
     "awscli",
+    "awscliv",
     "briebug",
     "codecov",
     "codelyzer",
@@ -13,6 +14,7 @@
     "devbrand",
     "devkit",
     "figma",
+    "gtag",
     "instrumenter",
     "lcov",
     "mixins",
@@ -31,7 +33,8 @@
     "strapi",
     "stylelint",
     "submodules",
-    "unsubsriber"
+    "unsubsriber",
+    "zip"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
