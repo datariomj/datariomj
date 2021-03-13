@@ -18,7 +18,7 @@ branches:
   only:
   - main
   - staging
-script: 'true'
+script: 'echo "Start"'
 stages:
   - name: lint
     if: branch = main
@@ -28,24 +28,24 @@ stages:
   - name: deploy
 jobs:
   include:
-  - name: Link checks
   - stage: lint
+    name: Link checks
     script:
       - echo "Running lint checks"
       - npm run lint
-  - name: Build app
   - stage: compile
+    name: Build app
     script:
       - echo "Running build app"
       - npm run build:prod
-  - name: E2E tests
   - stage: test
+    name: E2E tests
     script:
       - echo "Running e2e tests"
       - npm run e2e:ci -- --key $CYPRESS_RECORD_KEY
       - npm run codecov
-  - name: Deploy app
   - stage: deploy
+    name: Deploy app
     deploy:
       provider: s3
       access_key_id: $AWS_ACCESS_KEY_ID
