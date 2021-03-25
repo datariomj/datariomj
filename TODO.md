@@ -13,10 +13,7 @@
 - add ellipsis when height is insufficient
 
 ## CV
-- mobile ui
-- add collapse or expand all buttons
 - add icons on detail tab
-- change detail route to use
 - implement drag 
 
 ## Stack
@@ -34,9 +31,6 @@
 ## Error
 - ui
 
-## Others
-- add code coverage link
-
 ## CMS
 - implement graphql request
 - revamp cms implementation
@@ -51,7 +45,7 @@
 - Fix travis notification
 - Fix travis ngcc cache
 - update robots.txt by branch
-- get distribution id and bucket from config or variable
+- add this back to README.md ```![Codecov](https://img.shields.io/codecov/c/github/datariomj/datariomj/main)][codecov]```
 
 ## Dependency issues
 1. https://github.com/angular/components/issues/9728

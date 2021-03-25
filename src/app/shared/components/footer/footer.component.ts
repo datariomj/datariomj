@@ -21,7 +21,7 @@ export class FooterComponent {
     'github',
     'instagram',
   ];
-  currentYear = new Date().getFullYear();
+  currentYear = Math.max(new Date().getFullYear(), 2021);
   socialIcons = [
     {
       icon: 'github',

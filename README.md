@@ -10,7 +10,6 @@
 ### Status 📊
 [![Build](https://www.travis-ci.com/datariomj/datariomj.svg?branch=main)][travis]
 [![datariomj](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/3zwyy9/main&style=flat&logo=cypress)][cypress]
-<!-- [![Codecov](https://img.shields.io/codecov/c/github/datariomj/datariomj/main)][codecov] -->
 [![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/datariomj/datariomj)][snyk]
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7436259e99ee41a7b58f146322089397)][codacy]
 [![license](https://img.shields.io/github/license/datariomj/datariomj)][license]
