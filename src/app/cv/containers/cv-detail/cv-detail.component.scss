@@ -1,0 +1,24 @@
+@import 'variables';
+
+.cv-detail {
+  padding: 10px 20px;
+
+  a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: $disabled-color;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__link {
+    margin-left: 6px;
+  }
+
+  .mat-icon {
+    text-decoration: none;
+  }
+}

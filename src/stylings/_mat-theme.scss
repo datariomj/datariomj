@@ -10,20 +10,20 @@ $poppins-typography: mat-typography-config(
 @include mat-core($poppins-typography);
 
 $custom-primary: (
-  50 : #f5feff,
-  100 : #e6fcff,
-  200 : #d6faff,
-  300 : #c6f8ff,
-  400 : #b9f7ff,
-  500 : #adf5ff,
-  600 : #a6f4ff,
-  700 : #9cf2ff,
-  800 : #93f0ff,
-  900 : #83eeff,
+  50 : #f1fcfd,
+  100 : #ddf7fa,
+  200 : #c7f1f7,
+  300 : #b0ebf4,
+  400 : #9fe7f1,
+  500 : #8ee3ef,
+  600 : #86e0ed,
+  700 : #7bdceb,
+  800 : #71d8e8,
+  900 : #5fd0e4,
   A100 : #fff,
   A200 : #fff,
-  A400 : #fff,
-  A700 : #fff,
+  A400 : #e8fcff,
+  A700 : #cff8ff,
   contrast: (
     50 : #000,
     100 : #000,
@@ -183,13 +183,14 @@ $theme: map_merge(
     font-size: 14px;
     font-family: 'Source Code Pro', monospace;
     font-weight: 400;
+    font-style: italic;
 
     &__text {
       display: block;
     }
 
     &__node {
-      color: $accent-color;
+      color: $primary-color;
     }
   }
 }

@@ -30,7 +30,7 @@ export class HomeState {
     }
 
     @Action(GetReadme)
-    getReadme({ patchState, getState }: StateContext<HomeStateModel>, action: GetReadme) {
+    getReadme({ patchState, getState }: StateContext<HomeStateModel>) {
         const state = getState();
 
         if (state && state.readme) {

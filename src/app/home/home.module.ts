@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
 import { NgxsModule } from '@ngxs/store';
 import { SharedModule } from '@shared/shared.module';
 
@@ -10,11 +10,14 @@ import { HomeState } from './store/home.state';
 
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [
+    HomeComponent,
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     SharedModule,
+    MatTabsModule,
     NgxsModule.forFeature([
       HomeState,
     ]),

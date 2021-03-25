@@ -6,7 +6,7 @@ import * as marked from 'marked';
 })
 export class MdToHtmlPipe implements PipeTransform {
 
-  transform(value: string | null): string {
+  transform(value: string | null | undefined): string {
     if (value) {
       return marked(value);
     }
@@ -14,3 +14,5 @@ export class MdToHtmlPipe implements PipeTransform {
     return '';
   }
 }
+
+// import { documentToHtmlString } from '@contentful/rich-text-html-renderer';

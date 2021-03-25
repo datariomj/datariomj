@@ -7,10 +7,14 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
-  align-items: center;
   top: -95px;
 
   @include breakpoint(lg) {
     top: -25px;
+    align-items: center;
+  }
+
+  &__content {
+    padding: 0 20px;
   }
 }

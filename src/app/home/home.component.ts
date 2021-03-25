@@ -38,6 +38,6 @@ export class HomeComponent implements OnInit {
   }
 
   openGithubReadme() {
-    window.open('https://github.com/datariomj/datariomj', '_blank');
+    window.open('https://github.com/datariomj/datariomj/blob/main/README.md', '_blank');
   }
 }

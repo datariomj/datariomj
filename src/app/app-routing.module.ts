@@ -17,8 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'cv',
-    // loadChildren: () => import('./cv/cv.module').then(m => m.CvModule),
-    loadChildren: () => import('./construction/construction.module').then(m => m.ConstructionModule),
+    loadChildren: () => import('./cv/cv.module').then(m => m.CvModule),
   },
   {
     path: 'blog',

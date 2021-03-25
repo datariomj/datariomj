@@ -1,0 +1,24 @@
+<div class="cv-detail">
+  <ng-container *ngIf="detail$  | async as cvDetail; else noDetail">
+    <mat-list>
+      <mat-list-item *ngIf="cvDetail?.company">
+        Company: {{cvDetail?.company}}
+      </mat-list-item>
+      <mat-list-item *ngIf="cvDetail?.school">
+        School: {{cvDetail?.school}}
+      </mat-list-item>
+      <mat-list-item *ngIf="cvDetail?.link">
+        Link: <a class="cv-detail__link" href="{{cvDetail?.link}}" target="_blank">{{cvDetail?.link}} <mat-icon>open_in_new</mat-icon></a>
+      </mat-list-item>
+      <mat-list-item *ngIf="cvDetail?.dateStarted">
+        Duration: {{cvDetail?.dateStarted | date:'mediumDate'}} - {{(cvDetail?.dateEnded | date:'mediumDate') || 'Present'}}
+      </mat-list-item>
+    </mat-list>
+    <div *ngIf="cvDetail" [innerHtml]="cvDetail?.content | mdToHtml"></div>
+  </ng-container>
+
+  <ng-template #noDetail>
+    No Data to display
+  </ng-template>
+</div>
+<app-unfinished></app-unfinished>

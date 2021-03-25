@@ -31,8 +31,5 @@ export class StackComponent implements OnInit {
       slug: 'stack',
     });
     this.store.dispatch(new GetItems());
-
-    // this.cms.getAllEntriesByContentType('technology').subscribe(console.log);
-    // this.cms.getEntryById('10xhkrXOMbiFp3SzrUxcMt').subscribe(console.log);
   }
 }

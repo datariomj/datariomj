@@ -4,6 +4,13 @@
 .sidenav {
   height: 100%;
 
+  &__description {
+    margin: 0 0 0 12px;
+    font-size: 20px;
+    line-height: 1;
+    color: $disabled-color;
+  }
+
   &__link {
     &.mat-list-item {
       @include breakpoint(lg) {
@@ -18,8 +25,8 @@
 
     &--active {
       .mat-icon,
-      &.mat-list-item,
-      .sidenav__description {
+      .sidenav__description,
+      &.mat-list-item {
         color: white;
       }
     }
@@ -40,13 +47,6 @@
         width: 50px;
       }
     }
-  }
-
-  &__description {
-    margin: 0 0 0 12px;
-    font-size: 20px;
-    line-height: 1;
-    color: $disabled-color;
   }
 
   &__route-wrapper {
@@ -83,19 +83,18 @@
     &::-webkit-scrollbar {
       display: none;
     }
-  }
 
-  .mat-list-base {
-    padding-top: 0;
+    .mat-list-base {
+      padding-top: 0;
 
-    @include breakpoint(lg) {
-      padding-bottom: 50px;
-    }
+      @include breakpoint(lg) {
+        padding-bottom: 50px;
+      }
 
-    .mat-list-item {
-      .mat-list-item-content {
-        // justify-content: center;
-        padding: 0 25px;
+      .mat-list-item {
+        .mat-list-item-content {
+          padding: 0 25px;
+        }
       }
     }
   }

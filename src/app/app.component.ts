@@ -5,7 +5,6 @@ import { Event, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { ContactDialogComponent } from '@shared/components/contact-dialog/contact-dialog.component';
 import { Contact } from '@shared/interfaces/contact';
-import { ContactFormVisibility } from '@store/ui/ui.action';
 import { take } from 'rxjs/operators';
 import { UIState } from 'src/store/ui/ui.state';
 

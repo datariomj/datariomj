@@ -1,24 +1,31 @@
-@import 'variables';
-@import 'mixins';
+@import "variables";
+@import "mixins";
 
 .cv {
   &__container {
     display: flex;
     height: calc(100vh - #{$footer-height});
     width: 100%;
+  }
 
-    @include breakpoint(lg) {
-      position: absolute;
-      overflow: hidden;
-    }
+  &__drawer {
+    width: 100%;
+  }
+
+  &__tree {
+    height: 100%;
+    width: 320px;
+    padding-bottom: 20px;
   }
 
   &__list-wrapper {
     background-color: $card-color;
-    width: 30%;
+    // width: 30%;
+    // min-width: 320px;
+    padding: 10px;
     overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
     &::-webkit-scrollbar {
       display: none;
     }
@@ -27,19 +34,10 @@
   &__router-wrapper {
     width: 100%;
     overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
     &::-webkit-scrollbar {
       display: none;
-    }
-  }
-
-  &__detail-route {
-    text-decoration: none;
-    color: $text-color;
-
-    &:hover {
-      color: $accent-color;
     }
   }
 
@@ -47,14 +45,82 @@
     cursor: pointer;
   }
 
-  &__icon-expand {
-    color: $disabled-color;
+  &__icon-expand,
+  &__detail-route,
+  &__detail-expand {
+    text-decoration: none;
+    color: $text-color;
+    cursor: pointer;
+
+    &:hover {
+      color: $accent-color;
+    }
+
+    &--active {
+      color: $accent-color;
+    }
+  }
+
+  &__nav-close {
+    opacity: 1;
+    position: absolute;
+    right: 10px;
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
   }
 
   .mat-tree-node {
+    min-height: 36px;
+    outline: none;
+
     &:hover {
       .cv__icon-expand {
-        color: white;
+        color: $accent-color;
+      }
+    }
+
+    &.cv__detail-route--active {
+      .cv__detail-text {
+        color: $accent-color;
+      }
+    }
+  }
+
+  &__tab-navbar {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    background: black;
+  }
+
+  &__route-wrapper {
+    display: block;
+    min-height: calc(100vh - 112px);
+  }
+
+  &__list-menu {
+    &.mat-focus-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 20px;
+
+      @include breakpoint(lg) {
+        display: none;
+      }
+    }
+  }
+
+  .mat-tab-link {
+    padding: 0 36px 0 20px;
+
+    &.cv__nav-tab--active {
+      opacity: 1;
+    }
+
+    .cv__nav-close {
+      &:hover {
+        opacity: 1;
       }
     }
   }

@@ -1,31 +1,47 @@
 <div class="cv">
   <div class="cv__container">
-    <div class="cv__list-wrapper">
-      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding data-cy="cv-child-node">
-          <ng-container [ngTemplateOutlet]="nodeLink" [ngTemplateOutletContext]="{node:node}"></ng-container>
-        </mat-tree-node>
-        <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding (click)="toggleNode(node)" class="cv__detail-expand" data-cy="cv-parent-node">
-          <button mat-icon-button matTreeNodeToggle
-                  [attr.aria-label]="'Toggle ' + node.name" data-cy="cv-icon-expand">
-            <mat-icon class="cv__icon-expand">
-              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-            </mat-icon>
-          </button>
-          <ng-container [ngTemplateOutlet]="nodeLink" [ngTemplateOutletContext]="{node:node}"></ng-container>
-        </mat-tree-node>
-      </mat-tree>
-    </div>
-    <div class="cv__router-wrapper">
-      <router-outlet></router-outlet>
-    </div>
+    <mat-drawer-container class="cv__drawer" [autosize]="autosize" [hasBackdrop]="!isLarge">
+      <mat-drawer #drawer [mode]="isLarge ? 'side' : 'over'" [opened]="true" [autoFocus]="false">
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="cv__tree">
+          <mat-tree-node class="cv__detail-route" *matTreeNodeDef="let node" matTreeNodePadding data-cy="cv-child-node"
+            [routerLink]="node.route" routerLinkActive="cv__detail-route--active"
+            (click)="selectDetail()">
+            <ng-container [ngTemplateOutlet]="nodeLink" [ngTemplateOutletContext]="{node:node}"></ng-container>
+          </mat-tree-node>
+          <mat-tree-node class="cv__detail-expand" *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding (click)="toggleNode(node)" data-cy="cv-parent-node">
+            <button class="cv__expand-icon" mat-icon-button matTreeNodeToggle
+                    [attr.aria-label]="'Toggle ' + node.name" data-cy="cv-icon-expand">
+              <mat-icon class="cv__icon-expand">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+            </button>
+            <ng-container [ngTemplateOutlet]="nodeLink" [ngTemplateOutletContext]="{node:node}"></ng-container>
+          </mat-tree-node>
+        </mat-tree>
+      </mat-drawer>
+      <div class="cv__tab-container">
+        <nav mat-tab-nav-bar color="accent" class="cv__tab-navbar" *ngIf="entryId$ | async as entryId">
+          <a *ngFor="let detail of (details$ | async); let detailIndex = index" mat-tab-link
+            class="cv__nav-tab"
+            color="primary"
+            [ngClass]="{'cv__nav-tab--active': (entryId$ | async) === detail.entryId}"
+            [active]="entryId === detail.entryId"
+            (click)="goToDetail(detail.entryId)">
+            {{detail.title}}
+            <mat-icon class="cv__nav-close" aria-hidden="false" aria-label="close" (click)="removeDetail($event, detail.entryId, detailIndex)">close</mat-icon>
+          </a>
+        </nav>
+        <div class="cv__route-wrapper">
+          <router-outlet></router-outlet>
+        </div>
+        <button class="cv__list-menu" mat-mini-fab color="accent" aria-label="CV List" (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </mat-drawer-container> 
   </div>
-
 </div>
 
 <ng-template #nodeLink let-node='node'>
-  <a *ngIf="node.route; else noRoute" [routerLink]="node.route" class="cv__detail-route">{{node.name}}</a>
-  <ng-template #noRoute>
-    <span class="cv__detail-text">{{node.name}}</span>
-  </ng-template>
+  <span class="cv__detail-text">{{node.name}}</span>
 </ng-template>

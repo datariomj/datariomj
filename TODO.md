@@ -3,8 +3,11 @@
 ## General
 - add static texts like email, contact number to config
 - style scroll bar instead of display none
-- add browser not supported notification
-- add gtag
+- update browser not supported notification to include ie
+- add request caching
+- revamp preloader
+- implement placeholder component
+- create release note generate
 
 ## Sidenav
 - add ellipsis when height is insufficient
@@ -12,6 +15,9 @@
 ## CV
 - mobile ui
 - add collapse or expand all buttons
+- add icons on detail tab
+- change detail route to use
+- implement drag 
 
 ## Stack
 - mobile ui
@@ -33,6 +39,7 @@
 
 ## CMS
 - implement graphql request
+- revamp cms implementation
 
 ## Skills forgot to add
 - Contentful

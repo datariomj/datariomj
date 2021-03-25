@@ -31,7 +31,7 @@ export class StackState {
     }
 
     @Action(GetItems)
-    getItems({ patchState, getState }: StateContext<StackStateModel>, action: GetItems) {
+    getItems({ patchState, getState }: StateContext<StackStateModel>) {
         const state = getState();
 
         if (state && state.items) {

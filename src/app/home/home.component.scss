@@ -6,10 +6,11 @@
     display: flex;
     flex-flow: column;
     height: auto;
-    align-items: flex-start;
+    align-items: center;
     padding: 20px 20px 55px 20px;
 
     @include breakpoint(lg) {
+      align-items: flex-start;
       padding: 50px 100px 50px 100px;
       flex-flow: row;
       min-height: calc(100vh - 150px);
@@ -48,11 +49,9 @@
 
   &__greeting {
     margin: 20px 0 0 0;
-    font-size: 24px;
 
     @include breakpoint(lg) {
       margin: 0;
-      font-size: 40px;
     }
   }
 

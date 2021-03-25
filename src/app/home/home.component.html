@@ -1,18 +1,23 @@
 <div class="home">
   <div class="home__container">
     <div class="home__main">
-      <h1 appHtmlTags class="home__greeting">Hello World!</h1>
+      <h1 appHtmlTags class="home__greeting">Hello! I'm MJ</h1>
+      <br>
+      <h3 appHtmlTags class="home__greeting">Welcome to my VSCode-inspired portfolio</h3>
+      <br>
+      <br>
+      <app-unfinished></app-unfinished>
       <!-- <button class="home__cta" mat-stroked-button color="accent" data-cy="home-cta" (click)="openContactDialog()">Hire Me!</button> -->
     </div>
     <div class="home__readme-wrapper">
-      <mat-tab-group color="accent">
-        <mat-tab *ngIf="readme$">
-          <ng-template mat-tab-label>
-            <span (click)="openGithubReadme()">README.md</span>
-          </ng-template>
-          <div [innerHtml]="readme$ | async | mdToHtml"></div>
-        </mat-tab>
-      </mat-tab-group>
+      <div>
+        <nav mat-tab-nav-bar color="accent">
+          <a *ngIf="readme$" mat-tab-link color="accent" [active]="true" (click)="openGithubReadme()">
+            README.md
+          </a>
+        </nav>
+        <div mat-tab-content [innerHtml]="readme$ | async | mdToHtml"></div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,12 +1,14 @@
+@import 'variables';
+
 .terms {
   max-width: 900px;
   margin: 0 auto;
-  padding-bottom: 50px;
+  padding: 0 24px 50px 24px;
 
   a {
     outline: none;
     text-decoration: none;
-    color: #13cf13;
+    color: $accent-color;
 
     &:hover {
       outline: none;

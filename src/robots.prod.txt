@@ -1,6 +1,4 @@
 User-agent: *
-Disallow: /terms-conditions
-Disallow: /privacy-policy
 
 Allow: /
 

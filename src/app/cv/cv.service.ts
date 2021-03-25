@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ContentfulService } from '@core/services/contentful.service';
 import { forkJoin, Observable, of } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+
+import { CvDetail } from './interfaces/cv-detail';
 
 @Injectable({
   providedIn: 'root',
@@ -28,15 +30,19 @@ export class CvService {
             const childObs: any = [];
 
             item.children.forEach((child: any) => {
-              childObs.push(this.cms.getEntryById(child.sys.id));
+              childObs.push(this.cms.getEntryById(child.sys.id).pipe(
+                catchError(() => of(null)),
+              ));
             });
 
             if (childObs.length) {
               itemObs.push(forkJoin(childObs).pipe(
                 map((childrenRes) => {
-                  const parsedChildren = childrenRes.map((childRes: any) => ({
+                  const filteredRes = childrenRes.filter((childRes) => childRes);
+                  const parsedChildren = filteredRes.map((childRes: any) => ({
                     name: childRes.fields.title,
-                    route: childRes.fields.entryTitle,
+                    title: childRes.fields.entryTitle,
+                    route: childRes.sys.id,
                   }));
 
                   return {
@@ -69,6 +75,16 @@ export class CvService {
         );
       }),
       map(items => items.sort((a: any, b: any) => a.order - b.order)),
+    );
+  }
+
+  // todo fix types
+  getCvDetail(entryId: string): Observable<CvDetail> {
+    return this.cms.getEntryById(entryId).pipe(
+      map((test: any) => ({
+        ...test.fields,
+        entryId,
+      })),
     );
   }
 }

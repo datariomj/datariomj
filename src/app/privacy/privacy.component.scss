@@ -1,3 +1,5 @@
+@import 'variables';
+
 .privacy {
   max-width: 900px;
   margin: 0 auto;
@@ -6,7 +8,7 @@
   a {
     outline: none;
     text-decoration: none;
-    color: #13cf13;
+    color: $accent-color;
 
     &:hover {
       outline: none;
