@@ -1,13 +1,13 @@
+@use '~@angular/material' as mat;
 @import "variables";
 @import "mixins";
-@import "~@angular/material/theming";
 
-$poppins-typography: mat-typography-config(
+$poppins-typography: mat.define-typography-config(
   $font-family: "Poppins, monospace",
 );
 
 // Include non-theme styles for core.
-@include mat-core($poppins-typography);
+@include mat.core($poppins-typography);
 
 $custom-primary: (
   50 : #f1fcfd,
@@ -109,9 +109,9 @@ $custom-warn: (
 );
 
 // Define your application's custom theme.
-$primary: mat-palette($custom-primary);
-$accent: mat-palette($custom-accent);
-$warn: mat-palette($custom-warn);
+$primary: mat.define-palette($custom-primary);
+$accent: mat.define-palette($custom-accent);
+$warn: mat.define-palette($custom-warn);
 $mat-black-theme-background: (
   status-bar: $main-background,
   app-bar: #0f0f0f,
@@ -121,7 +121,7 @@ $mat-black-theme-background: (
   dialog: #0f0f0f,
   disabled-button: rgba(white, 0.12),
   raised-button: $disabled-color,
-  focused-button: $light-focused,
+  focused-button: rgba(white, 0.12),
   selected-button: $main-background,
   selected-disabled-button: $main-background,
   disabled-button-toggle: $main-background,
@@ -131,14 +131,14 @@ $mat-black-theme-background: (
 );
 $mat-black-theme-foreground: (
   base: white,
-  divider: $light-dividers,
-  dividers: $light-dividers,
-  disabled: $light-disabled-text,
+  divider: rgba(white, 0.12),
+  dividers: rgba(white, 0.12),
+  disabled: rgba(white, 0.5),
   disabled-button: rgba(white, 0.3),
-  disabled-text: $light-disabled-text,
+  disabled-text: rgba(white, 0.5),
   elevation: $main-background,
-  hint-text: $light-disabled-text,
-  secondary-text: $light-secondary-text,
+  hint-text: rgba(white, 0.5),
+  secondary-text: rgba(white, 0.7),
   icon: white,
   icons: white,
   text: white,
@@ -147,7 +147,7 @@ $mat-black-theme-foreground: (
   slider-off-active: rgba(white, 0.3),
 );
 
-$theme: mat-dark-theme($primary, $accent, $warn);
+$theme: mat.define-dark-theme($primary, $accent, $warn);
 $theme: map_merge(
   $theme,
   (
@@ -157,7 +157,7 @@ $theme: map_merge(
 );
 
 // Include theme styles for Angular Material components.
-@include angular-material-theme($theme);
+@include mat.all-component-themes($theme);
 
 .black-theme {
   .mat-stroked-button {
