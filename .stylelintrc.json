@@ -10,7 +10,8 @@
           "warn",
           "each",
           "include",
-          "mixin"
+          "mixin",
+          "use"
         ]
       }
     ],
