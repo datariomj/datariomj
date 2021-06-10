@@ -16,7 +16,6 @@ git:
 branches:
   only:
     - main
-    - staging
 script:
   - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run lint; fi || travis_terminate 1;
   - if [ "$TRAVIS_BRANCH" = "main" ]; then npm run e2e:ci -- --key $CYPRESS_RECORD_KEY; fi || travis_terminate 1;
@@ -35,7 +34,7 @@ deploy:
   local_dir: dist/datariomj/browser
   on:
     all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^(staging|main)$
+    condition: $TRAVIS_BRANCH =~ ^(main)$
 after_deploy:
   - aws configure set preview.cloudfront true
   - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
