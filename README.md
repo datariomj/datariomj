@@ -2,7 +2,7 @@
 
 ### Greetings 👋
 - Hi! I'm MJ 😃
-- Full Stack Developer 💼
+- Full-stack Developer 💼
 - Creating websites from scratch
 - Utilizing TypeScript for frontend, backend & infrastructure development
 <br />
