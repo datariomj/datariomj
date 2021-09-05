@@ -11,7 +11,7 @@
 
     @include breakpoint(lg) {
       align-items: flex-start;
-      padding: 50px 100px 50px 100px;
+      padding: 30px 100px 30px 100px;
       flex-flow: row;
       min-height: calc(100vh - 150px);
     }
@@ -23,9 +23,11 @@
     align-items: flex-start;
     justify-content: center;
     width: auto;
+    margin-bottom: 20px;
 
     @include breakpoint(lg) {
       width: 50%;
+      margin-bottom: 0;
     }
   }
 
@@ -48,19 +50,15 @@
   }
 
   &__greeting {
-    margin: 20px 0 0 0;
-
-    @include breakpoint(lg) {
-      margin: 0;
-    }
+    margin: 0;
   }
 
   &__cta {
     &.mat-stroked-button {
-      margin: 70px auto 0 auto;
+      // margin: 70px auto 0 auto;
 
       @include breakpoint(lg) {
-        margin: 150px 0 0 0;
+        // margin: 150px 0 0 0;
       }
     }
   }

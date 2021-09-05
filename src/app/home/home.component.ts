@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SeoService } from '@core/services/seo.service';
+import { STATIC_CONSTANT } from '@core/static.constants';
 import { Select, Store } from '@ngxs/store';
-import { ContactFormVisibility } from '@store/ui/ui.action';
 import { Observable } from 'rxjs';
 
 import { GetReadme } from './store/home.actions';
@@ -16,6 +16,7 @@ import { HomeState } from './store/home.state';
 })
 export class HomeComponent implements OnInit {
   @Select(HomeState.getReadme) readme$!: Observable<string>;
+  email: string = STATIC_CONSTANT.email;
 
   constructor(
     private store: Store,
@@ -33,8 +34,8 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(new GetReadme());
   }
 
-  openContactDialog() {
-    this.store.dispatch(new ContactFormVisibility(true));
+  promptEmail() {
+    window.location.href = `mailto:${this.email}`;
   }
 
   openGithubReadme() {

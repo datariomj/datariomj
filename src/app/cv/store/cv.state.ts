@@ -97,7 +97,7 @@ export class CvState {
     }
 
     @Action(RemoveDetail)
-    removeDetail({ patchState, getState }: StateContext<CvStateModel>, action: AddDetail) {
+    removeDetail({ patchState, getState }: StateContext<CvStateModel>, action: RemoveDetail) {
         const state = getState();
         const existingDetailIndex = state && state.details.findIndex(detail => detail.entryId === action.entryId);
 
@@ -109,8 +109,19 @@ export class CvState {
             return;
         }
 
+        const newDetails = state.details.filter((detail, index) => index !== existingDetailIndex);
+
+        if (!newDetails.length) {
+            patchState({
+                selectedEntryId: '',
+                details: newDetails,
+            });
+
+            return;
+        }
+
         patchState({
-            details: state.details.filter((detail, index) => index !== existingDetailIndex),
+            details: newDetails,
         });
     }
 

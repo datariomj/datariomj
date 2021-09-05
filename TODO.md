@@ -14,7 +14,8 @@
 
 ## CV
 - add icons on detail tab
-- implement drag 
+- implement drag
+- cache cv requests
 
 ## Stack
 - mobile ui

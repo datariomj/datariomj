@@ -13,15 +13,15 @@ export class HtmlTagsDirective implements OnInit {
 
   ngOnInit() {
     const nodeName = this.elementRef.nativeElement.nodeName.toLowerCase();
-    const currentText = this.elementRef.nativeElement.innerText;
+    const postElementAnchor = this.renderer.nextSibling(this.elementRef.nativeElement);
+    const preTagElement = this.renderer.createElement('div');
+    const postTagElement = this.renderer.createElement('div');
 
-    const newHtml = `
-      ${ this.getTag(nodeName, true) }
-      <span class="html-tag__text">&nbsp;&nbsp;&nbsp;&nbsp;${ currentText }</span>
-      ${ this.getTag(nodeName, false) }
-    `;
+    this.renderer.setProperty(preTagElement, 'innerHTML', this.getTag(nodeName, true));
+    this.renderer.setProperty(postTagElement, 'innerHTML', this.getTag(nodeName, false));
 
-    this.renderer.setProperty(this.elementRef.nativeElement, 'innerHTML', newHtml);
+    this.renderer.insertBefore(this.elementRef.nativeElement.parentNode, preTagElement, this.elementRef.nativeElement);
+    this.renderer.insertBefore(this.elementRef.nativeElement.parentNode, postTagElement, postElementAnchor);
   }
 
   private getTag(nodeName: string, initial: boolean): string {

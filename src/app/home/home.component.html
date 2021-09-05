@@ -1,13 +1,19 @@
 <div class="home">
   <div class="home__container">
     <div class="home__main">
-      <h1 appHtmlTags class="home__greeting">Hello! I'm MJ</h1>
+      <h1 appHtmlTags class="home__greeting">Hello! 👋</h1>
       <br>
-      <h3 appHtmlTags class="home__greeting">Welcome to my VSCode-inspired portfolio</h3>
+      <h2 appHtmlTags class="home__greeting">I'm currently working as a DevOps Engineer. 👨‍💻</h2>
       <br>
+      <p appHtmlTags class="home__greeting">
+        This website is deployed to AWS and runs on $0.5/month💵
+      </p>
       <br>
-      <app-unfinished></app-unfinished>
-      <!-- <button class="home__cta" mat-stroked-button color="accent" data-cy="home-cta" (click)="openContactDialog()">Hire Me!</button> -->
+      <p appHtmlTags class="home__greeting">
+        Feel free to send me a message and welcome to my VSCode-inspired portfolio.🙇‍♂️
+      </p>
+      <br>
+      <button appHtmlTags class="home__cta" mat-stroked-button color="accent" data-cy="home-cta" (click)="promptEmail()">Hire Me!</button>
     </div>
     <div class="home__readme-wrapper">
       <div>
