@@ -41,7 +41,7 @@
     "@angular/router": "^12.2.4",
     "@angular/service-worker": "^12.2.4",
     "@contentful/rich-text-html-renderer": "^14.1.2",
-    "@nguniversal/express-engine": "^12.1.0",
+    "@nguniversal/express-engine": "^12.1.1",
     "@ngxs/devtools-plugin": "^3.7.2",
     "@ngxs/logger-plugin": "^3.7.2",
     "@ngxs/store": "^3.7.2",
