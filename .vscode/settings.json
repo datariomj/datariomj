@@ -1,5 +1,4 @@
 {
-  "angular.experimental-ivy": true,
   "cSpell.words": [
     "awscli",
     "awscliv",
@@ -46,7 +45,6 @@
     "typescript"
   ],
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
   "workbench.colorCustomizations": {
