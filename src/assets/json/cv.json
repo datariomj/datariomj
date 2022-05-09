@@ -4,6 +4,14 @@
       "name": "Work Experience",
       "children": [
         {
+          "name": "Senior Software Engineer",
+          "route": "senior-software-engineer"
+        },
+        {
+          "name": "DevOps Engineer",
+          "route": "devops-engineer-two"
+        },
+        {
           "name": "Solutions Developer",
           "route": "solutions-developer"
         },
