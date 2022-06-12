@@ -37,7 +37,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled',
+    initialNavigation: 'enabledBlocking',
     preloadingStrategy: PreloadAllModules,
     onSameUrlNavigation: 'reload',
     scrollPositionRestoration: 'top',
