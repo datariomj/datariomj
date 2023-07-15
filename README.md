@@ -32,10 +32,6 @@
 [<img align="left" alt="datariomj | SoundCloud" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/svg/soundcloud-white.svg" />][soundcloud]
 <br />
 
-### Spotify Now Playing 🎧
-
-[<img src="https://spotify-np-datariomj.vercel.app/api/spotify-playing" alt="Spotify Now Playing" width="300" />](https://open.spotify.com/user/beg8h6lxlplfx76lekg8cn7m2/playlists)
-
 [typescript]: https://www.typescriptlang.org
 [angular]: https://angular.io
 [nodejs]: https://nodejs.org
