@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 import { Event, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { ContactDialogComponent } from '@shared/components/contact-dialog/contact-dialog.component';

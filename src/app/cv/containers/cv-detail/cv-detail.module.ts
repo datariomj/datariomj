@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatListModule } from '@angular/material/list';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatLegacyListModule as MatListModule } from '@angular/material/legacy-list';
+import { MatLegacyTabsModule as MatTabsModule } from '@angular/material/legacy-tabs';
 import { SharedModule } from '@shared/shared.module';
 
 import { CvDetailComponent } from './cv-detail.component';

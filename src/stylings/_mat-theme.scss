@@ -2,9 +2,8 @@
 @import "mixins";
 @import "@angular/material/theming";
 
-$poppins-typography: mat-typography-config(
-  $font-family: "Poppins, monospace",
-);
+$poppins-typography: mat-typography-config($font-family: "Poppins, monospace",
+  );
 
 // Include non-theme styles for core.
 @include mat-core($poppins-typography);
@@ -24,8 +23,7 @@ $custom-primary: (
   A200 : #fff,
   A400 : #e8fcff,
   A700 : #cff8ff,
-  contrast: (
-    50 : #000,
+  contrast: (50 : #000,
     100 : #000,
     200 : #000,
     300 : #000,
@@ -57,8 +55,7 @@ $custom-accent: (
   A200: #a9ffa9,
   A400: #76ff76,
   A700: #5dff5d,
-  contrast: (
-    50: #000,
+  contrast: (50: #000,
     100: #000,
     200: #000,
     300: #000,
@@ -90,8 +87,7 @@ $custom-warn: (
   A200 : #ff909e,
   A400 : #ff5d71,
   A700 : #ff445b,
-  contrast: (
-    50 : #000,
+  contrast: (50 : #000,
     100 : #000,
     200 : #000,
     300 : #000,
@@ -148,13 +144,10 @@ $mat-black-theme-foreground: (
 );
 
 $theme: mat-dark-theme($primary, $accent, $warn);
-$theme: map_merge(
-  $theme,
-  (
-    foreground: $mat-black-theme-foreground,
-    background: $mat-black-theme-background,
-  )
-);
+$theme: map_merge($theme,
+    (foreground: $mat-black-theme-foreground,
+      background: $mat-black-theme-background,
+    ));
 
 // Include theme styles for Angular Material components.
 @include angular-material-theme($theme);
