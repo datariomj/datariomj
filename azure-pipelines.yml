@@ -7,55 +7,52 @@ trigger:
 pr: none
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
-jobs:
-  - job: BuildAndDeploy
-    displayName: 'Build and Deploy'
-    steps:
-      - script: npm ci
-        displayName: 'Install Dependencies'
+steps:
+  - script: npm ci
+    displayName: "Install Dependencies"
 
-      - script: |
-          if ! [ -x "$(command -v aws)" ]; then
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            sudo ./aws/install
-          fi
-        displayName: 'Install AWS CLI'
-        continueOnError: true
+  - script: |
+      if ! [ -x "$(command -v aws)" ]; then
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install
+      fi
+    displayName: "Install AWS CLI"
+    continueOnError: true
 
-      - script: npm run lint
-        displayName: 'Lint'
-        condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+  - script: npm run lint
+    displayName: "Lint"
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
 
-      - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
-        displayName: 'End-to-End Tests'
-        condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+  - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
+    displayName: "End-to-End Tests"
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
 
-      - script: npm run codecov
-        displayName: 'Code Coverage'
-        condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+  - script: npm run codecov
+    displayName: "Code Coverage"
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
 
-      - script: |
-          if [ $(Build.SourceBranch) = 'refs/heads/main' ]; then
-            rm src/robots.txt
-            mv src/robots.prod.txt src/robots.txt
-          fi
-        displayName: 'Configure Robots.txt'
-        condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+  - script: |
+      if [ $(Build.SourceBranch) = 'refs/heads/main' ]; then
+        rm src/robots.txt
+        mv src/robots.prod.txt src/robots.txt
+      fi
+    displayName: "Configure Robots.txt"
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
 
-      - script: npm run build:prod
-        displayName: 'Build for Production'
+  - script: npm run build:prod
+    displayName: "Build for Production"
 
-      - task: PublishBuildArtifacts@1
-        inputs:
-          pathtoPublish: 'dist/datariomj/browser'
-          artifactName: 'drop'
-        displayName: 'Publish Build Artifacts'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: "dist/datariomj/browser"
+      artifactName: "drop"
+    displayName: "Publish Build Artifacts"
 
-      - script: |
-          aws configure set preview.cloudfront true
-          aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths "/*"
-        displayName: 'Configure CloudFront Invalidation'
-        condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+  - script: |
+      aws configure set preview.cloudfront true
+      aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths "/*"
+    displayName: "Configure CloudFront Invalidation"
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
