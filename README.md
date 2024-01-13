@@ -1,6 +1,7 @@
 # datariomj.dev
 
 ### Greetings 👋
+
 - Hi! I'm MJ 😃
 - Full-stack Developer 💼
 - Creating websites from scratch
@@ -8,15 +9,17 @@
 <br />
 
 ### Status 📊
+
 [![Build](https://www.travis-ci.com/datariomj/datariomj.svg?branch=main)][travis]
 [![datariomj](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/3zwyy9/main&style=flat&logo=cypress)][cypress]
 [![Codecov](https://img.shields.io/codecov/c/github/datariomj/datariomj/main)][codecov]
-[![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/datariomj/datariomj)][snyk]
+[![vulnerabilities](https://snyk.io/test/github/datariomj/datariomj/badge.svg)][snyk]
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7436259e99ee41a7b58f146322089397)][codacy]
 [![license](https://img.shields.io/github/license/datariomj/datariomj)][license]
 <br />
 
 ### Stack 📦
+
 [<img align="left" alt="Typescript" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png" />][typescript]
 [<img align="left" alt="Angular" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/angular/angular.png" />][angular]
 [<img align="left" alt="NodeJS" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nodejs/nodejs.png" />][nodejs]
@@ -26,6 +29,7 @@
 <br />
 
 ### Connect 🔗
+
 [<img align="left" alt="datariomj.dev" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/svg/datariomj-white.svg" />][website]
 [<img align="left" alt="datariomj | LinkedIn" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/svg/linkedin-white.svg" />][linkedin]
 [<img align="left" alt="datariomj | Instagram" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/svg/instagram-white.svg" />][instagram]
