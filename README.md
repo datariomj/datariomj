@@ -46,7 +46,7 @@
 [cypress]: https://dashboard.cypress.io/projects/3zwyy9/runs
 [codecov]: https://app.codecov.io/gh/datariomj/datariomj
 [snyk]: https://snyk.io/test/github/datariomj/datariomj
-[codacy]: https://www.codacy.com/gh/datariomj/datariomj/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=datariomj/datariomj&amp;utm_campaign=Badge_Grade
+[codacy]: https://app.codacy.com/gh/datariomj/datariomj/dashboard
 [license]: https://github.com/datariomj/datariomj/blob/main/LICENSE.md
 [website]: https://datariomj.dev
 [linkedin]: https://linkedin.com/in/datariomj
