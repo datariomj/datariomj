@@ -267,5 +267,13 @@
   },
   "cli": {
     "analytics": "7316dd9c-b045-4036-a306-389ec794a7bd"
+  },
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
   }
 }
