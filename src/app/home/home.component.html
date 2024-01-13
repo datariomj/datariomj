@@ -6,23 +6,25 @@
       <h2 appHtmlTags class="home__greeting">I'm currently working as a DevOps Engineer. 👨‍💻</h2>
       <br>
       <p appHtmlTags class="home__greeting">
-        This website is deployed to AWS and runs on $0.5/month💵
+        This website is deployed to AWS using Azure DevOps 🚀
       </p>
       <br>
       <p appHtmlTags class="home__greeting">
-        Welcome to my VSCode-inspired portfolio.🙇‍♂️
+        Made with open source projects and runs on $0.5/month 💵
       </p>
       <br>
       <button appHtmlTags class="home__cta" mat-stroked-button color="accent" data-cy="home-cta" (click)="promptEmail()">Hire Me!</button>
     </div>
     <div class="home__readme-wrapper">
       <div>
-        <nav mat-tab-nav-bar color="accent">
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" color="accent">
           <a *ngIf="readme$" mat-tab-link color="accent" [active]="true" (click)="openGithubReadme()">
             README.md
           </a>
         </nav>
-        <div mat-tab-content [innerHtml]="readme$ | async | mdToHtml"></div>
+        <mat-tab-nav-panel #tabPanel>
+          <div mat-tab-content [innerHtml]="readme$ | async | mdToHtml"></div>
+        </mat-tab-nav-panel>
       </div>
     </div>
   </div>

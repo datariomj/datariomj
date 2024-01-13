@@ -1,21 +1,21 @@
 .stack-card {
   max-width: 300px;
 
-  .mat-card-avatar {
-    width: auto;
-    height: auto;
-    color: black;
-  }
+  // .mat-mdc-card-avatar {
+  //   width: auto;
+  //   height: auto;
+  //   color: black;
+  // }
 
-  &.mat-card {
-    margin: 16px;
-    width: 200px;
-    height: 300px;
+  // &.mat-mdc-card {
+  //   margin: 16px;
+  //   width: 200px;
+  //   height: 300px;
 
-    .mat-card-title {
-      min-height: 60px;
-    }
-  }
+  //   .mat-mdc-card-title {
+  //     min-height: 60px;
+  //   }
+  // }
 
   &__icon-wrapper {
     display: flex;

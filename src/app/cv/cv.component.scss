@@ -24,8 +24,11 @@
     // min-width: 320px;
     padding: 10px;
     overflow-y: scroll;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+
+    /* Firefox */
     &::-webkit-scrollbar {
       display: none;
     }
@@ -34,8 +37,11 @@
   &__router-wrapper {
     width: 100%;
     overflow-y: scroll;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+
+    /* Firefox */
     &::-webkit-scrollbar {
       display: none;
     }
@@ -50,6 +56,7 @@
   &__detail-expand {
     text-decoration: none;
     color: $text-color;
+
     cursor: pointer;
 
     &:hover {
@@ -64,7 +71,7 @@
   &__nav-close {
     opacity: 1;
     position: absolute;
-    right: 10px;
+    right: -25px;
     height: 20px;
     width: 20px;
     font-size: 20px;
@@ -100,10 +107,10 @@
   }
 
   &__list-menu {
-    &.mat-focus-indicator {
-      position: absolute;
-      bottom: 40px;
-      left: 20px;
+    &.mat-mdc-button-base {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
 
       @include breakpoint(lg) {
         display: none;
@@ -111,11 +118,16 @@
     }
   }
 
-  .mat-tab-link {
-    padding: 0 36px 0 20px;
+  .mat-mdc-tab-link {
+    padding: 0 44px 0 20px;
+
 
     &.cv__nav-tab--active {
       opacity: 1;
+
+      .mdc-tab__text-label {
+        color: white;
+      }
     }
 
     .cv__nav-close {
