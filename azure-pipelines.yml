@@ -1,3 +1,8 @@
+resources:
+  containers:
+  - container: node
+    image: node:16
+
 stages:
   - stage: Init
     jobs:
@@ -6,9 +11,10 @@ stages:
           - script: echo "Notify via email"
   - stage: Build
     jobs:
-      - job: InstallDependencies
+      - job: InstallNPMDependencies
+        container: node
         steps:
-          - script: echo "Install Dependencies"
+          - script: npm ci
   - stage: Test
     jobs:
       - job: Tests
@@ -29,4 +35,3 @@ stages:
       - job: Notify
         steps:
           - script: echo "Notify via email"
-
