@@ -8,7 +8,7 @@ export class MdToHtmlPipe implements PipeTransform {
 
   transform(value: string | null | undefined): string {
     if (value) {
-      return marked(value);
+      return marked(value) as string;
     }
 
     return '';

@@ -11,10 +11,5 @@ ng update @angular/core@17 \
 
 ng update @angular/material@17
 
-ng update @ngxs/devtools-plugin@3.8 \
-  @ngxs/logger-plugin@3.8 \
-  @ngxs/store@3.8
-
-
 npm update
 ```
