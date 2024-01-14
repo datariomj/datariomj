@@ -57,7 +57,7 @@
 
   &__expand {
     background-color: $disabled-color;
-    width: 100px;
+    width: 82px;
     height: 50px;
     display: flex;
     align-items: center;
@@ -83,7 +83,7 @@
   }
 
   &__social-icon {
-    &.mat-icon-button {
+    &.mat-mdc-icon-button {
       color: $disabled-color;
 
       &:not(:last-child) {
@@ -130,7 +130,7 @@
     }
 
     &--active {
-      color: white;
+      // color: white; # todo color
 
       &:hover {
         text-decoration: none;

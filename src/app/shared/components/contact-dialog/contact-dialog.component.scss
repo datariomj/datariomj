@@ -2,12 +2,12 @@
   width: 500px;
   height: auto;
 
-  .mat-dialog-content {
+  .mat-mdc-dialog-content {
     display: flex;
     flex-flow: column;
   }
 
-  .mat-form-field {
+  .mat-mdc-form-field {
     &:not(:first-child) {
       margin-top: 10px;
     }

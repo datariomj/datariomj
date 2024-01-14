@@ -22,7 +22,6 @@ export class ContentfulGraphqlService {
 
   private getAuthorizationHeaders(): HttpHeaders {
     return new HttpHeaders({
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       Authorization: `Bearer ${ environment.contentful.accessToken }`,
     });
   }

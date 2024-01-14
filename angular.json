@@ -110,18 +110,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "datariomj:build"
+            "buildTarget": "datariomj:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "datariomj:build:production"
+              "buildTarget": "datariomj:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "datariomj:build"
+            "buildTarget": "datariomj:build"
           }
         },
         "test": {
@@ -196,7 +196,8 @@
               ]
             },
             "sourceMap": true,
-            "optimization": false
+            "optimization": false,
+            "buildOptimizer": false
           },
           "configurations": {
             "production": {
@@ -208,13 +209,14 @@
                 }
               ],
               "sourceMap": false,
-              "optimization": true
+              "optimization": true,
+              "buildOptimizer": true
             }
           },
           "defaultConfiguration": ""
         },
         "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
           "options": {
             "browserTarget": "datariomj:build",
             "serverTarget": "datariomj:server"
@@ -227,7 +229,7 @@
           }
         },
         "prerender": {
-          "builder": "@nguniversal/builders:prerender",
+          "builder": "@angular-devkit/build-angular:prerender",
           "options": {
             "browserTarget": "datariomj:build:production",
             "serverTarget": "datariomj:server:production",
@@ -267,5 +269,13 @@
   },
   "cli": {
     "analytics": "7316dd9c-b045-4036-a306-389ec794a7bd"
+  },
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
   }
 }

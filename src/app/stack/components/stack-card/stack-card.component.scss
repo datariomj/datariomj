@@ -1,18 +1,18 @@
 .stack-card {
   max-width: 300px;
 
-  .mat-card-avatar {
+  .mat-mdc-card-avatar {
     width: auto;
     height: auto;
     color: black;
   }
 
-  &.mat-card {
+  &.mat-mdc-card {
     margin: 16px;
     width: 200px;
     height: 300px;
 
-    .mat-card-title {
+    .mat-mdc-card-title {
       min-height: 60px;
     }
   }

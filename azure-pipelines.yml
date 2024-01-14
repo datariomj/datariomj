@@ -1,7 +1,7 @@
 resources:
   containers:
   - container: node
-    image: node:16
+    image: node:18
 
 stages:
   - stage: Init

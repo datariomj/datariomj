@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -15,7 +15,7 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -26,6 +26,7 @@ import { SharedModule } from './shared/shared.module';
   ],
   providers: [
     IconService,
+    { provide: APP_ID, useValue: 'serverApp' },
   ],
   bootstrap: [AppComponent],
 })

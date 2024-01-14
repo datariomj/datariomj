@@ -7,7 +7,8 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    color: $disabled-color;
+
+    // color: $disabled-color;
 
     &:hover {
       text-decoration: underline;

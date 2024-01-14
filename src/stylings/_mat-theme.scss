@@ -1,166 +1,134 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
 @import "variables";
 @import "mixins";
-@import "@angular/material/theming";
 
-$poppins-typography: mat-typography-config(
-  $font-family: "Poppins, monospace",
-);
+$font-config: mat.define-typography-config($font-family: "Poppins, monospace");
 
-// Include non-theme styles for core.
-@include mat-core($poppins-typography);
+// Dark Theme text
+$light-text: #fff;
+$light-primary-text: $light-text;
+$light-accent-text: rgba($light-primary-text, 0.7);
+$light-disabled-text: rgba($light-primary-text, 0.5);
+$light-dividers: rgba($light-primary-text, 0.12);
+$light-focused: rgba($light-primary-text, 0.12);
 
-$custom-primary: (
-  50 : #f1fcfd,
-  100 : #ddf7fa,
-  200 : #c7f1f7,
-  300 : #b0ebf4,
-  400 : #9fe7f1,
-  500 : #8ee3ef,
-  600 : #86e0ed,
-  700 : #7bdceb,
-  800 : #71d8e8,
-  900 : #5fd0e4,
-  A100 : #fff,
-  A200 : #fff,
-  A400 : #e8fcff,
-  A700 : #cff8ff,
-  contrast: (
-    50 : #000,
-    100 : #000,
-    200 : #000,
-    300 : #000,
-    400 : #000,
-    500 : #000,
-    600 : #000,
-    700 : #000,
-    800 : #000,
-    900 : #000,
-    A100 : #000,
-    A200 : #000,
-    A400 : #000,
-    A700 : #000,
-  )
-);
-
-$custom-accent: (
-  50: #e3f9e3,
-  100: #b8f1b8,
-  200: #89e789,
-  300: #5add5a,
-  400: #36d636,
-  500: #13cf13,
-  600: #11ca11,
-  700: #0ec30e,
-  800: #0bbd0b,
-  900: #06b206,
-  A100: #dcffdc,
-  A200: #a9ffa9,
-  A400: #76ff76,
-  A700: #5dff5d,
-  contrast: (
-    50: #000,
-    100: #000,
-    200: #000,
-    300: #000,
-    400: #000,
-    500: #000,
-    600: #fff,
-    700: #fff,
-    800: #fff,
-    900: #fff,
-    A100: #000,
-    A200: #000,
-    A400: #000,
-    A700: #000,
-  ),
-);
-
-$custom-warn: (
-  50 : #f7e5e9,
-  100 : #eabec9,
-  200 : #dd93a5,
-  300 : #cf6880,
-  400 : #c44765,
-  500 : #ba274a,
-  600 : #b32343,
-  700 : #ab1d3a,
-  800 : #a31732,
-  900 : #940e22,
-  A100 : #ffc3cb,
-  A200 : #ff909e,
-  A400 : #ff5d71,
-  A700 : #ff445b,
-  contrast: (
-    50 : #000,
-    100 : #000,
-    200 : #000,
-    300 : #000,
-    400 : #fff,
-    500 : #fff,
-    600 : #fff,
-    700 : #fff,
-    800 : #fff,
-    900 : #fff,
-    A100 : #000,
-    A200 : #000,
-    A400 : #000,
-    A700 : #fff,
-  )
-);
-
-// Define your application's custom theme.
-$primary: mat-palette($custom-primary);
-$accent: mat-palette($custom-accent);
-$warn: mat-palette($custom-warn);
-$mat-black-theme-background: (
-  status-bar: $main-background,
-  app-bar: #0f0f0f,
-  background: $main-background,
-  hover: rgba(white, 0.04),
-  card: $card-color,
-  dialog: #0f0f0f,
-  disabled-button: rgba(white, 0.12),
-  raised-button: $disabled-color,
-  focused-button: $light-focused,
-  selected-button: $main-background,
-  selected-disabled-button: $main-background,
-  disabled-button-toggle: $main-background,
-  unselected-chip: $main-background,
-  disabled-list-option: $main-background,
-  tooltip: $main-background,
-);
-$mat-black-theme-foreground: (
-  base: white,
+// Light Theme text
+$dark-text: #000;
+$dark-primary-text: rgba($dark-text, 0.87);
+$dark-accent-text: rgba($dark-primary-text, 0.54);
+$dark-disabled-text: rgba($dark-primary-text, 0.38);
+$dark-dividers: rgba($dark-primary-text, 0.12);
+$dark-focused: rgba($dark-primary-text, 0.12);
+$mat-dark-theme-foreground: (
+  base: $light-text,
   divider: $light-dividers,
   dividers: $light-dividers,
   disabled: $light-disabled-text,
-  disabled-button: rgba(white, 0.3),
+  disabled-button: rgba($light-text, 0.3),
   disabled-text: $light-disabled-text,
-  elevation: $main-background,
+  elevation: black,
   hint-text: $light-disabled-text,
-  secondary-text: $light-secondary-text,
-  icon: white,
-  icons: white,
-  text: white,
-  slider-min: white,
-  slider-off: rgba(white, 0.3),
-  slider-off-active: rgba(white, 0.3),
+  secondary-text: $light-accent-text,
+  accent-text: $light-accent-text,
+  icon: $light-text,
+  icons: $light-text,
+  text: $light-text,
+  slider-min: $light-text,
+  slider-off: rgba($light-text, 0.3),
+  slider-off-active: rgba($light-text, 0.3),
 );
 
-$theme: mat-dark-theme($primary, $accent, $warn);
-$theme: map_merge(
-  $theme,
-  (
-    foreground: $mat-black-theme-foreground,
-    background: $mat-black-theme-background,
+// Dark bg
+$dark-background: #000;
+$dark-bg-lighter-5: lighten($dark-background, 5%);
+$dark-bg-lighter-10: lighten($dark-background, 10%);
+$dark-bg-lighter-20: lighten($dark-background, 20%);
+$dark-bg-lighter-30: lighten($dark-background, 30%);
+$light-bg-alpha-4: rgba(#fafafa, 0.04);
+$light-bg-alpha-12: rgba(#fafafa, 0.12);
+
+// Background palette for dark themes.
+$mat-dark-theme-background: (
+  background: $dark-background,
+  status-bar: $dark-bg-lighter-20,
+  app-bar: $dark-bg-lighter-5,
+  hover: $light-bg-alpha-4,
+  card: $dark-bg-lighter-5,
+  dialog: $dark-bg-lighter-5,
+  tooltip: $dark-bg-lighter-20,
+  disabled-button: $light-bg-alpha-12,
+  raised-button: $dark-bg-lighter-5,
+  focused-button: $light-focused,
+  selected-button: $dark-bg-lighter-20,
+  selected-disabled-button: $dark-bg-lighter-30,
+  disabled-button-toggle: $dark-bg-lighter-10,
+  unselected-chip: $dark-bg-lighter-20,
+  disabled-list-option: $dark-bg-lighter-10,
+);
+
+@include mat.core;
+
+$mat-primary: (
+  main: #8ee3ef,
+  lighter: #ddf7fa,
+  darker: #71d8e8,
+  200: #8ee3ef,
+  // For slide toggle,
+  contrast : (main: $dark-primary-text,
+    lighter: $dark-primary-text,
+    darker: $dark-primary-text,
   )
 );
+$theme-primary: mat.define-palette($mat-primary, main, lighter, darker);
+$mat-accent: (
+  main: #13cf13,
+  lighter: #b8f1b8,
+  darker: #0bbd0b,
+  200: #13cf13,
+  // For slide toggle,
+  contrast : (main: $dark-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+$theme-accent: mat.define-palette($mat-accent, main, lighter, darker);
+$mat-warn: (
+  main: #ba274a,
+  lighter: #eabec9,
+  darker: #a31732,
+  200: #ba274a,
+  // For slide toggle,
+  contrast : (main: $light-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+$theme-warn: mat.define-palette($mat-warn, main, lighter, darker);
+$theme: mat.define-dark-theme((color: (primary: $theme-primary, accent: $theme-accent, warn: $theme-warn),
+      typography: $font-config,
+      density: 0,
+    ));
+$theme: map.set($theme,
+    color,
+    background,
+    $mat-dark-theme-background);
+$theme: map.set($theme,
+    color,
+    foreground,
+    $mat-dark-theme-foreground);
+$theme: map.set($theme,
+    background,
+    $mat-dark-theme-background);
+$theme: map.set($theme,
+    foreground,
+    $mat-dark-theme-foreground);
 
-// Include theme styles for Angular Material components.
-@include angular-material-theme($theme);
+// Theme Init
+@include mat.all-component-themes($theme);
 
-.black-theme {
-  .mat-stroked-button {
+.dark-theme {
+  .mat-mdc-outlined-button {
     padding: 0 25px;
     font-size: 14px;
     height: 40px;
@@ -192,5 +160,15 @@ $theme: map_merge(
     &__node {
       color: $primary-color;
     }
+  }
+
+  .mat-mdc-tab-header.mat-mdc-tab-nav-bar-stretch-tabs {
+    .mat-mdc-tab-link {
+      flex-grow: 0;
+    }
+  }
+
+  .mat-mdc-tab-link-container {
+    border-bottom: 1px solid rgb(255 255 255 / 12%);
   }
 }

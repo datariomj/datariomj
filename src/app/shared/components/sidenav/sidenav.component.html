@@ -18,7 +18,7 @@
 
 <ng-template #mainNavigation>
   <a mat-list-item *ngFor="let navLink of navLinks" class="sidenav__link" routerLinkActive="sidenav__link--active"
-      [routerLink]="navLink.route" [routerLinkActiveOptions]="{exact: navLink.route === ''}">
+     [routerLink]="navLink.route" [routerLinkActiveOptions]="{exact: navLink.route === ''}">
     <div class="sidenav__link-wrapper">
       <mat-icon svgIcon="{{navLink.icon}}" class="sidenav__icon"></mat-icon>
       <p *ngIf="sidenavExpanded$ | async" class="sidenav__description d__none d__block--lg">{{navLink.description}}</p>
