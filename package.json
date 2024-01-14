@@ -18,7 +18,7 @@
     "build:ssr": "ng build --configuration production && ng run datariomj:server:production",
     "serve:pre": "http-server -c-1 dist/datariomj/browser",
     "prerender": "ng run datariomj:prerender",
-    "cy:open": "./node_modules/.bin/cypress open",
+    "cy:open": "./node_modules/.bin/cypress run --headed",
     "cy:run": "./node_modules/.bin/cypress run",
     "e2e": "ng e2e",
     "e2e:ci": "ng run datariomj:e2e-ci",

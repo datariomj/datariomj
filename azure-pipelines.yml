@@ -1,14 +1,9 @@
-resources:
-  containers:
-  - container: node
-    image: node:18
-
 stages:
   - stage: Init
     jobs:
-      - job: Notify
+      - job: SelectNode
         steps:
-          - script: echo "Notify via email"
+          - script: nvm use 18
   - stage: Build
     jobs:
       - job: InstallNPMDependencies
