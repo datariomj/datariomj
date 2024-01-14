@@ -26,7 +26,6 @@
     }
 
     &--active {
-
       .mat-icon,
       .sidenav__description,
       &.mat-mdc-list-item {
@@ -76,6 +75,7 @@
 
   .mat-drawer-content {
     -ms-overflow-style: none;
+
     /* IE and Edge */
     scrollbar-width: none;
 

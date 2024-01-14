@@ -8,7 +8,9 @@
     "types": [
       "node",
       "cypress"
-    ]
+    ],
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "**/*.ts",

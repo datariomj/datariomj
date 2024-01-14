@@ -59,6 +59,7 @@
     "@angular-eslint/template-parser": "^17.2.0",
     "@angular/cli": "^17.0.10",
     "@angular/compiler-cli": "^17.0.9",
+    "@angular/ssr": "^17.0.10",
     "@compodoc/compodoc": "^1.1.23",
     "@cypress/code-coverage": "^3.10.0",
     "@cypress/schematic": "^2.5.1",
@@ -90,6 +91,7 @@
     "multiple-cucumber-html-reporter": "^3.6.0",
     "ngx-build-plus": "^17.0.0",
     "stylelint": "^16.1.0",
+    "stylelint-config-standard-scss": "^13.0.0",
     "stylelint-no-unsupported-browser-features": "^8.0.0",
     "stylelint-scss": "^6.0.0",
     "ts-node": "~10.9.2",
@@ -97,6 +99,7 @@
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true,
+    "stepDefinitions": "./cypress/e2e",
     "cucumberJson": {
       "generate": true,
       "outputFolder": "cypress/results",

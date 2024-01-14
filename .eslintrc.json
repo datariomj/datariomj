@@ -15,30 +15,12 @@
         "createDefaultProgram": true
       },
       "extends": [
-        "plugin:@angular-eslint/ng-cli-compat",
-        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/recommended"
       ],
       "plugins": [
         "simple-import-sort"
       ],
       "rules": {
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
-          }
-        ],
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
-          }
-        ],
         "comma-dangle": [
           "error",
           {
@@ -49,10 +31,7 @@
             "functions": "always-multiline"
           }
         ],
-        "simple-import-sort/imports": "error",
-        "@typescript-eslint/no-unused-vars": [
-          "error"
-        ]
+        "simple-import-sort/imports": "error"
       }
     },
     {

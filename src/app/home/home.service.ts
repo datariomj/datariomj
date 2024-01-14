@@ -13,7 +13,6 @@ export class HomeService {
 
   getReadme(): Observable<string> {
     const headers = new HttpHeaders({
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       'Content-Type': 'text/plain; charset=utf-8',
     });
 

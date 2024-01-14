@@ -3,10 +3,10 @@
 @import "variables";
 @import "mixins";
 
-$fontConfig: mat.define-typography-config($font-family: "Poppins, monospace");
+$font-config: mat.define-typography-config($font-family: "Poppins, monospace");
 
 // Dark Theme text
-$light-text: #ffffff;
+$light-text: #fff;
 $light-primary-text: $light-text;
 $light-accent-text: rgba($light-primary-text, 0.7);
 $light-disabled-text: rgba($light-primary-text, 0.5);
@@ -14,13 +14,12 @@ $light-dividers: rgba($light-primary-text, 0.12);
 $light-focused: rgba($light-primary-text, 0.12);
 
 // Light Theme text
-$dark-text: #000000;
+$dark-text: #000;
 $dark-primary-text: rgba($dark-text, 0.87);
 $dark-accent-text: rgba($dark-primary-text, 0.54);
 $dark-disabled-text: rgba($dark-primary-text, 0.38);
 $dark-dividers: rgba($dark-primary-text, 0.12);
 $dark-focused: rgba($dark-primary-text, 0.12);
-
 $mat-dark-theme-foreground: (
   base: $light-text,
   divider: $light-dividers,
@@ -41,7 +40,7 @@ $mat-dark-theme-foreground: (
 );
 
 // Dark bg
-$dark-background: #000000;
+$dark-background: #000;
 $dark-bg-lighter-5: lighten($dark-background, 5%);
 $dark-bg-lighter-10: lighten($dark-background, 10%);
 $dark-bg-lighter-20: lighten($dark-background, 20%);
@@ -68,7 +67,7 @@ $mat-dark-theme-background: (
   disabled-list-option: $dark-bg-lighter-10,
 );
 
-@include mat.core();
+@include mat.core;
 
 $mat-primary: (
   main: #8ee3ef,
@@ -82,7 +81,6 @@ $mat-primary: (
   )
 );
 $theme-primary: mat.define-palette($mat-primary, main, lighter, darker);
-
 $mat-accent: (
   main: #13cf13,
   lighter: #b8f1b8,
@@ -95,7 +93,6 @@ $mat-accent: (
   )
 );
 $theme-accent: mat.define-palette($mat-accent, main, lighter, darker);
-
 $mat-warn: (
   main: #ba274a,
   lighter: #eabec9,
@@ -108,9 +105,8 @@ $mat-warn: (
   )
 );
 $theme-warn: mat.define-palette($mat-warn, main, lighter, darker);
-
 $theme: mat.define-dark-theme((color: (primary: $theme-primary, accent: $theme-accent, warn: $theme-warn),
-      typography: $fontConfig,
+      typography: $font-config,
       density: 0,
     ));
 $theme: map.set($theme,
@@ -127,11 +123,6 @@ $theme: map.set($theme,
 $theme: map.set($theme,
     foreground,
     $mat-dark-theme-foreground);
-
-$altTheme: mat.define-light-theme((color: (primary: $theme-primary, accent: $theme-accent, warn: $theme-warn),
-      typography: $fontConfig,
-      density: 0,
-    ));
 
 // Theme Init
 @include mat.all-component-themes($theme);
@@ -178,6 +169,6 @@ $altTheme: mat.define-light-theme((color: (primary: $theme-primary, accent: $the
   }
 
   .mat-mdc-tab-link-container {
-    border-bottom: 1px solid rgba(255, 255, 255, .12);
+    border-bottom: 1px solid rgb(255 255 255 / 12%);
   }
 }

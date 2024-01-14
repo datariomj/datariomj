@@ -81,7 +81,6 @@ const addScreenshots = () => {
           const base64Image = Buffer.from(data, 'binary').toString('base64');
           if (!myStep.embeddings) {
             myStep.embeddings = [];
-            // eslint-disable-next-line @typescript-eslint/naming-convention
             myStep.embeddings.push({ data: base64Image, mime_type: 'image/png' });
             foundFailedStep = true;
           }
