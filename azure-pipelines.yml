@@ -3,7 +3,7 @@ stages:
     jobs:
       - job: SelectNode
         steps:
-          - script: nvm use 18
+          - bash: nvm use 18
   - stage: Build
     jobs:
       - job: InstallNPMDependencies
