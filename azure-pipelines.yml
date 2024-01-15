@@ -3,6 +3,8 @@ stages:
     jobs:
       - job: SelectNode
         steps:
+          - bash: whoami
+          - bash: ls ~/
           - bash: nvm use 18
   - stage: Build
     jobs:
