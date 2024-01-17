@@ -10,7 +10,8 @@
 
 ### Status 📊
 
-[![Build](https://www.travis-ci.com/datariomj/datariomj.svg?branch=main)][travis]
+[![Build Travis](https://www.travis-ci.com/datariomj/datariomj.svg?branch=main)][travis]
+<!-- [![Build Azure](https://dev.azure.com/datariomj/datariomj/_apis/build/status%2Fdatariomj?branchName=main)][azure_devops] -->
 [![datariomj](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/3zwyy9/main&style=flat&logo=cypress)][cypress]
 [![Codecov](https://img.shields.io/codecov/c/github/datariomj/datariomj/main)][codecov]
 [![vulnerabilities](https://snyk.io/test/github/datariomj/datariomj/badge.svg)][snyk]
