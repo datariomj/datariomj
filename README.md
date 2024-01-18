@@ -10,8 +10,7 @@
 
 ### Status 📊
 
-[![Build Travis](https://www.travis-ci.com/datariomj/datariomj.svg?branch=main)][travis]
-<!-- [![Build Azure](https://dev.azure.com/datariomj/datariomj/_apis/build/status%2Fdatariomj?branchName=main)][azure_devops] -->
+[![Build Status](https://dev.azure.com/mrcjsph/datariomj/_apis/build/status%2Fdatariomj?branchName=main)][azure]
 [![datariomj](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/3zwyy9/main&style=flat&logo=cypress)][cypress]
 [![Codecov](https://img.shields.io/codecov/c/github/datariomj/datariomj/main)][codecov]
 [![vulnerabilities](https://snyk.io/test/github/datariomj/datariomj/badge.svg)][snyk]
@@ -43,7 +42,7 @@
 [postgres]: https://www.postgresql.org
 [aws]: https://aws.amazon.com
 [docker]: https://www.docker.com
-[travis]: https://www.travis-ci.com/github/datariomj/datariomj
+[azure]: https://dev.azure.com/mrcjsph/datariomj/_apis/build/status%2Fdatariomj?branchName=main
 [cypress]: https://dashboard.cypress.io/projects/3zwyy9/runs
 [codecov]: https://app.codecov.io/gh/datariomj/datariomj
 [snyk]: https://snyk.io/test/github/datariomj/datariomj
