@@ -16,13 +16,14 @@ const browserify = require('@cypress/browserify-preprocessor');
 const cucumber = require('cypress-cucumber-preprocessor').default;
 const resolve = require('resolve');
 
-module.exports = (on, config) => {
+module.exports = (on: any, config: any) => {
   const options = {
     ...browserify.defaultOptions,
     typescript: resolve.sync('typescript', { baseDir: config.projectRoot }),
   };
 
   require('@cypress/code-coverage/task')(on, config);
+  on('file:preprocessor', require('@cypress/code-coverage/use-babelrc'));
   on('file:preprocessor', cucumber(options));
 
   return config;
