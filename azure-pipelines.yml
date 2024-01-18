@@ -1,34 +1,54 @@
-stages:
-  - stage: Init
-    jobs:
-      - job: SelectNode
-        steps:
-          - bash: whoami
-          - bash: ls ~/
-          - bash: nvm use 18
-  - stage: Build
-    jobs:
-      - job: InstallNPMDependencies
-        container: node
-        steps:
-          - script: npm ci
-  - stage: Test
-    jobs:
-      - job: Tests
-        steps:
-          - script: echo "Run Tests"
-  - stage: Publish
-    jobs:
-      - job: TestJob
-        steps:
-          - script: echo "Create Artifacts"
-  - stage: Deploy
-    jobs:
-      - job: TestJob
-        steps:
-          - script: echo "Deploy to S3, CloudFront and invalidate"
-  - stage: Post
-    jobs:
-      - job: Notify
-        steps:
-          - script: echo "Notify via email"
+trigger:
+- main
+
+pr:
+- main
+
+steps:
+- task: UseNode@1
+  inputs:
+    version: '18.x'
+    checkLatest: true
+
+- script: npm ci
+
+- script: |
+    npm run lint
+    npm run lint:styles
+
+- script: npm run build:prod
+
+- script: |
+    npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
+
+- script: |
+    rm src/robots.txt
+    mv src/robots.prod.txt src/robots.txt
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
+  
+- script: |
+    # Install AWS CLI
+    curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
+
+    # AWS CLI Configuration
+    aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
+    aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
+    aws configure set region $(AWS_REGION)
+  displayName: 'Install AWS CLI'
+
+- script: |
+    aws s3 sync ./dist s3://$(S3_BUCKET_ID)
+  displayName: 'Upload to S3'
+
+- script: |
+    aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
+  displayName: 'Invalidate CloudFront'
+
+- script: echo "Notify"
+  displayName: 'Notify'
