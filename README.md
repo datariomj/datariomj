@@ -12,7 +12,6 @@
 
 [![Build Status](https://dev.azure.com/mrcjsph/datariomj/_apis/build/status%2Fdatariomj?branchName=main)][azure]
 [![datariomj](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/3zwyy9/main&style=flat&logo=cypress)][cypress]
-[![Codecov](https://img.shields.io/codecov/c/github/datariomj/datariomj/main)][codecov]
 [![vulnerabilities](https://snyk.io/test/github/datariomj/datariomj/badge.svg)][snyk]
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7436259e99ee41a7b58f146322089397)][codacy]
 [![license](https://img.shields.io/github/license/datariomj/datariomj)][license]
@@ -44,7 +43,6 @@
 [docker]: https://www.docker.com
 [azure]: https://dev.azure.com/mrcjsph/datariomj/_apis/build/status%2Fdatariomj?branchName=main
 [cypress]: https://dashboard.cypress.io/projects/3zwyy9/runs
-[codecov]: https://app.codecov.io/gh/datariomj/datariomj
 [snyk]: https://snyk.io/test/github/datariomj/datariomj
 [codacy]: https://app.codacy.com/gh/datariomj/datariomj/dashboard
 [license]: https://github.com/datariomj/datariomj/blob/main/LICENSE.md

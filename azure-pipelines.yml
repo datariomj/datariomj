@@ -1,54 +1,51 @@
-trigger:
-- main
+variables:
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+  isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
 
-pr:
-- main
+jobs:
+- job: Build
+  steps:
+  - task: UseNode@1
+    inputs:
+      version: '20.x'
+      checkLatest: true
 
-steps:
-- task: UseNode@1
-  inputs:
-    version: '18.x'
-    checkLatest: true
+  - script: npm -v
 
-- script: npm ci
+  - script: npm ci
 
-- script: |
-    npm run lint
-    npm run lint:styles
-
-- script: npm run build:prod
-
-- script: |
-    npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
-
-- script: |
-    rm src/robots.txt
-    mv src/robots.prod.txt src/robots.txt
-
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.x'
-    addToPath: true
+  - script: |
+      npm run lint
+      npm run lint:styles
   
-- script: |
-    # Install AWS CLI
-    curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    unzip awscliv2.zip
-    sudo ./aws/install
+  - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
 
-    # AWS CLI Configuration
-    aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
-    aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
-    aws configure set region $(AWS_REGION)
-  displayName: 'Install AWS CLI'
+  - script: npm run build:prod
 
-- script: |
-    aws s3 sync ./dist/datariomj/browser s3://$(S3_BUCKET_ID)
-  displayName: 'Upload to S3'
+- job: Deployment
+  condition: and(succeeded(), eq(variables.isMain, true), eq(variables.isPR, false))
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.10'
+      addToPath: true
 
-- script: |
-    aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
-  displayName: 'Invalidate CloudFront'
+  - script: |
+      aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
+      aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
+      aws configure set region $(AWS_REGION)
+    displayName: 'Install AWS CLI'
 
-- script: echo "Notify"
-  displayName: 'Notify'
+  - script: |
+      aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
+      aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
+      aws configure set region $(AWS_REGION)
+    displayName: 'Configure AWS CLI'
+
+  - script: |
+      aws s3 sync ./dist/datariomj/browser s3://$(S3_BUCKET_ID)
+    displayName: 'Upload to S3'
+
+  - script: |
+      aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
+    displayName: 'Invalidate CloudFront'
