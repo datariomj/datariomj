@@ -15,7 +15,7 @@
 [![vulnerabilities](https://snyk.io/test/github/datariomj/datariomj/badge.svg)][snyk]
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7436259e99ee41a7b58f146322089397)][codacy]
 [![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m796216246-33192eac05ffcc04bd1cd411)][uptime_robot]
-![Version](https://img.shields.io/github/package-json/v/datariomj/datariomj)
+[![Version](https://img.shields.io/github/package-json/v/datariomj/datariomj)][version]
 [![license](https://img.shields.io/github/license/datariomj/datariomj)][license]
 <br />
 
@@ -48,6 +48,7 @@
 [snyk]: https://snyk.io/test/github/datariomj/datariomj
 [codacy]: https://app.codacy.com/gh/datariomj/datariomj/dashboard
 [uptime_robot]: https://stats.uptimerobot.com/AGzj9HrMEo
+[version]: https://github.com/datariomj/datariomj/blob/main/package.json
 [license]: https://github.com/datariomj/datariomj/blob/main/LICENSE.md
 [website]: https://datariomj.dev
 [linkedin]: https://linkedin.com/in/datariomj
