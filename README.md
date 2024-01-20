@@ -10,7 +10,7 @@
 
 ### Status 📊
 
-[![Build Status](https://dev.azure.com/mrcjsph/datariomj/_apis/build/status%2Fdatariomj?branchName=main)][azure]
+[![Build Status](https://dev.azure.com/mrcjsph/datariomj/_apis/build/status%2FAzure%20Pipelines%20datariomj-ci-cd?branchName=main&jobName=Job)][azure]
 [![datariomj](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/3zwyy9/main&style=flat&logo=cypress)][cypress]
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7436259e99ee41a7b58f146322089397)][codacy]
 [![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m796216246-33192eac05ffcc04bd1cd411)][uptime_robot]
@@ -42,7 +42,7 @@
 [postgres]: https://www.postgresql.org
 [aws]: https://aws.amazon.com
 [docker]: https://www.docker.com
-[azure]: https://dev.azure.com/mrcjsph/datariomj/_apis/build/status%2Fdatariomj?branchName=main
+[azure]: https://dev.azure.com/mrcjsph/datariomj/_build/latest?definitionId=5&branchName=main
 [cypress]: https://dashboard.cypress.io/projects/3zwyy9/runs
 [codacy]: https://app.codacy.com/gh/datariomj/datariomj/dashboard
 [uptime_robot]: https://stats.uptimerobot.com/AGzj9HrMEo
