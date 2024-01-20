@@ -42,7 +42,7 @@ jobs:
   - script: |
       curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
       unzip awscliv2.zip
-      ./aws/install -i /usr/local/aws-cli -b /usr/local/bin
+      ./aws/install -i $AGENT_TOOLSDIRECTORY/aws-cli -b /usr/local/bin
     displayName: 'Install AWS CLI'
 
   - script: |
