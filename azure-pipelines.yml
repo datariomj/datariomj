@@ -1,6 +1,8 @@
 variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
+  isSelfHosted: $[eq(variables['Agent.Name'], 'SelfHosted')]
+
 
 jobs:
 - job: Build
@@ -42,19 +44,20 @@ jobs:
   - script: |
       curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
       unzip awscliv2.zip
-      ./aws/install -i $AGENT_TOOLSDIRECTORY/aws-cli -b /usr/local/bin --update
+      ./aws/install
     displayName: 'Install AWS CLI'
+    condition: eq(variables.isSelfHosted, false)
 
   - script: |
-      /usr/local/bin/aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
-      /usr/local/bin/aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
-      /usr/local/bin/aws configure set region $(AWS_REGION)
+      aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
+      aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
+      aws configure set region $(AWS_REGION)
     displayName: 'Configure AWS CLI'
 
   - script: |
-      /usr/local/bin/aws s3 sync ./dist/datariomj/browser s3://$(S3_BUCKET_ID)
+      aws s3 sync ./dist/datariomj/browser s3://$(S3_BUCKET_ID)
     displayName: 'Upload to S3'
 
   - script: |
-      /usr/local/bin/aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
+      aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
     displayName: 'Invalidate CloudFront'
