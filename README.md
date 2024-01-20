@@ -12,7 +12,6 @@
 
 [![Build Status](https://dev.azure.com/mrcjsph/datariomj/_apis/build/status%2Fdatariomj?branchName=main)][azure]
 [![datariomj](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/3zwyy9/main&style=flat&logo=cypress)][cypress]
-[![vulnerabilities](https://snyk.io/test/github/datariomj/datariomj/badge.svg)][snyk]
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7436259e99ee41a7b58f146322089397)][codacy]
 [![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m796216246-33192eac05ffcc04bd1cd411)][uptime_robot]
 [![Version](https://img.shields.io/github/package-json/v/datariomj/datariomj)][version]
@@ -45,7 +44,6 @@
 [docker]: https://www.docker.com
 [azure]: https://dev.azure.com/mrcjsph/datariomj/_apis/build/status%2Fdatariomj?branchName=main
 [cypress]: https://dashboard.cypress.io/projects/3zwyy9/runs
-[snyk]: https://snyk.io/test/github/datariomj/datariomj
 [codacy]: https://app.codacy.com/gh/datariomj/datariomj/dashboard
 [uptime_robot]: https://stats.uptimerobot.com/AGzj9HrMEo
 [version]: https://github.com/datariomj/datariomj/blob/main/package.json
