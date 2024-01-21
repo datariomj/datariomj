@@ -7,13 +7,12 @@ import { NgxsModule } from '@ngxs/store';
 import { SharedModule } from '@shared/shared.module';
 
 import { StackCardComponent } from './components/stack-card/stack-card.component';
-import { StackIconComponent } from './components/stack-icon/stack-icon.component';
 import { StackComponent } from './stack.component';
 import { StackRoutingModule } from './stack-routing.module';
 import { StackState } from './store/stack.state';
 
 @NgModule({
-  declarations: [StackComponent, StackCardComponent, StackIconComponent],
+  declarations: [StackComponent, StackCardComponent],
   imports: [
     CommonModule,
     StackRoutingModule,

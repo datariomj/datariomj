@@ -213,16 +213,6 @@
       ]
     },
     {
-      "name": "Babel",
-      "symbol": "B",
-      "yearStarted": 2017,
-      "icon": "babel",
-      "tags": [
-        "ops",
-        "inactive"
-      ]
-    },
-    {
       "name": "Webpack",
       "symbol": "Wp",
       "yearStarted": 2017,

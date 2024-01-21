@@ -22,9 +22,6 @@ import { UnfinishedComponent } from './components/unfinished/unfinished.componen
 import { ContentfulAssetDirective } from './directives/contentful-asset.directive';
 import { HtmlTagsDirective } from './directives/html-tags.directive';
 import { MdToHtmlPipe } from './pipes/mdToHtml.pipe';
-import { RichTextToHtmlPipe } from './pipes/richTextToHtml.pipe';
-
-
 
 @NgModule({
   declarations: [
@@ -33,7 +30,6 @@ import { RichTextToHtmlPipe } from './pipes/richTextToHtml.pipe';
     PreloaderComponent,
     ContactDialogComponent,
     ContentfulAssetDirective,
-    RichTextToHtmlPipe,
     MdToHtmlPipe,
     HtmlTagsDirective,
     UnfinishedComponent,
@@ -66,7 +62,6 @@ import { RichTextToHtmlPipe } from './pipes/richTextToHtml.pipe';
     ReactiveFormsModule,
     ContactDialogComponent,
     ContentfulAssetDirective,
-    RichTextToHtmlPipe,
     MdToHtmlPipe,
     UnfinishedComponent,
   ],
