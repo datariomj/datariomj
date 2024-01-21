@@ -3,62 +3,43 @@ variables:
   isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
   isSelfHosted: $[eq(variables['Agent.Name'], 'SelfHosted')]
 
-
 jobs:
-- job: Build
-  steps:
-  - task: UseNode@1
-    displayName: 'Intall node'
-    inputs:
-      version: '20.x'
-      checkLatest: true
+  - job: BuildAndDeploy
+    displayName: Build and Deploy
+    steps:
+      - task: UseNode@1
+        displayName: "Intall node"
+        inputs:
+          version: "20.x"
+          checkLatest: true
 
-  - script: npm -v
-    displayName: 'Run npm version'
+      - script: npm ci
+        displayName: "Run npm install"
 
-  - script: npm ci
-    displayName: 'Run npm install'
-      
+      - script: |
+          npm run lint
+          npm run lint:styles
+        displayName: "Run lints"
 
-  - script: |
-      npm run lint
-      npm run lint:styles
-    displayName: 'Run lints'
-  
-  - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
-    displayName: 'Run tests'
+      - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
+        displayName: "Run tests"
 
-  - script: npm run build:prod
-    displayName: 'Run build'
+      - script: npm run build:prod
+        displayName: "Run build"
 
-- job: Deployment
-  condition: and(succeeded(), eq(variables.isMain, true), eq(variables.isPR, false))
-  dependsOn: Build
-  steps:
-  - task: UsePythonVersion@0
-    displayName: 'Set Python version'
-    inputs:
-      versionSpec: '3.12.0'
-      disableDownloadFromRegistry: true
+      - script: |
+          aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
+          aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
+          aws configure set region $(AWS_REGION)
+        displayName: "Configure AWS CLI"
+        condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
 
-  # todo check condition
-  # - script: |
-  #     curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-  #     unzip awscliv2.zip
-  #     ./aws/install
-  #   displayName: 'Install AWS CLI'
-  #   condition: eq(variables.isSelfHosted, false)
+      - script: |
+          aws s3 sync ./dist/datariomj/browser s3://$(S3_BUCKET_ID)
+        displayName: "Upload to S3"
+        condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
 
-  - script: |
-      aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
-      aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
-      aws configure set region $(AWS_REGION)
-    displayName: 'Configure AWS CLI'
-
-  - script: |
-      aws s3 sync ./dist/datariomj/browser s3://$(S3_BUCKET_ID)
-    displayName: 'Upload to S3'
-
-  - script: |
-      aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
-    displayName: 'Invalidate CloudFront'
+      - script: |
+          aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
+        displayName: "Invalidate CloudFront"
+        condition: and(eq(variables.isMain, true), eq(variables.isPR, false))

@@ -2,48 +2,80 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
   isSelfHosted: $[eq(variables['Agent.Name'], 'SelfHosted')]
+  distPath: 'dist/datariomj/browser'
+  artifactName: 'datariomj-angular'
+    
+stages:
+- stage: Init
+  jobs:
+  - job: Init
+    steps:
+      - checkout: self
+        name: "CheckoutRepo"
+        displayName: Checkout Repository
+      - script: npm ci
+        displayName: Run npm install
+      - task: Cache@2
+        displayName: Cache npm
+        inputs:
+          key: 'npm | "$(Agent.OS)" | package-lock.json'
+          restoreKeys: |
+            npm | "$(Agent.OS)"
+          path: $(npm_config_cache)
 
-jobs:
-- job: BuildAndDeploy
-  displayName: Build and Deploy
-  steps:
-  - task: UseNode@1
-    displayName: 'Intall node'
-    inputs:
-      version: '20.x'
-      checkLatest: true
+- stage: Lint
+  dependsOn: Init
+  jobs:
+  - job: Lint
+    steps:
+      - script: npm ci
+        displayName: Run npm install
+      - script: npm run lint
+        displayName: "Run Angular lints"
+      - script: npm run lint:styles
+        displayName: "Run style lints"
 
-  - script: npm -v
-    displayName: 'Run npm version'
+- stage: Test
+  dependsOn: Init
+  jobs:
+  - job: Test
+    steps:
+      - script: npm ci
+        displayName: Run npm install
+      - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
+        displayName: "Run E2E tests"
 
-  - script: npm ci
-    displayName: 'Run npm install'
-      
+- stage: Build
+  dependsOn: Init
+  jobs:
+  - job: Build
+    steps:
+      - script: npm ci
+        displayName: Run npm install
+      - script: npm run build:prod
+        displayName: "Run build"
+      - publish: $(System.DefaultWorkingDirectory)/$(distPath)
+        displayName: "Publish dist app"
+        condition: eq(variables.isPR, false)
+        artifact: $(artifactName)
 
-  - script: |
-      npm run lint
-      npm run lint:styles
-    displayName: 'Run lints'
+- stage: DeploymentProd
+  dependsOn:
+    - Lint
+    - Test
+    - Build
+  condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
+  jobs:
+  - deployment: DeployS3
+    environment: prod
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: $(artifactName)
+          - script: aws s3 sync $(distPath) s3://$(S3_BUCKET_ID)
+            displayName: "Upload to S3"
 
-  - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
-    displayName: 'Run tests'
-
-  - script: npm run build:prod
-    displayName: 'Run build'
-
-  - script: |
-      aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
-      aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
-      aws configure set region $(AWS_REGION)
-    displayName: 'Configure AWS CLI'
-    condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
-
-  - script: |
-      aws s3 sync ./dist/datariomj/browser s3://$(S3_BUCKET_ID)
-    displayName: 'Upload to S3'
-    condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
-
-  - script: |
-      aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
-    displayName: 'Invalidate CloudFront'
-    condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
+          - script: aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
+            displayName: "Invalidate CloudFront"
