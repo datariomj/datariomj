@@ -57,9 +57,7 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.scss",
-              "library/devbrand/variables.scss",
-              "library/devbrand/style.scss"
+              "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -72,7 +70,9 @@
             "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -137,9 +137,7 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.scss",
-              "library/devbrand/variables.scss",
-              "library/devbrand/style.scss"
+              "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -184,50 +182,6 @@
             }
           }
         },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/datariomj/server",
-            "main": "server.ts",
-            "tsConfig": "tsconfig.server.json",
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "./src/stylings"
-              ]
-            },
-            "sourceMap": true,
-            "optimization": false,
-            "buildOptimizer": false
-          },
-          "configurations": {
-            "production": {
-              "outputHashing": "media",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "sourceMap": false,
-              "optimization": true,
-              "buildOptimizer": true
-            }
-          },
-          "defaultConfiguration": ""
-        },
-        "serve-ssr": {
-          "builder": "@angular-devkit/build-angular:ssr-dev-server",
-          "options": {
-            "browserTarget": "datariomj:build",
-            "serverTarget": "datariomj:server"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "datariomj:build:production",
-              "serverTarget": "datariomj:server:production"
-            }
-          }
-        },
         "prerender": {
           "builder": "@angular-devkit/build-angular:prerender",
           "options": {
@@ -237,13 +191,6 @@
           },
           "configurations": {
             "production": {}
-          }
-        },
-        "serve-coverage": {
-          "builder": "ngx-build-plus:dev-server",
-          "options": {
-            "browserTarget": "datariomj:build",
-            "extraWebpackConfig": "./cypress/coverage.webpack.ts"
           }
         },
         "cypress-run": {
@@ -263,12 +210,79 @@
             "watch": true,
             "headless": false
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/datariomj/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "buildOptimizer": false,
+            "optimization": false,
+            "sourceMap": true,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src/stylings"
+              ]
+            },
+            "extractLicenses": false,
+            "vendorChunk": true
+          },
+          "configurations": {
+            "production": {
+              "buildOptimizer": true,
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true,
+              "vendorChunk": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "datariomj:build:development",
+              "serverTarget": "datariomj:server:development"
+            },
+            "production": {
+              "browserTarget": "datariomj:build:production",
+              "serverTarget": "datariomj:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "datariomj:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "datariomj:serve:development"
+            }
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "7316dd9c-b045-4036-a306-389ec794a7bd"
+    "analytics": "7316dd9c-b045-4036-a306-389ec794a7bd",
+    "schematicCollections": [
+      "@cypress/schematic",
+      "@schematics/angular"
+    ]
   },
   "schematics": {
     "@angular-eslint/schematics:application": {

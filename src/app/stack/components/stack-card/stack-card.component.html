@@ -5,14 +5,14 @@
   </mat-card-header>
   <mat-card-content>
     <div class="stack-card__icon-wrapper">
-      <app-stack-icon mat-card-avatar class="stack-card__icon" icon="{{stackData.iconText}}"></app-stack-icon>
+      {{stackData.iconText}}
     </div>
     <!-- <div *ngIf="stackData.iconImage && stackData.iconImage.sys">
       <img [appContentfulAsset]="stackData.iconImage.sys.id" [assetWidth]="100" [assetHeight]="100" alt="{{stackData.name}}">
     </div> -->
-    <mat-chip-list>
+    <mat-chip-set>
       <mat-chip *ngIf="stackData.type" color="primary" selected>{{stackData.type}}</mat-chip>
       <mat-chip *ngFor="let tag of stackData.tags" color="primary" selected>{{tag}}</mat-chip>
-    </mat-chip-list>
+    </mat-chip-set>
   </mat-card-content>
 </mat-card>

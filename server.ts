@@ -1,20 +1,21 @@
-/* eslint-disable prefer-arrow/prefer-arrow-functions */
-/* eslint-disable no-underscore-dangle */
 import 'zone.js/node';
+
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
 import * as express from 'express';
-import { existsSync } from 'fs';
-import { join } from 'path';
+import { AppServerModule } from 'src/main.server';
 
-import { AppServerModule } from './src/main.server';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
   const distFolder = join(process.cwd(), 'dist/datariomj/browser');
-  const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
+  const indexHtml = existsSync(join(distFolder, 'index.original.html'))
+    ? join(distFolder, 'index.original.html')
+    : join(distFolder, 'index.html');
 
   const commonEngine = new CommonEngine();
 
@@ -28,7 +29,7 @@ export function app(): express.Express {
     maxAge: '1y',
   }));
 
-  // All regular routes use the Universal engine
+  // All regular routes use the Angular engine
   server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
 
@@ -42,15 +43,13 @@ export function app(): express.Express {
       })
       .then((html) => res.send(html))
       .catch((err) => next(err));
-
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
   });
 
   return server;
 }
 
 function run(): void {
-  const port = process.env.PORT || 4000;
+  const port = process.env['PORT'] || 4000;
 
   // Start up the Node server
   const server = app();
@@ -69,4 +68,4 @@ if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
   run();
 }
 
-export * from './src/main.server';
+export default AppServerModule;

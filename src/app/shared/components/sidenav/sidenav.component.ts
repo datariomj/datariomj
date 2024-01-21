@@ -26,8 +26,8 @@ export class SidenavComponent {
   navLinks = [
     { icon: 'home', route: '', description: 'Home' },
     { icon: 'cv', route: '/cv', description: 'CV' },
-    // { icon: 'stack', route: '/stack', description: 'Stack' },
-    // { icon: 'blog', route: '/blog', description: 'Blog' },
+    { icon: 'stack', route: '/stack', description: 'Stack' },
+    { icon: 'blog', route: '/blog', description: 'Blog' },
   ];
 
   constructor(

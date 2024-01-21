@@ -3,44 +3,47 @@ variables:
   isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
   isSelfHosted: $[eq(variables['Agent.Name'], 'SelfHosted')]
 
-steps:
-- task: UseNode@1
-  displayName: 'Intall node'
-  inputs:
-    version: '20.x'
-    checkLatest: true
+jobs:
+- job: BuildAndDeploy
+  displayName: Build and Deploy
+  steps:
+  - task: UseNode@1
+    displayName: 'Intall node'
+    inputs:
+      version: '20.x'
+      checkLatest: true
 
-- script: npm -v
-  displayName: 'Run npm version'
+  - script: npm -v
+    displayName: 'Run npm version'
 
-- script: npm ci
-  displayName: 'Run npm install'
-    
+  - script: npm ci
+    displayName: 'Run npm install'
+      
 
-- script: |
-    npm run lint
-    npm run lint:styles
-  displayName: 'Run lints'
+  - script: |
+      npm run lint
+      npm run lint:styles
+    displayName: 'Run lints'
 
-- script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
-  displayName: 'Run tests'
+  - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
+    displayName: 'Run tests'
 
-- script: npm run build:prod
-  displayName: 'Run build'
+  - script: npm run build:prod
+    displayName: 'Run build'
 
-- script: |
-    aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
-    aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
-    aws configure set region $(AWS_REGION)
-  displayName: 'Configure AWS CLI'
-  condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
+  - script: |
+      aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
+      aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
+      aws configure set region $(AWS_REGION)
+    displayName: 'Configure AWS CLI'
+    condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
 
-- script: |
-    aws s3 sync ./dist/datariomj/browser s3://$(S3_BUCKET_ID)
-  displayName: 'Upload to S3'
-  condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
+  - script: |
+      aws s3 sync ./dist/datariomj/browser s3://$(S3_BUCKET_ID)
+    displayName: 'Upload to S3'
+    condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
 
-- script: |
-    aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
-  displayName: 'Invalidate CloudFront'
-  condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
+  - script: |
+      aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
+    displayName: 'Invalidate CloudFront'
+    condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
