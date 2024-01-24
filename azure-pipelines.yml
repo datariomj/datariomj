@@ -2,8 +2,8 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
   isSelfHosted: $[eq(variables['Agent.Name'], 'SelfHosted')]
-  distPath: 'dist/datariomj/browser'
-  artifactName: 'datariomj-angular'
+  distPath: dist/datariomj/browser
+  artifactName: WebApp
     
 stages:
 - stage: Init
@@ -11,7 +11,7 @@ stages:
   - job: Init
     steps:
       - checkout: self
-        name: "CheckoutRepo"
+        name: CheckoutRepo
         displayName: Checkout Repository
       - script: npm ci
         displayName: Run npm ci
@@ -31,9 +31,9 @@ stages:
       - script: npm ci
         displayName: Run npm install
       - script: npm run lint
-        displayName: "Run Angular lints"
+        displayName: Run Angular lints
       - script: npm run lint:styles
-        displayName: "Run style lints"
+        displayName: Run style lints
 
 - stage: Test
   dependsOn: Init
@@ -55,7 +55,7 @@ stages:
       - script: npm run build:prod
         displayName: "Run build"
       - publish: $(System.DefaultWorkingDirectory)/$(distPath)
-        displayName: "Publish dist app"
+        displayName: Publish Web App
         condition: eq(variables.isPR, false)
         artifact: $(artifactName)
 
@@ -72,12 +72,13 @@ stages:
       runOnce:
         deploy:
           steps:
+          - checkout: none
           - download: current
             artifact: $(artifactName)
           - script: ls -ltr
-            displayName: "Debug LS"
+            displayName: Debug LS
           - script: aws s3 sync ./$(distPath) s3://$(S3_BUCKET_ID)
-            displayName: "Upload to S3"
+            displayName: Upload to S3
 
           - script: aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
-            displayName: "Invalidate CloudFront"
+            displayName: Invalidate CloudFront
