@@ -4,7 +4,6 @@
 
 - Hi! I'm MJ 😃
 - Full-stack Developer 💼
-- Creating websites from scratch
 - Utilizing TypeScript for frontend, backend & infrastructure development
 &nbsp;
 
@@ -19,8 +18,6 @@
 &nbsp;
 
 ## Stack 📦
-
-### Development
 
 [<img align="left" alt="Typescript" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" />][typescript]
 [<img align="left" alt="Angular" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-plain.svg" />][angular]
