@@ -21,7 +21,7 @@ stages:
           key: 'npm | "$(Agent.OS)" | package-lock.json'
           restoreKeys: |
             npm | "$(Agent.OS)"
-          path: $(npm_config_cache)
+          path: /home/vsts/.npm
 
 - stage: Lint
   dependsOn: Init
