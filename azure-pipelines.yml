@@ -74,7 +74,9 @@ stages:
           steps:
           - download: current
             artifact: $(artifactName)
-          - script: aws s3 sync $(distPath) s3://$(S3_BUCKET_ID)
+          - script: ls -ltr
+            displayName: "Debug LS"
+          - script: aws s3 sync ./$(distPath) s3://$(S3_BUCKET_ID)
             displayName: "Upload to S3"
 
           - script: aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
