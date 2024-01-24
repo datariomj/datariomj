@@ -2,7 +2,7 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
   isSelfHosted: $[eq(variables['Agent.Name'], 'SelfHosted')]
-  distPath: $(Build.SourcesDirectory)/dist/datariomj/browser
+  distPath: dist/datariomj/browser
   artifactName: WebApp
     
 stages:
@@ -54,7 +54,7 @@ stages:
         displayName: Run npm install
       - script: npm run build:prod
         displayName: "Run build"
-      - publish: $(System.DefaultWorkingDirectory)/$(distPath)
+      - publish: $(distPath)
         displayName: Publish Web App
         condition: eq(variables.isPR, false)
         artifact: $(artifactName)
