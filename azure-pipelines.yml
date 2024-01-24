@@ -14,14 +14,14 @@ stages:
         name: "CheckoutRepo"
         displayName: Checkout Repository
       - script: npm ci
-        displayName: Run npm install
+        displayName: Run npm ci
       - task: Cache@2
         displayName: Cache npm
         inputs:
           key: 'npm | "$(Agent.OS)" | package-lock.json'
           restoreKeys: |
             npm | "$(Agent.OS)"
-          path: /home/vsts/.npm
+          path: /home/agent/.npm
 
 - stage: Lint
   dependsOn: Init
