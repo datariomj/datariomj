@@ -36,15 +36,15 @@ stages:
       - script: npm run lint:styles
         displayName: Run style lints
 
-# - stage: Test
-#   dependsOn: Init
-#   jobs:
-#   - job: Test
-#     steps:
-#       - script: npm ci
-#         displayName: Run npm install
-#       - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
-#         displayName: "Run E2E tests"
+- stage: Test
+  dependsOn: Init
+  jobs:
+  - job: Test
+    steps:
+      - script: npm ci
+        displayName: Run npm install
+      - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
+        displayName: "Run E2E tests"
 
 - stage: Build
   dependsOn: Init
@@ -63,11 +63,11 @@ stages:
 - stage: DeploymentProd
   dependsOn:
     - Lint
-    # - Test
+    - Test
     - Build
   condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
   jobs:
-  - deployment: DeployS3
+  - deployment: Deploy
     environment: prod
     strategy:
       runOnce:
