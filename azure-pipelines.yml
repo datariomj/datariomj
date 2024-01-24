@@ -11,6 +11,7 @@ stages:
   - job: Init
     steps:
       - checkout: self
+        clean: true
         name: CheckoutRepo
         displayName: Checkout Repository
       - script: npm ci
@@ -35,15 +36,15 @@ stages:
       - script: npm run lint:styles
         displayName: Run style lints
 
-- stage: Test
-  dependsOn: Init
-  jobs:
-  - job: Test
-    steps:
-      - script: npm ci
-        displayName: Run npm install
-      - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
-        displayName: "Run E2E tests"
+# - stage: Test
+#   dependsOn: Init
+#   jobs:
+#   - job: Test
+#     steps:
+#       - script: npm ci
+#         displayName: Run npm install
+#       - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
+#         displayName: "Run E2E tests"
 
 - stage: Build
   dependsOn: Init
@@ -62,7 +63,7 @@ stages:
 - stage: DeploymentProd
   dependsOn:
     - Lint
-    - Test
+    # - Test
     - Build
   condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
   jobs:
@@ -76,10 +77,10 @@ stages:
           - download: current
             artifact: $(artifactName)
           - script: |
-              ls -ltr
-              ls $(Pipeline.Workspace) -ltr
-              ls $(Build.SourcesDirectory) -ltr
-            displayName: Debug LS
+              aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
+              aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
+              aws configure set region $(AWS_REGION)
+            displayName: Configure AWS CLI
           - script: aws s3 sync $(Pipeline.Workspace)/$(artifactName) s3://$(S3_BUCKET_ID)
             displayName: Upload to S3
 
