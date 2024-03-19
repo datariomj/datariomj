@@ -19,12 +19,12 @@
 
 ## Stack 📦
 
-[<img align="left" alt="Typescript" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" />][typescript]
-[<img align="left" alt="Angular" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-plain.svg" />][angular]
-[<img align="left" alt="NodeJS" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" />][nodejs]
-[<img align="left" alt="AWS" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" />][aws]
-[<img align="left" alt="PostgreSQL" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" />][postgres]
-[<img align="left" alt="Docker" width="22px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/docker/docker.png" />][docker]
+[<img align="left" alt="Typescript" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" />][typescript]
+[<img align="left" alt="Angular" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" />][angular]
+[<img align="left" alt="NodeJS" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" />][nodejs]
+[<img align="left" alt="AWS" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" />][aws]
+[<img align="left" alt="PostgreSQL" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" />][postgres]
+[<img align="left" alt="Docker" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original-wordmark.svg" />][docker]
 &nbsp;
 
 ## Connect 🔗

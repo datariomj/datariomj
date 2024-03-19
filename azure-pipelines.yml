@@ -1,88 +1,87 @@
 variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
-  isSelfHosted: $[eq(variables['Agent.Name'], 'SelfHosted')]
   distPath: dist/datariomj/browser
   artifactName: WebApp
-    
+
 stages:
-- stage: Init
-  jobs:
-  - job: Init
-    steps:
-      - checkout: self
-        clean: true
-        name: CheckoutRepo
-        displayName: Checkout Repository
-      - script: npm ci
-        displayName: Run npm ci
-      - task: Cache@2
-        displayName: Cache npm
-        inputs:
-          key: 'npm | "$(Agent.OS)" | package-lock.json'
-          restoreKeys: |
-            npm | "$(Agent.OS)"
-          path: /home/agent/.npm
+  - stage: Init
+    jobs:
+      - job: Init
+        steps:
+          - checkout: self
+            clean: true
+            name: CheckoutRepo
+            displayName: Checkout Repository
+          - script: npm ci
+            displayName: Run npm ci
+          - task: Cache@2
+            displayName: Cache npm
+            inputs:
+              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                npm | "$(Agent.OS)"
+              path: /home/agent/.npm
 
-- stage: Lint
-  dependsOn: Init
-  jobs:
-  - job: Lint
-    steps:
-      - script: npm ci
-        displayName: Run npm install
-      - script: npm run lint
-        displayName: Run Angular lints
-      - script: npm run lint:styles
-        displayName: Run style lints
+  - stage: Lint
+    dependsOn: Init
+    jobs:
+      - job: Lint
+        steps:
+          - script: npm ci
+            displayName: Run npm install
+          - script: npm run lint
+            displayName: Run Angular lints
+          - script: npm run lint:styles
+            displayName: Run style lints
 
-- stage: Test
-  dependsOn: Init
-  jobs:
-  - job: Test
-    steps:
-      - script: npm ci
-        displayName: Run npm install
-      - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
-        displayName: "Run E2E tests"
+  - stage: Test
+    dependsOn: Init
+    jobs:
+      - job: Test
+        steps:
+          - script: npm ci
+            displayName: Run npm install
+          - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
+            displayName: "Run E2E tests"
 
-- stage: Build
-  dependsOn: Init
-  jobs:
-  - job: Build
-    steps:
-      - script: npm ci
-        displayName: Run npm install
-      - script: npm run build:prod
-        displayName: "Run build"
-      - publish: $(distPath)
-        displayName: Publish Web App
-        condition: eq(variables.isPR, false)
-        artifact: $(artifactName)
-
-- stage: DeploymentProd
-  dependsOn:
-    - Lint
-    - Test
-    - Build
-  condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
-  jobs:
-  - deployment: Deploy
-    environment: prod
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - checkout: none
-          - download: current
+  - stage: Build
+    dependsOn: Init
+    jobs:
+      - job: Build
+        steps:
+          - script: npm ci
+            displayName: Run npm install
+          - script: npm run build:prod
+            displayName: "Run build"
+          - publish: $(distPath)
+            displayName: Publish Web App
+            condition: eq(variables.isPR, false)
             artifact: $(artifactName)
-          - script: |
-              aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
-              aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
-              aws configure set region $(AWS_REGION)
-            displayName: Configure AWS CLI
-          - script: aws s3 sync $(Pipeline.Workspace)/$(artifactName) s3://$(S3_BUCKET_ID)
-            displayName: Upload to S3
 
-          - script: aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
-            displayName: Invalidate CloudFront
+  - stage: DeploymentProd
+    dependsOn:
+      - Lint
+      - Test
+      - Build
+    condition: and(eq(variables.isMain, true), eq(variables.isPR, false))
+    jobs:
+      - deployment: Deploy
+        environment: prod
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: none
+                - download: current
+                  artifact: $(artifactName)
+                - script: |
+                    aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
+                    aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
+                    aws configure set region $(AWS_REGION)
+                  displayName: Configure AWS CLI
+                - script: aws s3 sync $(Pipeline.Workspace)/$(artifactName) s3://$(S3_BUCKET_ID)
+                  displayName: Upload to S3
+
+                - script: aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
+                  displayName: Invalidate CloudFront

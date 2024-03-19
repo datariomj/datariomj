@@ -54,7 +54,6 @@
 
 ## CI/CD
 
-- Fix travis notification
 - update robots.txt by branch
 - add this back to README.md ```![Codecov](https://img.shields.io/codecov/c/github/datariomj/datariomj/main)][codecov]```
 
