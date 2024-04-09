@@ -82,16 +82,16 @@ stages:
           runOnce:
             deploy:
               steps:
-                - ${{ if eq(variables['isMain'], true) }}:
-                  - script: |
-                      echo "##vso[task.setvariable variable=targetS3BukcetId;issecret=true]$(S3_BUCKET_ID)"
-                      echo "##vso[task.setvariable variable=targetCloudfrontDistributionId;issecret=true]$(CLOUDFRONT_DISTRIBUTION_ID)"
-                    displayName: 'Add AWS Vars for Prod'
-                - ${{ if eq(variables['isRelease'], true) }}:
-                  - script: |
-                      echo "##vso[task.setvariable variable=targetS3BukcetId;issecret=true]$(STAGING_S3_BUCKET_ID)"
-                      echo "##vso[task.setvariable variable=targetCloudfrontDistributionId;issecret=true]$(STAGING_CLOUDFRONT_DISTRIBUTION_ID)"
-                    displayName: 'Add AWS Vars for Staging'
+                - script: |
+                    echo "##vso[task.setvariable variable=targetS3BukcetId;issecret=true]$(S3_BUCKET_ID)"
+                    echo "##vso[task.setvariable variable=targetCloudfrontDistributionId;issecret=true]$(CLOUDFRONT_DISTRIBUTION_ID)"
+                  displayName: 'Add AWS Vars for Prod'
+                  condition: eq(variables.isMain, true)
+                - script: |
+                    echo "##vso[task.setvariable variable=targetS3BukcetId;issecret=true]$(STAGING_S3_BUCKET_ID)"
+                    echo "##vso[task.setvariable variable=targetCloudfrontDistributionId;issecret=true]$(STAGING_CLOUDFRONT_DISTRIBUTION_ID)"
+                  displayName: 'Add AWS Vars for Staging'
+                  condition: eq(variables.isRelease, true)
                 - checkout: none
                 - download: current
                   artifact: $(artifactName)
