@@ -60,9 +60,8 @@ stages:
           - script: npm run build:$(environment)
             displayName: Run build
           - script: |
-              if [ "$(environment)" = "prod" ]; then
-                mv $(distPath)/robots.prod.txt $(distPath)/robots.txt
-              fi
+              mv $(distPath)/robots.prod.txt $(distPath)/robots.txt
+            condition: eq(variables.isMain, true)
             displayName: Apply robots.txt
           - publish: $(distPath)
             displayName: Publish Web App
