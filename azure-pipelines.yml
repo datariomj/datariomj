@@ -54,7 +54,7 @@ stages:
           - script: npm ci
             displayName: Run npm install
           - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
-            displayName: "Run E2E tests"
+            displayName: Run E2E tests
 
   - stage: Build
     dependsOn: Init
@@ -64,7 +64,12 @@ stages:
           - script: npm ci
             displayName: Run npm install
           - script: npm run build:$(environment)
-            displayName: "Run build"
+            displayName: Run build
+          - script: |
+              if [ "$(environment)" = "prod" ]; then
+                mv $(distPath)/robots.prod.txt $(distPath)/robots.txt
+              fi
+            displayName: Apply robots.txt
           - publish: $(distPath)
             displayName: Publish Web App
             condition: eq(variables.isPR, false)
