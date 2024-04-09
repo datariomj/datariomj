@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://datariomj.dev</loc><priority>0.5</priority></url>
 <url><loc>https://datariomj.dev/cv</loc><priority>0.5</priority></url>
+<url><loc>https://datariomj.dev/stack</loc><priority>0.5</priority></url>
+<url><loc>https://datariomj.dev/blog</loc><priority>0.5</priority></url>
 <url><loc>https://datariomj.dev/privacy</loc><priority>0.5</priority></url>
 <url><loc>https://datariomj-dev.web.app/terms</loc><priority>0.5</priority></url>
 </urlset>

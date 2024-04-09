@@ -1,4 +1,5 @@
 User-agent: *
+
 Disallow: /
 
 Sitemap: https://datariomj.dev/sitemap.xml
