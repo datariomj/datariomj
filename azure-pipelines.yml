@@ -1,38 +1,23 @@
 variables:
-  - name: isMain
-    value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
-  - name: isRelease
-    value: $[eq(variables['Build.SourceBranch'], 'refs/heads/release')]
-  - name: isPR
-    value: $[eq(variables['Build.Reason'], 'PullRequest')]
-  - name: distPath
-    value: dist/datariomj/browser
-  - name: artifactName
-    value: WebApp
-  - name: environment
-    value: $[ coalesce(
-        eq(variables['Build.SourceBranch'], 'refs/heads/main') ? 'prod' : '',
-        eq(variables['Build.SourceBranch'], 'refs/heads/release') ? 'staging' : '',
-        'prod'
-    ) ]
-  - name: S3_BUCKET_ID
-    value: $[ coalesce(
-        eq(variables['environment'], 'prod') ? variables['PROD_S3_BUCKET_ID'] : '',
-        eq(variables['environment'], 'staging') ? variables['STAGING_S3_BUCKET_ID'] : '',
-        variables['PROD_S3_BUCKET_ID']
-    ) ]
-  - name: CLOUDFRONT_DISTRIBUTION_ID
-    value: $[ coalesce(
-        eq(variables['environment'], 'prod') ? variables['PROD_CLOUDFRONT_DISTRIBUTION_ID'] : '',
-        eq(variables['environment'], 'staging') ? variables['STAGING_CLOUDFRONT_DISTRIBUTION_ID'] : '',
-        variables['PROD_CLOUDFRONT_DISTRIBUTION_ID']
-    ) ]
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+  isRelease: $[eq(variables['Build.SourceBranch'], 'refs/heads/release')]
+  isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
+  distPath: dist/datariomj/browser
+  artifactName: WebApp
 
 stages:
   - stage: Init
     jobs:
       - job: Init
         steps:
+          - ${{ if eq(variables['isMain'], true) }}:
+            - script: echo "##vso[task.setvariable variable=environment]prod"
+            - script: echo "##vso[task.setvariable variable=S3_BUCKET_ID;issecret=true]$(S3_BUCKET_ID)"
+            - script: echo "##vso[task.setvariable variable=CLOUDFRONT_DISTRIBUTION_ID;issecret=true]$(CLOUDFRONT_DISTRIBUTION_ID)"
+          - ${{ if eq(variables['isRelease'], true) }}:
+            - script: echo "##vso[task.setvariable variable=environment]staging"
+            - script: echo "##vso[task.setvariable variable=S3_BUCKET_ID;issecret=true]$(STAGING_S3_BUCKET_ID)"
+            - script: echo "##vso[task.setvariable variable=CLOUDFRONT_DISTRIBUTION_ID;issecret=true]$(STAGING_CLOUDFRONT_DISTRIBUTION_ID)"
           - checkout: self
             clean: true
             name: CheckoutRepo
