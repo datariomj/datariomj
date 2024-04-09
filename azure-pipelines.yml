@@ -15,11 +15,11 @@ stages:
       - job: Init
         steps:
           - ${{ if eq(variables['isMain'], true) }}:
-            - script: echo "##vso[task.setvariable variable=S3_BUCKET_ID;issecret=true]$(S3_BUCKET_ID)"
-            - script: echo "##vso[task.setvariable variable=CLOUDFRONT_DISTRIBUTION_ID;issecret=true]$(CLOUDFRONT_DISTRIBUTION_ID)"
+            - script: echo "##vso[task.setvariable variable=TARGET_S3_BUCKET_ID;issecret=true]$(S3_BUCKET_ID)"
+            - script: echo "##vso[task.setvariable variable=TARGET_CLOUDFRONT_DISTRIBUTION_ID;issecret=true]$(CLOUDFRONT_DISTRIBUTION_ID)"
           - ${{ if eq(variables['isRelease'], true) }}:
-            - script: echo "##vso[task.setvariable variable=S3_BUCKET_ID;issecret=true]$(STAGING_S3_BUCKET_ID)"
-            - script: echo "##vso[task.setvariable variable=CLOUDFRONT_DISTRIBUTION_ID;issecret=true]$(STAGING_CLOUDFRONT_DISTRIBUTION_ID)"
+            - script: echo "##vso[task.setvariable variable=TARGET_S3_BUCKET_ID;issecret=true]$(STAGING_S3_BUCKET_ID)"
+            - script: echo "##vso[task.setvariable variable=TARGET_CLOUDFRONT_DISTRIBUTION_ID;issecret=true]$(STAGING_CLOUDFRONT_DISTRIBUTION_ID)"
           - checkout: self
             clean: true
             name: CheckoutRepo
@@ -96,7 +96,7 @@ stages:
                     aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
                     aws configure set region $(AWS_REGION)
                   displayName: Configure AWS CLI
-                - script: aws s3 sync $(Pipeline.Workspace)/$(artifactName) s3://$(S3_BUCKET_ID)
+                - script: aws s3 sync $(Pipeline.Workspace)/$(artifactName) s3://$(TARGET_S3_BUCKET_ID)
                   displayName: Upload to S3
-                - script: aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
+                - script: aws cloudfront create-invalidation --distribution-id $(TARGET_CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
                   displayName: Invalidate CloudFront
