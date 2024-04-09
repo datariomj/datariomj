@@ -83,11 +83,15 @@ stages:
             deploy:
               steps:
                 - ${{ if eq(variables['isMain'], true) }}:
-                  - script: echo "##vso[task.setvariable variable=TARGET_S3_BUCKET_ID;issecret=true]$(S3_BUCKET_ID)"
-                  - script: echo "##vso[task.setvariable variable=TARGET_CLOUDFRONT_DISTRIBUTION_ID;issecret=true]$(CLOUDFRONT_DISTRIBUTION_ID)"
+                  - script: |
+                      echo "##vso[task.setvariable variable=targetS3BukcetId;issecret=true]$(S3_BUCKET_ID)"
+                      echo "##vso[task.setvariable variable=targetCloudfrontDistributionId;issecret=true]$(CLOUDFRONT_DISTRIBUTION_ID)"
+                    displayName: 'Add AWS Vars for Prod'
                 - ${{ if eq(variables['isRelease'], true) }}:
-                  - script: echo "##vso[task.setvariable variable=TARGET_S3_BUCKET_ID;issecret=true]$(STAGING_S3_BUCKET_ID)"
-                  - script: echo "##vso[task.setvariable variable=TARGET_CLOUDFRONT_DISTRIBUTION_ID;issecret=true]$(STAGING_CLOUDFRONT_DISTRIBUTION_ID)"
+                  - script: |
+                      echo "##vso[task.setvariable variable=targetS3BukcetId;issecret=true]$(STAGING_S3_BUCKET_ID)"
+                      echo "##vso[task.setvariable variable=targetCloudfrontDistributionId;issecret=true]$(STAGING_CLOUDFRONT_DISTRIBUTION_ID)"
+                    displayName: 'Add AWS Vars for Staging'
                 - checkout: none
                 - download: current
                   artifact: $(artifactName)
@@ -96,7 +100,7 @@ stages:
                     aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
                     aws configure set region $(AWS_REGION)
                   displayName: Configure AWS CLI
-                - script: aws s3 sync $(Pipeline.Workspace)/$(artifactName) s3://$(TARGET_S3_BUCKET_ID)
+                - script: aws s3 sync $(Pipeline.Workspace)/$(artifactName) s3://$(targetS3BukcetId)
                   displayName: Upload to S3
-                - script: aws cloudfront create-invalidation --distribution-id $(TARGET_CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
+                - script: aws cloudfront create-invalidation --distribution-id $(targetCloudfrontDistributionId) --paths '/*'
                   displayName: Invalidate CloudFront
