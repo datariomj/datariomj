@@ -1,5 +1,6 @@
 variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+  isRelease: $[eq(variables['Build.SourceBranch'], 'refs/heads/release')]
   isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
   distPath: dist/datariomj/browser
   artifactName: WebApp
@@ -58,6 +59,33 @@ stages:
             displayName: Publish Web App
             condition: eq(variables.isPR, false)
             artifact: $(artifactName)
+
+  - stage: DeploymentStaging
+    dependsOn:
+      - Lint
+      - Test
+      - Build
+    condition: and(eq(variables.isRelease, true), eq(variables.isPR, false))
+    jobs:
+      - deployment: Deploy
+        environment: staging
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: none
+                - download: current
+                  artifact: $(artifactName)
+                - script: |
+                    aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
+                    aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
+                    aws configure set region $(AWS_REGION)
+                  displayName: Configure AWS CLI
+                - script: aws s3 sync $(Pipeline.Workspace)/$(artifactName) s3://$(STAGING_S3_BUCKET_ID)
+                  displayName: Upload to S3
+
+                - script: aws cloudfront create-invalidation --distribution-id $(STAGING_CLOUDFRONT_DISTRIBUTION_ID) --paths '/*'
+                  displayName: Invalidate CloudFront
 
   - stage: DeploymentProd
     dependsOn:
