@@ -68,7 +68,6 @@ stages:
             condition: eq(variables.isPR, false)
             artifact: $(artifactName)
 
-  stages:
   - stage: Deployment
     dependsOn:
       - Lint
