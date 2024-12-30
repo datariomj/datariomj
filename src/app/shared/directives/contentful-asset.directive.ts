@@ -33,7 +33,7 @@ export class ContentfulAssetDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.$unsubsriber.next();
+    this.$unsubsriber.next(1);
     this.$unsubsriber.complete();
   }
 };

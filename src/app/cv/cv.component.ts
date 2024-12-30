@@ -66,7 +66,7 @@ export class CvComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.cdRef.detach();
-    this.$unsubsriber.next();
+    this.$unsubsriber.next(1);
     this.$unsubsriber.complete();
   }
 

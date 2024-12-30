@@ -41,12 +41,12 @@
     "@angular/router": "^18.2.13",
     "@angular/service-worker": "^18.2.13",
     "@angular/ssr": "^18.2.12",
-    "@ngxs/devtools-plugin": "^3.8.2",
-    "@ngxs/logger-plugin": "^3.8.2",
-    "@ngxs/store": "^3.8.2",
+    "@ngxs/devtools-plugin": "^18.1.6",
+    "@ngxs/logger-plugin": "^18.1.6",
+    "@ngxs/store": "^18.1.6",
     "express": "^4.18.2",
     "marked": "^11.1.1",
-    "rxjs": "^6.6.7",
+    "rxjs": "^7.8.1",
     "tslib": "^2.4.0",
     "zone.js": "^0.14.10"
   },
@@ -89,7 +89,7 @@
     "stylelint-no-unsupported-browser-features": "^8.0.0",
     "stylelint-scss": "^6.0.0",
     "ts-node": "~10.9.2",
-    "typescript": "^5.2.2",
+    "typescript": "^5.4.0",
     "webpack": "^5.89.0"
   },
   "cypress-cucumber-preprocessor": {
