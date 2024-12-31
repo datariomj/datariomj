@@ -37,8 +37,8 @@ export class CvService {
 
             if (childObs.length) {
               itemObs.push(forkJoin(childObs).pipe(
-                map((childrenRes) => {
-                  const filteredRes = childrenRes.filter((childRes) => childRes);
+                map((childrenRes: any) => {
+                  const filteredRes = childrenRes.filter((childRes: any) => childRes);
                   const parsedChildren = filteredRes.map((childRes: any) => ({
                     name: childRes.fields.title,
                     title: childRes.fields.entryTitle,
@@ -74,7 +74,7 @@ export class CvService {
           })),
         );
       }),
-      map(items => items.sort((a: any, b: any) => a.order - b.order)),
+      map((items: any) => items.sort((a: any, b: any) => a.order - b.order)),
     );
   }
 

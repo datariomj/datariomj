@@ -1,7 +1,7 @@
 import { environment } from '@env/environment';
-import { NgxsDevtoolsOptions } from '@ngxs/devtools-plugin/src/symbols';
-import { NgxsLoggerPluginOptions } from '@ngxs/logger-plugin/src/symbols';
-import { NgxsConfig } from '@ngxs/store/src/symbols';
+import { NgxsDevtoolsOptions } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginOptions } from '@ngxs/logger-plugin';
+import { NgxsConfig } from '@ngxs/store';
 
 import { UIState } from './ui/ui.state';
 
