@@ -40,7 +40,7 @@
     "@angular/platform-server": "^18.2.13",
     "@angular/router": "^18.2.13",
     "@angular/service-worker": "^18.2.13",
-    "@angular/ssr": "^18.2.12",
+    "@angular/ssr": "^18.2.14",
     "@ngxs/devtools-plugin": "^18.1.6",
     "@ngxs/logger-plugin": "^18.1.6",
     "@ngxs/store": "^18.1.6",
