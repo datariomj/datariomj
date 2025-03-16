@@ -140,6 +140,12 @@ stages:
     jobs:
       - job: Publish
         steps:
+          - checkout: self
+            clean: true
+            persistCredentials: true
+            name: CheckoutRepo
+            displayName: Checkout Repository
+
           - task: Cache@2
             displayName: Cache npm
             inputs:
