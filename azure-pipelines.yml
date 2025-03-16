@@ -162,6 +162,7 @@ stages:
               echo "##vso[task.setvariable variable=version]$version"
               npm run generate:changelog:release
               git add CHANGELOG.md
+              git checkout -b main
               git commit -m "chore: update changelog $version"
               git tag -a $version -m "Release $version"
               git push origin main --tags
