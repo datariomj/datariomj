@@ -24,7 +24,10 @@
     "e2e": "ng e2e",
     "e2e:ci": "ng run datariomj:e2e-ci",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "generate:changelog": "git-cliff > CHANGELOG.md",
+    "changelog:version": "git-cliff --bumped-version",
+    "generate:changelog:release": "git-cliff --config cliff.toml > CHANGELOG.md"
   },
   "private": true,
   "dependencies": {
@@ -75,6 +78,7 @@
     "eslint-plugin-jsdoc": "^48.0.2",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "git-cliff": "^2.8.0",
     "http-server": "^14.1.1",
     "jasmine-core": "~5.1.1",
     "jasmine-spec-reporter": "~7.0.0",

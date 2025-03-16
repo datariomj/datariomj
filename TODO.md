@@ -8,7 +8,6 @@
 - add request caching
 - revamp preloader
 - implement placeholder component
-- create release note generate
 
 ## Sidenav
 

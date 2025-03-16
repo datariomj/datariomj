@@ -103,3 +103,21 @@ stages:
                   displayName: Upload to S3
                 - script: aws cloudfront create-invalidation --distribution-id $(targetCloudfrontDistributionId) --paths '/*'
                   displayName: Invalidate CloudFront
+
+  - stage: PostDeployment
+    dependsOn: Deployment
+    condition: and(ne(variables.isPR, true), eq(variables.isMain, true))
+    jobs:
+      - job: CreateChangelogAndTag
+        steps:
+          - checkout: self
+            displayName: Checkout Repository
+          - script: |
+              version=$(npm run changelog:version)
+              echo "##vso[task.setvariable variable=version]$version"
+              git cliff --config cliff.toml > CHANGELOG.md
+              git add CHANGELOG.md
+              git commit -m "chore: update changelog $version"
+              git tag -a $version -m "Release $version"
+              git push origin main --tags
+            displayName: Generate Changelog and Tag
