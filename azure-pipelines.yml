@@ -14,12 +14,6 @@ stages:
     jobs:
       - job: Init
         steps:
-          - checkout: self
-            clean: true
-            name: CheckoutRepo
-            displayName: Checkout Repository
-          - script: npm ci
-            displayName: Run npm ci
           - task: Cache@2
             displayName: Cache npm
             inputs:
@@ -28,15 +22,28 @@ stages:
                 npm | "$(Agent.OS)"
               path: /home/agent/.npm
 
+          - script: npm ci
+            displayName: Run npm ci
+
   - stage: Lint
     dependsOn: Init
     jobs:
       - job: Lint
         steps:
+          - task: Cache@2
+            displayName: Cache npm
+            inputs:
+              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                npm | "$(Agent.OS)"
+              path: /home/agent/.npm
+
           - script: npm ci
             displayName: Run npm install
+          
           - script: npm run lint
             displayName: Run Angular lints
+          
           - script: npm run lint:styles
             displayName: Run style lints
 
@@ -45,8 +52,17 @@ stages:
     jobs:
       - job: Test
         steps:
+          - task: Cache@2
+            displayName: Cache npm
+            inputs:
+              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                npm | "$(Agent.OS)"
+              path: /home/agent/.npm
+
           - script: npm ci
             displayName: Run npm install
+          
           - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
             displayName: Run E2E tests
 
@@ -55,14 +71,25 @@ stages:
     jobs:
       - job: Build
         steps:
+          - task: Cache@2
+            displayName: Cache npm
+            inputs:
+              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                npm | "$(Agent.OS)"
+              path: /home/agent/.npm
+
           - script: npm ci
             displayName: Run npm install
+          
           - script: npm run build:$(environment)
             displayName: Run build
+          
           - script: |
               mv $(distPath)/robots.prod.txt $(distPath)/robots.txt
             condition: eq(variables.isMain, true)
             displayName: Apply robots.txt
+          
           - publish: $(distPath)
             displayName: Publish Web App
             condition: eq(variables.isPR, false)
@@ -104,18 +131,30 @@ stages:
                 - script: aws cloudfront create-invalidation --distribution-id $(targetCloudfrontDistributionId) --paths '/*'
                   displayName: Invalidate CloudFront
 
-  - stage: PostDeployment
-    dependsOn: Deployment
+  - stage: Publish
+    dependsOn:
+      - Lint
+      - Test
+      - Build
     condition: and(ne(variables.isPR, true), eq(variables.isMain, true))
     jobs:
-      - job: CreateChangelogAndTag
+      - job: Publish
         steps:
-          - checkout: self
-            displayName: Checkout Repository
+          - task: Cache@2
+            displayName: Cache npm
+            inputs:
+              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                npm | "$(Agent.OS)"
+              path: /home/agent/.npm
+              
+          - script: npm ci
+            displayName: Run npm install
+
           - script: |
               version=$(npm run changelog:version)
               echo "##vso[task.setvariable variable=version]$version"
-              git cliff --config cliff.toml > CHANGELOG.md
+              npm run generate:changelog:release
               git add CHANGELOG.md
               git commit -m "chore: update changelog $version"
               git tag -a $version -m "Release $version"
