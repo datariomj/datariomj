@@ -165,6 +165,5 @@ stages:
             displayName: Generate Changelog
 
           - script: |
-              echo "$GH_TOKEN" | gh auth login --with-token
               gh release create $version --title "Release $version" --notes-file CHANGELOG.md
             displayName: Create GitHub Release
