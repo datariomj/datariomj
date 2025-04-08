@@ -166,4 +166,6 @@ stages:
 
           - script: |
               gh release create $version --title "Release $version" --notes-file CHANGELOG.md
+            env:
+              GH_TOKEN: $(GH_TOKEN)
             displayName: Create GitHub Release

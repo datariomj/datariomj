@@ -38,7 +38,7 @@
 [cypress]: https://dashboard.cypress.io/projects/3zwyy9/runs
 [codacy]: https://app.codacy.com/gh/datariomj/datariomj/dashboard
 [uptime_robot]: https://stats.uptimerobot.com/AGzj9HrMEo
-[version]: https://github.com/datariomj/datariomj/blob/main/package.json
+[version]: https://github.com/datariomj/datariomj/releases
 [license]: https://github.com/datariomj/datariomj/blob/main/LICENSE.md
 
 [typescript]: https://www.typescriptlang.org
