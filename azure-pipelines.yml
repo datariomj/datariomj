@@ -162,9 +162,6 @@ stages:
               version=$(npm run changelog:version | tail -n 1 | tr -d '\n')
               echo "##vso[task.setvariable variable=version]$version"
               npm run generate:changelog:release
-            displayName: Generate Changelog
-
-          - script: |
               gh release create $version --title "Release $version" --notes-file CHANGELOG.md
             env:
               GH_TOKEN: $(GH_TOKEN)
