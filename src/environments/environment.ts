@@ -5,14 +5,7 @@
 export const environment = {
   production: false,
   version: '0.1.0',
-  hostUrl: 'http://localhost:4200',
-  contentful: {
-    host: 'https://cdn.contentful.com',
-    hostGraphQL: 'https://graphql.contentful.com',
-    environment: 'master',
-    space: 's5tpeora8n1x',
-    accessToken: 'dTTJKMDYBBneMpjykSXggLlZTBYn004i_AUlRFvmScc', // read only
-  },
+  hostUrl: 'https://datariomj.dev',
   facebook: {
     appId: '',
   },

@@ -1,28 +1,29 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
-import { And, Before, Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {
+  Before,
+  Given,
+  Then,
+  When,
+} from "@badeball/cypress-cucumber-preprocessor";
 
 // Before(() => {
 //   cy.intercept('post', '/sockjs-node/**', {}).as('postWebsocket');
 //   cy.intercept('GET', '/sockjs-node/**', {}).as('getWebsocket');
 // });
 
-Given('User visits home page', () => {
-  cy.visit(`${ Cypress.config().baseUrl }`);
+When("User clicks contact button from sidenav", () => {
+  cy.get("[data-cy=nav-contact]:visible").click();
 });
 
-When('User clicks contact button from sidenav', () => {
-  cy.get('[data-cy=nav-contact]:visible').click();
+Then("User will see contact dialog", () => {
+  cy.get("[data-cy=contact-form]").should("be.visible");
 });
 
-And('User will see contact dialog', () => {
-  cy.get('[data-cy=contact-form]').should('be.visible');
+When("User clicks cancel button from contact dialog", () => {
+  cy.get("[data-cy=contact-cancel]").click();
 });
 
-And('User clicks cancel button from contact dialog', () => {
-  cy.get('[data-cy=contact-cancel]').click();
-});
-
-Then('User will not see contact dialog', () => {
-  cy.get('[data-cy=contact-form]').should('not.exist');
+Then("User will not see contact dialog", () => {
+  cy.get("[data-cy=contact-form]").should("not.exist");
 });

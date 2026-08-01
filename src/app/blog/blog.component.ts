@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { SeoService } from '@core/services/seo.service';
 
 @Component({
@@ -9,9 +9,7 @@ import { SeoService } from '@core/services/seo.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogComponent implements OnInit {
-  constructor(
-    private seo: SeoService,
-  ) { }
+  private seo = inject(SeoService);
 
   ngOnInit(): void {
     this.seo.generateTags({

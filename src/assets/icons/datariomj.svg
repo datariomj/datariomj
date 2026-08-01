@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
+  <!-- Outer Terminal Window -->
+  <rect x="0" y="0" width="300" height="300" rx="16" fill="#3b3d42"/>
+
+  <!-- Inner Terminal Screen -->
+  <rect x="10" y="46" width="280" height="244" rx="4" fill="#1d1e21"/>
+
+  <!-- Window Controls -->
+  <circle cx="30" cy="23" r="8.5" fill="#798681"/>
+  <circle cx="58" cy="23" r="8.5" fill="#798681"/>
+  <circle cx="86" cy="23" r="8.5" fill="#798681"/>
+
+  <!-- Terminal Content (Green Symbols) -->
+  <g stroke="#27ae72" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Sigma symbol -->
+    <path d="M 120 152 L 45 152 L 93 206 L 45 260 L 120 260"/>
+    
+    <!-- Underscore -->
+    <line x1="140" y1="260" x2="185" y2="260"/>
+    
+    <!-- Cursor -->
+    <line x1="205" y1="150" x2="205" y2="260"/>
+  </g>
+</svg>

@@ -46,6 +46,7 @@ testem.log
 /cypress/screenshots/*
 /cypress/results/*
 documentation
+src/videos/*
 
 # System Files
 .DS_Store

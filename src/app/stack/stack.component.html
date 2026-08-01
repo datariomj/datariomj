@@ -1,10 +1,131 @@
-<div class="stack">
-  <div class="stack__container">
-    <div>
-      <h1>Technology Stack</h1>
-    </div>
-    <div class="stack__card-wrapper">
-      <app-stack-card *ngFor="let stackDatum of (stack$ | async)" [stackData]="stackDatum" data-cy="stack-card"></app-stack-card>
-    </div>
+<!-- Hero Header -->
+<header class="mb-4">
+  <div class="flex items-center gap-2 text-text-muted mb-4">
+    <span class="font-jetbrains text-xs uppercase tracking-widest text-primary">Inventory</span>
+    <div class="h-px grow bg-border-hairline"></div>
+  </div>
+  <h1 class="font-jetbrains text-3xl md:text-5xl text-primary mb-4">STACK // ARCHITECTURE</h1>
+  <p class="font-inter text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+    Infrastructure as a product. A curated selection of technologies focused on zero-trust security, immutable deployments, and hyper-scalable cloud-native patterns.
+  </p>
+  <div class="mt-8">
+    <app-terminal-hero></app-terminal-hero>
+  </div>
+</header>
+
+<!-- Filter & Search Controls Bar -->
+<section class="bg-surface-matte border border-border-hairline p-4 mb-8 rounded-lg flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
+  <!-- Search Input -->
+  <div class="relative flex-grow max-w-md">
+    <span class="absolute left-3 top-1/2 -translate-y-1/2 font-jetbrains text-xs text-primary pointer-events-none">$ grep</span>
+    <input 
+      type="text" 
+      [value]="searchQuery" 
+      (input)="onSearchInput($event)"
+      placeholder="filter stack by tech or keyword..." 
+      aria-label="Filter technologies"
+      class="w-full bg-surface-container-high border border-border-hairline pl-16 pr-4 py-2 font-jetbrains text-xs text-text-crisp rounded focus:outline-none focus:border-primary transition-colors">
+  </div>
+
+  <!-- Category Filter Buttons -->
+  <div class="flex flex-wrap gap-2 items-center">
+    <button 
+      (click)="setCategory('all')" 
+      [class.active-filter]="selectedCategory === 'all'"
+      class="filter-btn font-jetbrains text-xs px-3 py-1.5 border border-border-hairline text-text-muted hover:text-text-crisp transition-all cursor-pointer">
+      [ ALL ]
+    </button>
+    <button 
+      (click)="setCategory('ops')" 
+      [class.active-filter]="selectedCategory === 'ops'"
+      class="filter-btn font-jetbrains text-xs px-3 py-1.5 border border-border-hairline text-text-muted hover:text-text-crisp transition-all cursor-pointer">
+      [ OPS & SRE ]
+    </button>
+    <button 
+      (click)="setCategory('iac')" 
+      [class.active-filter]="selectedCategory === 'iac'"
+      class="filter-btn font-jetbrains text-xs px-3 py-1.5 border border-border-hairline text-text-muted hover:text-text-crisp transition-all cursor-pointer">
+      [ IaC ]
+    </button>
+    <button 
+      (click)="setCategory('dev')" 
+      [class.active-filter]="selectedCategory === 'dev'"
+      class="filter-btn font-jetbrains text-xs px-3 py-1.5 border border-border-hairline text-text-muted hover:text-text-crisp transition-all cursor-pointer">
+      [ APP DEV ]
+    </button>
+  </div>
+</section>
+
+<!-- Match Counter & Status -->
+<div class="flex justify-between items-center mb-6">
+  <span class="font-jetbrains text-xs text-text-muted">
+    [ MATCHED <span class="text-primary font-bold">{{ totalVisibleItems }}</span> OF {{ totalItems }} MODULES ]
+  </span>
+  <div class="flex items-center gap-2">
+    <span class="font-jetbrains text-xs text-text-muted">SORT:</span>
+    <button 
+      (click)="setSortBy('default')" 
+      [class.text-primary]="sortBy === 'default'"
+      class="font-jetbrains text-xs text-text-muted hover:text-text-crisp cursor-pointer bg-transparent border-0 p-0">
+      DEFAULT
+    </button>
+    <span class="text-border-hairline">|</span>
+    <button 
+      (click)="setSortBy('name')" 
+      [class.text-primary]="sortBy === 'name'"
+      class="font-jetbrains text-xs text-text-muted hover:text-text-crisp cursor-pointer bg-transparent border-0 p-0">
+      NAME
+    </button>
   </div>
 </div>
+
+<!-- Stacks Matrix -->
+@if (filteredCategories.length > 0) {
+  <section class="flex flex-col gap-10 mb-20">
+    @for (category of filteredCategories; track category.id) {
+      <div class="flex flex-col gap-4">
+        <div class="flex justify-between items-end border-b border-border-hairline pb-2">
+          <h2 class="font-jetbrains text-xl text-primary m-0">{{ category.title }}</h2>
+          <span class="font-jetbrains text-xs text-text-muted">{{ category.subtitle }}</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          @for (item of category.items; track item.name) {
+            <div class="bg-surface-matte border border-border-hairline p-4 transition-colors hover:border-primary group rounded-lg" data-cy="stack-card">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="font-jetbrains text-sm text-text-muted mb-1">{{ item.command }}</div>
+                  <div class="font-jetbrains text-xl text-text-crisp m-0">{{ item.name }}</div>
+                </div>
+                <span class="font-jetbrains text-xs text-primary">{{ item.status }}</span>
+              </div>
+              <p class="mt-2 text-on-surface-variant text-base leading-relaxed mb-0">{{ item.description }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </section>
+} @else {
+  <!-- Empty State when filter matches zero items -->
+  <section class="bg-surface-matte border border-border-hairline p-8 mb-20 rounded-lg text-center font-jetbrains">
+    <div class="w-12 h-12 rounded-full bg-surface-container-high border border-border-hairline flex items-center justify-center mx-auto mb-3">
+      <i class="fa-solid fa-magnifying-glass text-primary text-lg"></i>
+    </div>
+    <h3 class="text-text-crisp text-base mb-1">NO MATCHING STACK MODULES</h3>
+    <p class="text-text-muted text-xs max-w-md mx-auto mb-4">
+      No technologies matched your filter query "<span class="text-primary">{{ searchQuery }}</span>".
+    </p>
+    <button (click)="resetFilters()" class="px-4 py-2 font-jetbrains text-xs border border-primary text-primary hover:bg-primary hover:text-background transition-all cursor-pointer bg-transparent">
+      [ RESET_FILTERS ]
+    </button>
+  </section>
+}
+
+<!-- Quick Connect CTA -->
+<section class="pt-10 border-t border-border-hairline flex flex-col items-center gap-4 text-center">
+  <h4 class="font-jetbrains text-xl text-primary m-0">Interested in architectural deep-dives?</h4>
+  <div class="flex flex-col md:flex-row gap-4">
+    <a routerLink="/experience" class="px-6 py-3 font-jetbrains text-sm transition-all no-underline cursor-pointer border border-primary text-primary hover:bg-primary hover:text-background">[ VIEW_EXPERIENCE ]</a>
+    <a routerLink="/contact" class="px-6 py-3 font-jetbrains text-sm transition-all no-underline cursor-pointer border border-on-surface-variant text-on-surface-variant hover:bg-on-surface-variant hover:text-background">[ CONTACT ]</a>
+  </div>
+</section>

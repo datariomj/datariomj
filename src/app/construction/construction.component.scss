@@ -1,4 +1,4 @@
-@import 'mixins';
+@use "mixins";
 
 .construction {
   position: absolute;
@@ -9,7 +9,7 @@
   justify-content: center;
   top: -95px;
 
-  @include breakpoint(lg) {
+  @include mixins.breakpoint(lg) {
     top: -25px;
     align-items: center;
   }

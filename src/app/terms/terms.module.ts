@@ -6,9 +6,10 @@ import { TermsRoutingModule } from './terms-routing.module';
 
 
 @NgModule({
-  declarations: [TermsComponent],
+  declarations: [],
   imports: [
     CommonModule,
+    TermsComponent,
     TermsRoutingModule,
   ],
 })

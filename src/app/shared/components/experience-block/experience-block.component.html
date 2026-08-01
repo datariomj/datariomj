@@ -1,0 +1,68 @@
+<div class="experience-block" [ngClass]="{'is-current': isCurrent}">
+  <!-- Header -->
+  <div class="experience-header">
+    <div class="header-left">
+      <div class="flex items-center gap-2 flex-wrap mb-1">
+        <h3 class="experience-title">{{ title }}</h3>
+        @if (badge) {
+          <span class="role-badge">{{ badge }}</span>
+        }
+      </div>
+      <div class="flex items-center gap-3 text-xs text-text-muted">
+        <span class="experience-company font-bold">{{ company }}</span>
+        @if (location) {
+          <span class="location-tag flex items-center gap-1">
+            <i class="fa-solid fa-location-dot text-primary"></i> {{ location }}
+          </span>
+        }
+      </div>
+    </div>
+    <div class="experience-date-box">{{ dateRange }}</div>
+  </div>
+
+  <!-- Bullet Items -->
+  <ul class="experience-list">
+    @for (item of items; track item) {
+      <li [ngClass]="{'is-current': isCurrent}">
+        @if (isCurrent) {
+          <span class="bullet">$</span>
+        }
+        @if (!isCurrent) {
+          <span class="bullet-inactive">$</span>
+        }
+        <span class="content">{{ item }}</span>
+      </li>
+    }
+  </ul>
+
+  <!-- Tech Stack Badges -->
+  @if (technologies.length > 0) {
+    <div class="tech-stack-container mt-4 pt-3 border-t border-border-hairline flex flex-wrap items-center gap-1.5">
+      <span class="font-jetbrains text-xs text-text-muted mr-1">TECH_STACK:</span>
+      @for (tech of technologies; track tech) {
+        <span class="tech-tag">{{ tech }}</span>
+      }
+    </div>
+  }
+
+  <!-- Expandable Key Metrics -->
+  @if (metrics.length > 0) {
+    <div class="metrics-container mt-3">
+      <button (click)="toggleMetrics()" class="metrics-toggle-btn font-jetbrains text-xs cursor-pointer bg-transparent border-0 p-0 flex items-center gap-1.5 text-primary hover:underline">
+        <i class="fa-solid" [class.fa-chevron-down]="!showMetrics" [class.fa-chevron-up]="showMetrics"></i>
+        <span>{{ showMetrics ? '[ HIDE_KEY_METRICS ]' : '[ SHOW_KEY_METRICS ]' }}</span>
+      </button>
+
+      @if (showMetrics) {
+        <div class="metrics-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mt-3 p-3 bg-surface-container-high border border-border-hairline rounded font-jetbrains">
+          @for (m of metrics; track m.label) {
+            <div class="metric-card flex flex-col">
+              <span class="text-xs text-text-muted uppercase tracking-wider">{{ m.label }}</span>
+              <span class="text-sm font-bold text-primary">{{ m.value }}</span>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>
