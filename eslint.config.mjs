@@ -6,6 +6,18 @@ import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 export default tseslint.config(
   {
+    ignores: [
+      "dist/**",
+      ".angular/**",
+      "node_modules/**",
+      "coverage/**",
+      "documentation/**",
+      "cypress/**",
+      "cypress.config.ts",
+      "src/videos/**",
+    ],
+  },
+  {
     files: ["**/*.ts"],
     extends: [
       eslint.configs.recommended,
