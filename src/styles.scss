@@ -1,12 +1,163 @@
-@import "utilities";
-@import "mat-theme";
+@use "utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html,
-body {
+/* Modern Glassmorphism & Color Variables */
+:root {
+  /* Colors */
+  --color-surface: #121316;
+  --color-surface-dim: #121316;
+  --color-surface-bright: #38393c;
+  --color-surface-container-lowest: #0d0e11;
+  --color-surface-container-low: #1b1b1f;
+  --color-surface-container: #1f1f23;
+  --color-surface-container-high: #292a2d;
+  --color-surface-container-highest: #343538;
+  --color-on-surface: #e3e2e6;
+  --color-on-surface-variant: #bbcabf;
+  --color-inverse-surface: #e3e2e6;
+  --color-inverse-on-surface: #303034;
+  --color-outline: #86948a;
+  --color-outline-variant: #3c4a42;
+  --color-surface-tint: #10b981;
+  --color-primary: #10b981;
+  --color-on-primary: #003824;
+  --color-primary-container: #10b981;
+  --color-on-primary-container: #00422b;
+  --color-inverse-primary: #006c49;
+  --color-secondary: #b7c8e1;
+  --color-on-secondary: #213145;
+  --color-secondary-container: #3a4a5f;
+  --color-on-secondary-container: #a9bad3;
+  --color-tertiary: #ffb3af;
+  --color-on-tertiary: #650911;
+  --color-tertiary-container: #fc7c78;
+  --color-on-tertiary-container: #711419;
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+  --color-background: #121316;
+  --color-on-background: #e3e2e6;
+  --color-canvas-deep: #0d0e11;
+  --color-surface-matte: #16181d;
+  --color-text-crisp: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-border-hairline: #27272a;
+  --color-terminal-green: #10b981;
+  --color-glass-bg: rgb(22 24 29 / 75%);
+  --color-glass-border: rgb(255 255 255 / 8%);
+
+  /* Typography */
+  --font-inter: 'Inter', sans-serif;
+  --font-jetbrains: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --spacing-max-width: 48rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-stack-sm: 0.5rem;
+  --spacing-stack-md: 1rem;
+  --spacing-stack-lg: 2.5rem;
+  --spacing-section-gap: 5rem;
+}
+
+html {
+  scroll-behavior: smooth;
   height: 100%;
 }
 
 body {
   margin: 0;
-  font-family: Poppins, "Helvetica Neue", sans-serif;
+  height: 100%;
+  background-color: var(--color-canvas-deep);
+  color: var(--color-on-surface);
+  font-family: var(--font-inter);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
+
+h1 {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.35rem, 3vw, 2.25rem);
+}
+
+h3 {
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-jetbrains);
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-canvas-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(255 255 255 / 15%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Mobile spacing adjustments */
+@media (width <= 768px) {
+  :root {
+    --spacing-section-gap: 3rem;
+    --spacing-stack-lg: 1.5rem;
+    --spacing-gutter: 1rem;
+  }
+}
+
+@layer components {
+  .brutal-box {
+    @apply border border-border-hairline bg-surface-matte p-[var(--spacing-stack-lg)] mb-[var(--spacing-stack-lg)] rounded-lg transition-all duration-300;
+
+    background: var(--color-glass-bg);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgb(0 0 0 / 20%);
+  }
+
+  .brutal-box:hover {
+    border-color: rgb(16 185 129 / 30%);
+    box-shadow: 0 8px 30px rgb(16 185 129 / 8%);
+  }
+
+  .brutal-hover {
+    @apply p-4 transition-all duration-200 border-l-2 border-transparent hover:border-primary rounded-r-lg;
+  }
+
+  .section-header {
+    @apply flex flex-col md:flex-row justify-between md:items-end mb-[var(--spacing-stack-lg)] border-b border-border-hairline pb-2 gap-2 md:gap-0;
+  }
+
+  .section-header h2 {
+    @apply font-jetbrains text-2xl md:text-3xl uppercase tracking-tighter text-primary m-0;
+  }
+
+  .section-badge {
+    @apply font-jetbrains text-xs md:text-sm text-text-muted mb-1;
+  }
+
+  .label-focused {
+    @apply text-primary !important;
+  }
+}
+

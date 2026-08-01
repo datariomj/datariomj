@@ -1,16 +1,20 @@
-import { enableProdMode, ViewEncapsulation } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { provideHttpClient, withInterceptorsFromDi,withXhr } from '@angular/common/http';
+import { importProvidersFrom,provideZonelessChangeDetection } from '@angular/core';
+import { bootstrapApplication,BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { NgxsStoreModule } from '@store/store.module';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+import { AppComponent } from './app/app.component';
+import { AppRoutingModule } from './app/app-routing.module';
 
-if (environment.production) {
-  enableProdMode();
-}
 
 document.addEventListener('DOMContentLoaded', () => {
-  platformBrowserDynamic().bootstrapModule(AppModule, {
-  defaultEncapsulation: ViewEncapsulation.None,
-})
-  .catch(err => console.error(err));
+  bootstrapApplication(AppComponent, {
+    providers: [
+        importProvidersFrom(BrowserModule, AppRoutingModule, BrowserAnimationsModule, ServiceWorkerModule.register("ngsw-worker.js", { enabled: false }), NgxsStoreModule),
+        provideZonelessChangeDetection(),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
+    ],
+}).catch(err => console.error(err));
 });

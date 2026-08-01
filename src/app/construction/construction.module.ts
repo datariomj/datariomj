@@ -6,9 +6,10 @@ import { ConstructionRoutingModule } from './construction-routing.module';
 
 
 @NgModule({
-  declarations: [ConstructionComponent],
+  declarations: [],
   imports: [
     CommonModule,
+    ConstructionComponent,
     ConstructionRoutingModule,
   ],
 })

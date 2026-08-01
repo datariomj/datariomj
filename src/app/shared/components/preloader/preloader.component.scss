@@ -1,10 +1,88 @@
-.spinner {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+.preloader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: rgb(255 255 255 / 20%);
-  z-index: 999;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: var(--color-canvas-deep);
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgb(16 185 129 / 5%) 0%, transparent 70%),
+    linear-gradient(rgb(255 255 255 / 2%) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 4px;
+  backdrop-filter: blur(12px);
+}
+
+.preloader-window {
+  width: 100%;
+  max-width: 540px;
+  background: var(--color-surface-matte);
+  border: 1px solid var(--color-border-hairline);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 60%), 0 0 20px rgb(16 185 129 / 15%);
+  margin: 0;
+}
+
+.preloader-header {
+  background-color: var(--color-surface-container-high);
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border-hairline);
+}
+
+.preloader-dots {
+  display: flex;
+  gap: 0.4rem;
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
+    &.red-dot { background-color: var(--color-error); }
+    &.yellow-dot { background-color: var(--color-secondary); }
+    &.green-dot { background-color: var(--color-primary); }
+  }
+}
+
+.preloader-title {
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.preloader-body {
+  padding: 1.25rem;
+  color: var(--color-on-surface);
+}
+
+.logs-container {
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.log-line {
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+}
+
+.progress-track {
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-surface-container-high);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--color-primary);
+  box-shadow: 0 0 10px var(--color-primary);
+  transition: width 0.15s ease-out;
 }
