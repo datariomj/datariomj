@@ -21,7 +21,8 @@
     "lighthouse": "cypress run --browser chrome --spec cypress/e2e/lighthouse.cy.ts",
     "generate:changelog": "git-cliff > CHANGELOG.md",
     "changelog:version": "git-cliff --bumped-version",
-    "generate:changelog:release": "git-cliff --config cliff.toml > CHANGELOG.md"
+    "generate:changelog:release": "git-cliff --config cliff.toml > CHANGELOG.md",
+    "test:ci": "ng test --no-watch"
   },
   "private": true,
   "dependencies": {
@@ -33,9 +34,9 @@
     "@angular/platform-browser": "^22.0.7",
     "@angular/router": "^22.0.7",
     "@angular/service-worker": "^22.0.7",
-    "@ngxs/devtools-plugin": "^21.0.0",
-    "@ngxs/logger-plugin": "^21.0.0",
-    "@ngxs/store": "^21.0.0",
+    "@ngxs/devtools-plugin": "^22.0.0",
+    "@ngxs/logger-plugin": "^22.0.0",
+    "@ngxs/store": "^22.0.0",
     "rxjs": "^7.8.2",
     "tslib": "^2.8.1"
   },
@@ -54,7 +55,7 @@
     "@cypress-audit/lighthouse": "^1.4.2",
     "@cypress/schematic": "^2.5.1",
     "@eslint/eslintrc": "^3.3.6",
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "^9.36.0",
     "@types/jasmine": "^5.1.15",
     "@types/node": "^24.5.2",
     "@typescript-eslint/eslint-plugin": "^8.44.1",

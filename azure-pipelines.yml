@@ -11,13 +11,10 @@ pr:
       - release
 
 variables:
-  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
-  isRelease: $[eq(variables['Build.SourceBranch'], 'refs/heads/release')]
-  isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
   distPath: dist/datariomj/browser
   artifactName: WebApp
-  npmConfigCache: $(Pipeline.Workspace)/.npm
-  ${{ if eq(variables['isMain'], true) }}:
+  npm_config_cache: $(Pipeline.Workspace)/.npm
+  ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
     environment: prod
   ${{ else }}:
     environment: 'staging'
@@ -33,7 +30,7 @@ stages:
               key: 'npm | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
                 npm | "$(Agent.OS)"
-              path: $(npmConfigCache)
+              path: $(npm_config_cache)
 
           - script: npm ci
             displayName: Run npm ci
@@ -49,7 +46,7 @@ stages:
               key: 'npm | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
                 npm | "$(Agent.OS)"
-              path: $(npmConfigCache)
+              path: $(npm_config_cache)
 
           - script: npm ci
             displayName: Run npm install
@@ -64,6 +61,8 @@ stages:
               version=$(npm run changelog:version | tail -n 1 | tr -d '\n')
               echo "##vso[task.setvariable variable=version]$version"
               npm run generate:changelog:release
+            env:
+              GITHUB_TOKEN: $(GH_TOKEN)
             displayName: Generate Changelog
 
   - stage: Test
@@ -77,12 +76,16 @@ stages:
               key: 'npm | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
                 npm | "$(Agent.OS)"
-              path: $(npmConfigCache)
+              path: $(npm_config_cache)
 
           - script: npm ci
             displayName: Run npm install
           
+          - script: npm run test:ci
+            displayName: Run Unit tests
+
           - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
             displayName: Run E2E tests
 
   - stage: Build
@@ -96,7 +99,7 @@ stages:
               key: 'npm | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
                 npm | "$(Agent.OS)"
-              path: $(npmConfigCache)
+              path: $(npm_config_cache)
 
           - script: npm ci
             displayName: Run npm install
@@ -106,12 +109,12 @@ stages:
           
           - script: |
               mv $(distPath)/robots.prod.txt $(distPath)/robots.txt
-            condition: eq(variables.isMain, true)
+            condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
             displayName: Apply robots.txt
           
           - publish: $(distPath)
             displayName: Publish Web App
-            condition: eq(variables.isPR, false)
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
             artifact: $(artifactName)
 
   - stage: Deployment
@@ -119,7 +122,7 @@ stages:
       - Lint
       - Test
       - Build
-    condition: and(ne(variables.isPR, true), or(eq(variables.isMain, true), eq(variables.isRelease, true)))
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/release')))
     jobs:
       - deployment: Deploy
         environment: $(environment)
@@ -131,12 +134,12 @@ stages:
                     echo "##vso[task.setvariable variable=targetS3BukcetId;issecret=true]$(S3_BUCKET_ID)"
                     echo "##vso[task.setvariable variable=targetCloudfrontDistributionId;issecret=true]$(CLOUDFRONT_DISTRIBUTION_ID)"
                   displayName: 'Add AWS Vars for Prod'
-                  condition: eq(variables.isMain, true)
+                  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
                 - script: |
                     echo "##vso[task.setvariable variable=targetS3BukcetId;issecret=true]$(STAGING_S3_BUCKET_ID)"
                     echo "##vso[task.setvariable variable=targetCloudfrontDistributionId;issecret=true]$(STAGING_CLOUDFRONT_DISTRIBUTION_ID)"
                   displayName: 'Add AWS Vars for Staging'
-                  condition: eq(variables.isRelease, true)
+                  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/release'))
                 - checkout: none
                 - download: current
                   artifact: $(artifactName)
@@ -158,7 +161,7 @@ stages:
       - Lint
       - Test
       - Build
-    condition: and(ne(variables.isPR, true), eq(variables.isMain, true))
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     jobs:
       - job: Publish
         steps:
@@ -168,7 +171,7 @@ stages:
               key: 'npm | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
                 npm | "$(Agent.OS)"
-              path: $(npmConfigCache)
+              path: $(npm_config_cache)
               
           - script: npm ci
             displayName: Run npm install
