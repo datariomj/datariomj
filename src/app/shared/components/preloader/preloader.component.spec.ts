@@ -90,6 +90,14 @@ describe('PreloaderComponent', () => {
       vi.advanceTimersByTime(300); // 3 of 5 logs
       expect(component.progress).toBe(60);
     });
+
+    it('clears the interval when the boot sequence completes', () => {
+      const spy = vi.spyOn(globalThis, 'clearInterval');
+      component.runBootSequence();
+      vi.advanceTimersByTime(600);
+      expect(spy).toHaveBeenCalled();
+      spy.mockRestore();
+    });
   });
 
   describe('ngOnInit', () => {
@@ -97,6 +105,12 @@ describe('PreloaderComponent', () => {
       fixture.detectChanges(); // triggers ngOnInit which calls runBootSequence
       vi.advanceTimersByTime(700);
       expect(component.displayedLogs.length).toBe(5);
+    });
+
+    it('clears interval and sets progress to 100 when boot sequence completes', () => {
+      fixture.detectChanges();
+      vi.advanceTimersByTime(1000);
+      expect(component.progress).toBe(100);
     });
   });
 
@@ -106,5 +120,15 @@ describe('PreloaderComponent', () => {
       vi.advanceTimersByTime(100);
       expect(() => fixture.destroy()).not.toThrow();
     });
+  });
+
+  it('renders non-OK/READY statuses using the secondary label style', () => {
+    fixture.detectChanges();
+    vi.advanceTimersByTime(100);
+
+    component.displayedLogs.push({ timestamp: '0.999s', message: 'INFO LOG', status: 'INFO' });
+    fixture.detectChanges();
+
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('[INFO]');
   });
 });

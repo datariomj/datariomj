@@ -7,8 +7,8 @@ import { SeoService } from './seo.service';
 
 describe('SeoService', () => {
   let service: SeoService;
-  let mockTitle: { setTitle: ReturnType<typeof vi.fn> };
-  let mockMeta: { updateTag: ReturnType<typeof vi.fn> };
+  let mockTitle: { setTitle: ReturnType<typeof vi.fn>; };
+  let mockMeta: { updateTag: ReturnType<typeof vi.fn>; };
   let mockDocument: Document;
 
   beforeEach(() => {
@@ -112,13 +112,35 @@ describe('SeoService', () => {
     it('includes the slug in og:url', () => {
       service.generateTags({ slug: 'about' });
       expect(mockMeta.updateTag).toHaveBeenCalledWith(
-        expect.objectContaining({ property: 'og:url', content: expect.stringContaining('about') }),
+        expect.objectContaining({ property: 'og:url', content: expect.stringContaining('/about') }),
       );
     });
 
     it('calls updateTag multiple times (all meta tags)', () => {
       service.generateTags({ title: 'Test' });
       expect(mockMeta.updateTag.mock.calls.length).toBeGreaterThan(5);
+    });
+
+    it('falls back gracefully when document URL is not a valid URL', () => {
+      (mockDocument as unknown as { URL: string; }).URL = 'not-a-valid-url';
+      service.generateTags({ slug: '/about', image: '/assets/images/x.png' });
+
+      expect(mockMeta.updateTag).toHaveBeenCalledWith(
+        expect.objectContaining({ property: 'og:site_name', content: 'datariomj.dev' }),
+      );
+      expect(mockMeta.updateTag).toHaveBeenCalledWith(
+        expect.objectContaining({ name: 'twitter:image', content: '/assets/images/x.png' }),
+      );
+      expect(mockMeta.updateTag).toHaveBeenCalledWith(
+        expect.objectContaining({ property: 'og:url', content: 'not-a-valid-url' }),
+      );
+    });
+
+    it('keeps an empty image value as-is', () => {
+      service.generateTags({ image: '' });
+      expect(mockMeta.updateTag).toHaveBeenCalledWith(
+        expect.objectContaining({ name: 'twitter:image', content: '' }),
+      );
     });
   });
 
@@ -153,7 +175,7 @@ describe('SeoService', () => {
 
       expect(mockLink.setAttribute).toHaveBeenCalledWith(
         'href',
-        expect.stringContaining('contact'),
+        expect.stringContaining('/contact'),
       );
     });
 

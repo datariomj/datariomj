@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { inject,Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from '@env/environment';
 
@@ -11,8 +11,37 @@ export class SeoService {
   private title = inject(Title);
   private meta = inject(Meta);
 
+  private getOrigin(): string {
+    try {
+      return new URL(this.doc.URL).origin;
+    } catch {
+      return '';
+    }
+  }
 
-  generateTags(config: Partial<{ title: string; description: string; keywords: string; image: string; slug: string }>): void {
+  private toAbsoluteUrl(url: string): string {
+    if (!url) return url;
+    try {
+      const base = this.getOrigin() || this.doc.URL;
+      return new URL(url, base).toString();
+    } catch {
+      return url;
+    }
+  }
+
+  private toAbsoluteSlugUrl(slug?: string): string {
+    if (!slug) return this.doc.URL;
+    try {
+      const cleanSlug = slug.replace(/^\//, '');
+      const base = this.getOrigin() || this.doc.URL;
+      return new URL(`/${ cleanSlug }`, base).toString();
+    } catch {
+      return this.doc.URL;
+    }
+  }
+
+
+  generateTags(config: Partial<{ title: string; description: string; keywords: string; image: string; slug: string; }>): void {
     const finalConfig = {
       title: 'MJ Datario',
       description: 'Marc Joseph Datario\'s portfolio',
@@ -22,9 +51,15 @@ export class SeoService {
       ...config,
     };
 
-    if (environment.production) {
-      finalConfig.image = `${ environment.hostUrl }${ finalConfig.image }`;
-    }
+    finalConfig.image = this.toAbsoluteUrl(finalConfig.image);
+
+    const host = (() => {
+      try {
+        return new URL(this.doc.URL).host;
+      } catch {
+        return '';
+      }
+    })();
 
     this.title.setTitle(finalConfig.title);
 
@@ -41,11 +76,11 @@ export class SeoService {
     this.meta.updateTag({ name: 'fb:app_id', content: environment.facebook.appId });
 
     this.meta.updateTag({ property: 'og:type', content: 'website' });
-    this.meta.updateTag({ property: 'og:site_name', content: 'datariomj.dev' });
+    this.meta.updateTag({ property: 'og:site_name', content: host || 'datariomj.dev' });
     this.meta.updateTag({ property: 'og:title', content: finalConfig.title });
     this.meta.updateTag({ property: 'og:description', content: finalConfig.description });
     this.meta.updateTag({ property: 'og:image', content: finalConfig.image });
-    this.meta.updateTag({ property: 'og:url', content: `${ environment.hostUrl }/${ finalConfig.slug }` });
+    this.meta.updateTag({ property: 'og:url', content: this.toAbsoluteSlugUrl(finalConfig.slug) });
 
     this.setCanonicalURL(finalConfig.slug);
   }
@@ -57,7 +92,6 @@ export class SeoService {
       link.setAttribute('rel', 'canonical');
       this.doc.head.appendChild(link);
     }
-    const targetUrl = slug ? `${ environment.hostUrl }/${ slug.replace(/^\//, '') }` : this.doc.URL;
-    link.setAttribute('href', targetUrl);
+    link.setAttribute('href', this.toAbsoluteSlugUrl(slug));
   }
 }

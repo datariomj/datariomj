@@ -115,4 +115,65 @@ describe('ExperienceBlockComponent', () => {
       expect(component.isCurrent).toBe(true);
     });
   });
+
+  describe('template rendering', () => {
+    it('renders badge and location when provided', () => {
+      const f = TestBed.createComponent(ExperienceBlockComponent);
+      const c = f.componentInstance;
+      c.title = 'Title';
+      c.company = 'Company';
+      c.badge = 'LEAD';
+      c.location = 'PH';
+      c.items = ['A'];
+      f.detectChanges();
+
+      const el: HTMLElement = f.nativeElement;
+      expect(el.querySelector('.role-badge')).toBeTruthy();
+      expect(el.querySelector('.role-badge')?.textContent ?? '').toContain('LEAD');
+      expect(el.querySelector('.location-tag')).toBeTruthy();
+      expect(el.querySelector('.location-tag')?.textContent ?? '').toContain('PH');
+    });
+
+    it('renders current vs non-current bullets', () => {
+      const f = TestBed.createComponent(ExperienceBlockComponent);
+      const c = f.componentInstance;
+      c.items = ['A'];
+      c.isCurrent = true;
+      f.detectChanges();
+      expect(f.nativeElement.querySelector('.bullet')).toBeTruthy();
+
+      const f2 = TestBed.createComponent(ExperienceBlockComponent);
+      const c2 = f2.componentInstance;
+      c2.items = ['A'];
+      c2.isCurrent = false;
+      f2.detectChanges();
+      expect(f2.nativeElement.querySelector('.bullet-inactive')).toBeTruthy();
+    });
+
+    it('renders technologies list when provided', () => {
+      const f = TestBed.createComponent(ExperienceBlockComponent);
+      const c = f.componentInstance;
+      c.items = ['A'];
+      c.technologies = ['Terraform', 'AWS'];
+      f.detectChanges();
+      expect(f.nativeElement.querySelectorAll('.tech-tag').length).toBe(2);
+    });
+
+    it('renders metrics when toggled open', () => {
+      const f = TestBed.createComponent(ExperienceBlockComponent);
+      const c = f.componentInstance;
+      c.items = ['A'];
+      c.metrics = MOCK_METRICS;
+      f.detectChanges();
+
+      const btn: HTMLButtonElement | null = f.nativeElement.querySelector('.metrics-toggle-btn');
+      expect(btn).toBeTruthy();
+      btn?.click();
+      f.detectChanges();
+
+      expect(f.nativeElement.querySelector('.metrics-grid')).toBeTruthy();
+      expect(f.nativeElement.textContent).toContain('Uptime');
+      expect(f.nativeElement.textContent).toContain('99.99%');
+    });
+  });
 });

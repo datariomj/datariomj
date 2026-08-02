@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/generated
 # Only exists if Bazel was run
 /bazel-out
 
@@ -52,4 +53,5 @@ src/videos/*
 .DS_Store
 Thumbs.db
 
+.codecov
 CHANGELOG.md

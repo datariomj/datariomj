@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { environment } from '@env/environment';
+import { NavigationLink } from '@shared/interfaces/navigation-link';
 
 @Component({
     selector: 'app-navigation',
@@ -9,9 +11,8 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
     imports: [RouterLink, RouterLinkActive],
 })
 export class NavigationComponent {
-    private router = inject(Router);
-
     isMenuOpen = false;
+    navigationLinks: NavigationLink[] = environment.navigation;
 
     toggleMenu(): void {
         this.isMenuOpen = !this.isMenuOpen;

@@ -5,6 +5,7 @@ import { ChangeDetectionStrategy,Component, EventEmitter, Input, Output } from '
     templateUrl: './terminal-button.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['./terminal-button.component.css'],
+    standalone: true,
 })
 export class TerminalButtonComponent {
   @Input() label = '';
