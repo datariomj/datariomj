@@ -36,9 +36,9 @@ async function resolveSlugFromGit() {
   return undefined;
 }
 
-const token = process.env.CODECOV_API_KEY || process.env.CODECOV_TOKEN;
+const token = process.env.CODECOV_TOKEN || process.env.CODECOV_API_KEY;
 if (!token) {
-  process.stderr.write('Missing CODECOV_API_KEY / CODECOV_TOKEN\n');
+  process.stderr.write('Missing CODECOV_TOKEN / CODECOV_API_KEY\n');
   process.exit(1);
 }
 
@@ -121,6 +121,8 @@ await new Promise((resolve, reject) => {
     token,
     '-f',
     file,
+    '--git-service',
+    'github',
     '--fail-on-error',
   ];
 
@@ -128,14 +130,31 @@ await new Promise((resolve, reject) => {
     args.push('--slug', slug);
   }
 
+  if (process.env.CODECOV_VERBOSE) {
+    args.push('--verbose');
+  }
+
+  process.stdout.write(`Running: ${binPath} upload-process --disable-search -t <hidden> -f ${file} --git-service github${slug ? ` --slug ${slug}` : ''}\n`);
+
   const child = spawn(
     binPath,
     args,
     { stdio: 'inherit' },
   );
   child.on('exit', (code) => {
-    if (code === 0) resolve();
-    else reject(new Error(`Codecov upload failed (${code})`));
+    if (code === 0) {
+      resolve();
+    } else {
+      let message = `Codecov upload failed (${code})`;
+      if (code === 1) {
+        message += `\n\nCommon causes for "Repository not found":\n`;
+        message += `- CODECOV_TOKEN is an API token instead of a repository upload token.\n`;
+        message += `- The token does not belong to ${slug || 'this repository'}.\n`;
+        message += `- The repository is not activated in Codecov.\n`;
+        message += `Get a new upload token at https://app.codecov.io/gh/${slug || 'OWNER/REPO'}/settings`;
+      }
+      reject(new Error(message));
+    }
   });
   child.on('error', reject);
 });

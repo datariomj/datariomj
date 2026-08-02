@@ -104,9 +104,9 @@ stages:
 
           - script: npm run codecov:upload
             env:
-              CODECOV_API_KEY: $(CODECOV_API_KEY)
+              CODECOV_TOKEN: $(CODECOV_TOKEN)
               CODECOV_FILE: coverage/datariomj/clover.xml
-            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), ne(variables['CODECOV_API_KEY'], ''))
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), ne(variables['CODECOV_TOKEN'], ''))
             displayName: Upload coverage to Codecov
 
           # - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
