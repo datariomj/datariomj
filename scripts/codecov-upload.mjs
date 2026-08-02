@@ -14,7 +14,13 @@ if (!token) {
 const file = process.env.CODECOV_FILE || 'coverage/datariomj/clover.xml';
 
 const platform = os.platform();
-const codecovPlatform = platform === 'darwin' ? 'macos' : platform === 'win32' ? 'windows' : 'linux';
+const arch = os.arch();
+
+let codecovPlatform = platform === 'darwin' ? 'macos' : platform === 'win32' ? 'windows' : 'linux';
+if ((platform === 'darwin' || platform === 'linux') && arch === 'arm64') {
+  codecovPlatform = `${codecovPlatform}-arm64`;
+}
+
 const url = `https://cli.codecov.io/latest/${codecovPlatform}/codecov`;
 
 const binDir = path.join(process.cwd(), '.codecov');
