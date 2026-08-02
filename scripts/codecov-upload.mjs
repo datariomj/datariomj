@@ -186,14 +186,11 @@ try {
 await new Promise((resolve, reject) => {
   const args = [
     'upload-process',
-    '--disable-search',
     '-t',
     token,
     '-f',
     coverageFile,
-    '--git-service',
-    'github',
-    '--fail-on-error',
+
   ];
 
   if (slug) {
