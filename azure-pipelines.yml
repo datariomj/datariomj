@@ -14,6 +14,8 @@ variables:
   distPath: dist/datariomj/browser
   artifactName: WebApp
   npm_config_cache: $(Pipeline.Workspace)/.npm
+  npm_config_prefer_offline: true
+  CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
   ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
     environment: prod
     publicUrl: https://datariomj.dev
@@ -23,6 +25,8 @@ variables:
 
 stages:
   - stage: Init
+    variables:
+      CYPRESS_INSTALL_BINARY: '0'
     jobs:
       - job: Init
         steps:
@@ -34,11 +38,13 @@ stages:
                 npm | "$(Agent.OS)"
               path: $(npm_config_cache)
 
-          - script: npm ci
+          - script: npm ci --no-audit --no-fund
             displayName: Run npm ci
 
   - stage: Lint
     dependsOn: Init
+    variables:
+      CYPRESS_INSTALL_BINARY: '0'
     jobs:
       - job: Lint
         steps:
@@ -50,7 +56,7 @@ stages:
                 npm | "$(Agent.OS)"
               path: $(npm_config_cache)
 
-          - script: npm ci
+          - script: npm ci --no-audit --no-fund
             displayName: Run npm install
           
           - script: npm run lint
@@ -69,9 +75,19 @@ stages:
 
   - stage: Test
     dependsOn: Init
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
       - job: Test
         steps:
+          - task: Cache@2
+            displayName: Cache Cypress binary
+            inputs:
+              key: 'cypress | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                cypress | "$(Agent.OS)"
+              path: $(CYPRESS_CACHE_FOLDER)
+
           - task: Cache@2
             displayName: Cache npm
             inputs:
@@ -80,7 +96,7 @@ stages:
                 npm | "$(Agent.OS)"
               path: $(npm_config_cache)
 
-          - script: npm ci
+          - script: npm ci --no-audit --no-fund
             displayName: Run npm install
           
           - script: npm run test:coverage
@@ -100,6 +116,8 @@ stages:
 
   - stage: Build
     dependsOn: Init
+    variables:
+      CYPRESS_INSTALL_BINARY: '0'
     jobs:
       - job: Build
         steps:
@@ -111,7 +129,7 @@ stages:
                 npm | "$(Agent.OS)"
               path: $(npm_config_cache)
 
-          - script: npm ci
+          - script: npm ci --no-audit --no-fund
             displayName: Run npm install
           
           - script: npm run build:$(environment)
@@ -166,6 +184,8 @@ stages:
       - Lint
       - Test
       - Build
+    variables:
+      CYPRESS_INSTALL_BINARY: '0'
     condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     jobs:
       - job: Publish
@@ -178,7 +198,7 @@ stages:
                 npm | "$(Agent.OS)"
               path: $(npm_config_cache)
               
-          - script: npm ci
+          - script: npm ci --no-audit --no-fund
             displayName: Run npm install
 
           - script: |
