@@ -53,9 +53,7 @@ export class PreloaderComponent implements OnInit, OnDestroy {
         this.progress = Math.min(100, Math.round((index / this.bootLogs.length) * 100));
         this.cdr.markForCheck();
       } else {
-        if (this.timer !== null) {
-          clearInterval(this.timer);
-        }
+        if (this.timer) clearInterval(this.timer);
         this.progress = 100;
         this.cdr.markForCheck();
       }

@@ -1,5 +1,14 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { LoadChildrenCallback, PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { environment } from '@env/environment';
+import { NavigationLink } from '@shared/interfaces/navigation-link';
+
+function buildNavigationRoutes(links: NavigationLink[]): Routes {
+  return links.map((link) => ({
+    path: link.path.replace(/^\//, ''),
+    loadChildren: link.loadChildren as LoadChildrenCallback,
+  }));
+}
 
 const routes: Routes = [
   {
@@ -7,22 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
     pathMatch: 'full',
   },
-  {
-    path: 'about',
-    loadChildren: () => import('./about/about-module').then(m => m.AboutModule),
-  },
-  {
-    path: 'experience',
-    loadChildren: () => import('./experience/experience-module').then(m => m.ExperienceModule),
-  },
-  {
-    path: 'stack',
-    loadChildren: () => import('./stack/stack.module').then(m => m.StackModule),
-  },
-  {
-    path: 'contact',
-    loadChildren: () => import('./contact/contact-module').then(m => m.ContactModule),
-  },
+  ...buildNavigationRoutes(environment.navigation),
   {
     path: 'terms',
     loadChildren: () => import('./terms/terms.module').then(m => m.TermsModule),

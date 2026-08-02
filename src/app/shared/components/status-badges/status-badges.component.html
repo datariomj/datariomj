@@ -1,0 +1,61 @@
+<div class="status-terminal-window">
+  <!-- Terminal Header -->
+  <div class="status-terminal-header">
+    <div class="terminal-dots">
+      <div class="dot red-dot"></div>
+      <div class="dot yellow-dot"></div>
+      <div class="dot green-dot"></div>
+    </div>
+    <div class="status-terminal-title">datariomj@dev — ~/status</div>
+    <div style="width: 44px"></div>
+  </div>
+
+  <!-- Terminal Content -->
+  <div class="status-terminal-content">
+
+    <!-- Command line -->
+    <div class="status-terminal-line">
+      <span class="prompt-user">datariomj@dev</span><span class="prompt-sep">:</span><span class="prompt-path">~</span><span
+            class="prompt">$</span>
+      <span class="command-text">{{ statusCurlCommand }}</span>
+    </div>
+
+    <!-- JSON output: opening brace -->
+    <div class="status-terminal-line output-text">
+      <span class="json-brace">&#123;</span>
+    </div>
+    <div class="status-terminal-line output-text json-indent">
+      <span class="json-key">"service"</span><span class="json-colon">: </span><span class="json-string">"{{ serviceName }}"</span><span
+            class="json-comma">,</span>
+    </div>
+    <div class="status-terminal-line output-text json-indent">
+      <span class="json-key">"checks"</span><span class="json-colon">: </span><span class="json-brace">&#123;</span>
+    </div>
+
+    <!-- Badge rows -->
+    @for (badge of badges; track badge.key; let last = $last) {
+    <div class="status-terminal-line json-indent-2">
+      <span class="json-key">"{{ badge.key }}"</span><span class="json-colon">: </span>
+      <a [href]="badge.href" target="_blank" rel="noopener noreferrer" class="status-badge-img-link" [title]="badge.alt">
+        <img [src]="badge.imgSrc" [alt]="badge.alt" class="status-badge-img" loading="lazy" />
+      </a>@if (!last) {<span class="json-comma">,</span>}
+    </div>
+    }
+
+    <!-- JSON output: closing braces -->
+    <div class="status-terminal-line output-text json-indent">
+      <span class="json-brace">&#125;</span>
+    </div>
+    <div class="status-terminal-line output-text">
+      <span class="json-brace">&#125;</span>
+    </div>
+
+    <!-- Idle prompt -->
+    <div class="input-line">
+      <span class="prompt-user">datariomj@dev</span><span class="prompt-sep">:</span><span class="prompt-path">~</span><span
+            class="prompt">$</span>
+      <span class="blinking-cursor"></span>
+    </div>
+
+  </div>
+</div>

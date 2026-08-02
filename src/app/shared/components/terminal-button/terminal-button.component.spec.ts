@@ -65,4 +65,26 @@ describe('TerminalButtonComponent', () => {
       expect(component.label).toBe('Deploy');
     });
   });
+
+  describe('template interactions', () => {
+    it('clicking the button emits buttonClick', () => {
+      const emitSpy = vi.spyOn(component.buttonClick, 'emit');
+      const btn: HTMLButtonElement | null = fixture.nativeElement.querySelector('button');
+      expect(btn).toBeTruthy();
+      btn?.dispatchEvent(new MouseEvent('click'));
+      expect(emitSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('renders label and variant class', () => {
+      const fix = TestBed.createComponent(TerminalButtonComponent);
+      fix.componentInstance.label = 'Run';
+      fix.componentInstance.variant = 'ghost';
+      fix.detectChanges();
+
+      const btn: HTMLButtonElement | null = fix.nativeElement.querySelector('button');
+      expect(btn?.classList.contains('terminal-btn')).toBe(true);
+      expect(btn?.classList.contains('ghost')).toBe(true);
+      expect(btn?.textContent).toContain('Run');
+    });
+  });
 });

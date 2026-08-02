@@ -1,0 +1,197 @@
+app-status-badges, :host {
+  display: block;
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto var(--spacing-stack-lg) auto;
+}
+
+/* Terminal window — mirrors terminal-hero */
+.status-terminal-window {
+  background-color: var(--color-surface-matte);
+  border: 1px solid var(--color-border-hairline);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgb(0 0 0 / 40%);
+  transition: border-color 0.3s ease;
+
+  &:hover {
+    border-color: rgb(16 185 129 / 30%);
+  }
+}
+
+/* Header bar */
+.status-terminal-header {
+  background-color: var(--color-surface-container-high);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border-hairline);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.red-dot    { background-color: var(--color-error); }
+.yellow-dot { background-color: var(--color-secondary); }
+.green-dot  { background-color: var(--color-primary); }
+
+.status-terminal-title {
+  font-family: var(--font-jetbrains);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Content area */
+.status-terminal-content {
+  padding: 1rem;
+  font-family: var(--font-jetbrains);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-on-surface);
+}
+
+@media (width >= 768px) {
+  .status-terminal-content {
+    padding: 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Each output line */
+.status-terminal-line {
+  margin-bottom: 0.4rem;
+  white-space: pre-wrap;
+  word-break: normal;
+  overflow-wrap: break-word;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Prompt pieces — reuse same tokens as terminal-hero */
+.prompt-user {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.prompt-sep {
+  color: var(--color-outline);
+  margin: 0 1px;
+}
+
+.prompt-path {
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.prompt {
+  color: var(--color-primary);
+  margin-left: 2px;
+  margin-right: 0.5rem;
+  font-weight: 700;
+}
+
+.command-text {
+  color: var(--color-text-crisp);
+  font-weight: 500;
+}
+
+.output-text  { color: var(--color-on-surface-variant); }
+.output-success { color: var(--color-primary); }
+
+.term-cmd  {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.term-key  {
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+.term-muted { color: var(--color-text-muted); }
+
+/* Badge output row */
+.status-badge-output-line {
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.status-key {
+  min-width: 6rem;
+  flex-shrink: 0;
+  white-space: pre; /* preserve monospace padding */
+}
+
+.status-arrow {
+  flex-shrink: 0;
+}
+
+/* Badge image link */
+.status-badge-img-link {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 3px;
+  transition:
+    opacity 0.2s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+}
+
+.status-badge-img {
+  display: block;
+  height: 20px;
+  width: auto;
+}
+
+/* Idle blinking cursor */
+.input-line {
+  display: flex;
+  align-items: baseline;
+  margin-top: 0.25rem;
+}
+
+.blinking-cursor {
+  display: inline-block;
+  width: 1ch;
+  height: 1.2em;
+  background-color: var(--color-primary);
+  transform: translateY(0.15em);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* jq-style JSON syntax highlighting */
+.json-brace  {
+  color: var(--color-text-crisp);
+  font-weight: 600;
+}
+
+.json-key    {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.json-colon  { color: var(--color-text-muted); }
+.json-string { color: var(--color-secondary); }
+.json-ok     { color: var(--color-primary); }
+.json-comma  { color: var(--color-text-muted); }
+
+.json-indent   { padding-left: 1.5rem; }
+.json-indent-2 { padding-left: 3rem; }

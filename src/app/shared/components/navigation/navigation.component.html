@@ -4,10 +4,9 @@
       <span class="path-prefix">~/</span><span class="path-name">datariomj</span>
     </a>
     <div class="nav-links desktop-only">
-      <a routerLink="/about" class="nav-link" routerLinkActive="active-link">[about]</a>
-      <a routerLink="/experience" class="nav-link" routerLinkActive="active-link">[experience]</a>
-      <a routerLink="/stack" class="nav-link" routerLinkActive="active-link">[stack]</a>
-      <a routerLink="/contact" class="nav-link" routerLinkActive="active-link" data-cy="nav-contact">[contact]</a>
+      @for (link of navigationLinks; track link.path) {
+        <a [routerLink]="link.path" class="nav-link" routerLinkActive="active-link">[{{link.label}}]</a>
+      }
     </div>
     <a href="https://stats.uptimerobot.com/AGzj9HrMEo/796216246" target="_blank" rel="noopener noreferrer" class="live-status desktop-only">
       <span class="status-dot"></span>
@@ -26,10 +25,9 @@
 @if (isMenuOpen) {
   <div class="mobile-overlay" (click)="closeMenu()" (keyup.escape)="closeMenu()" tabindex="0" role="button" aria-label="Close mobile navigation overlay"></div>
   <div class="mobile-dropdown">
-    <a routerLink="/about" routerLinkActive="active-link" (click)="closeMenu()" class="mobile-dropdown-link">[about]</a>
-    <a routerLink="/experience" routerLinkActive="active-link" (click)="closeMenu()" class="mobile-dropdown-link">[experience]</a>
-    <a routerLink="/stack" routerLinkActive="active-link" (click)="closeMenu()" class="mobile-dropdown-link">[stack]</a>
-    <a routerLink="/contact" routerLinkActive="active-link" (click)="closeMenu()" data-cy="nav-contact" class="mobile-dropdown-link">[contact]</a>
+    @for (link of navigationLinks; track link.path) {
+      <a [routerLink]="link.path" routerLinkActive="active-link" (click)="closeMenu()" class="mobile-dropdown-link">[{{link.label}}]</a>
+    }
     <a href="https://stats.uptimerobot.com/AGzj9HrMEo/796216246" target="_blank" rel="noopener noreferrer" class="mobile-dropdown-link live-status-mobile">
       <span class="status-dot"></span>
       <span>LIVE_STATUS</span>
@@ -43,20 +41,10 @@
     <i class="fa-solid fa-terminal"></i>
     <span>home</span>
   </a>
-  <a routerLink="/about" routerLinkActive="mobile-nav-active" class="mobile-nav-item" (click)="closeMenu()">
-    <i class="fa-solid fa-user"></i>
-    <span>about</span>
-  </a>
-  <a routerLink="/experience" routerLinkActive="mobile-nav-active" class="mobile-nav-item" (click)="closeMenu()">
-    <i class="fa-solid fa-briefcase"></i>
-    <span>exp</span>
-  </a>
-  <a routerLink="/stack" routerLinkActive="mobile-nav-active" class="mobile-nav-item" (click)="closeMenu()">
-    <i class="fa-solid fa-layer-group"></i>
-    <span>stack</span>
-  </a>
-  <a routerLink="/contact" routerLinkActive="mobile-nav-active" class="mobile-nav-item" data-cy="nav-contact" (click)="closeMenu()">
-    <i class="fa-solid fa-envelope"></i>
-    <span>contact</span>
-  </a>
+  @for (link of navigationLinks; track link.path) {
+    <a [routerLink]="link.path" routerLinkActive="mobile-nav-active" class="mobile-nav-item" (click)="closeMenu()">
+      <i class="fa-solid {{link.iconClass}}"></i>
+      <span>{{link.label}}</span>
+    </a>
+  }
 </nav>

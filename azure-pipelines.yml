@@ -16,8 +16,10 @@ variables:
   npm_config_cache: $(Pipeline.Workspace)/.npm
   ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
     environment: prod
+    publicUrl: https://datariomj.dev
   ${{ else }}:
     environment: 'staging'
+    publicUrl: https://staging.datariomj.dev
 
 stages:
   - stage: Init
@@ -81,10 +83,18 @@ stages:
           - script: npm ci
             displayName: Run npm install
           
-          - script: npm run test:ci
+          - script: npm run test:coverage
             displayName: Run Unit tests
 
-          - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
+          - script: npm run codecov:upload
+            env:
+              CODECOV_API_KEY: $(CODECOV_API_KEY)
+              CODECOV_FILE: coverage/datariomj/clover.xml
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), ne(variables['CODECOV_API_KEY'], ''))
+            displayName: Upload coverage to Codecov
+
+          # - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
+          - script: npm run e2e:ci
             condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
             displayName: Run E2E tests
 
@@ -106,12 +116,7 @@ stages:
           
           - script: npm run build:$(environment)
             displayName: Run build
-          
-          - script: |
-              mv $(distPath)/robots.prod.txt $(distPath)/robots.txt
-            condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-            displayName: Apply robots.txt
-          
+
           - publish: $(distPath)
             displayName: Publish Web App
             condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))

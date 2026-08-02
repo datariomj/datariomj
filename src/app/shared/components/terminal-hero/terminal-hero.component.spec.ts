@@ -1,4 +1,4 @@
-import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, ElementRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -15,7 +15,7 @@ function makeInput(value: string, selectionStart?: number): HTMLInputElement {
 describe('TerminalHeroComponent', () => {
   let component: TerminalHeroComponent;
   let fixture: ComponentFixture<TerminalHeroComponent>;
-  let mockRouter: { url: string; navigate: ReturnType<typeof vi.fn>; events: unknown };
+  let mockRouter: { url: string; navigate: ReturnType<typeof vi.fn>; events: unknown; };
 
   beforeEach(async () => {
     vi.useFakeTimers();
@@ -65,11 +65,11 @@ describe('TerminalHeroComponent', () => {
       expect(component.activeCommand).toBe('cd /');
     });
 
-    it('includes whoami output', () => {
+    it('includes target output', () => {
       mockRouter.url = '/';
       fixture.detectChanges();
       vi.advanceTimersByTime(2000);
-      expect(component.activeOutput.some(o => o.text.includes('whoami'))).toBe(true);
+      expect(component.activeOutput.some(o => o.text.includes('target:'))).toBe(true);
     });
   });
 
@@ -710,6 +710,194 @@ describe('TerminalHeroComponent', () => {
       component.printPageStatus();
       const last = component.history[component.history.length - 1];
       expect(last.text).toContain('help');
+    });
+  });
+
+  describe('execute "pwd"', () => {
+    it('prints the current origin + route', () => {
+      mockRouter.url = '/about';
+      component.history = [];
+      component.execute(makeInput('pwd'));
+      expect(component.history[1].text).toContain(mockRouter.url);
+      expect(component.history[1].html).toBeTruthy();
+    });
+  });
+
+  describe('execute "status"', () => {
+    it('prints project status output', () => {
+      component.history = [];
+      component.execute(makeInput('status'));
+      expect(component.history[1].text).toContain('Project Status');
+      expect(component.history[1].html).toContain('status-badge-row');
+    });
+  });
+
+  describe('template branches', () => {
+    it('renders ghostText when present', () => {
+      mockRouter.url = '/about';
+      fixture.detectChanges();
+      vi.advanceTimersByTime(2500);
+
+      component.isTyping = false;
+      component.ghostText = 'ghost';
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.ghost-text')?.textContent).toContain('ghost');
+    });
+
+    it('wires ArrowRight key binding to autocomplete', () => {
+      mockRouter.url = '/about';
+      fixture.detectChanges();
+      vi.advanceTimersByTime(2500);
+
+      component.isTyping = false;
+      fixture.detectChanges();
+
+      component.suggestions = ['stack'];
+      const input = component.terminalInput.nativeElement;
+      input.value = 'cd s';
+      input.selectionStart = input.value.length;
+
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+      expect(input.value).toBe('cd stack');
+    });
+
+    it('renders closed state content when isClosed is true', () => {
+      mockRouter.url = '/about';
+      fixture.detectChanges();
+      vi.advanceTimersByTime(2500);
+
+      component.isClosed = true;
+      fixture.detectChanges();
+
+      const text = (fixture.nativeElement as HTMLElement).textContent || '';
+      expect(text).toContain('CONNECTION CLOSED');
+      expect(text).toContain('Connection Terminated');
+    });
+
+    it('clicking reboot triggers reconnect', () => {
+      mockRouter.url = '/about';
+      fixture.detectChanges();
+      vi.advanceTimersByTime(2500);
+
+      component.isClosed = true;
+      fixture.detectChanges();
+
+      const btn: HTMLButtonElement | null = fixture.nativeElement.querySelector('button');
+      btn?.click();
+      fixture.detectChanges();
+
+      expect(component.isClosed).toBe(false);
+    });
+  });
+
+  describe('focusInput', () => {
+    it('focuses the input element when not typing', () => {
+      mockRouter.url = '/about';
+      fixture.detectChanges();
+      vi.advanceTimersByTime(2500);
+
+      component.isTyping = false;
+      fixture.detectChanges();
+
+      const spy = vi.spyOn(component.terminalInput.nativeElement, 'focus');
+      component.focusInput();
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  describe('template event bindings', () => {
+    beforeEach(() => {
+      mockRouter.url = '/about';
+      fixture.detectChanges();
+      vi.advanceTimersByTime(2500);
+      component.isTyping = false;
+      fixture.detectChanges();
+    });
+
+    it('clicking terminal window focuses the input', () => {
+      const root: HTMLElement | null = fixture.nativeElement.querySelector('.terminal-window');
+      const spy = vi.spyOn(component.terminalInput.nativeElement, 'focus');
+      root?.dispatchEvent(new MouseEvent('click'));
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('pressing Enter on terminal window focuses the input', () => {
+      const root: HTMLElement | null = fixture.nativeElement.querySelector('.terminal-window');
+      const spy = vi.spyOn(component.terminalInput.nativeElement, 'focus');
+      root?.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('focus and blur events toggle isFocused', () => {
+      const input = component.terminalInput.nativeElement;
+      input.dispatchEvent(new FocusEvent('focus'));
+      expect(component.isFocused).toBe(true);
+      input.dispatchEvent(new FocusEvent('blur'));
+      expect(component.isFocused).toBe(false);
+    });
+
+    it('input event triggers onInputChange binding', () => {
+      const spy = vi.spyOn(component, 'onInputChange');
+      const input = component.terminalInput.nativeElement;
+      input.value = 'cd a';
+      input.dispatchEvent(new Event('input'));
+      expect(spy).toHaveBeenCalledWith('cd a');
+    });
+
+    it('Tab key triggers autocomplete via onTab binding', () => {
+      component.suggestions = ['about'];
+      fixture.detectChanges();
+
+      const input = component.terminalInput.nativeElement;
+      input.value = 'cd a';
+      input.selectionStart = input.value.length;
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }));
+      expect(input.value).toBe('cd about');
+    });
+
+    it('Enter key executes command via template binding', () => {
+      const input = component.terminalInput.nativeElement;
+      input.value = 'ls';
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+      const lastCommand = [...component.history].reverse().find(h => h.type === 'command');
+      expect(lastCommand).toMatchObject({ type: 'command', text: 'ls' });
+    });
+
+    it('clicking close dot closes terminal', () => {
+      const dot: HTMLElement | null = fixture.nativeElement.querySelector('.red-dot');
+      dot?.dispatchEvent(new MouseEvent('click'));
+      fixture.detectChanges();
+      expect(component.isClosed).toBe(true);
+    });
+
+    it('pressing Enter on close dot closes terminal', () => {
+      component.isClosed = false;
+      fixture.detectChanges();
+
+      const dot: HTMLElement | null = fixture.nativeElement.querySelector('.red-dot');
+      dot?.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+      fixture.detectChanges();
+      expect(component.isClosed).toBe(true);
+    });
+  });
+
+  describe('coverage helpers', () => {
+    it('buildStatusBadgesHtml includes service name and check keys', () => {
+      const html = component.buildStatusBadgesHtml();
+      expect(html).toContain('"service"');
+      expect(html).toContain('"build"');
+      // expect(html).toContain('"snyk"');
+      expect(html).toContain('"codecov"');
+    });
+
+    it('scrollToBottom updates scrollTop when terminalContent exists', () => {
+      const nativeElement = { scrollTop: 0, scrollHeight: 123 };
+      component.terminalContent = { nativeElement } as ElementRef<HTMLDivElement>;
+
+      (component as unknown as { scrollToBottom: () => void }).scrollToBottom();
+
+      expect(nativeElement.scrollTop).toBe(123);
     });
   });
 });

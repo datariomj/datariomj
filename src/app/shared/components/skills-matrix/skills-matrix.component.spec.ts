@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { SkillCategory,SkillsMatrixComponent } from './skills-matrix.component';
+import { SkillCategory, SkillsMatrixComponent } from './skills-matrix.component';
 
 const MOCK_CATEGORIES: SkillCategory[] = [
   { category: 'Infrastructure', items: ['Terraform', 'AWS', 'Kubernetes'] },
@@ -50,5 +50,18 @@ describe('SkillsMatrixComponent', () => {
     component.categories = MOCK_CATEGORIES;
     expect(component.categories[0].category).toBe('Infrastructure');
     expect(component.categories[1].category).toBe('Languages');
+  });
+
+  it('renders the matrix rows and items', () => {
+    const f = TestBed.createComponent(SkillsMatrixComponent);
+    const c = f.componentInstance;
+    c.categories = MOCK_CATEGORIES;
+    f.detectChanges();
+
+    const text = (f.nativeElement as HTMLElement).textContent || '';
+    expect(text).toContain('STAK // INFRASTRUCTURE');
+    expect(text).toContain('Terraform');
+    expect(text).toContain('AWS');
+    expect(text).toContain('Kubernetes');
   });
 });

@@ -1,7 +1,7 @@
+import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject,OnInit, ViewEncapsulation } from '@angular/core';
 import { SeoService } from '@core/services/seo.service';
 import { STATIC_CONSTANT } from '@core/static.constants';
-import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-privacy',
@@ -12,9 +12,16 @@ import { environment } from '@env/environment';
 })
 export class PrivacyComponent implements OnInit {
   private seo = inject(SeoService);
+  private doc = inject<Document>(DOCUMENT);
 
   email: string = STATIC_CONSTANT.email;
-  hostUrl: string = environment.hostUrl;
+  hostUrl: string = (() => {
+    try {
+      return new URL(this.doc.URL).origin;
+    } catch {
+      return '';
+    }
+  })();
 
   ngOnInit(): void {
     this.seo.generateTags({

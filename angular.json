@@ -54,10 +54,13 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/robots.txt",
-              "src/robots.prod.txt",
-              "src/sitemap.xml",
-              "src/manifest.webmanifest"
+              {
+                "glob": "**/*",
+                "input": "generated/staging",
+                "output": "."
+              },
+              "src/manifest.webmanifest",
+              "src/status.json"
             ],
             "styles": [
               "src/styles.scss"
@@ -77,6 +80,17 @@
           },
           "configurations": {
             "production": {
+              "assets": [
+                "src/favicon.ico",
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "generated/production",
+                  "output": "."
+                },
+                "src/manifest.webmanifest",
+                "src/status.json"
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -103,6 +117,17 @@
               "serviceWorker": "ngsw-config.json"
             },
             "staging": {
+              "assets": [
+                "src/favicon.ico",
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "generated/staging",
+                  "output": "."
+                },
+                "src/manifest.webmanifest",
+                "src/status.json"
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -144,7 +169,10 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "tsConfig": "tsconfig.spec.json",
-            "buildTarget": "datariomj:build"
+            "buildTarget": "datariomj:build",
+            "coverageExclude": [
+              "src/environments/**"
+            ]
           }
         },
         "e2e": {
