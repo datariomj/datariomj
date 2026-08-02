@@ -53,5 +53,7 @@ src/videos/*
 .DS_Store
 Thumbs.db
 
+# Downloaded Codecov CLI fallback
 .codecov
+
 CHANGELOG.md
