@@ -191,7 +191,7 @@
         "e2e-ci": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "datariomj:serve",
+            "devServerTarget": "datariomj:serve:production",
             "watch": false,
             "headless": true
           },

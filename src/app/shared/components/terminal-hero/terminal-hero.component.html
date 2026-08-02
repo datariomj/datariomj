@@ -35,7 +35,7 @@
         }}</span><span class="prompt"> $ </span><span class="command-text">{{ item.text }}</span>@if (isTyping && $last) {<span
             class="blinking-cursor"></span>}
       } @else if (item.html) {
-      <div class="terminal-html" [innerHTML]="item.html"></div>
+      <div class="terminal-html" [innerHTML]="item.html | safeHtml"></div>
       } @else {<span class="terminal-text">{{ item.text }}</span>}
     </div>
     }

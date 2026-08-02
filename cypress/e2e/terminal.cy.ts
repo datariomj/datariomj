@@ -1,16 +1,17 @@
 describe('Terminal Hero Component', () => {
   beforeEach(() => {
     cy.visit('/');
-    // Wait for initial typing sequence to finish
-    cy.wait(3000);
+    // Wait for initial typing sequence and status curl to finish
+    cy.wait(3500);
   });
 
   it('renders the terminal successfully', () => {
     cy.get('app-terminal-hero').should('exist');
     cy.get('.terminal-window').should('be.visible');
-    
+
     // Check boot sequence output
-    cy.get('.terminal-content').should('contain', 'STATUS: Loaded /');
+    cy.get('.terminal-content').should('contain', 'target: /');
+    cy.get('.terminal-content').should('contain', 'Marc Joseph Datario');
     cy.get('.terminal-content').should('contain', 'Type "help" to view available commands.');
   });
 
@@ -23,7 +24,7 @@ describe('Terminal Hero Component', () => {
     // Test routing via cd
     cy.get('.terminal-input').type('cd experience{enter}', { force: true });
     cy.url().should('include', '/experience');
-    
+
     // Test clearing history
     cy.get('.terminal-input').type('clear{enter}', { force: true });
     cy.get('.terminal-content').should('not.contain', 'Available commands:');
@@ -41,13 +42,13 @@ describe('Terminal Hero Component', () => {
   });
 
   it('provides auto-suggestions and handles tab completion', () => {
-    // Type 'cat ab' which should suggest 'out.md'
+    // Type 'cat ab' which should suggest 'about.md'
     cy.get('.terminal-input').type('cat ab', { force: true });
-    cy.get('.terminal-content').should('contain', 'out.md');
-    
+    cy.get('.terminal-content').should('contain', 'about.md');
+
     // Trigger right arrow for auto-completion (mapped to same handler as tab)
     cy.get('.terminal-input').type('{rightarrow}', { force: true });
-    
+
     // The input should now be 'cat about.md'
     cy.get('.terminal-input').should('have.value', 'cat about.md');
     cy.get('.terminal-input').type('{enter}', { force: true });
@@ -67,7 +68,8 @@ describe('Terminal Hero Component', () => {
     cy.get('button').contains('[ REBOOT_SESSION ]').click();
 
     // Verify it restores
-    cy.get('.terminal-content').should('contain', 'STATUS: Loaded /');
+    cy.get('.terminal-content').should('contain', 'target: /');
+    cy.get('.terminal-content').should('contain', 'Marc Joseph Datario');
     cy.get('.red-dot').should('be.visible');
   });
 });

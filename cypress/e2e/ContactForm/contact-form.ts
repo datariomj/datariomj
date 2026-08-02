@@ -11,14 +11,8 @@ Given("User is on home page", () => {
 });
 
 When("User navigates to contact page", () => {
-  // Mobile or Desktop navigation
-  cy.get("body").then(($body) => {
-    if ($body.find(".mobile-menu-btn:visible").length > 0) {
-      cy.get('.sidenav__mobile-nav [data-cy="nav-contact"]').click();
-    } else {
-      cy.get('.nav-links [data-cy="nav-contact"]').click();
-    }
-  });
+  // Navigate directly; contact is not currently in the main navigation
+  cy.visit('/contact');
   cy.url().should("include", "/contact");
 });
 

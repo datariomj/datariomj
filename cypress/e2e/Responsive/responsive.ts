@@ -18,7 +18,9 @@ const contactDialog = new ContactDialog();
 Given("User opens contact dialog on mobile", () => {
   basePage.setViewportMobile();
   homePage.visitHomePage();
-  cy.get('[data-cy="nav-contact"]').first().click({ force: true });
+  // Contact is not in the mobile navigation, so navigate directly
+  cy.visit('/contact');
+  cy.url().should('include', '/contact');
 });
 
 // Handled in common-steps.ts

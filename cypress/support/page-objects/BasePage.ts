@@ -8,14 +8,14 @@ export class BasePage {
   readonly footer = "app-footer";
   readonly mobileNavigation = ".sidenav__mobile-nav";
 
-  // Navigation elements - using routerLink for reliable selection
+  // Navigation elements - using rendered href for reliable selection
   readonly navLinks = {
-    home: 'a[routerLink="/"]',
-    about: 'a[routerLink="/about"]',
-    cv: 'a[routerLink="/experience"]',
-    stack: 'a[routerLink="/stack"]',
-    contact: 'a[routerLink="/contact"]',
-    blog: 'a[routerLink="/blog"]',
+    home: 'a[href="/"]',
+    about: 'a[href="/about"]',
+    cv: 'a[href="/experience"]',
+    stack: 'a[href="/stack"]',
+    contact: 'a[href="/contact"]',
+    blog: 'a[href="/blog"]',
     terms: 'a.footer__link:contains("Terms")',
     privacy: 'a.footer__link:contains("Privacy")',
   };
@@ -57,7 +57,15 @@ export class BasePage {
         } else if ($body.find(selector).length > 0) {
           cy.get(selector).first().click({ force: true });
         } else {
-          cy.visit(linkType === "home" ? "/" : `/${linkType}`);
+          const pathMap: Record<string, string> = {
+            home: '/',
+            cv: '/experience',
+            about: '/about',
+            stack: '/stack',
+            contact: '/contact',
+            blog: '/blog',
+          };
+          cy.visit(pathMap[linkType] ?? `/${linkType}`);
         }
       });
     }

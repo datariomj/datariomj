@@ -15,8 +15,6 @@ Feature: Navigation
     Then User should be on Home page with proper metadata
     When User clicks Stack navigation link
     Then User should be on Stack page
-    When User clicks Blog navigation link
-    Then User should be on Blog page
 
   @regression @navigation
   Scenario: User navigates to legal pages

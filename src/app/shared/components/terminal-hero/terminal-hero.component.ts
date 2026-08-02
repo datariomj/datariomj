@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { SafeHtmlPipe } from '@shared/pipes/safe-html.pipe';
 
 export interface TerminalOutputItem {
   type: 'command' | 'output' | 'output-success' | 'output-error';
@@ -14,6 +15,7 @@ export interface TerminalOutputItem {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
+  imports: [SafeHtmlPipe],
   host: {
     '[class.home-terminal]': 'isHomePage',
   },

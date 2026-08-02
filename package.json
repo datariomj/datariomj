@@ -94,7 +94,10 @@
     "vitest": "^4.1.10"
   },
   "cypress-cucumber-preprocessor": {
-    "stepDefinitions": "cypress/e2e/**/*.ts",
+    "stepDefinitions": [
+      "cypress/e2e/**/*.ts",
+      "!cypress/e2e/**/*.cy.ts"
+    ],
     "specPattern": "cypress/e2e/**/*.feature"
   }
 }

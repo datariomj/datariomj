@@ -10,10 +10,12 @@ pr:
       - main
       - release
 
+pool:
+  name: SelfHosted
+
 variables:
   distPath: dist/datariomj/browser
   artifactName: WebApp
-  npm_config_cache: $(Pipeline.Workspace)/.npm
   npm_config_prefer_offline: true
   CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
   ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
@@ -24,39 +26,21 @@ variables:
     publicUrl: https://staging.datariomj.dev
 
 stages:
-  - stage: Init
-    variables:
-      CYPRESS_INSTALL_BINARY: '0'
-    jobs:
-      - job: Init
-        steps:
-          - task: Cache@2
-            displayName: Cache npm
-            inputs:
-              key: 'npm | "$(Agent.OS)" | package-lock.json'
-              restoreKeys: |
-                npm | "$(Agent.OS)"
-              path: $(npm_config_cache)
-
-          - script: npm ci --no-audit --no-fund
-            displayName: Run npm ci
-
   - stage: Lint
-    dependsOn: Init
     variables:
       CYPRESS_INSTALL_BINARY: '0'
     jobs:
       - job: Lint
         steps:
           - task: Cache@2
-            displayName: Cache npm
+            displayName: Cache node_modules
             inputs:
-              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
-                npm | "$(Agent.OS)"
-              path: $(npm_config_cache)
+                node_modules | "$(Agent.OS)"
+              path: node_modules
 
-          - script: npm ci --no-audit --no-fund
+          - script: npm ci --prefer-offline --no-audit --no-fund
             displayName: Run npm install
           
           - script: npm run lint
@@ -74,7 +58,6 @@ stages:
             displayName: Generate Changelog
 
   - stage: Test
-    dependsOn: Init
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -89,14 +72,14 @@ stages:
               path: $(CYPRESS_CACHE_FOLDER)
 
           - task: Cache@2
-            displayName: Cache npm
+            displayName: Cache node_modules
             inputs:
-              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
-                npm | "$(Agent.OS)"
-              path: $(npm_config_cache)
+                node_modules | "$(Agent.OS)"
+              path: node_modules
 
-          - script: npm ci --no-audit --no-fund
+          - script: npm ci --prefer-offline --no-audit --no-fund
             displayName: Run npm install
           
           - script: npm run test:coverage
@@ -110,27 +93,25 @@ stages:
             condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), ne(variables['CODECOV_TOKEN'], ''))
             displayName: Upload coverage to Codecov
 
-          # - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
           - script: npm run e2e:ci
             condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
             displayName: Run E2E tests
 
   - stage: Build
-    dependsOn: Init
     variables:
       CYPRESS_INSTALL_BINARY: '0'
     jobs:
       - job: Build
         steps:
           - task: Cache@2
-            displayName: Cache npm
+            displayName: Cache node_modules
             inputs:
-              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
-                npm | "$(Agent.OS)"
-              path: $(npm_config_cache)
+                node_modules | "$(Agent.OS)"
+              path: node_modules
 
-          - script: npm ci --no-audit --no-fund
+          - script: npm ci --prefer-offline --no-audit --no-fund
             displayName: Run npm install
           
           - script: npm run build:$(environment)
@@ -192,14 +173,14 @@ stages:
       - job: Publish
         steps:
           - task: Cache@2
-            displayName: Cache npm
+            displayName: Cache node_modules
             inputs:
-              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
-                npm | "$(Agent.OS)"
-              path: $(npm_config_cache)
+                node_modules | "$(Agent.OS)"
+              path: node_modules
               
-          - script: npm ci --no-audit --no-fund
+          - script: npm ci --prefer-offline --no-audit --no-fund
             displayName: Run npm install
 
           - script: |
@@ -210,3 +191,4 @@ stages:
             env:
               GH_TOKEN: $(GH_TOKEN)
             displayName: Create GitHub Release
+
