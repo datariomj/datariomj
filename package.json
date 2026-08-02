@@ -1,6 +1,9 @@
 {
   "name": "datariomj",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=18.19.1"
+  },
   "scripts": {
     "ng": "ng",
     "start": "npm run generate:deployment-assets && ng serve",
