@@ -21,7 +21,7 @@ export class Experience {
     {
       title: 'DevOps Engineer Lead',
       company: 'EasyEquities PH',
-      location: 'Meycauayan, PH (Hybrid)',
+      location: 'Makati City, PH',
       badge: 'DevOps Lead',
       dateRange: 'Apr 2023 - Present',
       isCurrent: true,
@@ -49,7 +49,7 @@ export class Experience {
     {
       title: 'Senior Software Engineer (SRE)',
       company: 'Avaloq',
-      location: 'Makati, PH',
+      location: 'Makati City, PH',
       badge: 'Senior SRE',
       dateRange: 'Oct 2021 - Apr 2023',
       isCurrent: false,
@@ -67,7 +67,7 @@ export class Experience {
     {
       title: 'Solutions Developer',
       company: 'PCCW Solutions',
-      location: 'BGC, Taguig, PH',
+      location: 'Pasig City, PH',
       badge: 'Solutions Dev',
       dateRange: 'Apr 2020 - Oct 2021',
       isCurrent: false,
@@ -83,7 +83,7 @@ export class Experience {
     {
       title: 'Software Engineer & DevOps Engineer',
       company: 'Business Switch Philippines Inc.',
-      location: 'Meycauayan, PH',
+      location: 'Pasay City, PH',
       badge: 'Software & DevOps',
       dateRange: 'Jun 2016 - Apr 2020',
       isCurrent: false,
