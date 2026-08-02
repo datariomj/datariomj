@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { describe, expect, it, beforeEach } from 'vitest';
+import { DomSanitizer } from '@angular/platform-browser';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { SafeHtmlPipe } from './safe-html.pipe';
 
