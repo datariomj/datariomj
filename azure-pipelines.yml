@@ -27,6 +27,7 @@ variables:
 
 stages:
   - stage: Lint
+    dependsOn: []
     variables:
       CYPRESS_INSTALL_BINARY: '0'
     jobs:
@@ -58,6 +59,7 @@ stages:
             displayName: Generate Changelog
 
   - stage: Test
+    dependsOn: []
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -98,6 +100,7 @@ stages:
             displayName: Run E2E tests
 
   - stage: Build
+    dependsOn: []
     variables:
       CYPRESS_INSTALL_BINARY: '0'
     jobs:
