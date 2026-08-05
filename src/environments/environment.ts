@@ -7,6 +7,8 @@ import { NavigationLink } from '../app/shared/interfaces/navigation-link';
 export const environment = {
   production: false,
   version: '0.1.0',
+  sentryDsn: '',
+  sentryEnv: 'development',
   facebook: {
     appId: '',
   },
