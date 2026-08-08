@@ -64,7 +64,9 @@ stages:
                 echo "### 🚀 Upcoming Changelog Preview" > comment_body.md
                 echo "" >> comment_body.md
                 cat upcoming_changelog.md >> comment_body.md
-                gh pr comment $(System.PullRequest.PullRequestNumber) --body-file comment_body.md
+                if ! gh pr comment $(System.PullRequest.PullRequestNumber) --body-file comment_body.md; then
+                  echo "##vso[task.logissue type=warning]Could not post upcoming changelog comment to PR (token may lack pull request write access)."
+                fi
               fi
             env:
               GH_TOKEN: $(GH_TOKEN)
