@@ -3,11 +3,12 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, ViewEncapsulation }
 import { SeoService } from "@core/services/seo.service";
 
 import { TerminalHeroComponent } from "../shared/components/terminal-hero/terminal-hero.component";
+import { DeploymentArchitectureComponent } from "./components/deployment-architecture/deployment-architecture.component";
 
 @Component({
   selector: "app-home",
   standalone: true,
-  imports: [TerminalHeroComponent],
+  imports: [TerminalHeroComponent, DeploymentArchitectureComponent],
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],
   encapsulation: ViewEncapsulation.None,
