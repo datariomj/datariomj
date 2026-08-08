@@ -1,0 +1,47 @@
+<div class="experience-block" [ngClass]="{'is-current': isCurrent}">
+  <!-- Header -->
+  <div class="experience-header">
+    <div class="header-left">
+      <div class="flex items-center gap-2 flex-wrap mb-1">
+        <h3 class="experience-title">{{ title }}</h3>
+        @if (badge) {
+          <span class="role-badge">{{ badge }}</span>
+        }
+      </div>
+      <div class="flex items-center gap-3 text-xs text-text-muted">
+        <span class="experience-company font-bold">{{ company }}</span>
+        @if (location) {
+          <span class="location-tag flex items-center gap-1">
+            <i class="fa-solid fa-location-dot text-primary"></i> {{ location }}
+          </span>
+        }
+      </div>
+    </div>
+    <div class="experience-date-box">{{ dateRange }}</div>
+  </div>
+
+  <!-- Bullet Items -->
+  <ul class="experience-list">
+    @for (item of items; track item) {
+      <li [ngClass]="{'is-current': isCurrent}">
+        @if (isCurrent) {
+          <span class="bullet">$</span>
+        }
+        @if (!isCurrent) {
+          <span class="bullet-inactive">$</span>
+        }
+        <span class="content">{{ item }}</span>
+      </li>
+    }
+  </ul>
+
+  <!-- Tech Stack Badges -->
+  @if (technologies.length > 0) {
+    <div class="tech-stack-container mt-4 pt-3 border-t border-border-hairline flex flex-wrap items-center gap-1.5">
+      <span class="font-jetbrains text-xs text-text-muted mr-1">TECH_STACK:</span>
+      @for (tech of technologies; track tech) {
+        <span class="tech-tag">{{ tech }}</span>
+      }
+    </div>
+  }
+</div>
