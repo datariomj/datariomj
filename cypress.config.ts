@@ -8,7 +8,7 @@ export default defineConfig({
   projectId: "3zwyy9",
   viewportHeight: 768,
   viewportWidth: 1366,
-  video: true,
+  video: false,
   screenshotOnRunFailure: true,
   allowCypressEnv: true,
   defaultCommandTimeout: 10000,
