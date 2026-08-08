@@ -93,6 +93,11 @@
     "typescript-eslint": "^8.64.0",
     "vitest": "^4.1.10"
   },
+  "overrides": {
+    "nanoid": "3.3.17",
+    "js-yaml": "4.3.1",
+    "ip-address": "10.3.1"
+  },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [
       "cypress/e2e/**/*.ts",

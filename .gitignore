@@ -57,3 +57,6 @@ Thumbs.db
 .codecov
 
 CHANGELOG.md
+
+# CodeGraph local database
+.codegraph/

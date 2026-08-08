@@ -29,7 +29,7 @@
   color: var(--color-outline);
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .skill-row {
     flex-direction: column;
     margin-bottom: var(--spacing-stack-md);
