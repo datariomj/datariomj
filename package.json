@@ -83,7 +83,7 @@
     "git-cliff": "^2.8.0",
     "jasmine-core": "^6.3.0",
     "jsdom": "^29.1.1",
-    "postcss": "^8.5.20",
+    "postcss": "^8.5.23",
     "stylelint": "^16.24.0",
     "stylelint-config-standard-scss": "^16.0.0",
     "stylelint-no-unsupported-browser-features": "^8.0.0",
@@ -92,6 +92,11 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.64.0",
     "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "nanoid": "3.3.17",
+    "js-yaml": "4.3.1",
+    "ip-address": "10.3.1"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [

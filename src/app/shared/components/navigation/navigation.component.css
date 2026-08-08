@@ -5,7 +5,6 @@
   z-index: 100;
   background-color: var(--color-glass-bg);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border-hairline);
   font-family: var(--font-jetbrains);
   transition: all 0.3s ease;
@@ -53,7 +52,7 @@
 .nav-link:hover, .active-link {
   color: var(--color-terminal-green);
   font-weight: 700;
-  background-color: rgba(16, 185, 129, 0.08);
+  background-color: rgb(16 185 129 / 8%);
 }
 
 /* ===== Live Status Badge ===== */
@@ -64,8 +63,8 @@
   color: #4ade80;
   font-weight: bold;
   font-size: 12px;
-  background-color: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background-color: rgb(16 185 129 / 10%);
+  border: 1px solid rgb(16 185 129 / 20%);
   padding: 4px 12px;
   border-radius: 9999px;
   letter-spacing: 0.1em;
@@ -75,7 +74,7 @@
 }
 
 .live-status:hover {
-  background-color: rgba(16, 185, 129, 0.2);
+  background-color: rgb(16 185 129 / 20%);
   transform: translateY(-1px);
 }
 
@@ -92,6 +91,7 @@
   0%, 100% {
     opacity: 1;
   }
+
   50% {
     opacity: .5;
   }
@@ -115,7 +115,7 @@
 
 .mobile-menu-btn:hover {
   border-color: var(--color-terminal-green);
-  background-color: rgba(16, 185, 129, 0.05);
+  background-color: rgb(16 185 129 / 5%);
 }
 
 .hamburger-line {
@@ -143,9 +143,9 @@
 .mobile-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.65);
+  background-color: rgb(0 0 0 / 65%);
   z-index: 90;
-  animation: fadeIn 0.2s ease;
+  animation: fade-in 0.2s ease;
 }
 
 .mobile-dropdown {
@@ -154,13 +154,12 @@
   left: 0;
   right: 0;
   z-index: 95;
-  background-color: rgba(18, 19, 22, 0.95);
+  background-color: rgb(18 19 22 / 95%);
   border-bottom: 1px solid var(--color-border-hairline);
   padding: 12px 0;
-  animation: slideDown 0.25s ease;
+  animation: slide-down 0.25s ease;
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 25px rgb(0 0 0 / 30%);
 }
 
 .mobile-dropdown-link {
@@ -177,7 +176,7 @@
 .mobile-dropdown-link:hover,
 .mobile-dropdown-link.active-link {
   color: var(--color-terminal-green);
-  background-color: rgba(16, 185, 129, 0.08);
+  background-color: rgb(16 185 129 / 8%);
 }
 
 .live-status-mobile {
@@ -190,16 +189,17 @@
   padding-top: 14px;
 }
 
-@keyframes fadeIn {
+@keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes slideDown {
+@keyframes slide-down {
   from {
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -214,15 +214,14 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background-color: rgba(13, 14, 17, 0.92);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgb(13 14 17 / 92%);
+  border-top: 1px solid rgb(255 255 255 / 8%);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   justify-content: space-around;
   align-items: center;
   padding: 6px 0;
   padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px));
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 -4px 20px rgb(0 0 0 / 40%);
 }
 
 .mobile-nav-item {
@@ -253,7 +252,7 @@
 .mobile-nav-item:hover,
 .mobile-nav-item.mobile-nav-active {
   color: var(--color-terminal-green);
-  background-color: rgba(16, 185, 129, 0.08);
+  background-color: rgb(16 185 129 / 8%);
 }
 
 .mobile-nav-item.mobile-nav-active i {
@@ -270,7 +269,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .nav-container {
     padding: 14px var(--spacing-gutter);
   }
