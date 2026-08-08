@@ -76,9 +76,38 @@ stages:
   - stage: Test
     dependsOn: []
     variables:
-      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+      CYPRESS_INSTALL_BINARY: '0'
     jobs:
       - job: Test
+        steps:
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run test:coverage
+            displayName: Run Unit tests
+
+          - script: timeout 60 npm run codecov:upload
+            env:
+              CODECOV_TOKEN: $(CODECOV_TOKEN)
+              CODECOV_FILE: coverage/datariomj/clover.xml
+              SENTRY_DSN: ''
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), ne(variables['CODECOV_TOKEN'], ''))
+            displayName: Upload coverage to Codecov
+
+  - stage: E2EContactForm
+    dependsOn: []
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2EContactForm
         steps:
           - task: Cache@2
             displayName: Cache Cypress binary
@@ -98,21 +127,190 @@ stages:
 
           - script: npm ci --prefer-offline --no-audit --no-fund
             displayName: Run npm install
-          
-          - script: npm run test:coverage
-            displayName: Run Unit tests
 
-          - script: timeout 60 npm run codecov:upload
-            env:
-              CODECOV_TOKEN: $(CODECOV_TOKEN)
-              CODECOV_FILE: coverage/datariomj/clover.xml
-              SENTRY_DSN: ''
-            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), ne(variables['CODECOV_TOKEN'], ''))
-            displayName: Upload coverage to Codecov
-
-          - script: npm run e2e:ci
+          - script: npm run e2e:ci:contact-form
             condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-            displayName: Run E2E tests
+            displayName: Run E2E - Contact Form
+            env:
+              CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+              CYPRESS_PROJECT_ID: 3zwyy9
+              CYPRESS_ciBuildId: $(Build.BuildNumber)
+              CYPRESS_RECORD: "true"
+
+  - stage: E2EHome
+    dependsOn: []
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2EHome
+        steps:
+          - task: Cache@2
+            displayName: Cache Cypress binary
+            inputs:
+              key: 'cypress | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                cypress | "$(Agent.OS)"
+              path: $(CYPRESS_CACHE_FOLDER)
+
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run e2e:ci:home
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+            displayName: Run E2E - Home
+            env:
+              CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+              CYPRESS_PROJECT_ID: 3zwyy9
+              CYPRESS_ciBuildId: $(Build.BuildNumber)
+              CYPRESS_RECORD: "true"
+
+  - stage: E2ENavigation
+    dependsOn: []
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2ENavigation
+        steps:
+          - task: Cache@2
+            displayName: Cache Cypress binary
+            inputs:
+              key: 'cypress | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                cypress | "$(Agent.OS)"
+              path: $(CYPRESS_CACHE_FOLDER)
+
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run e2e:ci:navigation
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+            displayName: Run E2E - Navigation
+            env:
+              CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+              CYPRESS_PROJECT_ID: 3zwyy9
+              CYPRESS_ciBuildId: $(Build.BuildNumber)
+              CYPRESS_RECORD: "true"
+
+  - stage: E2EPages
+    dependsOn: []
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2EPages
+        steps:
+          - task: Cache@2
+            displayName: Cache Cypress binary
+            inputs:
+              key: 'cypress | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                cypress | "$(Agent.OS)"
+              path: $(CYPRESS_CACHE_FOLDER)
+
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run e2e:ci:pages
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+            displayName: Run E2E - Pages
+            env:
+              CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+              CYPRESS_PROJECT_ID: 3zwyy9
+              CYPRESS_ciBuildId: $(Build.BuildNumber)
+              CYPRESS_RECORD: "true"
+
+  - stage: E2ETerminal
+    dependsOn: []
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2ETerminal
+        steps:
+          - task: Cache@2
+            displayName: Cache Cypress binary
+            inputs:
+              key: 'cypress | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                cypress | "$(Agent.OS)"
+              path: $(CYPRESS_CACHE_FOLDER)
+
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run e2e:ci:terminal
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+            displayName: Run E2E - Terminal
+            env:
+              CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+              CYPRESS_PROJECT_ID: 3zwyy9
+              CYPRESS_ciBuildId: $(Build.BuildNumber)
+              CYPRESS_RECORD: "true"
+
+  - stage: E2ELighthouse
+    dependsOn: []
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2ELighthouse
+        steps:
+          - task: Cache@2
+            displayName: Cache Cypress binary
+            inputs:
+              key: 'cypress | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                cypress | "$(Agent.OS)"
+              path: $(CYPRESS_CACHE_FOLDER)
+
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run e2e:ci:lighthouse
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+            displayName: Run E2E - Lighthouse
+            env:
+              CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+              CYPRESS_PROJECT_ID: 3zwyy9
+              CYPRESS_ciBuildId: $(Build.BuildNumber)
+              CYPRESS_RECORD: "true"
 
   - stage: Build
     dependsOn: []
@@ -162,6 +360,12 @@ stages:
     dependsOn:
       - Lint
       - Test
+      - E2EContactForm
+      - E2EHome
+      - E2ENavigation
+      - E2EPages
+      - E2ETerminal
+      - E2ELighthouse
       - Build
     condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/release')))
     jobs:
@@ -201,6 +405,12 @@ stages:
     dependsOn:
       - Lint
       - Test
+      - E2EContactForm
+      - E2EHome
+      - E2ENavigation
+      - E2EPages
+      - E2ETerminal
+      - E2ELighthouse
       - Build
     variables:
       CYPRESS_INSTALL_BINARY: '0'
