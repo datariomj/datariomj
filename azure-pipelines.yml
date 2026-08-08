@@ -58,6 +58,19 @@ stages:
               GITHUB_TOKEN: $(GH_TOKEN)
             displayName: Generate Changelog
 
+          - script: |
+              npm run generate:changelog:unreleased > upcoming_changelog.md
+              if [ -s upcoming_changelog.md ]; then
+                echo "### 🚀 Upcoming Changelog Preview" > comment_body.md
+                echo "" >> comment_body.md
+                cat upcoming_changelog.md >> comment_body.md
+                gh pr comment $(System.PullRequest.PullRequestNumber) --body-file comment_body.md
+              fi
+            env:
+              GH_TOKEN: $(GH_TOKEN)
+            condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'), or(eq(variables['System.PullRequest.TargetBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main'), eq(variables['System.PullRequest.TargetBranchName'], 'main')))
+            displayName: Comment Upcoming Changelog on PR
+
   - stage: Test
     dependsOn: []
     variables:
@@ -117,8 +130,26 @@ stages:
           - script: npm ci --prefer-offline --no-audit --no-fund
             displayName: Run npm install
           
+          - script: |
+              version=$(npm run changelog:version | tail -n 1 | tr -d '\n')
+              echo "##vso[task.setvariable variable=sentryRelease]$version"
+            displayName: Set Sentry release version
+
           - script: npm run build:$(environment)
             displayName: Run build
+
+          - script: npm run sentry:sourcemaps
+            displayName: Upload Sentry source maps
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), ne(variables['SENTRY_AUTH_TOKEN'], ''))
+            env:
+              SENTRY_AUTH_TOKEN: $(SENTRY_AUTH_TOKEN)
+              SENTRY_ORG: $(SENTRY_ORG)
+              SENTRY_PROJECT: $(SENTRY_PROJECT)
+              SENTRY_RELEASE: $(sentryRelease)
+
+          - script: find $(distPath) -name '*.map' -delete
+            displayName: Remove source maps from artifact
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
           - publish: $(distPath)
             displayName: Publish Web App

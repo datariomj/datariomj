@@ -32,7 +32,7 @@
          [class.output-error]="item.type === 'output-error'" [class.has-html]="!!item.html">
       @if (item.type === 'command') {
       <span class="prompt-user">datariomj@dev</span><span class="prompt-sep">:</span><span class="prompt-path">~/{{ currentPath
-        }}</span><span class="prompt"> $ </span><span class="command-text">{{ item.text }}</span>@if (isTyping && $last) {<span
+        }}</span><span class="prompt">&nbsp;$&nbsp;</span><span class="command-text">{{ item.text }}</span>@if (isTyping && $last) {<span
             class="blinking-cursor"></span>}
       } @else if (item.html) {
       <div class="terminal-html" [innerHTML]="item.html | safeHtml"></div>
@@ -44,7 +44,7 @@
     @if (!isTyping) {
     <div class="input-line">
       <span class="prompt-user">datariomj@dev</span><span class="prompt-sep">:</span><span class="prompt-path">~/{{ currentPath
-        }}</span><span class="prompt"> $ </span>
+        }}</span><span class="prompt">&nbsp;$&nbsp;</span>
       <span class="command-text">{{ inputValue }}</span><span class="blinking-cursor"></span>
       @if (ghostText) {
       <span class="ghost-text">{{ ghostText }}</span>

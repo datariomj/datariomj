@@ -3,6 +3,8 @@ import { NavigationLink } from '../app/shared/interfaces/navigation-link';
 export const environment = {
   production: false,
   version: '0.1.0',
+  sentryDsn: 'https://85a21bb4e3e3375d3a74f6f8153f0e21@o4511842278244352.ingest.us.sentry.io/4511853070647296',
+  sentryEnv: 'staging',
   facebook: {
     appId: '2167184696673703',
   },
