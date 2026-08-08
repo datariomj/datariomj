@@ -76,18 +76,10 @@ stages:
   - stage: Test
     dependsOn: []
     variables:
-      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+      CYPRESS_INSTALL_BINARY: '0'
     jobs:
       - job: Test
         steps:
-          - task: Cache@2
-            displayName: Cache Cypress binary
-            inputs:
-              key: 'cypress | "$(Agent.OS)" | package-lock.json'
-              restoreKeys: |
-                cypress | "$(Agent.OS)"
-              path: $(CYPRESS_CACHE_FOLDER)
-
           - task: Cache@2
             displayName: Cache node_modules
             inputs:
@@ -110,7 +102,12 @@ stages:
             condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), ne(variables['CODECOV_TOKEN'], ''))
             displayName: Upload coverage to Codecov
 
-      - job: E2E_ContactForm
+  - stage: E2EContactForm
+    dependsOn: []
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2EContactForm
         steps:
           - task: Cache@2
             displayName: Cache Cypress binary
@@ -140,7 +137,12 @@ stages:
               CYPRESS_ciBuildId: $(Build.BuildNumber)
               CYPRESS_RECORD: "true"
 
-      - job: E2E_Home
+  - stage: E2EHome
+    dependsOn: []
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2EHome
         steps:
           - task: Cache@2
             displayName: Cache Cypress binary
@@ -170,7 +172,12 @@ stages:
               CYPRESS_ciBuildId: $(Build.BuildNumber)
               CYPRESS_RECORD: "true"
 
-      - job: E2E_Navigation
+  - stage: E2ENavigation
+    dependsOn: []
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2ENavigation
         steps:
           - task: Cache@2
             displayName: Cache Cypress binary
@@ -200,7 +207,12 @@ stages:
               CYPRESS_ciBuildId: $(Build.BuildNumber)
               CYPRESS_RECORD: "true"
 
-      - job: E2E_Pages
+  - stage: E2EPages
+    dependsOn: []
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2EPages
         steps:
           - task: Cache@2
             displayName: Cache Cypress binary
@@ -230,7 +242,12 @@ stages:
               CYPRESS_ciBuildId: $(Build.BuildNumber)
               CYPRESS_RECORD: "true"
 
-      - job: E2E_Terminal
+  - stage: E2ETerminal
+    dependsOn: []
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2ETerminal
         steps:
           - task: Cache@2
             displayName: Cache Cypress binary
@@ -260,7 +277,12 @@ stages:
               CYPRESS_ciBuildId: $(Build.BuildNumber)
               CYPRESS_RECORD: "true"
 
-      - job: E2E_Lighthouse
+  - stage: E2ELighthouse
+    dependsOn: []
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2ELighthouse
         steps:
           - task: Cache@2
             displayName: Cache Cypress binary
@@ -338,12 +360,12 @@ stages:
     dependsOn:
       - Lint
       - Test
-      - E2E_ContactForm
-      - E2E_Home
-      - E2E_Navigation
-      - E2E_Pages
-      - E2E_Terminal
-      - E2E_Lighthouse
+      - E2EContactForm
+      - E2EHome
+      - E2ENavigation
+      - E2EPages
+      - E2ETerminal
+      - E2ELighthouse
       - Build
     condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/release')))
     jobs:
@@ -383,12 +405,12 @@ stages:
     dependsOn:
       - Lint
       - Test
-      - E2E_ContactForm
-      - E2E_Home
-      - E2E_Navigation
-      - E2E_Pages
-      - E2E_Terminal
-      - E2E_Lighthouse
+      - E2EContactForm
+      - E2EHome
+      - E2ENavigation
+      - E2EPages
+      - E2ETerminal
+      - E2ELighthouse
       - Build
     variables:
       CYPRESS_INSTALL_BINARY: '0'
