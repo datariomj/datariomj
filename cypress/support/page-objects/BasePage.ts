@@ -21,8 +21,8 @@ export class BasePage {
   };
 
   // Common actions
-  visit(url = "") {
-    cy.visit(`${Cypress.config().baseUrl}${url}`);
+  visit(url = "/") {
+    cy.visit(url);
     this.waitForPageLoad();
     return this;
   }
