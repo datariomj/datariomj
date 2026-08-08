@@ -3,7 +3,7 @@
 ## Greetings 👋
 
 - Hi! I'm MJ 😃
-- Full-stack Developer 💼
+- DevOps Engineer Lead 💼
 - Utilizing TypeScript for frontend, backend & infrastructure development
 &nbsp;
 
@@ -30,7 +30,7 @@
 
 ## Connect 🔗
 
-[<img align="left" alt="datariomj.dev" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/svg/datariomj-white.svg" />][website]
+[<img align="left" alt="datariomj.dev" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/icons/datariomj.svg" />][website]
 [<img align="left" alt="datariomj | LinkedIn" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/svg/linkedin-white.svg" />][linkedin]
 [<img align="left" alt="datariomj | Instagram" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/svg/instagram-white.svg" />][instagram]
 [<img align="left" alt="datariomj | SoundCloud" width="22px" src="https://raw.githubusercontent.com/datariomj/datariomj/main/src/assets/svg/soundcloud-white.svg" />][soundcloud]
