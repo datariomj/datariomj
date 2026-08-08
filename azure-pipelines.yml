@@ -78,7 +78,35 @@ stages:
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
-      - job: Test
+      - job: UnitTests
+        variables:
+          CYPRESS_INSTALL_BINARY: '0'
+        steps:
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run test:coverage
+            displayName: Run unit tests with coverage
+
+          - script: timeout 60 npm run codecov:upload
+            env:
+              CODECOV_TOKEN: $(CODECOV_TOKEN)
+              CODECOV_FILE: coverage/datariomj/clover.xml
+              SENTRY_DSN: ''
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), ne(variables['CODECOV_TOKEN'], ''))
+            displayName: Upload coverage to Codecov
+
+      - job: E2ETests
+        variables:
+          CYPRESS_INSTALL_BINARY: '1'
         steps:
           - task: Cache@2
             displayName: Cache Cypress binary
@@ -98,17 +126,6 @@ stages:
 
           - script: npm ci --prefer-offline --no-audit --no-fund
             displayName: Run npm install
-          
-          - script: npm run test:coverage
-            displayName: Run Unit tests
-
-          - script: timeout 60 npm run codecov:upload
-            env:
-              CODECOV_TOKEN: $(CODECOV_TOKEN)
-              CODECOV_FILE: coverage/datariomj/clover.xml
-              SENTRY_DSN: ''
-            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), ne(variables['CODECOV_TOKEN'], ''))
-            displayName: Upload coverage to Codecov
 
           - script: npm run e2e:ci
             condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
@@ -161,7 +178,8 @@ stages:
   - stage: Deployment
     dependsOn:
       - Lint
-      - Test
+      - UnitTests
+      - E2ETests
       - Build
     condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/release')))
     jobs:
@@ -200,7 +218,8 @@ stages:
   - stage: Publish
     dependsOn:
       - Lint
-      - Test
+      - UnitTests
+      - E2ETests
       - Build
     variables:
       CYPRESS_INSTALL_BINARY: '0'
