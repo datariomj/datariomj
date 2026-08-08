@@ -26,29 +26,23 @@ variables:
     publicUrl: https://staging.datariomj.dev
 
 stages:
-  - stage: Lint
+  - stage: Init
     dependsOn: []
     variables:
       CYPRESS_INSTALL_BINARY: '0'
     jobs:
-      - job: Lint
+      - job: Init
         steps:
           - task: Cache@2
             displayName: Cache node_modules
             inputs:
-              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              key: 'node_modules | "(Agent.OS)" | package-lock.json'
               restoreKeys: |
-                node_modules | "$(Agent.OS)"
+                node_modules | "(Agent.OS)"'
               path: node_modules
 
           - script: npm ci --prefer-offline --no-audit --no-fund
             displayName: Run npm install
-          
-          - script: npm run lint
-            displayName: Run Angular lints
-          
-          - script: npm run lint:styles
-            displayName: Run style lints
 
           - script: |
               version=$(npm run changelog:version | tail -n 1 | tr -d '\n')
@@ -73,8 +67,33 @@ stages:
             condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'), or(eq(variables['System.PullRequest.TargetBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main'), eq(variables['System.PullRequest.TargetBranchName'], 'main')))
             displayName: Comment Upcoming Changelog on PR
 
+  - stage: Lint
+    dependsOn: [Init]
+    variables:
+      CYPRESS_INSTALL_BINARY: '0'
+    jobs:
+      - job: Lint
+        steps:
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "(Agent.OS)"'
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run lint
+            displayName: Run Angular lints
+
+          - script: npm run lint:styles
+            displayName: Run style lints
+
+
   - stage: Test
-    dependsOn: []
+    dependsOn: [Init]
     variables:
       CYPRESS_INSTALL_BINARY: '0'
     jobs:
@@ -103,7 +122,7 @@ stages:
             displayName: Upload coverage to Codecov
 
   - stage: E2EContactForm
-    dependsOn: []
+    dependsOn: [Init]
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -138,7 +157,7 @@ stages:
               CYPRESS_RECORD: "true"
 
   - stage: E2EHome
-    dependsOn: []
+    dependsOn: [Init]
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -173,7 +192,7 @@ stages:
               CYPRESS_RECORD: "true"
 
   - stage: E2ENavigation
-    dependsOn: []
+    dependsOn: [Init]
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -208,7 +227,7 @@ stages:
               CYPRESS_RECORD: "true"
 
   - stage: E2EPages
-    dependsOn: []
+    dependsOn: [Init]
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -243,7 +262,7 @@ stages:
               CYPRESS_RECORD: "true"
 
   - stage: E2ETerminal
-    dependsOn: []
+    dependsOn: [Init]
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -278,7 +297,7 @@ stages:
               CYPRESS_RECORD: "true"
 
   - stage: E2ELighthouse
-    dependsOn: []
+    dependsOn: [Init]
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -313,7 +332,7 @@ stages:
               CYPRESS_RECORD: "true"
 
   - stage: Build
-    dependsOn: []
+    dependsOn: [Init]
     variables:
       CYPRESS_INSTALL_BINARY: '0'
     jobs:
