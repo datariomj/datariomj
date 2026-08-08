@@ -123,6 +123,7 @@ stages:
 
   - stage: E2EContactForm
     dependsOn: [Init]
+    condition: ne(variables['Build.Reason'], 'PullRequest')
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -148,7 +149,6 @@ stages:
             displayName: Run npm install
 
           - script: npm run e2e:ci:contact-form
-            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
             displayName: Run E2E - Contact Form
             env:
               CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
@@ -158,6 +158,7 @@ stages:
 
   - stage: E2EHome
     dependsOn: [Init]
+    condition: ne(variables['Build.Reason'], 'PullRequest')
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -183,7 +184,6 @@ stages:
             displayName: Run npm install
 
           - script: npm run e2e:ci:home
-            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
             displayName: Run E2E - Home
             env:
               CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
@@ -193,6 +193,7 @@ stages:
 
   - stage: E2ENavigation
     dependsOn: [Init]
+    condition: ne(variables['Build.Reason'], 'PullRequest')
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -218,7 +219,6 @@ stages:
             displayName: Run npm install
 
           - script: npm run e2e:ci:navigation
-            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
             displayName: Run E2E - Navigation
             env:
               CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
@@ -228,6 +228,7 @@ stages:
 
   - stage: E2EPages
     dependsOn: [Init]
+    condition: ne(variables['Build.Reason'], 'PullRequest')
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -253,7 +254,6 @@ stages:
             displayName: Run npm install
 
           - script: npm run e2e:ci:pages
-            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
             displayName: Run E2E - Pages
             env:
               CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
@@ -263,6 +263,7 @@ stages:
 
   - stage: E2ETerminal
     dependsOn: [Init]
+    condition: ne(variables['Build.Reason'], 'PullRequest')
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -288,7 +289,6 @@ stages:
             displayName: Run npm install
 
           - script: npm run e2e:ci:terminal
-            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
             displayName: Run E2E - Terminal
             env:
               CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
@@ -298,6 +298,7 @@ stages:
 
   - stage: E2ELighthouse
     dependsOn: [Init]
+    condition: ne(variables['Build.Reason'], 'PullRequest')
     variables:
       CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
     jobs:
@@ -323,7 +324,6 @@ stages:
             displayName: Run npm install
 
           - script: npm run e2e:ci:lighthouse
-            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
             displayName: Run E2E - Lighthouse
             env:
               CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
