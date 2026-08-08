@@ -83,7 +83,7 @@
     "git-cliff": "^2.8.0",
     "jasmine-core": "^6.3.0",
     "jsdom": "^29.1.1",
-    "postcss": "^8.5.20",
+    "postcss": "^8.5.23",
     "stylelint": "^16.24.0",
     "stylelint-config-standard-scss": "^16.0.0",
     "stylelint-no-unsupported-browser-features": "^8.0.0",
