@@ -219,20 +219,21 @@ Then("Focus indicators should have sufficient contrast", () => {
 Then("Touch targets should meet minimum size requirements", () => {
   cy.get("a, button").each(($element) => {
     cy.wrap($element).then(($el) => {
-      const height = $el.outerHeight();
-      const width = $el.outerWidth();
+      const height = $el.outerHeight() ?? 0;
+      const width = $el.outerWidth() ?? 0;
       expect(Math.min(height, width)).to.be.greaterThan(44); // WCAG 2.1 AA requirement
     });
   });
 });
 
 Then("Content should be readable without zooming", () => {
-  cy.get("p, span, div")
-    .should("have.css", "font-size")
-    .then((fontSize) => {
-      const size = parseInt(fontSize);
+  cy.get("p, span, div").each(($el) => {
+    const fontSize = $el.css("font-size");
+    if (fontSize) {
+      const size = parseInt(fontSize, 10);
       expect(size).to.be.at.least(12); // Minimum readable font size
-    });
+    }
+  });
 });
 
 Then("Form should be accessible", () => {
@@ -290,9 +291,13 @@ Then("Decorative images should be marked appropriately", () => {
 Then("Videos should have captions if present", () => {
   cy.get("video").then(($videos) => {
     if ($videos.length > 0) {
-      cy.wrap($videos)
-        .should("have.attr", "aria-label")
-        .or("have.descendants", 'track[kind="captions"]');
+      cy.wrap($videos).each(($video) => {
+        cy.wrap($video).should("satisfy", ($el: JQuery<HTMLVideoElement>) => {
+          const hasAriaLabel = Boolean($el.attr("aria-label"));
+          const hasCaptions = $el.find('track[kind="captions"]').length > 0;
+          return hasAriaLabel || hasCaptions;
+        });
+      });
     }
   });
 });

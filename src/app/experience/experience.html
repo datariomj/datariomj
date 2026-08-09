@@ -29,36 +29,9 @@
           [dateRange]="exp.dateRange"
           [items]="exp.items"
           [technologies]="exp.technologies"
-          [metrics]="exp.metrics"
           [isCurrent]="exp.isCurrent">
         </app-experience-block>
       </div>
     }
-  </div>
-</section>
-
-<!-- Terminal Block Callout -->
-<section class="mt-20 max-w-5xl mx-auto">
-  <div class="bg-surface-matte border border-border-hairline rounded overflow-hidden">
-    <div class="bg-surface-container-high px-4 py-2 flex items-center justify-between border-b border-border-hairline">
-      <div class="flex gap-2">
-        <div class="w-3 h-3 rounded-full opacity-50 bg-error-container"></div>
-        <div class="w-3 h-3 rounded-full opacity-50 bg-secondary-container"></div>
-        <div class="w-3 h-3 rounded-full opacity-50 bg-primary-container"></div>
-      </div>
-      <span class="font-jetbrains text-sm text-text-muted">session: user@core_metrics</span>
-    </div>
-    <div class="p-6 font-jetbrains text-sm leading-relaxed text-primary">
-      <p class="mb-2"><span class="text-text-muted">$</span> cat experience_summary.json</p>
-      <p class="text-text-crisp m-0">{{ '{' }}</p>
-      <p class="pl-4 m-0">"total_uptime": "100.0%",</p>
-      <p class="pl-4 m-0">"deployments_managed": "&gt; 5,000",</p>
-      <p class="pl-4 m-0">"focus": "CI/CD Automation &amp; Developer Enablement"</p>
-      <p class="text-text-crisp m-0">{{ '}' }}</p>
-      <div class="mt-4 flex items-center">
-        <span class="text-text-muted">$</span>
-        <span class="inline-block w-2 h-5 bg-primary ml-2 animate-[blink_1s_step-end_infinite]"></span>
-      </div>
-    </div>
   </div>
 </section>

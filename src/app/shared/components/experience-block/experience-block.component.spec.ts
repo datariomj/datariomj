@@ -1,12 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { ExperienceBlockComponent, ExperienceMetric } from './experience-block.component';
-
-const MOCK_METRICS: ExperienceMetric[] = [
-  { label: 'Uptime', value: '99.99%' },
-  { label: 'Deployments', value: '5000+' },
-];
+import { ExperienceBlockComponent } from './experience-block.component';
 
 describe('ExperienceBlockComponent', () => {
   let component: ExperienceBlockComponent;
@@ -58,46 +53,12 @@ describe('ExperienceBlockComponent', () => {
     it('technologies defaults to empty array', () => {
       expect(component.technologies).toEqual([]);
     });
-
-    it('metrics defaults to empty array', () => {
-      expect(component.metrics).toEqual([]);
-    });
-
-    it('showMetrics defaults to false', () => {
-      expect(component.showMetrics).toBe(false);
-    });
-  });
-
-  describe('toggleMetrics', () => {
-    it('toggles showMetrics from false to true', () => {
-      component.toggleMetrics();
-      expect(component.showMetrics).toBe(true);
-    });
-
-    it('toggles showMetrics back to false', () => {
-      component.showMetrics = true;
-      component.toggleMetrics();
-      expect(component.showMetrics).toBe(false);
-    });
-
-    it('can be toggled multiple times', () => {
-      component.toggleMetrics();
-      component.toggleMetrics();
-      component.toggleMetrics();
-      expect(component.showMetrics).toBe(true);
-    });
   });
 
   describe('@Input bindings', () => {
     it('accepts a title', () => {
       component.title = 'DevOps Engineer Lead';
       expect(component.title).toBe('DevOps Engineer Lead');
-    });
-
-    it('accepts metrics', () => {
-      component.metrics = MOCK_METRICS;
-      expect(component.metrics.length).toBe(2);
-      expect(component.metrics[0].label).toBe('Uptime');
     });
 
     it('accepts items list', () => {
@@ -157,23 +118,6 @@ describe('ExperienceBlockComponent', () => {
       c.technologies = ['Terraform', 'AWS'];
       f.detectChanges();
       expect(f.nativeElement.querySelectorAll('.tech-tag').length).toBe(2);
-    });
-
-    it('renders metrics when toggled open', () => {
-      const f = TestBed.createComponent(ExperienceBlockComponent);
-      const c = f.componentInstance;
-      c.items = ['A'];
-      c.metrics = MOCK_METRICS;
-      f.detectChanges();
-
-      const btn: HTMLButtonElement | null = f.nativeElement.querySelector('.metrics-toggle-btn');
-      expect(btn).toBeTruthy();
-      btn?.click();
-      f.detectChanges();
-
-      expect(f.nativeElement.querySelector('.metrics-grid')).toBeTruthy();
-      expect(f.nativeElement.textContent).toContain('Uptime');
-      expect(f.nativeElement.textContent).toContain('99.99%');
     });
   });
 });

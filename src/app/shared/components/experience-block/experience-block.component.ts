@@ -1,10 +1,5 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input } from '@angular/core';
-
-export interface ExperienceMetric {
-  label: string;
-  value: string;
-}
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-experience-block',
@@ -14,8 +9,6 @@ export interface ExperienceMetric {
   imports: [NgClass],
 })
 export class ExperienceBlockComponent {
-  private cdr = inject(ChangeDetectorRef);
-
   @Input() title = '';
   @Input() company = '';
   @Input() dateRange = '';
@@ -24,12 +17,4 @@ export class ExperienceBlockComponent {
   @Input() isCurrent = false;
   @Input() items: string[] = [];
   @Input() technologies: string[] = [];
-  @Input() metrics: ExperienceMetric[] = [];
-
-  showMetrics = false;
-
-  toggleMetrics(): void {
-    this.showMetrics = !this.showMetrics;
-    this.cdr.markForCheck();
-  }
 }

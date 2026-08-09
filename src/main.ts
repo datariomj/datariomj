@@ -4,6 +4,7 @@ import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import * as Sentry from '@sentry/angular';
+import { consoleLoggingIntegration, replayIntegration } from '@sentry/browser';
 import { NgxsStoreModule } from '@store/store.module';
 
 import { AppComponent } from './app/app.component';
@@ -17,7 +18,8 @@ if (environment.sentryDsn) {
     release: environment.version,
     integrations: [
       Sentry.browserTracingIntegration(),
-      Sentry.replayIntegration({ maskAllText: false, maskAllInputs: true }),
+      replayIntegration({ maskAllText: false, maskAllInputs: true }),
+      consoleLoggingIntegration({ levels: ['error', 'warn', 'info', 'debug'] }),
     ],
     tracesSampleRate: environment.production ? 0.2 : 1.0,
     replaysSessionSampleRate: environment.production ? 0.1 : 0,
