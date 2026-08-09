@@ -29,11 +29,11 @@ export const environment = {
       loadChildren: () => import('../app/stack/stack.module').then(m => m.StackModule),
       iconClass: 'fa-layer-group',
     },
-    {
-      path: '/contact',
-      label: 'contact',
-      loadChildren: () => import('../app/contact/contact-module').then(m => m.ContactModule),
-      iconClass: 'fa-envelope',
-    },
+    // {
+    //   path: '/contact',
+    //   label: 'contact',
+    //   loadChildren: () => import('../app/contact/contact-module').then(m => m.ContactModule),
+    //   iconClass: 'fa-envelope',
+    // },
   ] as NavigationLink[],
 };
