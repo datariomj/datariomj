@@ -156,11 +156,7 @@ Cypress.Commands.add(
   "checkAccessibility",
   (context?: string, options?: any) => {
     cy.injectAxe();
-    if (context) {
-      cy.checkA11y(context, options);
-    } else {
-      cy.checkA11y(null, options);
-    }
+    cy.checkA11y(context, options);
   },
 );
 
@@ -194,3 +190,15 @@ Cypress.Commands.add(
   },
 );
 
+// Custom commands for data-cy selectors
+Cypress.Commands.add("getByTestId", (testId: string) => {
+  return cy.get(`[data-cy="${testId}"]`);
+});
+
+Cypress.Commands.add(
+  "findByTestId",
+  { prevSubject: "element" },
+  (subject, testId: string) => {
+    return cy.wrap(subject).find(`[data-cy="${testId}"]`);
+  },
+);

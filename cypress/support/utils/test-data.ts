@@ -168,7 +168,7 @@ export const TestHelpers = {
   // Verify page metadata
   verifyMetadata: (page: keyof typeof TestData.metadata) => {
     const meta = TestData.metadata[page];
-    if (meta.title) {
+    if ("title" in meta && meta.title) {
       cy.title().should("eq", meta.title);
     }
     if (meta.url) {

@@ -128,7 +128,7 @@ Cypress.Commands.add("startPerformanceMonitoring", () => {
 });
 
 Cypress.Commands.add("markPerformance", (name: string) => {
-  cy.window().then((win: any) => {
+  cy.window().then((win) => {
     if (win.performanceMetrics) {
       win.performanceMetrics.marks[name] =
         win.performance.now() - win.performanceMetrics.startTime;
@@ -137,7 +137,7 @@ Cypress.Commands.add("markPerformance", (name: string) => {
 });
 
 Cypress.Commands.add("endPerformanceMonitoring", () => {
-  cy.window().then((win: any) => {
+  cy.window().then((win) => {
     if (win.performanceMetrics) {
       const totalTime =
         win.performance.now() - win.performanceMetrics.startTime;
@@ -147,14 +147,20 @@ Cypress.Commands.add("endPerformanceMonitoring", () => {
   });
 });
 
-// Add TypeScript declarations for new commands
+// Add TypeScript declarations for custom commands and window properties
 declare global {
   namespace Cypress {
+    interface ApplicationWindow {
+      performanceMetrics?: {
+        startTime: number;
+        marks: Record<string, number>;
+      };
+    }
     interface Chainable {
-      configureAxe(): Chainable<void>;
       startPerformanceMonitoring(): Chainable<void>;
       markPerformance(name: string): Chainable<void>;
       endPerformanceMonitoring(): Chainable<void>;
     }
   }
 }
+

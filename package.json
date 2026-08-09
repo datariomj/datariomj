@@ -7,9 +7,9 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run generate:deployment-assets && ng serve",
-    "build": "npm run generate:deployment-assets && ng build",
-    "build:staging": "npm run generate:deployment-assets && ng build --configuration staging",
-    "build:prod": "npm run generate:deployment-assets && ng build --configuration production",
+    "build": "npm run generate:deployment-assets && node scripts/set-app-version.mjs && ng build --define __APP_VERSION__=\"'$(cat generated/version.txt)'\"",
+    "build:staging": "npm run generate:deployment-assets && node scripts/set-app-version.mjs && ng build --configuration staging --define __APP_VERSION__=\"'$(cat generated/version.txt)'\"",
+    "build:prod": "npm run generate:deployment-assets && node scripts/set-app-version.mjs && ng build --configuration production --define __APP_VERSION__=\"'$(cat generated/version.txt)'\"",
     "sentry:sourcemaps": "release=${SENTRY_RELEASE:-$npm_package_version}; sentry-cli sourcemaps inject --release $release ./dist/datariomj/browser && sentry-cli sourcemaps upload --release $release ./dist/datariomj/browser",
     "test": "ng test",
     "lint": "ng lint",

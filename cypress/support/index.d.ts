@@ -30,7 +30,6 @@ declare global {
     testErrorState(apiPattern: string, errorMessage?: string): Chainable<void>;
 
     // Custom commands from e2e.ts
-    configureAxe(): Chainable<void>;
     startPerformanceMonitoring(): Chainable<void>;
     markPerformance(name: string): Chainable<void>;
     endPerformanceMonitoring(): Chainable<void>;
@@ -38,22 +37,9 @@ declare global {
     // Additional type safety for common Cypress operations
     getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
     findByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
-  }
+    }
   }
 }
-
-// Custom command implementations for type safety
-Cypress.Commands.add("getByTestId", (testId: string) => {
-  return cy.get(`[data-cy="${testId}"]`);
-});
-
-Cypress.Commands.add(
-  "findByTestId",
-  { prevSubject: "element" },
-  (subject, testId: string) => {
-    return cy.wrap(subject).find(`[data-cy="${testId}"]`);
-  },
-);
 
 // Global types for test data
 export interface TestUser {
