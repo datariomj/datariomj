@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 
 import { TerminalHeroComponent } from '../shared/components/terminal-hero/terminal-hero.component';
 
@@ -24,7 +23,7 @@ export interface StackCategory {
   styleUrls: ['./stack.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, TerminalHeroComponent, FormsModule],
+  imports: [TerminalHeroComponent, FormsModule],
 })
 export class StackComponent {
   private cdr = inject(ChangeDetectorRef);
@@ -41,9 +40,9 @@ export class StackComponent {
       items: [
         {
           command: '$ ls tools/monitoring',
-          name: 'Prometheus & Grafana',
+          name: 'ELK Stack (Elasticsearch, Logstash, Kibana)',
           status: '[ RUNNING ]',
-          description: 'Metric aggregation and visual intelligence for high-cardinality distributed systems.',
+          description: 'Centralized log aggregation, search, and visualization for distributed systems.',
         },
         {
           command: '$ ls tools/orchestration',
