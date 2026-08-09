@@ -126,11 +126,3 @@
   border-radius: 4px;
   font-weight: 500;
 }
-
-.metrics-toggle-btn {
-  transition: opacity 0.2s ease;
-}
-
-.metrics-toggle-btn:hover {
-  opacity: 0.85;
-}

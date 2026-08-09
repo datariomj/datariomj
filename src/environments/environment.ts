@@ -4,9 +4,11 @@ import { NavigationLink } from '../app/shared/interfaces/navigation-link';
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+declare const __APP_VERSION__: string | undefined;
+
 export const environment = {
   production: false,
-  version: '0.1.0',
+  version: typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : '0.1.0-dev',
   sentryDsn: '',
   sentryEnv: 'development',
   facebook: {

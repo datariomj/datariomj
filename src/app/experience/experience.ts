@@ -26,24 +26,11 @@ export class Experience {
       dateRange: 'Apr 2023 - Present',
       isCurrent: true,
       technologies: ['AWS', 'Kubernetes', 'EKS', 'Jenkins', 'Terraform', 'Python', 'GitOps'],
-      metrics: [
-        { label: 'Uptime Ratio', value: '100.0%' },
-        { label: 'Deployments Managed', value: '> 5,000' },
-        { label: 'Legacy Migration', value: '100% Containers' },
-      ],
       items: [
-        'Lead DevOps team in implementing CI/CD best practices and infrastructure management strategies',
-        'Drive migration of legacy systems to scalable, cloud-native architectures',
-        'Mentor DevOps engineers while cultivating a culture of continuous improvement and innovation',
-        'Spearhead comprehensive disaster recovery planning and implementation initiatives',
-        'Pioneer AI-powered automation within CI/CD pipelines to enhance deployment efficiency',
-        'Orchestrate investigations and rapid resolution of critical production incidents',
-        'Built a Python-based DevOps Slack agent deployed on Kubernetes to automate team request handling',
-        'Architected and deployed GitOps-controlled CI/CD infrastructure using Jenkins on AWS',
-        'Automated end-to-end release management workflows leveraging Jenkins and AWS cloud services',
-        'Successfully migrated legacy CI/CD tools (Octopus Deploy & TeamCity) to unified Jenkins platform',
-        'Migrated legacy on-prem .NET IIS sites to containerized Kubernetes on AWS EKS',
-        'Implemented pipeline guardrails and audit controls to track production releases',
+        'Lead a DevOps team responsible for CI/CD strategy, cloud infrastructure, and platform reliability across fintech services.',
+        'Drive modernization of legacy systems toward containerized, cloud-native architectures on AWS.',
+        'Introduce AI-assisted automation and GitOps practices to improve deployment velocity and operational consistency.',
+        'Mentor engineers and foster a culture of incident readiness, observability, and continuous improvement.',
       ],
     },
     {
@@ -54,14 +41,9 @@ export class Experience {
       dateRange: 'Oct 2021 - Apr 2023',
       isCurrent: false,
       technologies: ['Kubernetes', 'Helm', 'Terraform', 'Cloud Custodian', 'Checkov'],
-      metrics: [
-        { label: 'IaC Compliance', value: '100%' },
-        { label: 'Cluster Scope', value: 'Multi-Region EKS' },
-      ],
       items: [
-        'Implemented automated monitoring, alerting, and security audit frameworks using Terraform',
-        'Managed production Kubernetes clusters and Helm deployments through IAC principles',
-        'Enforced Compliance and Policy as Code using Cloud Custodian and Checkov',
+        'Managed multi-region Kubernetes platforms and Helm-based deployments through infrastructure-as-code principles.',
+        'Implemented monitoring, alerting, and policy-as-code guardrails to strengthen security and compliance posture.',
       ],
     },
     {
@@ -72,12 +54,9 @@ export class Experience {
       dateRange: 'Apr 2020 - Oct 2021',
       isCurrent: false,
       technologies: ['Angular', 'TypeScript', 'Cypress', 'Node.js', 'REST APIs'],
-      metrics: [
-        { label: 'E2E QA Coverage', value: '> 90%' },
-      ],
       items: [
-        'Engineered enterprise CRM application using Angular framework',
-        'Implemented comprehensive test automation suite with Cypress for quality assurance',
+        'Built enterprise-grade web applications with Angular and TypeScript for CRM and business-process workflows.',
+        'Established end-to-end test automation practices with Cypress to improve release confidence and QA coverage.',
       ],
     },
     {
@@ -88,16 +67,10 @@ export class Experience {
       dateRange: 'Jun 2016 - Apr 2020',
       isCurrent: false,
       technologies: ['Node.js', 'AWS Lambda', 'Docker', 'Angular', 'AWS CDK', 'Bash'],
-      metrics: [
-        { label: 'Cost Reduction', value: '65%' },
-        { label: 'Deployment Time', value: '-80%' },
-      ],
       items: [
-        'Architected and deployed serverless microservices using Node.js and AWS Lambda',
-        'Pioneered Angular adoption and containerized application development with Docker',
-        'Achieved 65% reduction in operational costs through infrastructure optimization',
-        'Introduced Infrastructure as Code methodology using AWS CDK with TypeScript',
-        'Established automated CI/CD pipelines using AWS CodeBuild and CodePipeline',
+        'Developed serverless microservices and containerized applications on AWS, reducing operational overhead.',
+        'Pioneered Angular adoption and Infrastructure-as-Code practices to streamline full-stack delivery.',
+        'Built automated CI/CD pipelines that significantly shortened release cycles and deployment risk.',
       ],
     },
   ];

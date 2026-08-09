@@ -354,7 +354,7 @@ stages:
               echo "##vso[task.setvariable variable=sentryRelease]$version"
             displayName: Set Sentry release version
 
-          - script: npm run build:$(environment)
+          - script: npm run build:$(environment) -- --define __APP_VERSION__="'$(sentryRelease)'"
             displayName: Run build
 
           - script: npm run sentry:sourcemaps

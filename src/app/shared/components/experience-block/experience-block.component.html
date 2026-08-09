@@ -44,25 +44,4 @@
       }
     </div>
   }
-
-  <!-- Expandable Key Metrics -->
-  @if (metrics.length > 0) {
-    <div class="metrics-container mt-3">
-      <button (click)="toggleMetrics()" class="metrics-toggle-btn font-jetbrains text-xs cursor-pointer bg-transparent border-0 p-0 flex items-center gap-1.5 text-primary hover:underline">
-        <i class="fa-solid" [class.fa-chevron-down]="!showMetrics" [class.fa-chevron-up]="showMetrics"></i>
-        <span>{{ showMetrics ? '[ HIDE_KEY_METRICS ]' : '[ SHOW_KEY_METRICS ]' }}</span>
-      </button>
-
-      @if (showMetrics) {
-        <div class="metrics-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mt-3 p-3 bg-surface-container-high border border-border-hairline rounded font-jetbrains">
-          @for (m of metrics; track m.label) {
-            <div class="metric-card flex flex-col">
-              <span class="text-xs text-text-muted uppercase tracking-wider">{{ m.label }}</span>
-              <span class="text-sm font-bold text-primary">{{ m.value }}</span>
-            </div>
-          }
-        </div>
-      }
-    </div>
-  }
 </div>

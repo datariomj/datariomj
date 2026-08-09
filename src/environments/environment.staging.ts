@@ -1,8 +1,10 @@
 import { NavigationLink } from '../app/shared/interfaces/navigation-link';
 
+declare const __APP_VERSION__: string | undefined;
+
 export const environment = {
   production: false,
-  version: '0.1.0',
+  version: typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : '0.1.0-dev',
   sentryDsn: 'https://85a21bb4e3e3375d3a74f6f8153f0e21@o4511842278244352.ingest.us.sentry.io/4511853070647296',
   sentryEnv: 'staging',
   facebook: {
