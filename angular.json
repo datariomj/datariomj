@@ -146,7 +146,8 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "buildTarget": "datariomj:build"
+            "buildTarget": "datariomj:build",
+            "host": "0.0.0.0"
           },
           "configurations": {
             "production": {

@@ -229,6 +229,7 @@ export class DeploymentArchitectureComponent {
         "Features: Error grouping, release tracking, user environment metadata",
         "Environment Aliases: Separate tracking for production and staging",
       ],
+      link: { url: "https://sentry.io/organizations/datariomj/issues/", label: "View Sentry Dashboard" },
     },
     codecov: {
       id: "codecov",
@@ -245,6 +246,7 @@ export class DeploymentArchitectureComponent {
         "Reports: Detailed line-by-line coverage heatmaps",
         "PR Checks: Enforces non-regressive coverage threshold rules",
       ],
+      link: { url: "https://app.codecov.io/gh/datariomj/datariomj", label: "View Codecov Coverage" },
     },
     codacy: {
       id: "codacy",
@@ -261,6 +263,7 @@ export class DeploymentArchitectureComponent {
         "Quality Gates: Blocks merging if security vulnerabilities are found",
         "Standards: OWASP Top 10 compliance checks",
       ],
+      link: { url: "https://app.codacy.com/gh/datariomj/datariomj/dashboard", label: "View Codacy Dashboard" },
     },
     cypress: {
       id: "cypress",
@@ -277,6 +280,7 @@ export class DeploymentArchitectureComponent {
         "Artifacts: Test video recordings, failure DOM screenshots",
         "Assertions: Viewport responsiveness and navigation link integrity",
       ],
+      link: { url: "https://cloud.cypress.io/projects/3zwyy9", label: "View Cypress Cloud Runs" },
     },
     uptimerobot: {
       id: "uptimerobot",
@@ -293,6 +297,7 @@ export class DeploymentArchitectureComponent {
         "Interval: 5-minute automated global pings",
         "Alerting: Instant notifications on latency spikes or downtime",
       ],
+      link: { url: "https://stats.uptimerobot.com/AGzj9HrMEo", label: "View UptimeRobot Status" },
     },
     route53: {
       id: "route53",
