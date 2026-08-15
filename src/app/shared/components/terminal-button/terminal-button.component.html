@@ -1,0 +1,9 @@
+<button 
+  class="terminal-btn"
+  [class.primary]="variant === 'primary'"
+  [class.ghost]="variant === 'ghost'"
+  (click)="onClick($event)">
+  <span class="bracket">[</span>
+  <span class="btn-label">{{ label }}</span>
+  <span class="bracket">]</span>
+</button>

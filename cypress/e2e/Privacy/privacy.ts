@@ -1,11 +1,9 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
-import { Given, Then } from 'cypress-cucumber-preprocessor/steps';
+import { Given, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-Given('User visits privacy page', () => {
-  cy.visit(`${ Cypress.config().baseUrl }/privacy`);
+Given("User visits privacy page", () => {
+  cy.visit(`${Cypress.config().baseUrl}/privacy`);
 });
 
-Then('User will load proper metadata', () => {
-  cy.title().should('eq', 'MJ Datario | Privacy Policy');
-});
+// Handled in common.ts

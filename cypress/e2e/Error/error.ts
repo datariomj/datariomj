@@ -1,11 +1,9 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
-import { Given, Then } from 'cypress-cucumber-preprocessor/steps';
+import { Given, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-Given('User visits error page', () => {
-  cy.visit(`${ Cypress.config().baseUrl }/non-existing-route`);
+Given("User visits error page", () => {
+  cy.visit(`${Cypress.config().baseUrl}/non-existing-route`);
 });
 
-Then('User will load proper metadata', () => {
-  cy.title().should('eq', '404 Error');
-});
+// Handled in common.ts

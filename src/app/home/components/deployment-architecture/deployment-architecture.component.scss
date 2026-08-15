@@ -1,0 +1,82 @@
+.section-badge {
+  @apply text-xs font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800/50 inline-block mt-1;
+}
+
+.bg-surface-matte {
+  background-color: #020617;
+}
+
+.border-border-hairline {
+  border-color: rgb(51 65 85 / 60%);
+}
+
+.diagram-viewport {
+  background: radial-gradient(circle at 50% 50%, rgb(14 165 233 / 3%) 0%, rgb(2 6 23 / 0%) 70%);
+}
+
+.diagram-node {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease;
+  transform-origin: center center;
+
+  &:hover {
+    transform: translateY(-1.5px) scale(1.015);
+    filter: drop-shadow(0 4px 12px rgb(14 165 233 / 25%));
+
+    rect {
+      stroke-width: 1.8px;
+    }
+  }
+
+  &.selected {
+    transform: translateY(-2px) scale(1.02);
+    filter: drop-shadow(0 6px 16px rgb(14 165 233 / 40%));
+
+    rect {
+      stroke-width: 2px;
+    }
+  }
+}
+
+@keyframes expand-morph-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(24px);
+    filter: blur(6px);
+  }
+
+  65% {
+    opacity: 1;
+    transform: scale(1.015) translateY(-2px);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes unmorph-diagram {
+  0% {
+    opacity: 0;
+    transform: scale(1.05) translateY(-14px);
+    filter: blur(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-expandMorph {
+  animation: expand-morph-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity, filter;
+}
+
+.animate-unmorphDiagram {
+  animation: unmorph-diagram 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity, filter;
+}

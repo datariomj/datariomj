@@ -1,0 +1,77 @@
+<div class="terminal-window" [class.focused]="isFocused && !isClosed" [class.closed]="isClosed" [class.home-terminal]="isHomePage"
+     (click)="!isClosed && focusInput()" (keyup.enter)="!isClosed && focusInput()" tabindex="0" role="region"
+     aria-label="Interactive terminal window">
+  <!-- Terminal Header -->
+  <div class="terminal-header">
+    <div class="terminal-dots">
+      @if (!isClosed) {
+      <div class="dot red-dot" (click)="closeTerminal($event)" (keyup.enter)="closeTerminal($event)" tabindex="0" role="button"
+           title="Close terminal" aria-label="Close terminal"></div>
+      } @else {
+      <div class="dot gray-dot bg-surface-bright opacity-40 cursor-not-allowed w-3 h-3 rounded-full"></div>
+      }
+      <div class="dot yellow-dot"></div>
+      <div class="dot green-dot"></div>
+    </div>
+    <div class="terminal-title">
+      @if (isClosed) {
+      [CONNECTION CLOSED]
+      } @else {
+      datariomj@dev — ~/{{ currentPath }}
+      }
+    </div>
+    <div style="width: 44px"></div>
+  </div>
+
+  @if (!isClosed) {
+  <!-- Terminal Content -->
+  <div class="terminal-content" #terminalContent>
+    <!-- History -->
+    @for (item of history; track item) {
+    <div class="terminal-line" [class.output-text]="item.type === 'output'" [class.output-success]="item.type === 'output-success'"
+         [class.output-error]="item.type === 'output-error'" [class.has-html]="!!item.html">
+      @if (item.type === 'command') {
+      <span class="prompt-user">datariomj@dev</span><span class="prompt-sep">:</span><span class="prompt-path">~/{{ currentPath
+        }}</span><span class="prompt">&nbsp;$&nbsp;</span><span class="command-text">{{ item.text }}</span>@if (isTyping && $last) {<span
+            class="blinking-cursor"></span>}
+      } @else if (item.html) {
+      <div class="terminal-html" [innerHTML]="item.html | safeHtml"></div>
+      } @else {<span class="terminal-text">{{ item.text }}</span>}
+    </div>
+    }
+
+    <!-- Input Line -->
+    @if (!isTyping) {
+    <div class="input-line">
+      <span class="prompt-user">datariomj@dev</span><span class="prompt-sep">:</span><span class="prompt-path">~/{{ currentPath
+        }}</span><span class="prompt">&nbsp;$&nbsp;</span>
+      <span class="command-text">{{ inputValue }}</span><span class="blinking-cursor"></span>
+      @if (ghostText) {
+      <span class="ghost-text">{{ ghostText }}</span>
+      }
+      <input #terminalInput type="text" class="terminal-input" aria-label="Terminal command input" autocomplete="off" autocorrect="off"
+             autocapitalize="off" spellcheck="false" (focus)="onFocus()" (blur)="onBlur()" (input)="onInputChange(terminalInput.value)"
+             (keydown.tab)="onTab($event, terminalInput)" (keydown.ArrowRight)="onArrowRight($event, terminalInput)"
+             (keydown.enter)="execute(terminalInput)" />
+    </div>
+    }
+  </div>
+  } @else {
+  <!-- Connection Closed content inside same window structure to prevent layout shifting -->
+  <div class="terminal-content flex flex-col items-center justify-center text-center animate-fade-in"
+       style="min-height: 250px; max-height: 400px; padding: 2rem;">
+    <div
+         class="w-12 h-12 rounded-full bg-surface-container-high border border-border-hairline flex items-center justify-center mb-4 shadow-inner">
+      <i class="fa-solid fa-power-off text-xl text-error opacity-80 animate-pulse"></i>
+    </div>
+    <h2 class="font-jetbrains text-base text-error mb-2 tracking-wide uppercase">Connection Terminated</h2>
+    <p class="font-inter text-text-muted text-xs max-w-sm mx-auto mb-6">
+      The session to datariomj@dev has been closed by the user.
+    </p>
+    <button class="px-5 py-2.5 font-jetbrains text-xs transition-all cursor-pointer border border-primary text-primary hover:bg-primary hover:text-background flex items-center gap-2 mx-auto bg-transparent group"
+            (click)="reconnect()">
+      <i class="fa-solid fa-rotate-right group-hover:animate-spin"></i> [ REBOOT_SESSION ]
+    </button>
+  </div>
+  }
+</div>

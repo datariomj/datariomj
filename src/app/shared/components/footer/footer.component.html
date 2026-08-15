@@ -1,43 +1,13 @@
-<div class="footer">
-  <mat-toolbar>
-    <div class="footer__left">
-      <div class="footer__section">
-        <div class="footer__expand d__none d__flex--lg" (click)="toggleSidenav()">
-          <mat-icon svgIcon="chevron-right"></mat-icon>
-        </div>
-      </div>
-      <div class="footer__section d__none d__flex--lg">
-        <ng-container *ngTemplateOutlet="branch"></ng-container>
-      </div>
-      <div class="footer__section footer__section--flex-sb d__flex d__none--lg">
-        <ng-container *ngTemplateOutlet="branch"></ng-container>
-        <div>
-          <a mat-icon-button *ngFor="let socialIcon of socialIcons" class="footer__social-icon" href="{{socialIcon.link}}" rel="noreferrer" target="_blank">
-            <mat-icon svgIcon="{{socialIcon.icon}}"></mat-icon>
-          </a>
-        </div>
-      </div>
-      <div class="footer__section">
-        <a class="footer__link" routerLinkActive="footer__link--active" routerLink="/privacy">Privacy Policy</a>
-        <span class="footer__link-divider">|</span>
-        <a class="footer__link" routerLinkActive="footer__link--active" routerLink="/terms">Terms & Conditions</a>
-      </div>
+<footer class="w-full bg-background border-t border-border-hairline">
+  <div class="w-full max-w-5xl mx-auto px-6 py-10 pb-[90px] md:pb-10 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="flex flex-col items-center md:items-start gap-1">
+      <p class="font-jetbrains text-xs text-text-muted uppercase tracking-widest m-0">© {{currentYear}} datariomj.dev</p>
     </div>
-    <div class="footer__right">
-      <div class="footer__section">
-        <a class="footer__link footer__text--smaller" href="mailto:{{email}}">{{email}}</a>
-      </div>
-      <div class="footer__section">
-        <mat-icon svgIcon="copyright" class="footer__text footer__copyright-icon"></mat-icon>
-        <span class="footer__text footer__text--smaller">{{currentYear}}</span>
-      </div>
+    <div class="flex gap-4 md:gap-8 font-jetbrains flex-wrap justify-center">
+      <a class="text-xs text-terminal-green no-underline transition-opacity hover:underline hover:opacity-80" href="https://github.com/datariomj" target="_blank" rel="noopener noreferrer">GITHUB</a>
+      <a class="text-xs text-terminal-green no-underline transition-opacity hover:underline hover:opacity-80" href="https://www.linkedin.com/in/datariomj/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+      <a class="text-xs text-terminal-green no-underline transition-opacity hover:underline hover:opacity-80" routerLink="/privacy">PRIVACY</a>
+      <a class="text-xs text-terminal-green no-underline transition-opacity hover:underline hover:opacity-80" routerLink="/terms">TERMS</a>
     </div>
-  </mat-toolbar>
-</div>
-
-<ng-template #branch>
-  <a class="footer__link" href="https://github.com/datariomj/datariomj/tree/main" rel="noreferrer" target="_blank">
-    <mat-icon svgIcon="git"></mat-icon>
-    <span>main</span>
-  </a>
-</ng-template>
+  </div>
+</footer>

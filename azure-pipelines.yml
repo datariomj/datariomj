@@ -1,113 +1,392 @@
+trigger:
+  branches:
+    include:
+      - main
+      - release
+
+pr:
+  branches:
+    include:
+      - main
+      - release
+
+pool:
+  name: SelfHosted
+
 variables:
-  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
-  isRelease: $[eq(variables['Build.SourceBranch'], 'refs/heads/release')]
-  isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
   distPath: dist/datariomj/browser
   artifactName: WebApp
-  npmConfigCache: $(Pipeline.Workspace)/.npm
-  ${{ if eq(variables['isMain'], true) }}:
+  npm_config_prefer_offline: true
+  CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+  ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
     environment: prod
+    publicUrl: https://datariomj.dev
   ${{ else }}:
     environment: 'staging'
+    publicUrl: https://staging.datariomj.dev
 
 stages:
   - stage: Init
+    dependsOn: []
+    variables:
+      CYPRESS_INSTALL_BINARY: '0'
     jobs:
       - job: Init
         steps:
           - task: Cache@2
-            displayName: Cache npm
+            displayName: Cache node_modules
             inputs:
-              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
-                npm | "$(Agent.OS)"
-              path: $(npmConfigCache)
+                node_modules | "$(Agent.OS)"
+              path: node_modules
 
-          - script: npm ci
-            displayName: Run npm ci
-
-  - stage: Lint
-    dependsOn: Init
-    jobs:
-      - job: Lint
-        steps:
-          - task: Cache@2
-            displayName: Cache npm
-            inputs:
-              key: 'npm | "$(Agent.OS)" | package-lock.json'
-              restoreKeys: |
-                npm | "$(Agent.OS)"
-              path: $(npmConfigCache)
-
-          - script: npm ci
+          - script: npm ci --prefer-offline --no-audit --no-fund
             displayName: Run npm install
-          
-          - script: npm run lint
-            displayName: Run Angular lints
-          
-          - script: npm run lint:styles
-            displayName: Run style lints
 
           - script: |
               version=$(npm run changelog:version | tail -n 1 | tr -d '\n')
               echo "##vso[task.setvariable variable=version]$version"
               npm run generate:changelog:release
+            env:
+              GITHUB_TOKEN: $(GH_TOKEN)
             displayName: Generate Changelog
 
+          - script: |
+              npm run generate:changelog:unreleased > upcoming_changelog.md
+              if [ -s upcoming_changelog.md ]; then
+                echo "### 🚀 Upcoming Changelog Preview" > comment_body.md
+                echo "" >> comment_body.md
+                cat upcoming_changelog.md >> comment_body.md
+                if ! gh pr comment $(System.PullRequest.PullRequestNumber) --body-file comment_body.md; then
+                  echo "##vso[task.logissue type=warning]Could not post upcoming changelog comment to PR (token may lack pull request write access)."
+                fi
+              fi
+            env:
+              GH_TOKEN: $(GH_TOKEN)
+            condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'), or(eq(variables['System.PullRequest.TargetBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main'), eq(variables['System.PullRequest.TargetBranchName'], 'main')))
+            displayName: Comment Upcoming Changelog on PR
+
+  - stage: Lint
+    dependsOn: [Init]
+    variables:
+      CYPRESS_INSTALL_BINARY: '0'
+    jobs:
+      - job: Lint
+        steps:
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run lint
+            displayName: Run Angular lints
+
+          - script: npm run lint:styles
+            displayName: Run style lints
+
+
   - stage: Test
-    dependsOn: Init
+    dependsOn: [Init]
+    variables:
+      CYPRESS_INSTALL_BINARY: '0'
     jobs:
       - job: Test
         steps:
           - task: Cache@2
-            displayName: Cache npm
+            displayName: Cache node_modules
             inputs:
-              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
-                npm | "$(Agent.OS)"
-              path: $(npmConfigCache)
+                node_modules | "$(Agent.OS)"
+              path: node_modules
 
-          - script: npm ci
+          - script: npm ci --prefer-offline --no-audit --no-fund
             displayName: Run npm install
-          
-          - script: npm run e2e:ci -- --record --key $(CYPRESS_RECORD_KEY)
-            displayName: Run E2E tests
+
+          - script: npm run test:coverage
+            displayName: Run Unit tests
+
+          - script: timeout 60 npm run codecov:upload
+            env:
+              CODECOV_TOKEN: $(CODECOV_TOKEN)
+              CODECOV_FILE: coverage/datariomj/clover.xml
+              SENTRY_DSN: ''
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), ne(variables['CODECOV_TOKEN'], ''))
+            displayName: Upload coverage to Codecov
+
+  - stage: E2EContactForm
+    dependsOn: [Init]
+    condition: ne(variables['Build.Reason'], 'PullRequest')
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2EContactForm
+        steps:
+          - task: Cache@2
+            displayName: Cache Cypress binary
+            inputs:
+              key: 'cypress | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                cypress | "$(Agent.OS)"
+              path: $(CYPRESS_CACHE_FOLDER)
+
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run e2e:ci:contact-form
+            displayName: Run E2E - Contact Form
+            env:
+              CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+              CYPRESS_PROJECT_ID: 3zwyy9
+              CYPRESS_ciBuildId: $(Build.BuildNumber)
+              CYPRESS_RECORD: "true"
+
+  - stage: E2EHome
+    dependsOn: [Init]
+    condition: ne(variables['Build.Reason'], 'PullRequest')
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2EHome
+        steps:
+          - task: Cache@2
+            displayName: Cache Cypress binary
+            inputs:
+              key: 'cypress | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                cypress | "$(Agent.OS)"
+              path: $(CYPRESS_CACHE_FOLDER)
+
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run e2e:ci:home
+            displayName: Run E2E - Home
+            env:
+              CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+              CYPRESS_PROJECT_ID: 3zwyy9
+              CYPRESS_ciBuildId: $(Build.BuildNumber)
+              CYPRESS_RECORD: "true"
+
+  - stage: E2ENavigation
+    dependsOn: [Init]
+    condition: ne(variables['Build.Reason'], 'PullRequest')
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2ENavigation
+        steps:
+          - task: Cache@2
+            displayName: Cache Cypress binary
+            inputs:
+              key: 'cypress | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                cypress | "$(Agent.OS)"
+              path: $(CYPRESS_CACHE_FOLDER)
+
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run e2e:ci:navigation
+            displayName: Run E2E - Navigation
+            env:
+              CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+              CYPRESS_PROJECT_ID: 3zwyy9
+              CYPRESS_ciBuildId: $(Build.BuildNumber)
+              CYPRESS_RECORD: "true"
+
+  - stage: E2EPages
+    dependsOn: [Init]
+    condition: ne(variables['Build.Reason'], 'PullRequest')
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2EPages
+        steps:
+          - task: Cache@2
+            displayName: Cache Cypress binary
+            inputs:
+              key: 'cypress | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                cypress | "$(Agent.OS)"
+              path: $(CYPRESS_CACHE_FOLDER)
+
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run e2e:ci:pages
+            displayName: Run E2E - Pages
+            env:
+              CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+              CYPRESS_PROJECT_ID: 3zwyy9
+              CYPRESS_ciBuildId: $(Build.BuildNumber)
+              CYPRESS_RECORD: "true"
+
+  - stage: E2ETerminal
+    dependsOn: [Init]
+    condition: ne(variables['Build.Reason'], 'PullRequest')
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2ETerminal
+        steps:
+          - task: Cache@2
+            displayName: Cache Cypress binary
+            inputs:
+              key: 'cypress | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                cypress | "$(Agent.OS)"
+              path: $(CYPRESS_CACHE_FOLDER)
+
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run e2e:ci:terminal
+            displayName: Run E2E - Terminal
+            env:
+              CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+              CYPRESS_PROJECT_ID: 3zwyy9
+              CYPRESS_ciBuildId: $(Build.BuildNumber)
+              CYPRESS_RECORD: "true"
+
+  - stage: E2ELighthouse
+    dependsOn: [Init]
+    condition: ne(variables['Build.Reason'], 'PullRequest')
+    variables:
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/.cypress
+    jobs:
+      - job: E2ELighthouse
+        steps:
+          - task: Cache@2
+            displayName: Cache Cypress binary
+            inputs:
+              key: 'cypress | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                cypress | "$(Agent.OS)"
+              path: $(CYPRESS_CACHE_FOLDER)
+
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                node_modules | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci --prefer-offline --no-audit --no-fund
+            displayName: Run npm install
+
+          - script: npm run e2e:ci:lighthouse
+            displayName: Run E2E - Lighthouse
+            env:
+              CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+              CYPRESS_PROJECT_ID: 3zwyy9
+              CYPRESS_ciBuildId: $(Build.BuildNumber)
+              CYPRESS_RECORD: "true"
 
   - stage: Build
-    dependsOn: Init
+    dependsOn: [Init]
+    variables:
+      CYPRESS_INSTALL_BINARY: '0'
     jobs:
       - job: Build
         steps:
           - task: Cache@2
-            displayName: Cache npm
+            displayName: Cache node_modules
             inputs:
-              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
-                npm | "$(Agent.OS)"
-              path: $(npmConfigCache)
+                node_modules | "$(Agent.OS)"
+              path: node_modules
 
-          - script: npm ci
+          - script: npm ci --prefer-offline --no-audit --no-fund
             displayName: Run npm install
           
+          - script: |
+              version=$(cat generated/version.txt)
+              echo "##vso[task.setvariable variable=sentryRelease]$version"
+            displayName: Set Sentry release version
+
           - script: npm run build:$(environment)
             displayName: Run build
-          
-          - script: |
-              mv $(distPath)/robots.prod.txt $(distPath)/robots.txt
-            condition: eq(variables.isMain, true)
-            displayName: Apply robots.txt
-          
+
+          - script: npm run sentry:sourcemaps
+            displayName: Upload Sentry source maps
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), ne(variables['SENTRY_AUTH_TOKEN'], ''))
+            env:
+              SENTRY_AUTH_TOKEN: $(SENTRY_AUTH_TOKEN)
+              SENTRY_ORG: $(SENTRY_ORG)
+              SENTRY_PROJECT: $(SENTRY_PROJECT)
+              SENTRY_RELEASE: $(sentryRelease)
+
+          - script: find $(distPath) -name '*.map' -delete
+            displayName: Remove source maps from artifact
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+
           - publish: $(distPath)
             displayName: Publish Web App
-            condition: eq(variables.isPR, false)
+            condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
             artifact: $(artifactName)
 
   - stage: Deployment
     dependsOn:
       - Lint
       - Test
+      - E2EContactForm
+      - E2EHome
+      - E2ENavigation
+      - E2EPages
+      - E2ETerminal
+      - E2ELighthouse
       - Build
-    condition: and(ne(variables.isPR, true), or(eq(variables.isMain, true), eq(variables.isRelease, true)))
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/release')))
     jobs:
       - deployment: Deploy
         environment: $(environment)
@@ -119,43 +398,54 @@ stages:
                     echo "##vso[task.setvariable variable=targetS3BukcetId;issecret=true]$(S3_BUCKET_ID)"
                     echo "##vso[task.setvariable variable=targetCloudfrontDistributionId;issecret=true]$(CLOUDFRONT_DISTRIBUTION_ID)"
                   displayName: 'Add AWS Vars for Prod'
-                  condition: eq(variables.isMain, true)
+                  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
                 - script: |
                     echo "##vso[task.setvariable variable=targetS3BukcetId;issecret=true]$(STAGING_S3_BUCKET_ID)"
                     echo "##vso[task.setvariable variable=targetCloudfrontDistributionId;issecret=true]$(STAGING_CLOUDFRONT_DISTRIBUTION_ID)"
                   displayName: 'Add AWS Vars for Staging'
-                  condition: eq(variables.isRelease, true)
+                  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/release'))
                 - checkout: none
                 - download: current
                   artifact: $(artifactName)
-                - script: |
-                    aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
-                    aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
-                    aws configure set region $(AWS_REGION)
-                  displayName: Configure AWS CLI
                 - script: aws s3 sync $(Pipeline.Workspace)/$(artifactName) s3://$(targetS3BukcetId)
+                  env:
+                    AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+                    AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+                    AWS_DEFAULT_REGION: $(AWS_REGION)
                   displayName: Upload to S3
                 - script: aws cloudfront create-invalidation --distribution-id $(targetCloudfrontDistributionId) --paths '/*'
+                  env:
+                    AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+                    AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+                    AWS_DEFAULT_REGION: $(AWS_REGION)
                   displayName: Invalidate CloudFront
 
   - stage: Publish
     dependsOn:
       - Lint
       - Test
+      - E2EContactForm
+      - E2EHome
+      - E2ENavigation
+      - E2EPages
+      - E2ETerminal
+      - E2ELighthouse
       - Build
-    condition: and(ne(variables.isPR, true), eq(variables.isMain, true))
+    variables:
+      CYPRESS_INSTALL_BINARY: '0'
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     jobs:
       - job: Publish
         steps:
           - task: Cache@2
-            displayName: Cache npm
+            displayName: Cache node_modules
             inputs:
-              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              key: 'node_modules | "$(Agent.OS)" | package-lock.json'
               restoreKeys: |
-                npm | "$(Agent.OS)"
-              path: $(npmConfigCache)
+                node_modules | "$(Agent.OS)"
+              path: node_modules
               
-          - script: npm ci
+          - script: npm ci --prefer-offline --no-audit --no-fund
             displayName: Run npm install
 
           - script: |
@@ -166,3 +456,4 @@ stages:
             env:
               GH_TOKEN: $(GH_TOKEN)
             displayName: Create GitHub Release
+

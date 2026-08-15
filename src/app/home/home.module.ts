@@ -1,26 +1,18 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { MatTabsModule } from '@angular/material/tabs';
-import { NgxsModule } from '@ngxs/store';
-import { SharedModule } from '@shared/shared.module';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { provideStates } from "@ngxs/store";
 
-import { HomeComponent } from './home.component';
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeState } from './store/home.state';
-
+import { HomeComponent } from "./home.component";
+import { HomeRoutingModule } from "./home-routing.module";
+import { HomeState } from "./store/home.state";
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-  ],
+  declarations: [],
   imports: [
     CommonModule,
+    HomeComponent,
     HomeRoutingModule,
-    SharedModule,
-    MatTabsModule,
-    NgxsModule.forFeature([
-      HomeState,
-    ]),
   ],
+  providers: [provideStates([HomeState])],
 })
-export class HomeModule { }
+export class HomeModule {}

@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject,OnInit, ViewEncapsulation } from '@angular/core';
 import { SeoService } from '@core/services/seo.service';
 import { STATIC_CONSTANT } from '@core/static.constants';
-import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-terms',
@@ -11,12 +11,17 @@ import { environment } from '@env/environment';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TermsComponent implements OnInit {
-  email: string = STATIC_CONSTANT.email;
-  hostUrl: string = environment.hostUrl;
+  private seo = inject(SeoService);
+  private doc = inject<Document>(DOCUMENT);
 
-  constructor(
-    private seo: SeoService,
-  ) { }
+  email: string = STATIC_CONSTANT.email;
+  hostUrl: string = (() => {
+    try {
+      return new URL(this.doc.URL).origin;
+    } catch {
+      return '';
+    }
+  })();
 
   ngOnInit(): void {
     this.seo.generateTags({

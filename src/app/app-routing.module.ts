@@ -1,11 +1,25 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { LoadChildrenCallback, PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { environment } from '@env/environment';
+import { NavigationLink } from '@shared/interfaces/navigation-link';
+
+function buildNavigationRoutes(links: NavigationLink[]): Routes {
+  return links.map((link) => ({
+    path: link.path.replace(/^\//, ''),
+    loadChildren: link.loadChildren as LoadChildrenCallback,
+  }));
+}
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
     pathMatch: 'full',
+  },
+  ...buildNavigationRoutes(environment.navigation),
+  {
+    path: 'contact',
+    loadChildren: () => import('./contact/contact-module').then(m => m.ContactModule),
   },
   {
     path: 'terms',
@@ -14,20 +28,6 @@ const routes: Routes = [
   {
     path: 'privacy',
     loadChildren: () => import('./privacy/privacy.module').then(m => m.PrivacyModule),
-  },
-  {
-    path: 'cv',
-    loadChildren: () => import('./cv/cv.module').then(m => m.CvModule),
-  },
-  {
-    path: 'blog',
-    // loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule),
-    loadChildren: () => import('./construction/construction.module').then(m => m.ConstructionModule),
-  },
-  {
-    path: 'stack',
-    // loadChildren: () => import('./stack/stack.module').then(m => m.StackModule),
-    loadChildren: () => import('./construction/construction.module').then(m => m.ConstructionModule),
   },
   {
     path: '**',

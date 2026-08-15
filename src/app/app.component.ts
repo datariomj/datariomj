@@ -1,33 +1,28 @@
-import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Event, NavigationEnd, Router } from '@angular/router';
-import { Store } from '@ngxs/store';
-import { ContactDialogComponent } from '@shared/components/contact-dialog/contact-dialog.component';
-import { Contact } from '@shared/interfaces/contact';
-import { take } from 'rxjs/operators';
-import { UIState } from 'src/store/ui/ui.state';
+import { DOCUMENT } from "@angular/common";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, ViewEncapsulation } from "@angular/core";
+import { Event, NavigationEnd, Router, RouterOutlet } from "@angular/router";
+import { Store } from "@ngxs/store";
+
+import { UIState } from "../store/ui/ui.state";
+import { FooterComponent } from "./shared/components/footer/footer.component";
+import { NavigationComponent } from "./shared/components/navigation/navigation.component";
+import { PreloaderComponent } from "./shared/components/preloader/preloader.component";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styles: [],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [RouterOutlet, FooterComponent, PreloaderComponent, NavigationComponent],
 })
 export class AppComponent implements OnInit {
-  showPreloader!: boolean;
-  title = 'datariomj';
-  private dialogRef!: MatDialogRef<ContactDialogComponent>;
+  private doc = inject<Document>(DOCUMENT);
+  private router = inject(Router);
+  private store = inject(Store);
+  private cdRef = inject(ChangeDetectorRef);
 
-  constructor(
-    public dialog: MatDialog,
-    @Inject(DOCUMENT) private doc: Document,
-    private router: Router,
-    private store: Store,
-    private cdRef: ChangeDetectorRef,
-  ) {
-  }
+  showPreloader!: boolean;
+  title = "datariomj";
 
   ngOnInit() {
     this.initRoutingEvents();
@@ -35,45 +30,22 @@ export class AppComponent implements OnInit {
   }
 
   private initRoutingEvents(): void {
-    this.router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationEnd) {
-        const sidenavContent = this.doc.querySelector('.mat-drawer-content');
-
-        if (sidenavContent) {
-          sidenavContent.scrollTop = 0;
+    this.router.events.subscribe({
+      next: (event: Event) => {
+        if (event instanceof NavigationEnd) {
+          // Standard window scroll
+          this.doc.defaultView?.scrollTo(0, 0);
         }
-      }
+      },
     });
   }
 
   private initStoreEvents(): void {
-    this.store.select(UIState.showPreloader).subscribe((showPreloader) => {
-      this.showPreloader = showPreloader;
-      this.cdRef.detectChanges();
+    this.store.select(UIState.showPreloader).subscribe({
+      next: (showPreloader) => {
+        this.showPreloader = showPreloader;
+        this.cdRef.detectChanges();
+      },
     });
-    this.store.select(UIState.showContactForm).subscribe((showContactForm) => {
-      if (showContactForm) {
-        this.openContactDialog();
-      } else {
-        this.closeContactDialog();
-      }
-      this.cdRef.detectChanges();
-    });
-  }
-
-  private openContactDialog() {
-    this.dialogRef = this.dialog.open(ContactDialogComponent, { disableClose: true });
-
-    this.dialogRef.afterClosed().pipe(
-      take(1),
-    ).subscribe((contactFormData: Contact) => {
-      console.log(contactFormData);
-    });
-  }
-
-  private closeContactDialog() {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
   }
 }

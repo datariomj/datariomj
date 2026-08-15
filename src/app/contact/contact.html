@@ -1,0 +1,110 @@
+<!-- Minimal Header -->
+<section class="mb-20">
+  <h1 class="font-jetbrains text-3xl md:text-5xl text-primary mb-2">0x04 // ESTABLISH_CONNECTION</h1>
+  <p class="font-inter text-base text-on-surface-variant max-w-2xl leading-relaxed">
+    Ready to architect scalable cloud solutions or discuss high-availability infrastructure. Input your parameters below to initialize the communication handshake.
+  </p>
+  <div class="mt-8">
+    <app-terminal-hero></app-terminal-hero>
+  </div>
+</section>
+
+<!-- Contact Form -->
+<section class="mb-20">
+  @if (!isSubmitted) {
+    <form class="flex flex-col gap-6" (submit)="onSubmit($event)">
+      <!-- Name Field -->
+      <div class="flex flex-col gap-2">
+        <div class="flex justify-between items-center">
+          <label class="font-jetbrains text-xs text-on-surface-variant uppercase transition-colors" for="name">[NAME]</label>
+          @if (nameTouched && !isNameValid) {
+            <span class="font-jetbrains text-xs text-error font-semibold">[ERROR] IDENTIFIER_REQUIRED (min 2 chars)</span>
+          }
+        </div>
+        <input 
+          class="w-full bg-surface-container border font-jetbrains text-on-surface p-4 rounded text-sm transition-all focus:outline-none focus:border-primary focus:shadow-[0_0_10px_rgba(16,185,129,0.1)]"
+          [class.border-border-hairline]="!nameTouched || isNameValid"
+          [class.border-error]="nameTouched && !isNameValid"
+          id="name" 
+          name="name" 
+          [(ngModel)]="name"
+          placeholder="IDENTIFY_YOURSELF" 
+          type="text" 
+          (focus)="onFocus($event)" 
+          (blur)="onBlur('name', $event)">
+      </div>
+      
+      <!-- Email Field -->
+      <div class="flex flex-col gap-2">
+        <div class="flex justify-between items-center">
+          <label class="font-jetbrains text-xs text-on-surface-variant uppercase transition-colors" for="email">[EMAIL]</label>
+          @if (emailTouched && !isEmailValid) {
+            <span class="font-jetbrains text-xs text-error font-semibold">[ERROR] VALID_RETURN_ADDRESS_REQUIRED</span>
+          }
+        </div>
+        <input 
+          class="w-full bg-surface-container border font-jetbrains text-on-surface p-4 rounded text-sm transition-all focus:outline-none focus:border-primary focus:shadow-[0_0_10px_rgba(16,185,129,0.1)]"
+          [class.border-border-hairline]="!emailTouched || isEmailValid"
+          [class.border-error]="emailTouched && !isEmailValid"
+          id="email" 
+          name="email" 
+          [(ngModel)]="email"
+          placeholder="RETURN_ADDRESS_REQUIRED" 
+          type="email" 
+          (focus)="onFocus($event)" 
+          (blur)="onBlur('email', $event)">
+      </div>
+      
+      <!-- Message Field -->
+      <div class="flex flex-col gap-2">
+        <div class="flex justify-between items-center">
+          <label class="font-jetbrains text-xs text-on-surface-variant uppercase transition-colors" for="message">[MESSAGE]</label>
+          @if (messageTouched && !isMessageValid) {
+            <span class="font-jetbrains text-xs text-error font-semibold">[ERROR] MESSAGE_TOO_SHORT (min 10 chars)</span>
+          }
+        </div>
+        <textarea 
+          class="w-full bg-surface-container border font-jetbrains text-on-surface p-4 rounded text-sm transition-all focus:outline-none focus:border-primary focus:shadow-[0_0_10px_rgba(16,185,129,0.1)] resize-none"
+          [class.border-border-hairline]="!messageTouched || isMessageValid"
+          [class.border-error]="messageTouched && !isMessageValid"
+          id="message" 
+          name="message" 
+          [(ngModel)]="message"
+          placeholder="INJECT_COMMUNICATION_HERE..." 
+          rows="5" 
+          (focus)="onFocus($event)" 
+          (blur)="onBlur('message', $event)"></textarea>
+      </div>
+      
+      <!-- Submit Button -->
+      <button 
+        class="relative inline-flex items-center justify-center w-full md:w-auto self-start px-10 py-4 bg-transparent border border-primary text-primary font-jetbrains text-sm overflow-hidden transition-all cursor-pointer group disabled:opacity-50"
+        type="submit"
+        [disabled]="isSubmitting"
+        (click)="onSubmit($event)">
+        <span class="btn-text relative z-10 transition-colors group-hover:text-background flex items-center gap-2">
+          @if (isSubmitting) {
+            <i class="fa-solid fa-spinner animate-spin"></i> [ ...TRANSMITTING... ]
+          } @else {
+            [ EXECUTE_SEND ]
+          }
+        </span>
+        <div class="absolute inset-0 bg-primary translate-y-full transition-transform group-hover:translate-y-0 z-[1]"></div>
+      </button>
+    </form>
+  } @else {
+    <!-- Success State Callout -->
+    <div class="bg-surface-matte border border-primary/40 p-8 rounded-lg text-center font-jetbrains animate-fade-in shadow-[0_0_30px_rgba(16,185,129,0.1)]">
+      <div class="w-14 h-14 rounded-full bg-primary/10 border border-primary flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-check text-primary text-2xl"></i>
+      </div>
+      <h3 class="text-primary text-xl font-bold mb-2">[ STATUS 200 OK ] // HANDSHAKE_ESTABLISHED</h3>
+      <p class="text-on-surface-variant text-sm max-w-lg mx-auto mb-6 leading-relaxed">
+        Thank you <span class="text-text-crisp font-semibold">{{ name }}</span>! Your communication payload has been logged. I will analyze the metrics and reply to <span class="text-primary font-mono">{{ email }}</span> promptly.
+      </p>
+      <button (click)="resetForm()" class="px-6 py-3 font-jetbrains text-xs border border-primary text-primary hover:bg-primary hover:text-background transition-all cursor-pointer bg-transparent">
+        [ TRANSMIT_ANOTHER_PAYLOAD ]
+      </button>
+    </div>
+  }
+</section>

@@ -23,11 +23,21 @@ body = """
 {% else -%}
     ## [Unreleased]
 {% endif -%}
-{% for group, commits in commits | group_by(attribute="group") %}
-    ### {{ group | upper_first }}
-    {% for commit in commits %}
+{% set breaking_commits = commits | filter(attribute="breaking", value=true) %}
+{% if breaking_commits | length > 0 %}
+    ### BREAKING CHANGES
+    {% for commit in breaking_commits %}
         - {{ commit.message | split(pat="\n") | first | upper_first | trim }}\
     {% endfor %}
+{% endif %}
+{% for group, group_commits in commits | group_by(attribute="group") %}
+    {% set non_breaking = group_commits | filter(attribute="breaking", value=false) %}
+    {% if non_breaking | length > 0 %}
+    ### {{ group | upper_first }}
+    {% for commit in non_breaking %}
+        - {{ commit.message | split(pat="\n") | first | upper_first | trim }}\
+    {% endfor %}
+    {% endif %}
 {% endfor %}\n
 """
 # template for the changelog footer

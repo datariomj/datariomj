@@ -1,15 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject,Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HomeService {
-  constructor(
-    private http: HttpClient,
-  ) {
-  }
+  private http = inject(HttpClient);
+
 
   getReadme(): Observable<string> {
     const headers = new HttpHeaders({

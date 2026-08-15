@@ -1,19 +1,13 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
-import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 
-Given('User visits home page', () => {
-  cy.visit(`${ Cypress.config().baseUrl }`);
+// Handled in common.ts
+
+When("User clicks hire me", () => {
+  cy.get("[data-cy=home-cta]").click();
 });
 
-Then('User will load proper metadata', () => {
-  cy.title().should('eq', 'MJ Datario | Home');
-});
-
-When('User clicks hire me', () => {
-  cy.get('[data-cy=home-cta]').click();
-});
-
-Then('User will see contact dialog', () => {
-  cy.get('[data-cy=contact-form]').should('be.visible');
+Then("User will see contact dialog", () => {
+  cy.get("[data-cy=contact-form]").should("be.visible");
 });
