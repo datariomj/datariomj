@@ -37,6 +37,13 @@ declare global {
     // Additional type safety for common Cypress operations
     getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
     findByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
+
+    // Custom commands from @cypress-audit/lighthouse
+    lighthouse(
+      thresholds?: Record<string, number>,
+      opts?: any,
+      config?: any,
+    ): Chainable<any>;
     }
   }
 }

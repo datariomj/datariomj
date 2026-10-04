@@ -16,10 +16,17 @@ if (environment.sentryDsn) {
     dsn: environment.sentryDsn,
     environment: environment.sentryEnv,
     release: environment.version,
+    // FREE TIER (Developer plan): the Logs product is NOT included in the free quota.
+    // Enable structured logs ONLY in non-production (staging) so we never bill Logs
+    // units from production traffic. Metrics (Sentry.metrics.*) are also not free-tier
+    // and are intentionally NOT enabled anywhere.
+    enableLogs: !environment.production,
     integrations: [
       Sentry.browserTracingIntegration(),
       replayIntegration({ maskAllText: false, maskAllInputs: true }),
-      consoleLoggingIntegration({ levels: ['error', 'warn', 'info', 'debug'] }),
+      consoleLoggingIntegration({
+        levels: environment.production ? ['error', 'warn'] : ['error', 'warn', 'info', 'debug'],
+      }),
     ],
     tracesSampleRate: environment.production ? 0.2 : 1.0,
     replaysSessionSampleRate: environment.production ? 0.1 : 0,

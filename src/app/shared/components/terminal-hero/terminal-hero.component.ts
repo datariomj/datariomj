@@ -216,6 +216,7 @@ export class TerminalHeroComponent implements OnInit {
     if (!this.isHomePage) {
       this.history.push({ type: 'output', text: 'Type "help" to view available commands.' });
     }
+    this.scrollToBottom();
   }
 
   getCurrentRouteName(): string {
@@ -522,7 +523,13 @@ export class TerminalHeroComponent implements OnInit {
 
   private scrollToBottom(): void {
     if (this.terminalContent) {
-      this.terminalContent.nativeElement.scrollTop = this.terminalContent.nativeElement.scrollHeight;
+      // Defer until after the next render so scrollHeight reflects the newly appended lines.
+      setTimeout(() => {
+        const el = this.terminalContent?.nativeElement;
+        if (el) {
+          el.scrollTop = el.scrollHeight;
+        }
+      }, 0);
     }
   }
 }
