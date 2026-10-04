@@ -891,11 +891,14 @@ describe('TerminalHeroComponent', () => {
       expect(html).toContain('"codecov"');
     });
 
-    it('scrollToBottom updates scrollTop when terminalContent exists', () => {
+    it('scrollToBottom updates scrollTop when terminalContent exists', async () => {
       const nativeElement = { scrollTop: 0, scrollHeight: 123 };
       component.terminalContent = { nativeElement } as ElementRef<HTMLDivElement>;
 
+      vi.useRealTimers();
       (component as unknown as { scrollToBottom: () => void }).scrollToBottom();
+      await new Promise(resolve => setTimeout(resolve, 10));
+      vi.useFakeTimers();
 
       expect(nativeElement.scrollTop).toBe(123);
     });
