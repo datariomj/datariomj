@@ -2,13 +2,14 @@ import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/com
 import { ErrorHandler, importProvidersFrom, provideZonelessChangeDetection } from '@angular/core';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PreloadAllModules, provideRouter, withInMemoryScrolling, withPreloading, withViewTransitions } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import * as Sentry from '@sentry/angular';
 import { consoleLoggingIntegration, replayIntegration } from '@sentry/browser';
 import { NgxsStoreModule } from '@store/store.module';
 
 import { AppComponent } from './app/app.component';
-import { AppRoutingModule } from './app/app-routing.module';
+import { routes } from './app/app.routes';
 import { environment } from './environments/environment';
 
 if (environment.sentryDsn) {
@@ -37,10 +38,16 @@ if (environment.sentryDsn) {
 document.addEventListener('DOMContentLoaded', () => {
   bootstrapApplication(AppComponent, {
     providers: [
-        importProvidersFrom(BrowserModule, AppRoutingModule, BrowserAnimationsModule, ServiceWorkerModule.register("ngsw-worker.js", { enabled: false }), NgxsStoreModule),
-        provideZonelessChangeDetection(),
-        provideHttpClient(withXhr(), withInterceptorsFromDi()),
-        { provide: ErrorHandler, useValue: Sentry.createErrorHandler({ showDialog: false }) },
+      importProvidersFrom(BrowserModule, BrowserAnimationsModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }), NgxsStoreModule),
+      provideRouter(
+        routes,
+        withViewTransitions(),
+        withPreloading(PreloadAllModules),
+        withInMemoryScrolling({ scrollPositionRestoration: 'top' }),
+      ),
+      provideZonelessChangeDetection(),
+      provideHttpClient(withXhr(), withInterceptorsFromDi()),
+      { provide: ErrorHandler, useValue: Sentry.createErrorHandler({ showDialog: false }) },
     ],
-}).catch(err => console.error(err));
+  }).catch(err => console.error(err));
 });
