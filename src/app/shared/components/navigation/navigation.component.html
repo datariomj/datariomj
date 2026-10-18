@@ -1,0 +1,50 @@
+<nav class="navigation-bar">
+  <div class="nav-container">
+    <a routerLink="/" class="nav-brand text-decoration-none cursor-pointer" (click)="closeMenu()">
+      <span class="path-prefix">~/</span><span class="path-name">datariomj</span>
+    </a>
+    <div class="nav-links desktop-only">
+      @for (link of navigationLinks; track link.path) {
+        <a [routerLink]="link.path" class="nav-link" routerLinkActive="active-link">[{{link.label}}]</a>
+      }
+    </div>
+    <a href="https://stats.uptimerobot.com/AGzj9HrMEo/796216246" target="_blank" rel="noopener noreferrer" class="live-status desktop-only">
+      <span class="status-dot"></span>
+      <span>LIVE_STATUS</span>
+    </a>
+    <!-- Mobile hamburger button -->
+    <button class="mobile-menu-btn mobile-only" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen" aria-label="Toggle navigation menu">
+      <span class="hamburger-line" [class.open]="isMenuOpen"></span>
+      <span class="hamburger-line" [class.open]="isMenuOpen"></span>
+      <span class="hamburger-line" [class.open]="isMenuOpen"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile slide-down menu overlay -->
+@if (isMenuOpen) {
+  <div class="mobile-overlay" (click)="closeMenu()" (keyup.escape)="closeMenu()" tabindex="0" role="button" aria-label="Close mobile navigation overlay"></div>
+  <div class="mobile-dropdown">
+    @for (link of navigationLinks; track link.path) {
+      <a [routerLink]="link.path" routerLinkActive="active-link" (click)="closeMenu()" class="mobile-dropdown-link">[{{link.label}}]</a>
+    }
+    <a href="https://stats.uptimerobot.com/AGzj9HrMEo/796216246" target="_blank" rel="noopener noreferrer" class="mobile-dropdown-link live-status-mobile">
+      <span class="status-dot"></span>
+      <span>LIVE_STATUS</span>
+    </a>
+  </div>
+}
+
+<!-- Mobile bottom navigation bar -->
+<nav class="sidenav__mobile-nav mobile-only" role="navigation" aria-label="Mobile navigation">
+  <a routerLink="/" routerLinkActive="mobile-nav-active" [routerLinkActiveOptions]="{exact: true}" class="mobile-nav-item" (click)="closeMenu()">
+    <i class="fa-solid fa-terminal"></i>
+    <span>home</span>
+  </a>
+  @for (link of navigationLinks; track link.path) {
+    <a [routerLink]="link.path" routerLinkActive="mobile-nav-active" class="mobile-nav-item" (click)="closeMenu()">
+      <i class="fa-solid {{link.iconClass}}"></i>
+      <span>{{link.label}}</span>
+    </a>
+  }
+</nav>

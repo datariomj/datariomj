@@ -2,61 +2,59 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
     "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
     "resolveJsonModule": true,
     "paths": {
+      "src/*": [
+        "./src/*"
+      ],
       "@env/*": [
-        "src/environments/*"
+        "./src/environments/*"
       ],
       "@store/*": [
-        "src/store/*"
+        "./src/store/*"
       ],
       "@blog/*": [
-        "src/app/blog/*"
+        "./src/app/blog/*"
       ],
       "@contact/*": [
-        "src/app/contact/*"
+        "./src/app/contact/*"
       ],
       "@core/*": [
-        "src/app/core/*"
+        "./src/app/core/*"
       ],
       "@cv/*": [
-        "src/app/cv/*"
+        "./src/app/cv/*"
       ],
       "@error/*": [
-        "src/app/error/*"
+        "./src/app/error/*"
       ],
       "@home/*": [
-        "src/app/home/*"
+        "./src/app/home/*"
       ],
       "@privacy/*": [
-        "src/app/privacy/*"
+        "./src/app/privacy/*"
       ],
       "@shared/*": [
-        "src/app/shared/*"
+        "./src/app/shared/*"
       ],
       "@stack/*": [
-        "src/app/stack/*"
+        "./src/app/stack/*"
       ],
       "@terms/*": [
-        "src/app/terms/*"
+        "./src/app/terms/*"
       ]
     },
     "useDefineForClassFields": false

@@ -1,3 +1,48 @@
-<div class="spinner">
-  <mat-spinner color="accent"></mat-spinner>
+<div class="preloader-overlay" data-cy="preloader">
+  <div class="preloader-window brutal-box">
+    <!-- Terminal Header -->
+    <div class="preloader-header">
+      <div class="preloader-dots">
+        <span class="dot red-dot"></span>
+        <span class="dot yellow-dot"></span>
+        <span class="dot green-dot"></span>
+      </div>
+      <div class="preloader-title font-jetbrains text-xs">
+        [BOOT_SEQUENCE] // DATARIOMJ_OS_v2.6
+      </div>
+      <div class="w-10"></div>
+    </div>
+
+    <!-- Terminal Content -->
+    <div class="preloader-body font-jetbrains text-xs">
+      <div class="logs-container">
+        @for (log of displayedLogs; track log.timestamp) {
+          <div class="log-line animate-fade-in">
+            <span class="text-text-muted">[{{ log.timestamp }}]</span>
+            <span class="text-on-surface mx-1.5 flex-1">{{ log.message }}</span>
+            @if (log.status === 'OK') {
+              <span class="text-primary font-bold">[OK]</span>
+            } @else if (log.status === 'READY') {
+              <span class="text-primary font-bold">[READY]</span>
+            } @else {
+              <span class="text-secondary font-bold">[{{ log.status }}]</span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Progress Section -->
+      <div class="progress-section mt-4 pt-3 border-t border-border-hairline">
+        <div class="flex justify-between items-center mb-1.5 text-xs">
+          <span class="text-primary font-semibold flex items-center gap-2">
+            <i class="fa-solid fa-spinner animate-spin"></i> INITIALIZING SYSTEM
+          </span>
+          <span class="text-text-crisp font-bold font-mono">{{ progress }}%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" [style.width.%]="progress"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

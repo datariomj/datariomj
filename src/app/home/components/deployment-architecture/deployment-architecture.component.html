@@ -1,0 +1,834 @@
+<section class="mt-16 mb-20 w-full relative">
+  <!-- Shared SVG Defs (Always present in DOM so <use> symbols render in details overlay) -->
+  <svg class="sr-only" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arrow" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0 0, 9 3, 0 6" fill="#64748b"/>
+      </marker>
+      <marker id="arrow-cyan" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0 0, 9 3, 0 6" fill="#38bdf8"/>
+      </marker>
+      <marker id="arrow-amber" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0 0, 9 3, 0 6" fill="#f59e0b"/>
+      </marker>
+      <marker id="arrow-emerald" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0 0, 9 3, 0 6" fill="#10b981"/>
+      </marker>
+
+      <!-- SVG ICONS -->
+      <g id="icon-lock">
+        <rect x="3" y="6" width="10" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M5 6 V4 A3 3 0 0 1 11 4 V6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      </g>
+      <g id="icon-globe">
+        <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <ellipse cx="8" cy="8" rx="3" ry="6.5" fill="none" stroke="currentColor" stroke-width="0.9"/>
+        <line x1="1.5" y1="8" x2="14.5" y2="8" stroke="currentColor" stroke-width="0.9"/>
+      </g>
+      <g id="icon-browser">
+        <rect x="1" y="2" width="14" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <line x1="1" y1="5.5" x2="15" y2="5.5" stroke="currentColor" stroke-width="1"/>
+        <circle cx="3.5" cy="3.75" r="0.75" fill="currentColor"/>
+        <circle cx="5.5" cy="3.75" r="0.75" fill="currentColor"/>
+        <circle cx="7.5" cy="3.75" r="0.75" fill="currentColor"/>
+      </g>
+      <g id="icon-github">
+        <circle cx="9" cy="9" r="7.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M4.5 7 Q9 2.5 13.5 7" fill="none" stroke="currentColor" stroke-width="1.1"/>
+        <circle cx="9" cy="12" r="1.5" fill="currentColor"/>
+      </g>
+      <g id="icon-docker">
+        <rect x="1.5" y="3.5" width="15" height="11" rx="2" fill="none" stroke="#10b981" stroke-width="1.3"/>
+        <rect x="3.5" y="6" width="3" height="3" rx="0.5" fill="#10b981" opacity="0.8"/>
+        <rect x="7.5" y="6" width="3" height="3" rx="0.5" fill="#10b981" opacity="0.8"/>
+        <rect x="11.5" y="6" width="3" height="3" rx="0.5" fill="#10b981" opacity="0.8"/>
+        <rect x="5.5" y="10" width="7" height="2" rx="0.5" fill="#10b981" opacity="0.5"/>
+      </g>
+      <g id="icon-lint">
+        <rect x="2.5" y="2.5" width="13" height="13" rx="2.5" fill="none" stroke="#94a3b8" stroke-width="1.3"/>
+        <line x1="5.5" y1="7" x2="7.5" y2="9.5" stroke="#94a3b8" stroke-width="1.3"/>
+        <line x1="7.5" y1="9.5" x2="12.5" y2="4.5" stroke="#94a3b8" stroke-width="1.3"/>
+      </g>
+      <g id="icon-test">
+        <rect x="3.5" y="1.5" width="11" height="15" rx="2.5" fill="none" stroke="#94a3b8" stroke-width="1.3"/>
+        <line x1="9" y1="4.5" x2="9" y2="10.5" stroke="#94a3b8" stroke-width="1.2"/>
+        <circle cx="9" cy="13" r="1" fill="#94a3b8"/>
+      </g>
+      <g id="icon-build">
+        <circle cx="9" cy="9" r="6" fill="none" stroke="#94a3b8" stroke-width="1.3"/>
+        <path d="M9 3 L9 5.5 M9 12.5 L9 15 M3 9 L5.5 9 M12.5 9 L15 9" stroke="#94a3b8" stroke-width="1.2"/>
+      </g>
+      <g id="icon-deploy">
+        <path d="M3.5 13.5 L9 4.5 L14.5 13.5" fill="none" stroke="#f59e0b" stroke-width="1.3"/>
+        <line x1="9" y1="4.5" x2="9" y2="15.5" stroke="#f59e0b" stroke-width="1.2"/>
+        <line x1="4.5" y1="15.5" x2="13.5" y2="15.5" stroke="#f59e0b" stroke-width="1"/>
+      </g>
+      <g id="icon-publish">
+        <path d="M3.5 3.5 L14.5 3.5 L14.5 9.5 L9 13 L3.5 9.5 Z" fill="none" stroke="#94a3b8" stroke-width="1.3"/>
+        <circle cx="9" cy="7" r="1.8" fill="#94a3b8"/>
+      </g>
+      <g id="icon-sentry">
+        <circle cx="9" cy="9" r="7.5" fill="none" stroke="#f43f5e" stroke-width="1.3"/>
+        <path d="M2.5 13.5 L9 2.5 L15.5 13.5" fill="none" stroke="#f43f5e" stroke-width="1.3"/>
+        <line x1="9" y1="8" x2="9" y2="13.5" stroke="#f43f5e" stroke-width="1.2"/>
+      </g>
+      <g id="icon-codecov">
+        <rect x="2.5" y="9" width="3.5" height="7" rx="0.5" fill="#10b981" opacity="0.8"/>
+        <rect x="7.25" y="4.5" width="3.5" height="11.5" rx="0.5" fill="#10b981" opacity="0.8"/>
+        <rect x="12" y="7" width="3.5" height="9" rx="0.5" fill="#10b981" opacity="0.8"/>
+      </g>
+      <g id="icon-codacy">
+        <path d="M9 1.5 L15.5 5 L15.5 11.5 Q15.5 16 9 17 Q2.5 16 2.5 11.5 L2.5 5 Z" fill="none" stroke="#10b981" stroke-width="1.3"/>
+        <line x1="5.5" y1="8" x2="8" y2="10.5" stroke="#10b981" stroke-width="1.3"/>
+        <line x1="8" y1="10.5" x2="12.5" y2="6" stroke="#10b981" stroke-width="1.3"/>
+      </g>
+      <g id="icon-cypress">
+        <polygon points="4.5,2.5 4.5,15.5 14.5,9" fill="none" stroke="#10b981" stroke-width="1.3"/>
+      </g>
+      <g id="icon-uptimerobot">
+        <circle cx="9" cy="9" r="7" fill="none" stroke="#10b981" stroke-width="1.3"/>
+        <line x1="9" y1="9" x2="9" y2="4.5" stroke="#10b981" stroke-width="1.2"/>
+        <line x1="9" y1="9" x2="12.5" y2="9" stroke="#10b981" stroke-width="1"/>
+      </g>
+      <g id="icon-route53">
+        <circle cx="9" cy="9" r="7.5" fill="none" stroke="#f59e0b" stroke-width="1.3"/>
+        <ellipse cx="9" cy="9" rx="4" ry="7.5" fill="none" stroke="#f59e0b" stroke-width="0.9" opacity="0.7"/>
+        <line x1="1.5" y1="9" x2="16.5" y2="9" stroke="#f59e0b" stroke-width="0.9" opacity="0.7"/>
+      </g>
+      <g id="icon-cloudfront">
+        <circle cx="9" cy="6.5" r="4.5" fill="none" stroke="#f59e0b" stroke-width="1.3"/>
+        <circle cx="4.5" cy="10" r="4" fill="none" stroke="#f59e0b" stroke-width="1.3"/>
+        <circle cx="13.5" cy="10" r="4" fill="none" stroke="#f59e0b" stroke-width="1.3"/>
+        <line x1="9" y1="11" x2="9" y2="17" stroke="#f59e0b" stroke-width="1.1"/>
+      </g>
+      <g id="icon-s3">
+        <rect x="1" y="4.5" width="16" height="11" rx="2" fill="none" stroke="#f59e0b" stroke-width="1.3"/>
+        <rect x="3" y="2.5" width="12" height="3" rx="1" fill="#f59e0b" opacity="0.8"/>
+        <line x1="4" y1="9" x2="14" y2="9" stroke="#f59e0b" stroke-width="0.9" opacity="0.6"/>
+        <line x1="4" y1="12" x2="11" y2="12" stroke="#f59e0b" stroke-width="0.9" opacity="0.6"/>
+      </g>
+      <g id="icon-acm">
+        <rect x="2.5" y="2.5" width="13" height="13" rx="2.5" fill="none" stroke="#f59e0b" stroke-width="1.3"/>
+        <path d="M6 8.5 V6.5 A3 3 0 0 1 12 6.5 V8.5" fill="none" stroke="#f59e0b" stroke-width="1.2"/>
+        <circle cx="9" cy="11.5" r="1.2" fill="#f59e0b"/>
+      </g>
+      <g id="icon-user">
+        <circle cx="9" cy="5.5" r="3.5" fill="none" stroke="#38bdf8" stroke-width="1.3"/>
+        <path d="M2.5 16.5 Q2.5 10 9 10 Q15.5 10 15.5 16.5" fill="none" stroke="#38bdf8" stroke-width="1.3"/>
+      </g>
+      <g id="icon-angular">
+        <polygon points="9,1.5 16.5,4.5 14.5,14.5 9,16.5 3.5,14.5 1.5,4.5" fill="none" stroke="#38bdf8" stroke-width="1.3"/>
+        <line x1="3.5" y1="7.5" x2="14.5" y2="7.5" stroke="#38bdf8" stroke-width="0.9"/>
+      </g>
+      <g id="icon-infra">
+        <rect x="1.5" y="1.5" width="15" height="15" rx="2.5" fill="none" stroke="#f59e0b" stroke-width="1.3"/>
+        <line x1="4.5" y1="5.5" x2="13.5" y2="5.5" stroke="#f59e0b" stroke-width="0.9"/>
+        <line x1="4.5" y1="9" x2="11.5" y2="9" stroke="#f59e0b" stroke-width="0.9"/>
+        <line x1="4.5" y1="12.5" x2="9.5" y2="12.5" stroke="#f59e0b" stroke-width="0.9"/>
+      </g>
+      <g id="icon-azdo">
+        <path d="M2.5 2.5 L9 9 L2.5 15.5" fill="none" stroke="#c084fc" stroke-width="1.3"/>
+        <path d="M9 9 L15.5 2.5 L15.5 15.5 Z" fill="none" stroke="#c084fc" stroke-width="1.3"/>
+      </g>
+    </defs>
+  </svg>
+
+  <div class="section-header flex flex-wrap items-center justify-between gap-3 mb-3">
+    <div>
+      <h2>Deployment Architecture</h2>
+      <span class="section-badge font-mono">0x01 // INFRASTRUCTURE</span>
+    </div>
+    
+    <!-- Clean Interactive Instruction Badge -->
+    <div class="px-3.5 py-1.5 rounded-lg bg-slate-900/90 border border-cyan-900/60 shadow-inner flex items-center gap-2 font-mono text-xs">
+      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+      <span class="text-cyan-400 font-semibold">Click any block to inspect specifications</span>
+    </div>
+  </div>
+
+  <p class="text-on-surface-variant text-sm leading-relaxed mb-6 max-w-2xl">
+    This portfolio is powered by a self-hosted CI/CD pipeline spanning 5 GitHub repositories,
+    deployed to AWS via Azure DevOps with infrastructure managed as code through AWS CDK and Pulumi.
+  </p>
+
+  <div class="bg-surface-matte border border-border-hairline rounded-lg overflow-hidden p-3 sm:p-6 relative min-h-[540px]">
+    
+    <!-- Expanded Node Detail Panel Overlay (Angular 19 Control Flow Syntax) -->
+    @if (currentNode) {
+      <div class="w-full min-w-[280px] max-w-[960px] min-h-[540px] h-[540px] mx-auto p-4 sm:p-7 rounded-xl bg-slate-950 border border-slate-800 shadow-2xl relative flex flex-col justify-between animate-expandMorph">
+        <!-- Single Close Button Top Right -->
+        <button 
+          (click)="closeDetail()" 
+          aria-label="Revert to Diagram"
+          class="absolute top-4 right-4 sm:top-5 sm:right-5 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 hover:text-white text-xs font-semibold border border-cyan-800/80 transition-all cursor-pointer shadow-lg hover:shadow-cyan-900/20 z-10">
+          <span>✕</span>
+          <span class="hidden xs:inline">Revert to Diagram</span>
+          <span class="xs:hidden">Back</span>
+        </button>
+
+        <!-- Scrollable Main Content Area -->
+        <div class="overflow-y-auto pr-1 custom-scrollbar">
+          <div class="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-5 pr-20 sm:pr-44">
+            <!-- Main Node Vector SVG Icon Avatar -->
+            <div class="p-2.5 sm:p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-cyan-400 flex-shrink-0 shadow-inner flex items-center justify-center">
+              <svg class="w-7 h-7 sm:w-10 sm:h-10" viewBox="0 0 18 18">
+                <use [attr.href]="'#' + currentNode.icon"></use>
+              </svg>
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5 sm:gap-2 mb-1 flex-wrap">
+                <span class="text-[0.6rem] sm:text-[0.65rem] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                  {{ currentNode.category }}
+                </span>
+
+                @if (currentNode.visibility === 'PUBLIC') {
+                  <span class="text-[0.6rem] sm:text-[0.65rem] font-bold px-2 py-0.5 rounded bg-cyan-950/80 text-cyan-400 border border-cyan-800/80 flex items-center gap-1">
+                    <svg class="w-3 h-3 text-cyan-400" viewBox="0 0 16 16"><use href="#icon-globe"></use></svg>
+                    <span>PUBLIC</span>
+                  </span>
+                } @else if (currentNode.visibility === 'PRIVATE') {
+                  <span class="text-[0.6rem] sm:text-[0.65rem] font-bold px-2 py-0.5 rounded bg-amber-950/80 text-amber-400 border border-amber-800/80 flex items-center gap-1">
+                    <svg class="w-3 h-3 text-amber-400" viewBox="0 0 16 16"><use href="#icon-lock"></use></svg>
+                    <span>PRIVATE</span>
+                  </span>
+                } @else if (currentNode.visibility === 'INTERNAL') {
+                  <span class="text-[0.6rem] sm:text-[0.65rem] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                    ⚙️ INTERNAL STAGE
+                  </span>
+                }
+              </div>
+              <h3 class="text-lg sm:text-2xl font-bold text-white tracking-tight">{{ currentNode.title }}</h3>
+              <p class="text-[0.7rem] sm:text-xs text-slate-400 mt-0.5 leading-relaxed">{{ currentNode.shortDesc }}</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 pt-3 sm:pt-4 border-t border-slate-800/80">
+            <!-- Overview & Description -->
+            <div class="md:col-span-2 space-y-3 sm:space-y-4">
+              <div>
+                <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                  <span>System Overview</span>
+                </h4>
+                <p class="text-xs text-slate-300 leading-relaxed">{{ currentNode.fullDesc }}</p>
+              </div>
+
+              <div class="pt-1">
+                <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                  <span>Tech Stack</span>
+                </h4>
+                <div class="flex flex-wrap gap-1 sm:gap-1.5">
+                  @for (tech of currentNode.techStack; track $index) {
+                    <span class="text-[0.65rem] sm:text-[0.7rem] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded bg-slate-900 text-cyan-300 border border-slate-800 font-mono">
+                      {{ tech }}
+                    </span>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <!-- Specifications & Links -->
+            <div class="space-y-2.5 sm:space-y-3 bg-slate-900/60 p-3 sm:p-4 rounded-xl border border-slate-800/80">
+              <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Key Specifications</span>
+              </h4>
+              <ul class="text-[0.7rem] sm:text-[0.725rem] text-slate-300 space-y-1.5 sm:space-y-2">
+                @for (spec of currentNode.specs; track $index) {
+                  <li class="flex items-start gap-1.5">
+                    <span class="text-cyan-400 font-bold">•</span>
+                    <span class="text-slate-300">{{ spec }}</span>
+                  </li>
+                }
+              </ul>
+
+              @if (currentNode.link) {
+                <div class="pt-2 sm:pt-3 border-t border-slate-800">
+                  <a [href]="currentNode.link.url" target="_blank" rel="noopener noreferrer" 
+                     class="inline-flex items-center gap-1 text-xs font-semibold text-cyan-400 hover:text-cyan-300 underline transition-colors">
+                    <span>{{ currentNode.link.label }}</span>
+                    <span>↗</span>
+                  </a>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Bar -->
+        <div class="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-slate-900 flex justify-between items-center text-[0.65rem] sm:text-[0.7rem] text-slate-500">
+          <span class="truncate pr-2">Tap 'Back' (top right) to return to map</span>
+          <span class="font-mono text-cyan-400/70 shrink-0">datariomj.dev // {{ currentNode.id }}</span>
+        </div>
+      </div>
+    }
+
+    <!-- Mobile Stack Interactive Flow View (Visible on screens < 640px) -->
+    @if (!currentNode) {
+      <div class="block sm:hidden w-full h-[540px] overflow-y-auto pr-1 custom-scrollbar space-y-4 animate-unmorphDiagram">
+        <div class="flex items-center justify-between text-[0.7rem] text-slate-400 font-mono mb-2 pb-1 border-b border-slate-800">
+          <span>📱 MOBILE PIPELINE FLOW</span>
+          <span class="text-cyan-400 font-semibold">Tap card for specs</span>
+        </div>
+
+        <!-- 1. SOURCE CONTROL -->
+        <div class="p-3 rounded-lg bg-slate-900/50 border border-sky-900/40">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[0.65rem] font-bold tracking-wider text-sky-400 uppercase">// SOURCE CONTROL (5 REPOS)</span>
+            <span class="text-[0.6rem] text-slate-400 font-mono">github.com</span>
+          </div>
+          <div class="grid grid-cols-1 gap-2">
+            <div (click)="selectNode('datariomj')" (keydown)="handleKeydown($event, 'datariomj')" role="button" tabindex="0" class="flex items-center justify-between p-2.5 rounded bg-slate-900 border border-sky-950 hover:border-sky-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-5 h-5 text-sky-400" viewBox="0 0 18 18"><use href="#icon-angular"></use></svg>
+                <div>
+                  <span class="text-xs font-bold text-white block">datariomj</span>
+                  <span class="text-[0.65rem] text-slate-400">Angular SPA Frontend</span>
+                </div>
+              </div>
+              <span class="text-[0.6rem] font-bold px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800">PUBLIC</span>
+            </div>
+
+            <div (click)="selectNode('datariomj-infra')" (keydown)="handleKeydown($event, 'datariomj-infra')" role="button" tabindex="0" class="flex items-center justify-between p-2.5 rounded bg-slate-900 border border-amber-950/60 hover:border-amber-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-5 h-5 text-amber-400" viewBox="0 0 18 18"><use href="#icon-infra"></use></svg>
+                <div>
+                  <span class="text-xs font-bold text-white block">datariomj-infra</span>
+                  <span class="text-[0.65rem] text-slate-400">AWS CDK Monorepo</span>
+                </div>
+              </div>
+              <span class="text-[0.6rem] font-bold px-1.5 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-800">PRIVATE</span>
+            </div>
+
+            <div (click)="selectNode('datariomj-sentry')" (keydown)="handleKeydown($event, 'datariomj-sentry')" role="button" tabindex="0" class="flex items-center justify-between p-2.5 rounded bg-slate-900 border border-rose-950/60 hover:border-rose-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-5 h-5 text-rose-400" viewBox="0 0 18 18"><use href="#icon-sentry"></use></svg>
+                <div>
+                  <span class="text-xs font-bold text-white block">datariomj-sentry</span>
+                  <span class="text-[0.65rem] text-slate-400">Pulumi Sentry Stack</span>
+                </div>
+              </div>
+              <span class="text-[0.6rem] font-bold px-1.5 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-800">PRIVATE</span>
+            </div>
+
+            <div (click)="selectNode('datariomj-azdo')" (keydown)="handleKeydown($event, 'datariomj-azdo')" role="button" tabindex="0" class="flex items-center justify-between p-2.5 rounded bg-slate-900 border border-purple-950/60 hover:border-purple-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-5 h-5 text-purple-400" viewBox="0 0 18 18"><use href="#icon-azdo"></use></svg>
+                <div>
+                  <span class="text-xs font-bold text-white block">datariomj-azdo</span>
+                  <span class="text-[0.65rem] text-slate-400">Pulumi Azure DevOps</span>
+                </div>
+              </div>
+              <span class="text-[0.6rem] font-bold px-1.5 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-800">PRIVATE</span>
+            </div>
+
+            <div (click)="selectNode('datariomj-azp-agent')" (keydown)="handleKeydown($event, 'datariomj-azp-agent')" role="button" tabindex="0" class="flex items-center justify-between p-2.5 rounded bg-slate-900 border border-emerald-950/60 hover:border-emerald-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-5 h-5 text-emerald-400" viewBox="0 0 18 18"><use href="#icon-docker"></use></svg>
+                <div>
+                  <span class="text-xs font-bold text-white block">datariomj-azp-agent</span>
+                  <span class="text-[0.65rem] text-slate-400">Docker Agent Image</span>
+                </div>
+              </div>
+              <span class="text-[0.6rem] font-bold px-1.5 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-800">PRIVATE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connector Indicator -->
+        <div class="flex items-center justify-center gap-2 text-[0.65rem] text-slate-400 font-mono py-0.5">
+          <span class="w-8 h-px bg-slate-800"></span>
+          <span>git push / PR ➔</span>
+          <span class="w-8 h-px bg-slate-800"></span>
+        </div>
+
+        <!-- 2. CI/CD PIPELINE -->
+        <div class="p-3 rounded-lg bg-slate-900/50 border border-emerald-900/40">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[0.65rem] font-bold tracking-wider text-emerald-400 uppercase">// CI/CD PIPELINE (6 STAGES)</span>
+            <span class="text-[0.6rem] text-slate-400 font-mono">Azure DevOps</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div (click)="selectNode('agent')" (keydown)="handleKeydown($event, 'agent')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-emerald-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5 mb-1">
+                <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 18 18"><use href="#icon-docker"></use></svg>
+                <span class="text-xs font-bold text-white">Agent</span>
+              </div>
+              <span class="text-[0.6rem] text-slate-400 block">Self-Hosted</span>
+            </div>
+
+            <div (click)="selectNode('lint')" (keydown)="handleKeydown($event, 'lint')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-cyan-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5 mb-1">
+                <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 18 18"><use href="#icon-lint"></use></svg>
+                <span class="text-xs font-bold text-white">Lint</span>
+              </div>
+              <span class="text-[0.6rem] text-slate-400 block">ESLint / Prettier</span>
+            </div>
+
+            <div (click)="selectNode('test')" (keydown)="handleKeydown($event, 'test')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-cyan-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5 mb-1">
+                <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 18 18"><use href="#icon-test"></use></svg>
+                <span class="text-xs font-bold text-white">Test</span>
+              </div>
+              <span class="text-[0.6rem] text-slate-400 block">Vitest / Cypress</span>
+            </div>
+
+            <div (click)="selectNode('build')" (keydown)="handleKeydown($event, 'build')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-cyan-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5 mb-1">
+                <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 18 18"><use href="#icon-build"></use></svg>
+                <span class="text-xs font-bold text-white">Build</span>
+              </div>
+              <span class="text-[0.6rem] text-slate-400 block">esbuild / Bundle</span>
+            </div>
+
+            <div (click)="selectNode('deploy')" (keydown)="handleKeydown($event, 'deploy')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-amber-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5 mb-1">
+                <svg class="w-4 h-4 text-amber-400" viewBox="0 0 18 18"><use href="#icon-deploy"></use></svg>
+                <span class="text-xs font-bold text-white">Deploy</span>
+              </div>
+              <span class="text-[0.6rem] text-slate-400 block">S3 Sync / CDN Purge</span>
+            </div>
+
+            <div (click)="selectNode('publish')" (keydown)="handleKeydown($event, 'publish')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-cyan-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5 mb-1">
+                <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 18 18"><use href="#icon-publish"></use></svg>
+                <span class="text-xs font-bold text-white">Publish</span>
+              </div>
+              <span class="text-[0.6rem] text-slate-400 block">GitHub Release</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connector Indicator -->
+        <div class="flex items-center justify-center gap-2 text-[0.65rem] text-slate-400 font-mono py-0.5">
+          <span class="w-8 h-px bg-slate-800"></span>
+          <span>aws s3 sync ➔</span>
+          <span class="w-8 h-px bg-slate-800"></span>
+        </div>
+
+        <!-- 3. OBSERVABILITY & QUALITY -->
+        <div class="p-3 rounded-lg bg-slate-900/50 border border-rose-900/40">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[0.65rem] font-bold tracking-wider text-rose-400 uppercase">// OBSERVABILITY & QUALITY</span>
+            <span class="text-[0.6rem] text-slate-400 font-mono">5 Integrations</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div (click)="selectNode('sentry')" (keydown)="handleKeydown($event, 'sentry')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-rose-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-rose-400" viewBox="0 0 18 18"><use href="#icon-sentry"></use></svg>
+                <span class="text-xs font-bold text-white">Sentry</span>
+              </div>
+            </div>
+
+            <div (click)="selectNode('codecov')" (keydown)="handleKeydown($event, 'codecov')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-emerald-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 18 18"><use href="#icon-codecov"></use></svg>
+                <span class="text-xs font-bold text-white">Codecov</span>
+              </div>
+            </div>
+
+            <div (click)="selectNode('codacy')" (keydown)="handleKeydown($event, 'codacy')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-emerald-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 18 18"><use href="#icon-codacy"></use></svg>
+                <span class="text-xs font-bold text-white">Codacy</span>
+              </div>
+            </div>
+
+            <div (click)="selectNode('cypress')" (keydown)="handleKeydown($event, 'cypress')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-emerald-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 18 18"><use href="#icon-cypress"></use></svg>
+                <span class="text-xs font-bold text-white">Cypress</span>
+              </div>
+            </div>
+
+            <div (click)="selectNode('uptimerobot')" (keydown)="handleKeydown($event, 'uptimerobot')" role="button" tabindex="0" class="col-span-2 p-2 rounded bg-slate-900 border border-slate-800 hover:border-emerald-500 cursor-pointer active:scale-98 transition-all flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 18 18"><use href="#icon-uptimerobot"></use></svg>
+                <span class="text-xs font-bold text-white">UptimeRobot</span>
+              </div>
+              <span class="text-[0.6rem] text-slate-400 font-mono">24/7 Monitoring</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connector Indicator -->
+        <div class="flex items-center justify-center gap-2 text-[0.65rem] text-slate-400 font-mono py-0.5">
+          <span class="w-8 h-px bg-slate-800"></span>
+          <span>CDK provision ➔</span>
+          <span class="w-8 h-px bg-slate-800"></span>
+        </div>
+
+        <!-- 4. AWS INFRASTRUCTURE -->
+        <div class="p-3 rounded-lg bg-slate-900/50 border border-amber-900/40">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[0.65rem] font-bold tracking-wider text-amber-400 uppercase">// AWS INFRASTRUCTURE</span>
+            <span class="text-[0.6rem] text-slate-400 font-mono">ap-southeast-1</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div (click)="selectNode('route53')" (keydown)="handleKeydown($event, 'route53')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-amber-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5 mb-0.5">
+                <svg class="w-4 h-4 text-amber-400" viewBox="0 0 18 18"><use href="#icon-route53"></use></svg>
+                <span class="text-xs font-bold text-white">Route 53</span>
+              </div>
+              <span class="text-[0.6rem] text-slate-400 block">DNS Apex</span>
+            </div>
+
+            <div (click)="selectNode('cloudfront')" (keydown)="handleKeydown($event, 'cloudfront')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-amber-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5 mb-0.5">
+                <svg class="w-4 h-4 text-amber-400" viewBox="0 0 18 18"><use href="#icon-cloudfront"></use></svg>
+                <span class="text-xs font-bold text-white">CloudFront</span>
+              </div>
+              <span class="text-[0.6rem] text-slate-400 block">Global CDN</span>
+            </div>
+
+            <div (click)="selectNode('s3')" (keydown)="handleKeydown($event, 's3')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-amber-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5 mb-0.5">
+                <svg class="w-4 h-4 text-amber-400" viewBox="0 0 18 18"><use href="#icon-s3"></use></svg>
+                <span class="text-xs font-bold text-white">S3 Bucket</span>
+              </div>
+              <span class="text-[0.6rem] text-slate-400 block">Static Storage</span>
+            </div>
+
+            <div (click)="selectNode('acm')" (keydown)="handleKeydown($event, 'acm')" role="button" tabindex="0" class="p-2 rounded bg-slate-900 border border-slate-800 hover:border-amber-500 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-1.5 mb-0.5">
+                <svg class="w-4 h-4 text-amber-400" viewBox="0 0 18 18"><use href="#icon-acm"></use></svg>
+                <span class="text-xs font-bold text-white">ACM (SSL)</span>
+              </div>
+              <span class="text-[0.6rem] text-slate-400 block">TLS Certificate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connector Indicator -->
+        <div class="flex items-center justify-center gap-2 text-[0.65rem] text-slate-400 font-mono py-0.5">
+          <span class="w-8 h-px bg-slate-800"></span>
+          <span>CDN edge delivery ➔</span>
+          <span class="w-8 h-px bg-slate-800"></span>
+        </div>
+
+        <!-- 5. END USERS & ENDPOINTS -->
+        <div class="p-3 rounded-lg bg-slate-900/50 border border-sky-900/40">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[0.65rem] font-bold tracking-wider text-sky-400 uppercase">// LIVE ENDPOINTS (TAP TO OPEN ↗)</span>
+          </div>
+          <div class="grid grid-cols-1 gap-2">
+            <div (click)="selectNode('prod')" (keydown)="handleKeydown($event, 'prod')" role="button" tabindex="0" class="flex items-center justify-between p-2.5 rounded bg-slate-900 border border-sky-800 hover:border-sky-400 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-sky-400" viewBox="0 0 18 18"><use href="#icon-user"></use></svg>
+                <span class="text-xs font-bold text-sky-400">https://datariomj.dev</span>
+              </div>
+              <span class="text-xs font-bold text-sky-400">↗</span>
+            </div>
+
+            <div (click)="selectNode('staging')" (keydown)="handleKeydown($event, 'staging')" role="button" tabindex="0" class="flex items-center justify-between p-2.5 rounded bg-slate-900 border border-sky-800 hover:border-sky-400 cursor-pointer active:scale-98 transition-all">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-sky-400" viewBox="0 0 18 18"><use href="#icon-user"></use></svg>
+                <span class="text-xs font-bold text-sky-400">https://staging.datariomj.dev</span>
+              </div>
+              <span class="text-xs font-bold text-sky-400">↗</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Desktop SVG Diagram Viewport (Visible on screens >= 640px) -->
+    @if (!currentNode) {
+      <div class="diagram-viewport hidden sm:flex justify-center overflow-x-auto w-full min-h-[540px] h-[540px] animate-unmorphDiagram">
+        <svg viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" class="w-full min-w-[850px] max-w-[960px] h-full block">
+
+          <!-- Background -->
+          <rect width="100%" height="100%" fill="#020617"/>
+
+          <!-- Direct Connector: datariomj-infra (Source Control) ➔ AWS INFRASTRUCTURE section -->
+          <path d="M 281 78 L 281 334" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-amber)"/>
+
+          <!-- ================================================================
+               SECTION 1: SOURCE CONTROL (y = 15 to 90, Height = 75)
+               ================================================================ -->
+          <rect x="20" y="15" width="860" height="75" rx="8" fill="rgba(14, 165, 233, 0.05)" stroke="#0284c7" stroke-width="1.2" stroke-dasharray="6,3"/>
+          <text x="35" y="33" fill="#38bdf8" font-size="10.5" font-weight="700" letter-spacing="0.05em">SOURCE CONTROL — github.com/datariomj</text>
+
+          <!-- datariomj (x=35, w=156) -->
+          <g (click)="selectNode('datariomj')" (keydown)="handleKeydown($event, 'datariomj')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'datariomj'">
+            <rect x="35" y="42" width="156" height="38" rx="6" fill="rgba(14, 165, 233, 0.15)" stroke="#38bdf8" stroke-width="1.3"/>
+            <use href="#icon-angular" x="43" y="52"/>
+            <text x="66" y="65" fill="#38bdf8" font-size="11" font-weight="700">datariomj</text>
+            <g color="#38bdf8"><use href="#icon-globe" x="166" y="53"/></g>
+          </g>
+
+          <!-- datariomj-infra (x=203, w=156) -->
+          <g (click)="selectNode('datariomj-infra')" (keydown)="handleKeydown($event, 'datariomj-infra')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'datariomj-infra'">
+            <rect x="203" y="42" width="156" height="38" rx="6" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.3"/>
+            <use href="#icon-infra" x="211" y="52"/>
+            <text x="232" y="65" fill="#f59e0b" font-size="10.5" font-weight="700">datariomj-infra</text>
+            <g color="#f59e0b"><use href="#icon-lock" x="334" y="53"/></g>
+          </g>
+
+          <!-- datariomj-sentry (x=371, w=156) -->
+          <g (click)="selectNode('datariomj-sentry')" (keydown)="handleKeydown($event, 'datariomj-sentry')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'datariomj-sentry'">
+            <rect x="371" y="42" width="156" height="38" rx="6" fill="rgba(244, 63, 94, 0.15)" stroke="#f43f5e" stroke-width="1.3"/>
+            <use href="#icon-sentry" x="379" y="52"/>
+            <text x="400" y="65" fill="#f43f5e" font-size="10.5" font-weight="700">datariomj-sentry</text>
+            <g color="#f43f5e"><use href="#icon-lock" x="502" y="53"/></g>
+          </g>
+
+          <!-- datariomj-azure-devops (x=539, w=156) -->
+          <g (click)="selectNode('datariomj-azdo')" (keydown)="handleKeydown($event, 'datariomj-azdo')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'datariomj-azdo'">
+            <rect x="539" y="42" width="156" height="38" rx="6" fill="rgba(192, 132, 252, 0.15)" stroke="#c084fc" stroke-width="1.3"/>
+            <use href="#icon-azdo" x="547" y="52"/>
+            <text x="568" y="65" fill="#c084fc" font-size="10.5" font-weight="700">datariomj-azdo</text>
+            <g color="#c084fc"><use href="#icon-lock" x="670" y="53"/></g>
+          </g>
+
+          <!-- datariomj-azp-agent (x=707, w=158) -->
+          <g (click)="selectNode('datariomj-azp-agent')" (keydown)="handleKeydown($event, 'datariomj-azp-agent')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'datariomj-azp-agent'">
+            <rect x="707" y="42" width="158" height="38" rx="6" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1.3"/>
+            <use href="#icon-docker" x="714" y="52"/>
+            <text x="734" y="65" fill="#10b981" font-size="9.5" font-weight="700">datariomj-azp-agent</text>
+            <g color="#10b981"><use href="#icon-lock" x="842" y="53"/></g>
+          </g>
+
+          <!-- ================================================================
+               GAP 1 (y = 90 to 118, 28px Gap): git push / PR Arrow
+               ================================================================ -->
+          <line x1="450" y1="80" x2="450" y2="118" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <rect x="400" y="95" width="100" height="18" rx="4" fill="#030712" stroke="#1e293b" stroke-width="1"/>
+          <text x="450" y="107" fill="#94a3b8" font-size="8.5" font-weight="600" font-family="monospace" text-anchor="middle">git push / PR</text>
+
+          <!-- ================================================================
+               SECTION 2: CI/CD PIPELINE (y = 118 to 203, Height = 85)
+               ================================================================ -->
+          <rect x="20" y="118" width="860" height="85" rx="8" fill="rgba(16, 185, 129, 0.05)" stroke="#10b981" stroke-width="1.2" stroke-dasharray="6,3"/>
+          <text x="35" y="135" fill="#10b981" font-size="10.5" font-weight="700" letter-spacing="0.05em">CI/CD PIPELINE — Azure DevOps (SelfHosted pool)</text>
+
+          <!-- Agent (w=124) -->
+          <g (click)="selectNode('agent')" (keydown)="handleKeydown($event, 'agent')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'agent'">
+            <rect x="35" y="143" width="124" height="38" rx="6" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" stroke-width="1.3"/>
+            <use href="#icon-docker" x="43" y="153"/>
+            <text x="64" y="166" fill="white" font-size="10" font-weight="700">Self-Hosted Agent</text>
+          </g>
+
+          <!-- Lint (w=110) -->
+          <g (click)="selectNode('lint')" (keydown)="handleKeydown($event, 'lint')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'lint'">
+            <rect x="178" y="143" width="110" height="38" rx="6" fill="rgba(30, 41, 59, 0.7)" stroke="#475569" stroke-width="1.3"/>
+            <use href="#icon-lint" x="188" y="153"/>
+            <text x="212" y="166" fill="white" font-size="11" font-weight="700">Lint</text>
+          </g>
+
+          <!-- Test (w=110) -->
+          <g (click)="selectNode('test')" (keydown)="handleKeydown($event, 'test')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'test'">
+            <rect x="307" y="143" width="110" height="38" rx="6" fill="rgba(30, 41, 59, 0.7)" stroke="#475569" stroke-width="1.3"/>
+            <use href="#icon-test" x="317" y="153"/>
+            <text x="341" y="166" fill="white" font-size="11" font-weight="700">Test</text>
+          </g>
+
+          <!-- Build (w=110) -->
+          <g (click)="selectNode('build')" (keydown)="handleKeydown($event, 'build')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'build'">
+            <rect x="436" y="143" width="110" height="38" rx="6" fill="rgba(30, 41, 59, 0.7)" stroke="#475569" stroke-width="1.3"/>
+            <use href="#icon-build" x="446" y="153"/>
+            <text x="470" y="166" fill="white" font-size="11" font-weight="700">Build</text>
+          </g>
+
+          <!-- Deploy (w=120) -->
+          <g (click)="selectNode('deploy')" (keydown)="handleKeydown($event, 'deploy')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'deploy'">
+            <rect x="565" y="143" width="120" height="38" rx="6" fill="rgba(245, 158, 11, 0.2)" stroke="#f59e0b" stroke-width="1.3"/>
+            <use href="#icon-deploy" x="575" y="153"/>
+            <text x="599" y="166" fill="white" font-size="11" font-weight="700">Deploy</text>
+          </g>
+
+          <!-- Publish (w=157) -->
+          <g (click)="selectNode('publish')" (keydown)="handleKeydown($event, 'publish')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'publish'">
+            <rect x="708" y="143" width="157" height="38" rx="6" fill="rgba(30, 41, 59, 0.7)" stroke="#475569" stroke-width="1.3"/>
+            <use href="#icon-publish" x="720" y="153"/>
+            <text x="745" y="166" fill="white" font-size="11" font-weight="700">Publish</text>
+          </g>
+
+          <!-- Stage connectors -->
+          <line x1="159" y1="162" x2="175" y2="162" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrow-emerald)"/>
+          <line x1="288" y1="162" x2="304" y2="162" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+          <line x1="417" y1="162" x2="433" y2="162" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+          <line x1="546" y1="162" x2="562" y2="162" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+          <line x1="685" y1="162" x2="705" y2="162" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <text x="446" y="195" fill="#94a3b8" font-size="8" font-weight="600" font-family="monospace" text-anchor="middle">Branch routes: main → prod | release → staging</text>
+
+          <!-- Unified Subtle Arrow Badge: CDK Provision (Centered in Gap 2 at y=217) -->
+          <rect x="233" y="208" width="96" height="18" rx="4" fill="#030712" stroke="#1e293b" stroke-width="1"/>
+          <text x="281" y="220" fill="#94a3b8" font-size="8.5" font-weight="600" font-family="monospace" text-anchor="middle">CDK provision</text>
+
+          <!-- ================================================================
+               SECTION 3: OBSERVABILITY & QUALITY (y = 231 to 306, Height = 75)
+               ================================================================ -->
+          <rect x="20" y="231" width="860" height="75" rx="8" fill="rgba(244, 63, 94, 0.05)" stroke="#f43f5e" stroke-width="1.2" stroke-dasharray="6,3"/>
+          <text x="35" y="248" fill="#f43f5e" font-size="10.5" font-weight="700" letter-spacing="0.05em">OBSERVABILITY & QUALITY CONTROL</text>
+
+          <!-- Sentry (x=35, w=156) -->
+          <g (click)="selectNode('sentry')" (keydown)="handleKeydown($event, 'sentry')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'sentry'">
+            <rect x="35" y="256" width="156" height="38" rx="6" fill="rgba(244, 63, 94, 0.15)" stroke="#f43f5e" stroke-width="1.3"/>
+            <use href="#icon-sentry" x="45" y="265"/>
+            <text x="70" y="278" fill="white" font-size="11" font-weight="700">Sentry</text>
+          </g>
+
+          <!-- Codecov (x=203, w=156) -->
+          <g (click)="selectNode('codecov')" (keydown)="handleKeydown($event, 'codecov')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'codecov'">
+            <rect x="203" y="256" width="156" height="38" rx="6" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1.3"/>
+            <use href="#icon-codecov" x="213" y="265"/>
+            <text x="238" y="278" fill="white" font-size="11" font-weight="700">Codecov</text>
+          </g>
+
+          <!-- Codacy (x=371, w=156) -->
+          <g (click)="selectNode('codacy')" (keydown)="handleKeydown($event, 'codacy')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'codacy'">
+            <rect x="371" y="256" width="156" height="38" rx="6" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1.3"/>
+            <use href="#icon-codacy" x="381" y="265"/>
+            <text x="406" y="278" fill="white" font-size="11" font-weight="700">Codacy</text>
+          </g>
+
+          <!-- Cypress (x=539, w=156) -->
+          <g (click)="selectNode('cypress')" (keydown)="handleKeydown($event, 'cypress')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'cypress'">
+            <rect x="539" y="256" width="156" height="38" rx="6" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1.3"/>
+            <use href="#icon-cypress" x="549" y="265"/>
+            <text x="574" y="278" fill="white" font-size="11" font-weight="700">Cypress</text>
+          </g>
+
+          <!-- UptimeRobot (x=707, w=158) -->
+          <g (click)="selectNode('uptimerobot')" (keydown)="handleKeydown($event, 'uptimerobot')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'uptimerobot'">
+            <rect x="707" y="256" width="158" height="38" rx="6" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1.3"/>
+            <use href="#icon-uptimerobot" x="717" y="265"/>
+            <text x="742" y="278" fill="white" font-size="11" font-weight="700">UptimeRobot</text>
+          </g>
+
+          <!-- ================================================================
+               GAP 3 (y = 306 to 334, 28px Gap): Separated TLS Cert & aws s3 sync
+               ================================================================ -->
+          <!-- 1. TLS Cert Line: ACM (x=770) ➔ CloudFront (x=345.5) -->
+          <path d="M 770 360 L 770 318 L 345.5 318 L 345.5 360" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow-amber)"/>
+          
+          <!-- 2. Vertical Deploy ➔ S3 Line (x=625) -->
+          <path d="M 625 181 L 625 360" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-amber)"/>
+
+          <!-- 3. TLS Cert Badge: Placed at x=450 (97px to the left of aws s3 sync!) -->
+          <rect x="416" y="309" width="68" height="18" rx="4" fill="#030712" stroke="#1e293b" stroke-width="1"/>
+          <text x="450" y="321" fill="#94a3b8" font-size="8" font-weight="600" font-family="monospace" text-anchor="middle">TLS Cert</text>
+
+          <!-- 4. aws s3 sync Badge: Placed at x=625 (Centered on vertical line) -->
+          <rect x="581" y="309" width="88" height="18" rx="4" fill="#030712" stroke="#1e293b" stroke-width="1"/>
+          <text x="625" y="321" fill="#94a3b8" font-size="8.5" font-weight="600" font-family="monospace" text-anchor="middle">aws s3 sync</text>
+
+          <!-- ================================================================
+               SECTION 4: AWS INFRASTRUCTURE (y = 334 to 419, Height = 85)
+               ================================================================ -->
+          <rect x="20" y="334" width="860" height="85" rx="8" fill="rgba(245, 158, 11, 0.05)" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="8,4"/>
+          <text x="35" y="351" fill="#f59e0b" font-size="10.5" font-weight="700" letter-spacing="0.05em">AWS INFRASTRUCTURE — ap-southeast-1 (CDK-managed)</text>
+
+          <!-- Route 53 (x=35, w=191) -->
+          <g (click)="selectNode('route53')" (keydown)="handleKeydown($event, 'route53')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'route53'">
+            <rect x="35" y="360" width="191" height="38" rx="6" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.3"/>
+            <use href="#icon-route53" x="45" y="369"/>
+            <text x="70" y="382" fill="white" font-size="11" font-weight="700">Route 53</text>
+          </g>
+
+          <!-- CloudFront (x=248, w=195) -->
+          <g (click)="selectNode('cloudfront')" (keydown)="handleKeydown($event, 'cloudfront')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'cloudfront'">
+            <rect x="248" y="360" width="195" height="38" rx="6" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.3"/>
+            <use href="#icon-cloudfront" x="258" y="369"/>
+            <text x="283" y="382" fill="white" font-size="11" font-weight="700">CloudFront</text>
+          </g>
+
+          <!-- S3 Bucket (x=465, w=191) -->
+          <g (click)="selectNode('s3')" (keydown)="handleKeydown($event, 's3')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 's3'">
+            <rect x="465" y="360" width="191" height="38" rx="6" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.3"/>
+            <use href="#icon-s3" x="475" y="369"/>
+            <text x="500" y="382" fill="white" font-size="11" font-weight="700">S3 Bucket</text>
+          </g>
+
+          <!-- ACM (SSL) (x=675, w=190) -->
+          <g (click)="selectNode('acm')" (keydown)="handleKeydown($event, 'acm')" role="button" tabindex="0" class="diagram-node cursor-pointer" [class.selected]="selectedNodeId === 'acm'">
+            <rect x="675" y="360" width="190" height="38" rx="6" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.3"/>
+            <use href="#icon-acm" x="685" y="369"/>
+            <text x="710" y="382" fill="white" font-size="11" font-weight="700">ACM (SSL)</text>
+          </g>
+
+          <!-- AWS Connectors with Unified Subtle Badges -->
+          <line x1="226" y1="379" x2="246" y2="379" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrow-amber)"/>
+          <rect x="214" y="363" width="48" height="14" rx="3" fill="#030712" stroke="#1e293b" stroke-width="0.8"/>
+          <text x="238" y="373" fill="#94a3b8" font-size="7.5" font-weight="600" font-family="monospace" text-anchor="middle">CNAME</text>
+
+          <line x1="443" y1="379" x2="463" y2="379" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrow-amber)"/>
+          <rect x="437" y="363" width="32" height="14" rx="3" fill="#030712" stroke="#1e293b" stroke-width="0.8"/>
+          <text x="453" y="373" fill="#94a3b8" font-size="7.5" font-weight="600" font-family="monospace" text-anchor="middle">OAI</text>
+
+          <!-- ================================================================
+               SECTION 5: END USERS & ENDPOINTS (y = 447 to 522, Height = 75)
+               ================================================================ -->
+          <rect x="20" y="447" width="860" height="75" rx="8" fill="rgba(14, 165, 233, 0.05)" stroke="#0284c7" stroke-width="1.2" stroke-dasharray="6,3"/>
+          <text x="35" y="464" fill="#38bdf8" font-size="9.5" font-weight="700" letter-spacing="0.05em">END USERS & LIVE ENDPOINTS (click to open ↗)</text>
+
+          <g (click)="selectNode('prod')" (keydown)="handleKeydown($event, 'prod')" role="button" tabindex="0" class="diagram-node cursor-pointer group" title="Open https://datariomj.dev in a new tab">
+            <rect x="35" y="472" width="402" height="38" rx="6" fill="rgba(14, 165, 233, 0.15)" stroke="#38bdf8" stroke-width="1.3"/>
+            <use href="#icon-user" x="45" y="481"/>
+            <text x="70" y="495" fill="#38bdf8" font-size="11.5" font-weight="700">https://datariomj.dev</text>
+            <text x="422" y="495" fill="#38bdf8" font-size="12" font-weight="700" text-anchor="end">↗</text>
+          </g>
+
+          <g (click)="selectNode('staging')" (keydown)="handleKeydown($event, 'staging')" role="button" tabindex="0" class="diagram-node cursor-pointer group" title="Open https://staging.datariomj.dev in a new tab">
+            <rect x="462" y="472" width="403" height="38" rx="6" fill="rgba(14, 165, 233, 0.15)" stroke="#38bdf8" stroke-width="1.3"/>
+            <use href="#icon-user" x="472" y="481"/>
+            <text x="497" y="495" fill="#38bdf8" font-size="11.5" font-weight="700">https://staging.datariomj.dev</text>
+            <text x="850" y="495" fill="#38bdf8" font-size="12" font-weight="700" text-anchor="end">↗</text>
+          </g>
+
+          <!-- CloudFront (y=398) ➔ Endpoints (y=472) Direct Blue Lines -->
+          <line x1="285" y1="398" x2="236" y2="469" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+          <line x1="400" y1="398" x2="663" y2="469" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+        </svg>
+      </div>
+    }
+
+    <!-- Infrastructure Cost Breakdown Section -->
+    <div class="mt-6 p-3 sm:p-4 rounded-lg bg-slate-900/40 border border-slate-800/80">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-3 border-b border-slate-800/80">
+        <div class="flex items-center gap-2">
+          <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+          <h3 class="text-xs font-bold text-white tracking-wide">Monthly Infrastructure Overhead</h3>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-slate-400">Total Monthly Cost:</span>
+          <span class="text-xs sm:text-sm font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-800 px-2 py-0.5 rounded">~$0.60 USD / month</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-[0.725rem]">
+        <div class="p-2.5 sm:p-3 rounded bg-slate-900/60 border border-slate-800">
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-semibold text-amber-400">AWS Route 53</span>
+            <span class="font-bold text-white">$0.54</span>
+          </div>
+          <p class="text-slate-400 text-[0.675rem]">1 Hosted Zone ($0.50/mo) + Public DNS Queries ($0.04)</p>
+        </div>
+
+        <div class="p-2.5 sm:p-3 rounded bg-slate-900/60 border border-slate-800">
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-semibold text-cyan-400">AWS CloudFront &amp; S3</span>
+            <span class="font-bold text-emerald-400">$0.00</span>
+          </div>
+          <p class="text-slate-400 text-[0.675rem]">AWS Always-Free Tier (1TB CDN transfer &amp; 5GB storage)</p>
+        </div>
+
+        <div class="p-2.5 sm:p-3 rounded bg-slate-900/60 border border-slate-800">
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-semibold text-emerald-400">CI/CD &amp; Observability</span>
+            <span class="font-bold text-emerald-400">$0.00</span>
+          </div>
+          <p class="text-slate-400 text-[0.675rem]">Free Tiers: Azure DevOps, Sentry, Codecov, Codacy, Pulumi</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clean Footer -->
+    <p class="text-center mt-5 text-[0.7rem] text-slate-500 font-mono">
+      datariomj.dev • 5 repositories • AWS CDK + Pulumi + Azure DevOps
+    </p>
+  </div>
+</section>

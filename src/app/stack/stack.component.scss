@@ -1,12 +1,15 @@
-.stack {
-  &__container {
-    padding-bottom: 50px;
+.filter-btn {
+  background-color: transparent;
+  border-radius: 4px;
+
+  &:hover {
+    border-color: var(--color-primary);
   }
 
-  &__card-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+  &.active-filter {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: rgb(16 185 129 / 12%);
+    font-weight: 600;
   }
 }

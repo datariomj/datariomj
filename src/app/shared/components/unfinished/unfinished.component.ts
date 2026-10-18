@@ -1,11 +1,16 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+} from "@angular/core";
 
 @Component({
-  selector: 'app-unfinished',
-  templateUrl: './unfinished.component.html',
-  styleUrls: ['./unfinished.component.scss'],
+  selector: "app-unfinished",
+  standalone: true,
+  imports: [],
+  templateUrl: "./unfinished.component.html",
+  styleUrls: ["./unfinished.component.scss"],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UnfinishedComponent {
-}
+export class UnfinishedComponent {}

@@ -1,17 +1,15 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
-import { Before } from 'cypress-cucumber-preprocessor/steps';
+import { Before, Given } from "@badeball/cypress-cucumber-preprocessor";
+import { HomePage } from "../../support/page-objects/HomePage";
 
 Before(() => {
   // cy.intercept('*', (req) => {
   //   const regularResourcesRe = /\.(jsx?|coffee|html|less|s?css|svg)(\?.*)?$/;
   //   const url = new URL(req.url);
-
   //   url.search = '';
   //   url.hash = '';
-
   //   const isAsset = req.method === 'GET' && regularResourcesRe.test(url.href);
-
   //   if (req.url.includes('sockjs-node') || isAsset) {
   //     req.destroy();
   //   } else {
@@ -21,3 +19,5 @@ Before(() => {
   // cy.intercept('POST', '/sockjs-node/**', {}).as('postWebsocket');
   // cy.intercept('GET', '/sockjs-node/**', {}).as('getWebsocket');
 });
+
+// Common step definitions moved to common-steps.ts to avoid duplicates

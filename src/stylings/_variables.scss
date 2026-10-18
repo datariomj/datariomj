@@ -1,8 +1,63 @@
-$main-background: #000;
-$primary-color: #8ee3ef;
-$accent-color: #13cf13;
-$warn-color: #a30015;
-$text-color: #fff;
-$disabled-color: #757b82;
-$card-color: #3b3e41;
+/* Colors */
+$color-surface: var(--color-surface);
+$color-surface-dim: var(--color-surface-dim);
+$color-surface-bright: var(--color-surface-bright);
+$color-surface-container-lowest: var(--color-surface-container-lowest);
+$color-surface-container-low: var(--color-surface-container-low);
+$color-surface-container: var(--color-surface-container);
+$color-surface-container-high: var(--color-surface-container-high);
+$color-surface-container-highest: var(--color-surface-container-highest);
+$color-on-surface: var(--color-on-surface);
+$color-on-surface-variant: var(--color-on-surface-variant);
+$color-inverse-surface: var(--color-inverse-surface);
+$color-inverse-on-surface: var(--color-inverse-on-surface);
+$color-outline: var(--color-outline);
+$color-outline-variant: var(--color-outline-variant);
+$color-surface-tint: var(--color-surface-tint);
+$color-primary: var(--color-primary);
+$color-on-primary: var(--color-on-primary);
+$color-primary-container: var(--color-primary-container);
+$color-on-primary-container: var(--color-on-primary-container);
+$color-inverse-primary: var(--color-inverse-primary);
+$color-secondary: var(--color-secondary);
+$color-on-secondary: var(--color-on-secondary);
+$color-secondary-container: var(--color-secondary-container);
+$color-on-secondary-container: var(--color-on-secondary-container);
+$color-tertiary: var(--color-tertiary);
+$color-on-tertiary: var(--color-on-tertiary);
+$color-tertiary-container: var(--color-tertiary-container);
+$color-on-tertiary-container: var(--color-on-tertiary-container);
+$color-error: var(--color-error);
+$color-on-error: var(--color-on-error);
+$color-error-container: var(--color-error-container);
+$color-on-error-container: var(--color-on-error-container);
+$color-background: var(--color-background);
+$color-on-background: var(--color-on-background);
+$color-canvas-deep: var(--color-canvas-deep);
+$color-surface-matte: var(--color-surface-matte);
+$color-text-crisp: var(--color-text-crisp);
+$color-text-muted: var(--color-text-muted);
+$color-border-hairline: var(--color-border-hairline);
+$color-terminal-green: var(--color-terminal-green);
+
+/* Typography */
+$font-inter: var(--font-inter);
+$font-jetbrains: var(--font-jetbrains);
+
+/* Spacing */
+$spacing-max-width: var(--spacing-max-width);
+$spacing-gutter: var(--spacing-gutter);
+$spacing-stack-sm: var(--spacing-stack-sm);
+$spacing-stack-md: var(--spacing-stack-md);
+$spacing-stack-lg: var(--spacing-stack-lg);
+$spacing-section-gap: var(--spacing-section-gap);
+
+/* Old variables for legacy components */
+$main-background: var(--color-canvas-deep);
+$primary-color: var(--color-primary);
+$accent-color: var(--color-terminal-green);
+$warn-color: var(--color-error);
+$text-color: var(--color-on-surface);
+$disabled-color: var(--color-text-muted);
+$card-color: var(--color-surface-matte);
 $footer-height: 50px;

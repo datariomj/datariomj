@@ -1,7 +1,6 @@
 export class ToggleSidenav {
   public static readonly type = '[App] Toggle Sidenav';
 
-  constructor() { };
 }
 
 export class PreloaderVisibility {

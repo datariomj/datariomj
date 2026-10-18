@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/generated
 # Only exists if Bazel was run
 /bazel-out
 
@@ -46,9 +47,16 @@ testem.log
 /cypress/screenshots/*
 /cypress/results/*
 documentation
+src/videos/*
 
 # System Files
 .DS_Store
 Thumbs.db
 
+# Downloaded Codecov CLI fallback
+.codecov
+
 CHANGELOG.md
+
+# CodeGraph local database
+.codegraph/

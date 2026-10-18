@@ -1,0 +1,18 @@
+<div class="skills-matrix">
+  @for (cat of categories; track cat) {
+    <div class="skill-row">
+      <div class="skill-key">STAK // {{ cat.category | uppercase }} :</div>
+      <div class="skill-values">
+        <span class="bracket">[</span>
+        @for (item of cat.items; track item; let last = $last) {
+          <span class="item">
+            {{ item }}@if (!last) {
+            <span class="comma">, </span>
+          }
+        </span>
+      }
+      <span class="bracket">]</span>
+    </div>
+  </div>
+}
+</div>

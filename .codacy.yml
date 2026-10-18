@@ -1,0 +1,13 @@
+---
+engines:
+  eslint:
+    enabled: true
+
+exclude_paths:
+  - "dist/**"
+  - ".angular/**"
+  - "node_modules/**"
+  - "coverage/**"
+  - "documentation/**"
+  - "cypress/**"
+  - "src/videos/**"

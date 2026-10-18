@@ -1,16 +1,53 @@
-import { enableProdMode, ViewEncapsulation } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
+import { ErrorHandler, importProvidersFrom, provideZonelessChangeDetection } from '@angular/core';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PreloadAllModules, provideRouter, withInMemoryScrolling, withPreloading, withViewTransitions } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import * as Sentry from '@sentry/angular';
+import { consoleLoggingIntegration, replayIntegration } from '@sentry/browser';
+import { NgxsStoreModule } from '@store/store.module';
 
-import { AppModule } from './app/app.module';
+import { AppComponent } from './app/app.component';
+import { routes } from './app/app.routes';
 import { environment } from './environments/environment';
 
-if (environment.production) {
-  enableProdMode();
+if (environment.sentryDsn) {
+  Sentry.init({
+    dsn: environment.sentryDsn,
+    environment: environment.sentryEnv,
+    release: environment.version,
+    // FREE TIER (Developer plan): the Logs product is NOT included in the free quota.
+    // Enable structured logs ONLY in non-production (staging) so we never bill Logs
+    // units from production traffic. Metrics (Sentry.metrics.*) are also not free-tier
+    // and are intentionally NOT enabled anywhere.
+    enableLogs: !environment.production,
+    integrations: [
+      Sentry.browserTracingIntegration(),
+      replayIntegration({ maskAllText: false, maskAllInputs: true }),
+      consoleLoggingIntegration({
+        levels: environment.production ? ['error', 'warn'] : ['error', 'warn', 'info', 'debug'],
+      }),
+    ],
+    tracesSampleRate: environment.production ? 0.2 : 1.0,
+    replaysSessionSampleRate: environment.production ? 0.1 : 0,
+    replaysOnErrorSampleRate: 1.0,
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  platformBrowserDynamic().bootstrapModule(AppModule, {
-  defaultEncapsulation: ViewEncapsulation.None,
-})
-  .catch(err => console.error(err));
+  bootstrapApplication(AppComponent, {
+    providers: [
+      importProvidersFrom(BrowserModule, BrowserAnimationsModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }), NgxsStoreModule),
+      provideRouter(
+        routes,
+        withViewTransitions(),
+        withPreloading(PreloadAllModules),
+        withInMemoryScrolling({ scrollPositionRestoration: 'top' }),
+      ),
+      provideZonelessChangeDetection(),
+      provideHttpClient(withXhr(), withInterceptorsFromDi()),
+      { provide: ErrorHandler, useValue: Sentry.createErrorHandler({ showDialog: false }) },
+    ],
+  }).catch(err => console.error(err));
 });

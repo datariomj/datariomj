@@ -1,53 +1,16 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { IconService } from '@core/services/icon.service';
-import { STATIC_CONSTANT } from '@core/static.constants';
-import { Store } from '@ngxs/store';
-import { ToggleSidenav } from '@store/ui/ui.action';
+
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from "@angular/core";
+import { RouterModule } from "@angular/router";
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
+  selector: "app-footer",
+  standalone: true,
+  imports: [RouterModule],
+  templateUrl: "./footer.component.html",
+  styleUrls: ["./footer.component.scss"],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-  email: string = STATIC_CONSTANT.email;
-  icons = [
-    'chevron-right',
-    'git',
-    'copyright',
-    'linkedin',
-    'github',
-    'instagram',
-  ];
   currentYear = Math.max(new Date().getFullYear(), 2021);
-  socialIcons = [
-    {
-      icon: 'github',
-      link: 'https://github.com/datariomj',
-    },
-    {
-      icon: 'instagram',
-      link: 'https://www.instagram.com/datariomj',
-    },
-    {
-      icon: 'linkedin',
-      link: 'https://www.linkedin.com/in/datariomj',
-    },
-  ];
-
-  constructor(
-    private store: Store,
-    private iconService: IconService,
-  ) {
-    this.icons.forEach((icon) => {
-      this.iconService.addSvgIcon(icon);
-    });
-  }
-
-  toggleSidenav() {
-    this.store.dispatch(new ToggleSidenav());
-    // todo animate chevron
-  }
 }

@@ -1,0 +1,39 @@
+import { LoadChildrenCallback, Routes } from '@angular/router';
+import { environment } from '@env/environment';
+import { NavigationLink } from '@shared/interfaces/navigation-link';
+
+function buildNavigationRoutes(links: NavigationLink[]): Routes {
+  return links.map((link) => ({
+    path: link.path.replace(/^\//, ''),
+    loadChildren: link.loadChildren as LoadChildrenCallback,
+  }));
+}
+
+export const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+    pathMatch: 'full',
+  },
+  ...buildNavigationRoutes(environment.navigation),
+  {
+    path: 'projects',
+    loadChildren: () => import('./projects/projects-module').then(m => m.ProjectsModule),
+  },
+  {
+    path: 'contact',
+    loadChildren: () => import('./contact/contact-module').then(m => m.ContactModule),
+  },
+  {
+    path: 'terms',
+    loadChildren: () => import('./terms/terms.module').then(m => m.TermsModule),
+  },
+  {
+    path: 'privacy',
+    loadChildren: () => import('./privacy/privacy.module').then(m => m.PrivacyModule),
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./error/error.module').then(m => m.ErrorModule),
+  },
+];

@@ -1,0 +1,42 @@
+.skills-matrix {
+  margin-bottom: var(--spacing-stack-lg);
+}
+
+.skill-row {
+  display: flex;
+  margin-bottom: var(--spacing-stack-sm);
+  font-family: var(--font-jetbrains);
+}
+
+.skill-key {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  width: 180px;
+  flex-shrink: 0;
+}
+
+.skill-values {
+  color: var(--color-text-crisp);
+  font-size: 14px;
+}
+
+.bracket {
+  color: var(--color-outline);
+}
+
+.comma {
+  color: var(--color-outline);
+}
+
+@media (width <= 768px) {
+  .skill-row {
+    flex-direction: column;
+    margin-bottom: var(--spacing-stack-md);
+  }
+  
+  .skill-key {
+    margin-bottom: 4px;
+    width: auto;
+  }
+}

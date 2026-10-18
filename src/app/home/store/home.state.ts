@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject,Injectable } from '@angular/core';
 import { HomeService } from '@home/home.service';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { PreloaderVisibility } from '@store/ui/ui.action';
@@ -18,11 +18,9 @@ export interface HomeStateModel {
 })
 @Injectable()
 export class HomeState {
-    constructor(
-        private homeService: HomeService,
-        private store: Store,
-    ) {
-    }
+    private homeService = inject(HomeService);
+    private store = inject(Store);
+
 
     @Selector()
     public static getReadme(state: HomeStateModel) {
