@@ -22,16 +22,16 @@ describe('TerminalButtonComponent', () => {
   });
 
   it('has default label as empty string', () => {
-    expect(component.label).toBe('');
+    expect(component.label()).toBe('');
   });
 
   it('has default variant as "primary"', () => {
-    expect(component.variant).toBe('primary');
+    expect(component.variant()).toBe('primary');
   });
 
   it('accepts "ghost" as a variant', () => {
-    component.variant = 'ghost';
-    expect(component.variant).toBe('ghost');
+    fixture.componentRef.setInput('variant', 'ghost');
+    expect(component.variant()).toBe('ghost');
   });
 
   describe('onClick', () => {
@@ -59,10 +59,10 @@ describe('TerminalButtonComponent', () => {
     });
   });
 
-  describe('@Input bindings', () => {
+  describe('input bindings', () => {
     it('accepts a custom label', () => {
-      component.label = 'Deploy';
-      expect(component.label).toBe('Deploy');
+      fixture.componentRef.setInput('label', 'Deploy');
+      expect(component.label()).toBe('Deploy');
     });
   });
 
@@ -77,8 +77,8 @@ describe('TerminalButtonComponent', () => {
 
     it('renders label and variant class', () => {
       const fix = TestBed.createComponent(TerminalButtonComponent);
-      fix.componentInstance.label = 'Run';
-      fix.componentInstance.variant = 'ghost';
+      fix.componentRef.setInput('label', 'Run');
+      fix.componentRef.setInput('variant', 'ghost');
       fix.detectChanges();
 
       const btn: HTMLButtonElement | null = fix.nativeElement.querySelector('button');

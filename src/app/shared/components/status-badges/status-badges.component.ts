@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { TelemetryService } from '@core/services/telemetry.service';
 
 export interface StatusBadge {
   key: string;
@@ -15,7 +16,10 @@ export interface StatusBadge {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StatusBadgesComponent {
+export class StatusBadgesComponent implements OnInit {
+  private telemetry = inject(TelemetryService);
+  readonly telemetryStatus = this.telemetry.status;
+
   statusCurlCommand = `curl -s ${ window.location.origin }/status.json | jq`;
   serviceName = window.location.host || 'datariomj.dev';
 
@@ -63,4 +67,12 @@ export class StatusBadgesComponent {
       href: 'https://github.com/datariomj/datariomj/blob/main/LICENSE.md',
     },
   ];
+
+  ngOnInit(): void {
+    this.refreshTelemetry();
+  }
+
+  refreshTelemetry(): void {
+    this.telemetry.checkTelemetry();
+  }
 }

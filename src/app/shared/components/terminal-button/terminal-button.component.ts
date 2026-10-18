@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy,Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
     selector: 'app-terminal-button',
@@ -8,9 +8,9 @@ import { ChangeDetectionStrategy,Component, EventEmitter, Input, Output } from '
     standalone: true,
 })
 export class TerminalButtonComponent {
-  @Input() label = '';
-  @Input() variant: 'primary' | 'ghost' = 'primary';
-  @Output() buttonClick = new EventEmitter<Event>();
+  label = input<string>('');
+  variant = input<'primary' | 'ghost'>('primary');
+  buttonClick = output<Event>();
 
   onClick(event: Event) {
     this.buttonClick.emit(event);

@@ -1,0 +1,35 @@
+<div class="project-card border border-border-hairline bg-surface-matte rounded-lg p-5 transition-all duration-200 hover:border-primary">
+  <div class="flex items-center justify-between gap-2 mb-2">
+    <h3 class="font-jetbrains text-lg font-bold text-text-crisp">{{ project().title }}</h3>
+    <span class="project-badge text-xs px-2 py-0.5 rounded font-jetbrains border"
+      [class.border-primary]="project().status === 'ACTIVE'"
+      [class.text-primary]="project().status === 'ACTIVE'"
+      [class.border-text-muted]="project().status !== 'ACTIVE'"
+      [class.text-text-muted]="project().status !== 'ACTIVE'">
+      {{ project().status }}
+    </span>
+  </div>
+
+  <p class="text-sm text-text-muted mb-4">{{ project().description }}</p>
+
+  <div class="flex flex-wrap gap-1.5 mb-4">
+    @for (tech of project().techStack; track tech) {
+      <span class="text-xs font-jetbrains px-2 py-0.5 rounded bg-surface-container-high text-primary">
+        {{ tech }}
+      </span>
+    }
+  </div>
+
+  <div class="flex items-center gap-3 pt-3 border-t border-border-hairline text-xs font-jetbrains">
+    @if (project().repoUrl) {
+      <a [href]="project().repoUrl" target="_blank" rel="noopener noreferrer" class="text-secondary hover:underline">
+        [view source]
+      </a>
+    }
+    @if (project().liveUrl) {
+      <a [href]="project().liveUrl" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">
+        [live demo]
+      </a>
+    }
+  </div>
+</div>
