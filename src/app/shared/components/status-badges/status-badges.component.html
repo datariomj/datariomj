@@ -42,6 +42,43 @@
     </div>
     }
 
+    <!-- Live Telemetry Section -->
+    <div class="status-terminal-line json-indent">
+      <span class="json-brace">&#125;</span><span class="json-comma">,</span>
+    </div>
+    <div class="status-terminal-line output-text json-indent">
+      <span class="json-key">"telemetry"</span><span class="json-colon">: </span><span class="json-brace">&#123;</span>
+    </div>
+    <div class="status-terminal-line json-indent-2">
+      <span class="json-key">"latency"</span><span class="json-colon">: </span>
+      <span class="json-string">
+        @if (telemetryStatus().latencyMs !== null) {
+          "{{ telemetryStatus().latencyMs }}ms"
+        } @else {
+          "measuring..."
+        }
+      </span><span class="json-comma">,</span>
+    </div>
+    <div class="status-terminal-line json-indent-2">
+      <span class="json-key">"status"</span><span class="json-colon">: </span>
+      <span [class.json-ok]="telemetryStatus().endpointHealthy" [class.json-error]="telemetryStatus().endpointHealthy === false">
+        @if (telemetryStatus().endpointHealthy === true) {
+          "HEALTHY (HTTP 200)"
+        } @else if (telemetryStatus().endpointHealthy === false) {
+          "DEGRADED"
+        } @else {
+          "CHECKING"
+        }
+      </span><span class="json-comma">,</span>
+    </div>
+    <div class="status-terminal-line json-indent-2">
+      <span class="json-key">"last_ping"</span><span class="json-colon">: </span>
+      <span class="json-string">"{{ telemetryStatus().checkedAt || 'pending' }}"</span>
+      <button type="button" class="telemetry-ping-btn" (click)="refreshTelemetry()" title="Re-ping telemetry endpoint">
+        [ping]
+      </button>
+    </div>
+
     <!-- JSON output: closing braces -->
     <div class="status-terminal-line output-text json-indent">
       <span class="json-brace">&#125;</span>

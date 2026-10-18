@@ -191,7 +191,26 @@ app-status-badges, :host {
 .json-colon  { color: var(--color-text-muted); }
 .json-string { color: var(--color-secondary); }
 .json-ok     { color: var(--color-primary); }
+.json-error  { color: var(--color-error); }
 .json-comma  { color: var(--color-text-muted); }
+
+.telemetry-ping-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-primary);
+  font-family: var(--font-jetbrains);
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  opacity: 0.8;
+  transition: opacity 0.2s, transform 0.1s;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
 
 .json-indent   { padding-left: 1.5rem; }
 .json-indent-2 { padding-left: 3rem; }

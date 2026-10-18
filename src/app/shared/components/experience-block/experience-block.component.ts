@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-experience-block',
@@ -9,12 +9,12 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   imports: [NgClass],
 })
 export class ExperienceBlockComponent {
-  @Input() title = '';
-  @Input() company = '';
-  @Input() dateRange = '';
-  @Input() location = '';
-  @Input() badge = '';
-  @Input() isCurrent = false;
-  @Input() items: string[] = [];
-  @Input() technologies: string[] = [];
+  title = input<string>('');
+  company = input<string>('');
+  dateRange = input<string>('');
+  location = input<string>('');
+  badge = input<string>('');
+  isCurrent = input<boolean>(false);
+  items = input<string[]>([]);
+  technologies = input<string[]>([]);
 }

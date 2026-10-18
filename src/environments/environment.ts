@@ -34,6 +34,12 @@ export const environment = {
       iconClass: 'fa-layer-group',
     },
     // {
+    //   path: '/projects',
+    //   label: 'projects',
+    //   loadChildren: () => import('../app/projects/projects-module').then(m => m.ProjectsModule),
+    //   iconClass: 'fa-code-branch',
+    // },
+    // {
     //   path: '/contact',
     //   label: 'contact',
     //   loadChildren: () => import('../app/contact/contact-module').then(m => m.ContactModule),

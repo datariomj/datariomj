@@ -18,6 +18,10 @@ const routes: Routes = [
   },
   ...buildNavigationRoutes(environment.navigation),
   {
+    path: 'projects',
+    loadChildren: () => import('./projects/projects-module').then(m => m.ProjectsModule),
+  },
+  {
     path: 'contact',
     loadChildren: () => import('./contact/contact-module').then(m => m.ContactModule),
   },

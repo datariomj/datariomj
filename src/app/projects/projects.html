@@ -1,0 +1,20 @@
+<app-terminal-hero />
+
+<div class="projects-container max-w-5xl mx-auto px-4 py-8">
+  <div class="mb-8">
+    <div class="flex items-center gap-2 mb-2">
+      <span class="text-primary font-jetbrains text-sm">~/projects</span>
+      <span class="text-text-muted font-jetbrains text-xs">--list</span>
+    </div>
+    <h1 class="text-2xl font-bold font-jetbrains text-text-crisp">Engineering Projects</h1>
+    <p class="text-sm text-text-muted mt-1 font-jetbrains">
+      Showcase of open-source repositories, cloud architecture, and development tooling.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (proj of projects(); track proj.id) {
+      <app-project-card [project]="proj" />
+    }
+  </div>
+</div>

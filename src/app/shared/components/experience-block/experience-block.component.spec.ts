@@ -21,71 +21,70 @@ describe('ExperienceBlockComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('@Input defaults', () => {
+  describe('input defaults', () => {
     it('title defaults to empty string', () => {
-      expect(component.title).toBe('');
+      expect(component.title()).toBe('');
     });
 
     it('company defaults to empty string', () => {
-      expect(component.company).toBe('');
+      expect(component.company()).toBe('');
     });
 
     it('dateRange defaults to empty string', () => {
-      expect(component.dateRange).toBe('');
+      expect(component.dateRange()).toBe('');
     });
 
     it('location defaults to empty string', () => {
-      expect(component.location).toBe('');
+      expect(component.location()).toBe('');
     });
 
     it('badge defaults to empty string', () => {
-      expect(component.badge).toBe('');
+      expect(component.badge()).toBe('');
     });
 
     it('isCurrent defaults to false', () => {
-      expect(component.isCurrent).toBe(false);
+      expect(component.isCurrent()).toBe(false);
     });
 
     it('items defaults to empty array', () => {
-      expect(component.items).toEqual([]);
+      expect(component.items()).toEqual([]);
     });
 
     it('technologies defaults to empty array', () => {
-      expect(component.technologies).toEqual([]);
+      expect(component.technologies()).toEqual([]);
     });
   });
 
-  describe('@Input bindings', () => {
+  describe('input bindings', () => {
     it('accepts a title', () => {
-      component.title = 'DevOps Engineer Lead';
-      expect(component.title).toBe('DevOps Engineer Lead');
+      fixture.componentRef.setInput('title', 'DevOps Engineer Lead');
+      expect(component.title()).toBe('DevOps Engineer Lead');
     });
 
     it('accepts items list', () => {
-      component.items = ['Led CI/CD migration', 'Reduced deployment time'];
-      expect(component.items).toHaveLength(2);
+      fixture.componentRef.setInput('items', ['Led CI/CD migration', 'Reduced deployment time']);
+      expect(component.items()).toHaveLength(2);
     });
 
     it('accepts technologies list', () => {
-      component.technologies = ['Terraform', 'AWS', 'Kubernetes'];
-      expect(component.technologies).toContain('Kubernetes');
+      fixture.componentRef.setInput('technologies', ['Terraform', 'AWS', 'Kubernetes']);
+      expect(component.technologies()).toContain('Kubernetes');
     });
 
     it('accepts isCurrent flag', () => {
-      component.isCurrent = true;
-      expect(component.isCurrent).toBe(true);
+      fixture.componentRef.setInput('isCurrent', true);
+      expect(component.isCurrent()).toBe(true);
     });
   });
 
   describe('template rendering', () => {
     it('renders badge and location when provided', () => {
       const f = TestBed.createComponent(ExperienceBlockComponent);
-      const c = f.componentInstance;
-      c.title = 'Title';
-      c.company = 'Company';
-      c.badge = 'LEAD';
-      c.location = 'PH';
-      c.items = ['A'];
+      f.componentRef.setInput('title', 'Title');
+      f.componentRef.setInput('company', 'Company');
+      f.componentRef.setInput('badge', 'LEAD');
+      f.componentRef.setInput('location', 'PH');
+      f.componentRef.setInput('items', ['A']);
       f.detectChanges();
 
       const el: HTMLElement = f.nativeElement;
@@ -97,25 +96,22 @@ describe('ExperienceBlockComponent', () => {
 
     it('renders current vs non-current bullets', () => {
       const f = TestBed.createComponent(ExperienceBlockComponent);
-      const c = f.componentInstance;
-      c.items = ['A'];
-      c.isCurrent = true;
+      f.componentRef.setInput('items', ['A']);
+      f.componentRef.setInput('isCurrent', true);
       f.detectChanges();
       expect(f.nativeElement.querySelector('.bullet')).toBeTruthy();
 
       const f2 = TestBed.createComponent(ExperienceBlockComponent);
-      const c2 = f2.componentInstance;
-      c2.items = ['A'];
-      c2.isCurrent = false;
+      f2.componentRef.setInput('items', ['A']);
+      f2.componentRef.setInput('isCurrent', false);
       f2.detectChanges();
       expect(f2.nativeElement.querySelector('.bullet-inactive')).toBeTruthy();
     });
 
     it('renders technologies list when provided', () => {
       const f = TestBed.createComponent(ExperienceBlockComponent);
-      const c = f.componentInstance;
-      c.items = ['A'];
-      c.technologies = ['Terraform', 'AWS'];
+      f.componentRef.setInput('items', ['A']);
+      f.componentRef.setInput('technologies', ['Terraform', 'AWS']);
       f.detectChanges();
       expect(f.nativeElement.querySelectorAll('.tech-tag').length).toBe(2);
     });
