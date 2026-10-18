@@ -350,6 +350,7 @@ stages:
             displayName: Run npm install
           
           - script: |
+              node scripts/set-app-version.mjs
               version=$(cat generated/version.txt)
               echo "##vso[task.setvariable variable=sentryRelease]$version"
             displayName: Set Sentry release version
